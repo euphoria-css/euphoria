@@ -326,6 +326,9 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 }
 ```
 
+We automatically inject `none` classes for padding and spacing (eg `.p-none { padding: 0; }`) and `auto` classes for margins (eg `.m-auto { margin: auto; }`) since they are so commonly needed.
+
+
 ## Changelog
 
 ### v.1.0.2
