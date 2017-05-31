@@ -160,18 +160,18 @@ Will result in:
 
 ```css
 /* Text colors */
-.text-primary { color: lightseagreen; }
-.text-success { color: forestgreen; }
-.text-info { color: teal; }
-.text-warning { color: orange; }
-.text-danger { color: crimson; }
+.text-primary { color: lightseagreen !important; }
+.text-success { color: forestgreen !important; }
+.text-info { color: teal !important; }
+.text-warning { color: orange !important; }
+.text-danger { color: crimson !important; }
 
 /* Background colors */
-.bg-primary { background: lightseagreen; }
-.bg-success { background: forestgreen; }
-.bg-info { background: teal; }
-.bg-warning { background: orange; }
-.bg-danger { background: crimson; }
+.bg-primary { background: lightseagreen !important; }
+.bg-success { background: forestgreen !important; }
+.bg-info { background: teal !important; }
+.bg-warning { background: orange !important; }
+.bg-danger { background: crimson !important; }
 ```
 
 You can pass in your own color mappings like:
@@ -186,12 +186,12 @@ euphoria.colors({
 Which will return: 
 ```css
 /* Text colors */
-.text-angry { color: red; }
-.text-happy { color: green; }
+.text-angry { color: red !important; }
+.text-happy { color: green !important; }
 
 /* Background colors */
-.bg-angry { background: red; }
-.bg-happy { background: green; }
+.bg-angry { background: red !important; }
+.bg-happy { background: green !important; }
 ```
 
 ### `display`
