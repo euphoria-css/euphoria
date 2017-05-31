@@ -1,9 +1,10 @@
-# Euphoria
+# Euphoria 🏝
 
 > A minimalize CSS toolkit for CSS-in-JS applications.
 
 This library contains a collection of building blocks for assembling web UIs that are common across most applications. The helpers include:
 
+- [All](#all) - return all Euphoria utils with optional mappings
 - [Alignment](#alignment) - float, text and vertical alignment helpers like `.float-left`, `.text-center`, `.align-middle`, etc..
 - [Colors](#colors) - helpers like `.text-primary`, `.bg-info`, etc...
 - [Display](#display) - display helpers like `.display-none`, `.display-block`, etc...
@@ -76,14 +77,14 @@ These mapping will get passed directly to the helpers below based on the key (eg
 **Usage:** `euphoria.alignment()`
 
 ```css
-// Text alignment
+/* Text alignment */
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
 .text-center { text-align: center !important; }
 .text-justify { text-align: justify !important; }
 .text-left { text-align: left !important; }
 
-// Vertical alignment
+/* Vertical alignment */
 .align-baseline { vertical-align: baseline !important; }
 .align-top { vertical-align: top !important; }
 .align-middle { vertical-align: middle !important; }
@@ -91,38 +92,38 @@ These mapping will get passed directly to the helpers below based on the key (eg
 .align-text-top { vertical-align: text-top !important; }
 .align-text-bottom { vertical-align: text-bottom !important; }
 
-// Floats
+/* Floats */
 .float-left { float: left !important; }
 .float-right { float: right !important; }
 .float-none { float: none !important; }
 
-// Flexbox direction
+/* Flexbox direction */
 .flex-row { flex-direction: row !important; }
 .flex-column { flex-direction: column !important; }
 .flex-column-reverse { flex-direction: column-reverse !important; }
 
-// Flexbox justification
+/* Flexbox justification */
 .justify-content-start { justify-content: flex-start !important; }
 .justify-content-end { justify-content: flex-end !important; }
 .justify-content-center { justify-content: center !important; }
 .justify-content-between { justify-content: space-between !important; }
 .justify-content-around { justify-content: space-around !important; }
 
-// Flexbox alignment
+/* Flexbox align items */
 .align-items-start { align-items: flex-start !important; }
 .align-items-end { align-items: flex-end !important; }
 .align-items-center { align-items: center !important; }
 .align-items-baseline { align-items: baseline !important; }
 .align-items-stretch { align-items: stretch !important; }
 
-// Flexbox align self
+/* Flexbox align self */
 .align-self-start { align-self: flex-start !important; }
 .align-self-end { align-self: flex-end !important; }
 .align-self-center { align-self: center !important; }
 .align-self-baseline { align-self: baseline !important; }
 .align-self-stretch { align-self: stretch !important; }
 
-// Flexbox align content
+/* Flexbox align content */
 .align-content-start { align-content: flex-start !important; }
 .align-content-end { align-content: flex-end !important; }
 .align-content-center { align-content: center !important; }
@@ -130,12 +131,12 @@ These mapping will get passed directly to the helpers below based on the key (eg
 .align-content-between { align-content: space-between !important; }
 .align-content-around { align-content: space-around !important; }
 
-// Flexbox wrapping
+/* Flexbox wrapping */
 .flex-wrap { flex-wrap: wrap !important; }
 .flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
 .flex-nowrap { flex-wrap: nowrap !important; }
 
-// Flexbox ordering
+/* Flexbox ordering */
 .flex-first { order: -1 !important; }
 .flex-last { order: 1 !important; }
 ```
@@ -144,25 +145,24 @@ These mapping will get passed directly to the helpers below based on the key (eg
 
 **Usage:** `euphoria.colors([colorsMapping])`
 
-Calling: `euphoria.colors()` will return:
-
 ```js
 import { css } from 'glamor'
 import { spacing } from 'euphoria'
 
-css.insert(euphoria.spacing())
+css.insert(euphoria.colors())
 ```
 
+Will result in:
 
 ```css
-// Text colors
+/* Text colors */
 .text-primary { color: lightseagreen; }
 .text-success { color: forestgreen; }
 .text-info { color: teal; }
 .text-warning { color: orange; }
 .text-danger { color: crimson; }
 
-// Background colors
+/* Background colors */
 .bg-primary { background: lightseagreen; }
 .bg-success { background: forestgreen; }
 .bg-info { background: teal; }
@@ -181,11 +181,11 @@ euphoria.colors({
 
 Which will return: 
 ```css
-// Text colors
+/* Text colors */
 .text-angry { color: red; }
 .text-happy { color: green; }
 
-// Background colors
+/* Background colors */
 .bg-angry { background: red; }
 .bg-happy { background: green; }
 ```
@@ -195,6 +195,7 @@ Which will return:
 **Usage:** `euphoria.display()`
 
 ```css
+/* Display */
 .display-block { display: block !important; }
 .display-inline { display: inline !important; }
 .display-inline-block { display: inline-block !important; }
@@ -202,6 +203,7 @@ Which will return:
 .display-inline-flex { display: inline-flex !important; }
 .display-none { display: none !important; }
 
+/* Visibility */
 .visible { visibility: visible !important; }
 .invisible { visibility: hidden !important; }
 ```
@@ -226,7 +228,7 @@ css.insert(
 Now you will have the following classes available to you:
 
 ```css
-// Padding
+/* Padding */
 .p-none { padding: 0; }
 .p-sm { padding: 0.5rem; }
 .p-md { padding: 1rem; }
@@ -262,7 +264,7 @@ Now you will have the following classes available to you:
 .py-md { padding-top: 1rem; padding-bottom: 1rem; }
 .py-lg { padding-top: 2rem; padding-bottom: 2rem; }
 
-// Margins
+/* Margins */
 .m-none { margin: 0; }
 .m-sm { margin: 0.5rem; }
 .m-md { margin: 1rem; }
@@ -321,6 +323,10 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 ```
 
 ## Changelog
+
+### v.1.0.1
+
+- Update readme.
 
 ### v.1.0.0
 
