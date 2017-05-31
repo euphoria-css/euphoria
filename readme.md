@@ -66,7 +66,8 @@ euphoria.all({
     tiny: '0.2rem',
     huge: '4rem',
   }
-})```
+})
+```
 
 These mapping will get passed directly to the helpers below based on the key (eg `colors`, `spacing`, etc)
 
@@ -75,7 +76,6 @@ These mapping will get passed directly to the helpers below based on the key (eg
 **Usage:** `euphoria.alignment()`
 
 ```css
-
 // Text alignment
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
