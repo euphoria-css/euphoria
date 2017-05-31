@@ -10,6 +10,10 @@ This library contains a collection of building blocks for assembling web UIs tha
 - [Display](#display) - display helpers like `.display-none`, `.display-block`, etc...
 - [Spacing](#spacing) - padding and margin helpers like `.mb-lg`, `.py-xxl`, `.ml-auto`, etc...
 
+Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. All Euphoria functions return a collection of CSS classes as a `String` that can be injected into a webpage, for example using [glamor](https://github.com/threepointone/glamor) (which all the following examples refer to). You can use Euphoria however you like of course.
+
+Most of the code that makes up Euphoria is quite simple, have a look at the `euphoria` directory to learn more about how this all works.
+
 ## Install
 
 With yarn:
@@ -341,6 +345,13 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 
 - Initial prototype
 
+
+## Contributing
+
+PRs welcome!
+
+- Please run `prettier --no-semi --single-quote --trailing-comma es5` on all code before submitting.
+- Please write tests for your code! (coming soon 😅)
 
 ## Credits
 
