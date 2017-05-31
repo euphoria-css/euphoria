@@ -322,6 +322,10 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 
 ## Changelog
 
+### v.1.0.0
+
+- Bump to v1 because npm wasn't allowing minor versions...?
+
 ### v0.2.0
 
 - Move to CSS-in-JS implementation
