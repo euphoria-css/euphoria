@@ -320,3 +320,23 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 }
 ```
 
+## Changelog
+
+### v0.2.0
+
+- Move to CSS-in-JS implementation
+- Add alignment, display, colors, spacing helpers
+
+### v0.1.0
+
+- Initial prototype
+
+
+## Credits
+
+[Dana Woodman](http://danawoodman.com)
+
+
+## License
+
+MIT
