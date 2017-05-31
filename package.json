@@ -1,0 +1,44 @@
+{
+  "name": "euphoria",
+  "version": "0.1.0",
+  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "main": "euphoria/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/danawoodman/euphoria.git"
+  },
+  "keywords": [
+    "css",
+    "sass",
+    "scss",
+    "euphoria",
+    "ui",
+    "framework",
+    "tool",
+    "util",
+    "utils",
+    "utilties",
+    "styling",
+    "design",
+    "bootstrap",
+    "reset",
+    "forms",
+    "type",
+    "tyopgraphy",
+    "fonts",
+    "font",
+    "icon",
+    "style"
+  ],
+  "author": "Dana Woodman <dana@danawoodman.com> (http://danawoodman.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danawoodman/euphoria/issues"
+  },
+  "homepage": "https://github.com/danawoodman/euphoria#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "ramda": "0.24.0"
+  }
+}
