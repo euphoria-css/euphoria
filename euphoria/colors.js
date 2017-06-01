@@ -10,8 +10,8 @@ const defaultColors = {
 
 function makeColorClass(color) {
   return [
-    `.bg-${color[0]} { background: ${color[1]}; }`,
-    `.text-${color[0]} { color: ${color[1]}; }`,
+    `.bg-${color[0]} { background: ${color[1]} !important; }`,
+    `.text-${color[0]} { color: ${color[1]} !important; }`,
   ]
 }
 

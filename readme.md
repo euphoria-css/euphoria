@@ -1,6 +1,6 @@
 # Euphoria 🏝
 
-> A minimalize CSS toolkit for CSS-in-JS applications.
+> Euphoric CSS styling utility library for CSS-in-JS projects
 
 This library contains a collection of building blocks for assembling web UIs that are common across most applications. The helpers include:
 
@@ -330,6 +330,10 @@ We automatically inject `none` classes for padding and spacing (eg `.p-none { pa
 
 
 ## Changelog
+
+### v.1.0.3
+
+- Set `!important` flag for color styles.
 
 ### v.1.0.2
 
