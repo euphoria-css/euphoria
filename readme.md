@@ -62,16 +62,22 @@ If you call `euphoria.all()` it will return all the below utilies together with 
 You can pass in custom mappings also:
 
 ```js
-euphoria.all({
-  colors: {
-    angry: 'red',
-    happy: 'green',
-  },
-  spacing: {
-    tiny: '0.2rem',
-    huge: '4rem',
-  }
-})
+import { css } from 'glamor'
+import { all } from 'euphoria'
+
+css.insert(
+  all({
+    colors: {
+      angry: 'red',
+      happy: 'green',
+    },
+    spacing: {
+      tiny: '0.2rem',
+      huge: '4rem',
+    }
+  })
+)
+
 ```
 
 These mapping will get passed directly to the helpers below based on the key (eg `colors`, `spacing`, etc)
@@ -79,6 +85,15 @@ These mapping will get passed directly to the helpers below based on the key (eg
 ### `alignment`
 
 **Usage:** `euphoria.alignment()`
+
+```js
+import { css } from 'glamor'
+import { alignment } from 'euphoria'
+
+css.insert(alignment())
+```
+
+Will result in:
 
 ```css
 /* Text alignment */
@@ -145,15 +160,16 @@ These mapping will get passed directly to the helpers below based on the key (eg
 .flex-last { order: 1 !important; }
 ```
 
+
 ### `colors`
 
 **Usage:** `euphoria.colors([colorsMapping])`
 
 ```js
 import { css } from 'glamor'
-import { spacing } from 'euphoria'
+import { colors } from 'euphoria'
 
-css.insert(euphoria.colors())
+css.insert(colors())
 ```
 
 Will result in:
@@ -192,11 +208,22 @@ Which will return:
 /* Background colors */
 .bg-angry { background: red !important; }
 .bg-happy { background: green !important; }
+
 ```
+
 
 ### `display`
 
 **Usage:** `euphoria.display()`
+
+```js
+import { css } from 'glamor'
+import { display } from 'euphoria'
+
+css.insert(display())
+```
+
+Results in:
 
 ```css
 /* Display */
@@ -212,13 +239,14 @@ Which will return:
 .invisible { visibility: hidden !important; }
 ```
 
+
 ### `spacing`
 
 **Usage:** `euphoria.spacing([spacingMapping])`
 
 ```js
 import { css } from 'glamor'
-import spacing from 'euphoria-spacing'
+import { spacing } from 'euphoria'
 
 css.insert(
   spacing({
@@ -329,7 +357,31 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 We automatically inject `none` classes for padding and spacing (eg `.p-none { padding: 0 !important; }`) and `auto` classes for margins (eg `.m-auto { margin: auto !important; }`) since they are so commonly needed.
 
 
+### `type`
+
+**Usage:** `euphoria.type()`
+
+```js
+import { css } from 'glamor'
+import { type } from 'euphoria'
+
+css.insert(type())
+```
+
+Will result in:
+
+```css
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+```
+
+
 ## Changelog
+
+### v.1.1.0
+
+- Add "text-transform" helpers.
 
 ### v.1.0.3
 
