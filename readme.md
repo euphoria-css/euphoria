@@ -380,6 +380,10 @@ Will result in:
 
 ## Changelog
 
+### v.1.1.1
+
+- Make type helpers use `!important` flag.
+
 ### v.1.1.0
 
 - Add "text-transform" helpers.
