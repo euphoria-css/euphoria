@@ -19,3 +19,7 @@ console.log(euphoria.display())
 
 console.log('\nSPACING')
 console.log(euphoria.spacing({ tiny: '0.2rem', huge: '3rem' }))
+
+console.log('\nTYPE')
+//console.log(euphoria.type({ tiny: '0.2rem', huge: '3rem' }))
+console.log(euphoria.type())

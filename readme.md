@@ -372,13 +372,50 @@ css.insert(type())
 Will result in:
 
 ```css
+/* Text transforms */
 .text-uppercase { text-transform: uppercase !important; }
 .text-lowercase { text-transform: lowercase !important; }
 .text-capitalize { text-transform: capitalize !important; }
+
+/* Font sizes */
+.text-xxs { font-size: 0.7rem !important; }
+.text-xs { font-size: 0.8rem !important; }
+.text-sm { font-size: 0.9rem !important; }
+.text-md { font-size: 1rem !important; }
+.text-lg { font-size: 1.25rem !important; }
+.text-xl { font-size: 1.5rem !important; }
+.text-xxl { font-size: 2rem !important; }
+.text-xxxl { font-size: 3rem !important; }
+```
+
+To override default font styles, pass in a configuration object:
+
+```js
+import { css } from 'glamor'
+import { type } from 'euphoria'
+
+css.insert(type({ tiny: '0.3rem', huge: '3rem' }))
+```
+
+Will result in:
+
+```css
+/* Text transforms */
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+/* Font sizes */
+.text-tiny { font-size: 0.3rem !important; }
+.text-huge { font-size: 3rem !important; }
 ```
 
 
 ## Changelog
+
+### v.1.2.0
+
+- Make `font-size` helpers
 
 ### v.1.1.1
 
