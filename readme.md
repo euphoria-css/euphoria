@@ -58,9 +58,16 @@ css.insert(colors())
 
 **Usage:** `euphoria.all([mappings])`
 
-If you call `euphoria.all()` it will return all the below utilies together with default mappings.
+If you call `euphoria.all()` it will return all the below utilities together with default mappings:
 
-You can pass in custom mappings also:
+```js
+import { css } from 'glamor'
+import { all } from 'euphoria'
+
+css.insert(all())
+```
+
+You can pass in **custom mappings** also:
 
 ```js
 import { css } from 'glamor'
@@ -75,7 +82,11 @@ css.insert(
     spacing: {
       tiny: '0.2rem',
       huge: '4rem',
-    }
+    },
+    type: {
+      tiny: '0.6rem',
+      huge: '3rem',
+    },
   })
 )
 
