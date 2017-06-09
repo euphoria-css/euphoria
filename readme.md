@@ -22,6 +22,8 @@ This library contains a collection of building blocks for assembling web UIs tha
 - [**Text**](#text)
   - *Transforms*: `.text-uppercase`, `.text-lowercase`, `.text-capitalize`
   - *Sizes*: `.text-xxs`, `.text-xs`, `.text-sm`, `.text-md`, etc...
+  - *Style*: `.text-bold`, `.text-italic`, `.text-normal`
+  - *Decoration*: `.text-underline`, `.text-line-through`
 
 Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. All Euphoria functions return a collection of CSS classes as a `String` that can be injected into a webpage, for example using [glamor](https://github.com/threepointone/glamor) (which all the following examples refer to). You can use Euphoria however you like of course.
 
@@ -394,11 +396,6 @@ css.insert(text())
 Will result in:
 
 ```css
-/* Text transforms */
-.text-uppercase { text-transform: uppercase !important; }
-.text-lowercase { text-transform: lowercase !important; }
-.text-capitalize { text-transform: capitalize !important; }
-
 /* Font sizes */
 .text-xxs { font-size: 0.7rem !important; }
 .text-xs { font-size: 0.8rem !important; }
@@ -408,6 +405,20 @@ Will result in:
 .text-xl { font-size: 1.5rem !important; }
 .text-xxl { font-size: 2rem !important; }
 .text-xxxl { font-size: 3rem !important; }
+
+/* Text transforms */
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+/* Text decoration */
+.text-line-through { text-decoration: line-through !important; }
+.text-underline { text-decoration: underline !important; }
+
+/* Font style */
+.text-normal { font-style: normal !important; }
+.text-bold { font-style: bold !important; }
+.text-italic { font-style: italic !important; }
 ```
 
 To override default font styles, pass in a configuration object:
@@ -422,18 +433,26 @@ css.insert(text({ tiny: '0.3rem', huge: '3rem' }))
 Will result in:
 
 ```css
-/* Text transforms */
-.text-uppercase { text-transform: uppercase !important; }
-.text-lowercase { text-transform: lowercase !important; }
-.text-capitalize { text-transform: capitalize !important; }
-
 /* Font sizes */
 .text-tiny { font-size: 0.3rem !important; }
 .text-huge { font-size: 3rem !important; }
+
+/* Text transforms */
+/* ...same as above... */
+
+/* Text decoration */
+/* ...same as above... */
+
+/* Font style */
+/* ...same as above... */
 ```
 
 
 ## Changelog
+
+### v.1.4.0
+
+- Add text decoration and font styles
 
 ### v.1.3.0
 
