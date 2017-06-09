@@ -54,7 +54,7 @@ css.insert(euphoria.display())
 // etc...
 ```
 
-You can of course also just export the utils you want like:
+You can of course also just import the utils you want like:
 
 ```js
 import { colors } from 'euphoria'
