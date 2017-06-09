@@ -4,21 +4,21 @@ const alignment = require('./alignment')
 const colors = require('./colors')
 const display = require('./display')
 const spacing = require('./spacing')
-const type = require('./type')
+const text = require('./text')
 
-const all = {
+const allStyles = {
   alignment,
   colors,
   display,
   spacing,
-  type,
+  text,
 }
 
-module.exports = Object.assign({}, all, {
-  all(mapping = {}) {
-    const css = R.mapObjIndexed((func, name) => {
-      return func(mapping[name])
-    }, all)
-    return R.join('\n', R.values(css))
-  },
-})
+function all(mapping = {}) {
+  const css = R.mapObjIndexed((func, name) => {
+    return func(mapping[name])
+  }, allStyles)
+  return R.join('\n', R.values(css))
+}
+
+module.exports = Object.assign({}, allStyles, { all })

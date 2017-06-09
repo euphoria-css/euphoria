@@ -37,8 +37,7 @@ module.exports = () => {
   const text = `.text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
 .text-center { text-align: center !important; }
-.text-justify { text-align: justify !important; }
-.text-left { text-align: left !important; }`
+.text-justify { text-align: justify !important; }`
 
   const vertical = `.align-baseline { vertical-align: baseline !important; }
 .align-top { vertical-align: top !important; }

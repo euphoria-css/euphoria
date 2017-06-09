@@ -5,11 +5,23 @@
 This library contains a collection of building blocks for assembling web UIs that are common across most applications. The helpers include:
 
 - [All](#all) - return all Euphoria utils with optional mappings
-- [Alignment](#alignment) - float, flexbox, text and vertical alignment helpers like `.float-left`, `.text-center`, `.align-middle`, etc..
-- [Colors](#colors) - helpers like `.text-primary`, `.bg-info`, etc...
-- [Display](#display) - display helpers like `.display-none`, `.display-block`,, `.display-flex`, etc...
-- [Spacing](#spacing) - padding and margin helpers like `.mb-lg`, `.py-xxl`, `.ml-auto`, etc...
-- [Type](#type) - type utilties like `.text-uppercase`, `.text-lowercase` and `.text-capitalize`
+- [Alignment](#alignment)
+  - Float: `.float-left`, `.float-right`, `.float-none`
+  - Flexbox: `.flex-row`, `.align-items-center`, `.justify-content-start`, etc...
+  - Alignment: `.align-top`, `.align-middle`, `.align-basline`, etc...
+  - Text: `.text-right`, `.text-center`, `.text-justify`, etc...
+- [Colors](#colors)
+  - Text colors: `.text-primary`, `.text-white`, `.text-gray-dark`, etc...
+  - Background: `.bg-info`, `.bg-danger`, `.bg-gray-lightest`, etc...
+- [Display](#display)
+  - Display: `.display-none`, `.display-block`, `.display-flex`, etc...
+  - Visibility: `.visible`, `.invisible`
+- [Spacing](#spacing)
+  - Padding: `.p-xl`, `.px-none`, `.pl-xxs`, etc...
+  - Margins: `.m-md`, `.mx-auto`, `.my-none`, etc...
+- [Text](#text)
+  - Transforms: `.text-uppercase`, `.text-lowercase`, `.text-capitalize`
+  - Sizes: `.text-xxs`, `.text-xs`, `.text-sm`, `.text-md`, etc...
 
 Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. All Euphoria functions return a collection of CSS classes as a `String` that can be injected into a webpage, for example using [glamor](https://github.com/threepointone/glamor) (which all the following examples refer to). You can use Euphoria however you like of course.
 
@@ -83,7 +95,7 @@ css.insert(
       tiny: '0.2rem',
       huge: '4rem',
     },
-    type: {
+    text: {
       tiny: '0.6rem',
       huge: '3rem',
     },
@@ -113,7 +125,6 @@ Will result in:
 .text-right { text-align: right !important; }
 .text-center { text-align: center !important; }
 .text-justify { text-align: justify !important; }
-.text-left { text-align: left !important; }
 
 /* Vertical alignment */
 .align-baseline { vertical-align: baseline !important; }
@@ -369,15 +380,15 @@ Calling `spacing` without arguments will get you the default spacing mapping, wh
 We automatically inject `none` classes for padding and spacing (eg `.p-none { padding: 0 !important; }`) and `auto` classes for margins (eg `.m-auto { margin: auto !important; }`) since they are so commonly needed.
 
 
-### `type`
+### `text`
 
-**Usage:** `euphoria.type()`
+**Usage:** `euphoria.text()`
 
 ```js
 import { css } from 'glamor'
-import { type } from 'euphoria'
+import { text } from 'euphoria'
 
-css.insert(type())
+css.insert(text())
 ```
 
 Will result in:
@@ -403,9 +414,9 @@ To override default font styles, pass in a configuration object:
 
 ```js
 import { css } from 'glamor'
-import { type } from 'euphoria'
+import { text } from 'euphoria'
 
-css.insert(type({ tiny: '0.3rem', huge: '3rem' }))
+css.insert(text({ tiny: '0.3rem', huge: '3rem' }))
 ```
 
 Will result in:
@@ -423,6 +434,11 @@ Will result in:
 
 
 ## Changelog
+
+### v.1.3.0
+
+- **BREAKING**: Rename `type` to `text`
+- Cleanup readme
 
 ### v.1.2.0
 
