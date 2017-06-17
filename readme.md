@@ -455,6 +455,10 @@ Will result in:
 
 ## Changelog
 
+### v.1.4.3
+
+- Further improve example site.
+
 ### v.1.4.2
 
 - Add examples site
