@@ -1,12 +1,9 @@
-import stringifyObject from 'stringify-object'
+import Highlight from './highlight'
 import React from 'react'
+import stringify from './stringify'
 import { spacing } from './config'
 
 const directions = ['', 'b', 'l', 'r', 't', 'x', 'y']
-
-function stringify(code) {
-  return stringifyObject(code, { indent: '  ' })
-}
 
 export default function Spacing() {
   return (
@@ -15,11 +12,11 @@ export default function Spacing() {
       <h2 id="spacing">Spacing</h2>
 
       <h4 id="spacing-usage">Usage</h4>
-      <pre lang="js">{`import euphoria from 'euphoria'
+      <Highlight lang="javascript">{`import euphoria from 'euphoria'
 import { css } from 'glamor'
 
 css.insert(euphoria.spacing(${stringify(spacing)}))
-`}</pre>
+`}</Highlight>
 
       <h3 id="padding">Padding</h3>
 

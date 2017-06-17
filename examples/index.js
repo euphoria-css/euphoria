@@ -33,12 +33,12 @@ h1, h2, h3 {
 }
 h1 {
   color: ${colors.warning};
-  font-size: 3.5rem;
+  font-size: 3.75rem;
 }
 h2 {
   color: ${colors.primary};
   border-top: 1px solid #f5f5f5;
-  font-size: 2.75rem;
+  font-size: 2.85rem;
   padding-top: 1.8em;
 }
 h3 {
@@ -50,13 +50,14 @@ h4 {
 h4 {
   font-weight: bold;
 }
-code,
-pre {
-  color: ${colors.primary};
+code {
+  color: #c62da8;
 }
 pre {
-  background: #f5f5f5;
-  padding: ${spacing.md};
+  padding: ${spacing.lg} !important;
+}
+pre code {
+  color: #333;
 }
 `)
 

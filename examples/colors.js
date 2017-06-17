@@ -1,4 +1,6 @@
+import Highlight from './highlight'
 import React from 'react'
+import stringify from './stringify'
 import { colors } from './config'
 
 export default function Spacing() {
@@ -6,6 +8,13 @@ export default function Spacing() {
     <div>
 
       <h2 id="colors">Colors</h2>
+
+      <h4 id="spacing-usage">Usage</h4>
+      <Highlight lang="js">{`import euphoria from 'euphoria'
+import { css } from 'glamor'
+
+css.insert(euphoria.colors(${stringify(colors)}))
+`}</Highlight>
 
       <h3 id="colors-text">Text Colors</h3>
       {Object.keys(colors).map((k, i) => (
