@@ -28,20 +28,35 @@ a {
 h1, h2, h3, h4 {
   margin: 1.8em 0 0.8em 0;
 }
-h1, h2 {
+h1, h2, h3 {
   font-family: Mogra, serif;
 }
 h1 {
+  color: ${colors.warning};
   font-size: 3.5rem;
 }
 h2 {
-  font-size: 2.5rem;
+  color: ${colors.primary};
+  border-top: 1px solid #f5f5f5;
+  font-size: 2.75rem;
+  padding-top: 1.8em;
 }
 h3 {
-  font-size: 1.35rem;
+  font-size: 2.25rem;
 }
-h3 {
+h4 {
+  font-size: 1.3rem;
+}
+h4 {
   font-weight: bold;
+}
+code,
+pre {
+  color: ${colors.primary};
+}
+pre {
+  background: #f5f5f5;
+  padding: ${spacing.md};
 }
 `)
 
@@ -51,24 +66,32 @@ function TOC() {
       <li>
         <a href="#colors"><strong>Colors</strong></a>
         <ul>
-          <li><a href="#olors-text">Text Colors</a></li>
-          <li><a href="#olors-background">Background Colors</a></li>
+          <li><a href="#colors-text">Text Colors</a></li>
+          <li><a href="#colors-background">Background Colors</a></li>
         </ul>
       </li>
       <li>
-        <a href="#padding"><strong>Padding</strong></a>
+        <a href="#spacing"><strong>Spacing</strong></a>
         <ul>
-          <li><a href="#padding-remove">Remove Padding</a></li>
-          <li><a href="#padding-sizes">Sizes</a></li>
-          <li><a href="#padding-directions">Directions</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#margins"><strong>Margins</strong></a>
-        <ul>
-          <li><a href="#padding-remove">Remove Padding</a></li>
-          <li><a href="#padding-sizes">Sizes</a></li>
-          <li><a href="#padding-directions">Directions</a></li>
+          <li>
+            <a href="#spacing-usage">Usage</a>
+          </li>
+          <li>
+            <a href="#padding"><strong>Padding</strong></a>
+            <ul>
+              <li><a href="#padding-remove">Remove Padding</a></li>
+              <li><a href="#padding-sizes">Sizes</a></li>
+              <li><a href="#padding-directions">Directions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#margins"><strong>Margins</strong></a>
+            <ul>
+              <li><a href="#margins-remove">Remove Padding</a></li>
+              <li><a href="#margins-sizes">Sizes</a></li>
+              <li><a href="#margins-directions">Directions</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
@@ -82,7 +105,7 @@ function Examples() {
 
   return (
     <div {...container} className="mx-auto my-lg">
-      <h1 className="text-primary">Euphoria 🏝</h1>
+      <h1>Euphoria 🏝</h1>
       <p>
         Examples of how to use Euphoria styles in your CSS-in-JS project. Please
         see

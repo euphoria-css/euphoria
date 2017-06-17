@@ -1,4 +1,4 @@
-# Euphoria 🏝
+![Euphoria](https://cl.ly/l4hy/Screen%20Shot%202017-06-17%20at%202.03.11%20PM.png)
 
 > Euphoric CSS styling utility library for CSS-in-JS projects
 
