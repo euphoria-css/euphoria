@@ -3,6 +3,7 @@ const R = require('ramda')
 const defaultColors = {
   primary: 'lightseagreen',
   success: 'forestgreen',
+  muted: 'lightgray',
   info: 'teal',
   warning: 'orange',
   danger: 'crimson',

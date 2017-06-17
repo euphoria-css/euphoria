@@ -203,6 +203,7 @@ Will result in:
 /* Text colors */
 .text-primary { color: lightseagreen !important; }
 .text-success { color: forestgreen !important; }
+.text-muted { color: gray !important; }
 .text-info { color: teal !important; }
 .text-warning { color: orange !important; }
 .text-danger { color: crimson !important; }
@@ -211,8 +212,10 @@ Will result in:
 .bg-primary { background: lightseagreen !important; }
 .bg-success { background: forestgreen !important; }
 .bg-info { background: teal !important; }
+.bg-muted { background: gray !important; }
 .bg-warning { background: orange !important; }
 .bg-danger { background: crimson !important; }
+.bg-muted { background: gray !important; }
 ```
 
 You can pass in your own color mappings like:
@@ -449,6 +452,10 @@ Will result in:
 
 
 ## Changelog
+
+### v.1.4.1
+
+- Add `muted` color to defaults
 
 ### v.1.4.0
 
