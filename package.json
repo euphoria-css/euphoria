@@ -3,7 +3,10 @@
   "version": "1.4.1",
   "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "euphoria/index.js",
-  "scripts": {},
+  "scripts": {
+    "build-examples": "webpack",
+    "watch-examples": "webpack-dev-server"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/danawoodman/euphoria.git"
@@ -37,7 +40,24 @@
     "url": "https://github.com/danawoodman/euphoria/issues"
   },
   "homepage": "https://github.com/danawoodman/euphoria#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel": "6.23.0",
+    "babel-core": "6.25.0",
+    "babel-loader": "7.0.0",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-1": "6.24.1",
+    "chalk": "1.1.3",
+    "extract-text-webpack-plugin": "2.1.2",
+    "glamor": "2.20.25",
+    "html-webpack-harddisk-plugin": "0.1.0",
+    "html-webpack-plugin": "2.28.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "webpack": "2.6.1",
+    "webpack-dev-server": "2.4.5"
+  },
   "dependencies": {
     "ramda": "0.24.0"
   }

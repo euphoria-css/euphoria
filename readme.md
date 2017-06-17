@@ -2,6 +2,8 @@
 
 > Euphoric CSS styling utility library for CSS-in-JS projects
 
+**To view examples of how to use Euphoria, check out the [Examples site](http://danawoodman.com/euphoria/)!**
+
 This library contains a collection of building blocks for assembling web UIs that are common across most applications. The helpers include:
 
 - [**All**](#all) - return all Euphoria utils with optional mappings
@@ -453,6 +455,10 @@ Will result in:
 
 ## Changelog
 
+### v.1.4.2
+
+- Add examples site
+
 ### v.1.4.1
 
 - Add `muted` color to defaults
@@ -510,6 +516,7 @@ PRs welcome!
 
 - Please run `prettier --no-semi --single-quote --trailing-comma es5` on all code before submitting.
 - Please write tests for your code! (coming soon 😅)
+- If you're updating examples, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
 
 ## Credits
 
