@@ -17,7 +17,7 @@ module.exports = (sizes = defaultSizes) => {
 .text-capitalize { text-transform: capitalize !important; }`
 
   const style = `.text-normal { font-style: normal !important; }
-.text-bold { font-style: bold !important; }
+.text-bold { font-weight: bold !important; }
 .text-italic { font-style: italic !important; }`
 
   const decoration = `.text-line-through { text-decoration: line-through !important; }

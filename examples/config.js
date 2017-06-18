@@ -16,3 +16,14 @@ export const colors = {
   warning: 'orange',
   danger: 'crimson',
 }
+
+export const fontSizes = {
+  xxs: '0.7rem',
+  xs: '0.8rem',
+  sm: '0.9rem',
+  md: '1rem',
+  lg: '1.25rem',
+  xl: '1.5rem',
+  xxl: '2rem',
+  xxxl: '3rem',
+}

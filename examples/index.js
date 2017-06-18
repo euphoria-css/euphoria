@@ -1,8 +1,11 @@
+import Alignment from './alignment'
 import Colors from './colors'
+import Display from './display'
 import euphoria from '../euphoria'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Spacing from './spacing'
+import Text from './text'
 import { css } from 'glamor'
 import { colors, spacing } from './config'
 
@@ -65,10 +68,29 @@ function TOC() {
   return (
     <ul>
       <li>
+        <a href="#alignment"><strong>Alignment</strong></a>
+        <ul>
+          <li><a href="#alignment-usage">Usage</a></li>
+          <li><a href="#alignment-text">Text</a></li>
+          <li><a href="#alignment-vertical">Vertical Alignment</a></li>
+          <li><a href="#alignment-floats">Floats</a></li>
+          <li><a href="#alignment-flexbox">Flexbox</a></li>
+        </ul>
+      </li>
+      <li>
         <a href="#colors"><strong>Colors</strong></a>
         <ul>
-          <li><a href="#colors-text">Text Colors</a></li>
-          <li><a href="#colors-background">Background Colors</a></li>
+          <li><a href="#colors-usage">Usage</a></li>
+          <li><a href="#colors-text">Text</a></li>
+          <li><a href="#colors-background">Background</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#display"><strong>Display</strong></a>
+        <ul>
+          <li><a href="#display-usage">Usage</a></li>
+          <li><a href="#display-display">Display</a></li>
+          <li><a href="#display-visibility">Visiblity</a></li>
         </ul>
       </li>
       <li>
@@ -95,6 +117,16 @@ function TOC() {
           </li>
         </ul>
       </li>
+      <li>
+        <a href="#text"><strong>Text</strong></a>
+        <ul>
+          <li><a href="#text-usage">Usage</a></li>
+          <li><a href="#text-sizes">Sizes</a></li>
+          <li><a href="#text-transforms">Transforms</a></li>
+          <li><a href="#text-decoration">Decoration</a></li>
+          <li><a href="#text-styles">Styles</a></li>
+        </ul>
+      </li>
     </ul>
   )
 }
@@ -117,8 +149,11 @@ function Examples() {
       </p>
       <h2>Examples</h2>
       <TOC />
+      <Alignment />
       <Colors />
+      <Display />
       <Spacing />
+      <Text />
     </div>
   )
 }

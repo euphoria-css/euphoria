@@ -455,6 +455,11 @@ Will result in:
 
 ## Changelog
 
+### v.1.4.4
+
+- Finish adding examples to example site
+- Fix `.text-bold`
+
 ### v.1.4.3
 
 - Further improve example site.

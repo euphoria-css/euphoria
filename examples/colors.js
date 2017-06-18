@@ -3,13 +3,13 @@ import React from 'react'
 import stringify from './stringify'
 import { colors } from './config'
 
-export default function Spacing() {
+export default function Colors() {
   return (
     <div>
 
       <h2 id="colors">Colors</h2>
 
-      <h4 id="spacing-usage">Usage</h4>
+      <h4 id="colors-usage">Usage</h4>
       <Highlight lang="js">{`import euphoria from 'euphoria'
 import { css } from 'glamor'
 
