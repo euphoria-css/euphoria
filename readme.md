@@ -455,6 +455,10 @@ Will result in:
 
 ## Changelog
 
+### v.1.5.0
+
+- Use autoprefixer to add vendor prefixes as necessary.
+
 ### v.1.4.4
 
 - Finish adding examples to example site

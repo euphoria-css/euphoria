@@ -1,10 +1,12 @@
+const autoprefixer = require('autoprefixer')
+
 module.exports = () => {
   const floats = `
 .float-left { float: left !important; }
 .float-right { float: right !important; }
 .float-none { float: none !important; }`
 
-  const flex = `.flex-row { flex-direction: row !important; }
+  const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
 .flex-column { flex-direction: column !important; }
 .flex-column-reverse { flex-direction: column-reverse !important; }
 .justify-content-start { justify-content: flex-start !important; }
@@ -32,19 +34,19 @@ module.exports = () => {
 .flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
 .flex-nowrap { flex-wrap: nowrap !important; }
 .flex-first { order: -1 !important; }
-.flex-last { order: 1 !important; }`
+.flex-last { order: 1 !important; }`)
 
   const text = `.text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
 .text-center { text-align: center !important; }
 .text-justify { text-align: justify !important; }`
 
-  const vertical = `.align-baseline { vertical-align: baseline !important; }
+  const vertical = autoprefixer.process(`.align-baseline { vertical-align: baseline !important; }
 .align-top { vertical-align: top !important; }
 .align-middle { vertical-align: middle !important; }
 .align-bottom { vertical-align: bottom !important; }
 .align-text-top { vertical-align: text-top !important; }
-.align-text-bottom { vertical-align: text-bottom !important; }`
+.align-text-bottom { vertical-align: text-bottom !important; }`)
 
   return [floats, flex, text, vertical].join('\n')
 }
