@@ -15,6 +15,12 @@ css.insert(euphoria.alignment())
 `}</Highlight>
 
       <h3 id="alignment-text">Text Alignment</h3>
+      <ul>
+        <li><code>.text-left</code></li>
+        <li><code>.text-right</code></li>
+        <li><code>.text-center</code></li>
+        <li><code>.text-justify</code></li>
+      </ul>
       <div className="bg-muted mb-md text-left">
         Div with the class <code>.text-left</code>.
       </div>
@@ -56,6 +62,7 @@ css.insert(euphoria.alignment())
       <h4 id="alignment-flexbox-direction">Direction</h4>
       <ul>
         <li><code>.flex-row</code></li>
+        <li><code>.flex-row-reverse</code></li>
         <li><code>.flex-column</code></li>
         <li><code>.flex-column-reverse</code></li>
       </ul>

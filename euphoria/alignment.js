@@ -7,6 +7,7 @@ module.exports = () => {
 .float-none { float: none !important; }`
 
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
+.flex-row-reverse { flex-direction: row-reverse !important; }
 .flex-column { flex-direction: column !important; }
 .flex-column-reverse { flex-direction: column-reverse !important; }
 .justify-content-start { justify-content: flex-start !important; }

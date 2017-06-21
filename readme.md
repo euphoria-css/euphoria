@@ -455,6 +455,10 @@ Will result in:
 
 ## Changelog
 
+### v.1.5.1
+
+- Add `.flex-row-reverse` direction
+
 ### v.1.5.0
 
 - Use autoprefixer to add vendor prefixes as necessary.
