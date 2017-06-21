@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d57625d1fcb036aea2d3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1be8144d9bccbd1c993f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -31785,6 +31785,7 @@ module.exports = () => {
 .float-none { float: none !important; }`
 
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
+.flex-row-reverse { flex-direction: row-reverse !important; }
 .flex-column { flex-direction: column !important; }
 .flex-column-reverse { flex-direction: column-reverse !important; }
 .justify-content-start { justify-content: flex-start !important; }
@@ -39853,6 +39854,46 @@ function Alignment() {
       'Text Alignment'
     ),
     _react2.default.createElement(
+      'ul',
+      null,
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.text-left'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.text-right'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.text-center'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.text-justify'
+        )
+      )
+    ),
+    _react2.default.createElement(
       'div',
       { className: 'bg-muted mb-md text-left' },
       'Div with the class ',
@@ -40033,6 +40074,15 @@ function Alignment() {
           'code',
           null,
           '.flex-row'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.flex-row-reverse'
         )
       ),
       _react2.default.createElement(
