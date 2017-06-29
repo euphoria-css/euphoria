@@ -8,6 +8,10 @@ module.exports = () => {
   const sizes = `.full-height { height: 100% !important; }
 .full-width { width: 100% !important; }`
 
+  const positions = `.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }`
+
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
 .flex-row-reverse { flex-direction: row-reverse !important; }
 .flex-column { flex-direction: column !important; }
@@ -51,5 +55,5 @@ module.exports = () => {
 .align-text-top { vertical-align: text-top !important; }
 .align-text-bottom { vertical-align: text-bottom !important; }`)
 
-  return [floats, sizes, flex, text, vertical].join('\n')
+  return [floats, sizes, positions, flex, text, vertical].join('\n')
 }

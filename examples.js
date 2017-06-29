@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6ff9bdab3a3f7db797ee"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29829eaeb53cd75460e8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -31403,15 +31403,6 @@ function TOC() {
           null,
           _react2.default.createElement(
             'a',
-            { href: '#alignment-vertical' },
-            'Vertical Alignment'
-          )
-        ),
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            'a',
             { href: '#alignment-floats' },
             'Floats'
           )
@@ -31423,6 +31414,24 @@ function TOC() {
             'a',
             { href: '#alignment-sizing' },
             'Sizing'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            'a',
+            { href: '#alignment-position' },
+            'Position'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            'a',
+            { href: '#alignment-vertical' },
+            'Vertical Alignment'
           )
         ),
         _react2.default.createElement(
@@ -31795,6 +31804,10 @@ module.exports = () => {
   const sizes = `.full-height { height: 100% !important; }
 .full-width { width: 100% !important; }`
 
+  const positions = `.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }`
+
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
 .flex-row-reverse { flex-direction: row-reverse !important; }
 .flex-column { flex-direction: column !important; }
@@ -31838,7 +31851,7 @@ module.exports = () => {
 .align-text-top { vertical-align: text-top !important; }
 .align-text-bottom { vertical-align: text-bottom !important; }`)
 
-  return [floats, sizes, flex, text, vertical].join('\n')
+  return [floats, sizes, positions, flex, text, vertical].join('\n')
 }
 
 
@@ -39950,69 +39963,6 @@ function Alignment() {
     ),
     _react2.default.createElement(
       'h3',
-      { id: 'alignment-vertical' },
-      'Vertical Alignment'
-    ),
-    _react2.default.createElement(
-      'ul',
-      null,
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-baseline'
-        )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-top'
-        )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-middle'
-        )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-bottom'
-        )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-text-top'
-        )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          'code',
-          null,
-          '.align-text-bottom'
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'h3',
       { id: 'alignment-floats' },
       'Floats'
     ),
@@ -40086,6 +40036,105 @@ function Alignment() {
           'width: 100%'
         ),
         ' to the element'
+      )
+    ),
+    _react2.default.createElement(
+      'h3',
+      { id: 'alignment-position' },
+      'Position'
+    ),
+    _react2.default.createElement(
+      'ul',
+      null,
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.position-relative'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.position-absolute'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.position-fixed'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'h3',
+      { id: 'alignment-vertical' },
+      'Vertical Alignment'
+    ),
+    _react2.default.createElement(
+      'ul',
+      null,
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-baseline'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-top'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-middle'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-bottom'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-text-top'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.align-text-bottom'
+        )
       )
     ),
     _react2.default.createElement(

@@ -36,16 +36,6 @@ css.insert(euphoria.alignment())
         consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.
       </div>
 
-      <h3 id="alignment-vertical">Vertical Alignment</h3>
-      <ul>
-        <li><code>.align-baseline</code></li>
-        <li><code>.align-top</code></li>
-        <li><code>.align-middle</code></li>
-        <li><code>.align-bottom</code></li>
-        <li><code>.align-text-top</code></li>
-        <li><code>.align-text-bottom</code></li>
-      </ul>
-
       <h3 id="alignment-floats">Floats</h3>
       <ul>
         <li><code>.float-left</code></li>
@@ -63,6 +53,23 @@ css.insert(euphoria.alignment())
           <code>.full-width</code> - applies <code>width: 100%</code> to the
           element
         </li>
+      </ul>
+
+      <h3 id="alignment-position">Position</h3>
+      <ul>
+        <li><code>.position-relative</code></li>
+        <li><code>.position-absolute</code></li>
+        <li><code>.position-fixed</code></li>
+      </ul>
+
+      <h3 id="alignment-vertical">Vertical Alignment</h3>
+      <ul>
+        <li><code>.align-baseline</code></li>
+        <li><code>.align-top</code></li>
+        <li><code>.align-middle</code></li>
+        <li><code>.align-bottom</code></li>
+        <li><code>.align-text-top</code></li>
+        <li><code>.align-text-bottom</code></li>
       </ul>
 
       <h3 id="alignment-flexbox">Flexbox</h3>

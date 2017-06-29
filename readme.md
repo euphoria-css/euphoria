@@ -9,9 +9,11 @@ This library contains a collection of building blocks for assembling web UIs tha
 - [**All**](#all) - return all Euphoria utils with optional mappings
 - [**Alignment**](#alignment)
   - *Float*: `.float-left`, `.float-right`, `.float-none`
-  - *Flexbox*: `.flex-row`, `.align-items-center`, `.justify-content-start`, etc...
   - *Alignment*: `.align-top`, `.align-middle`, `.align-basline`, etc...
   - *Text*: `.text-right`, `.text-center`, `.text-justify`, etc...
+  - *Sizes*: `.full-width` and `.full-height`
+  - *Position*: `.position-absolute`, `.position-relative`, `.position-fixed`
+  - *Flexbox*: `.flex-row`, `.align-items-center`, `.justify-content-start`, etc...
 - [**Colors**](#colors)
   - *Text colors*: `.text-primary`, `.text-white`, `.text-gray-dark`, etc...
   - *Background*: `.bg-info`, `.bg-danger`, `.bg-gray-lightest`, etc...
@@ -142,6 +144,11 @@ Will result in:
 .float-left { float: left !important; }
 .float-right { float: right !important; }
 .float-none { float: none !important; }
+
+/* Sizing */
+.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }
 
 /* Sizing */
 .full-height { height: 100% !important; }
@@ -458,6 +465,10 @@ Will result in:
 
 
 ## Changelog
+
+### v.1.5.3
+
+- Add `.position-absolute`, `.position-relative` and `.position-fixed` alignment helpers
 
 ### v.1.5.2
 
