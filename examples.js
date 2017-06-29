@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1be8144d9bccbd1c993f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6ff9bdab3a3f7db797ee"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -31421,6 +31421,15 @@ function TOC() {
           null,
           _react2.default.createElement(
             'a',
+            { href: '#alignment-sizing' },
+            'Sizing'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            'a',
             { href: '#alignment-flexbox' },
             'Flexbox'
           )
@@ -31779,10 +31788,12 @@ define(String.prototype, "padRight", "".padEnd);
 const autoprefixer = __webpack_require__(246)
 
 module.exports = () => {
-  const floats = `
-.float-left { float: left !important; }
+  const floats = `.float-left { float: left !important; }
 .float-right { float: right !important; }
 .float-none { float: none !important; }`
+
+  const sizes = `.full-height { height: 100% !important; }
+.full-width { width: 100% !important; }`
 
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
 .flex-row-reverse { flex-direction: row-reverse !important; }
@@ -31827,7 +31838,7 @@ module.exports = () => {
 .align-text-top { vertical-align: text-top !important; }
 .align-text-bottom { vertical-align: text-bottom !important; }`)
 
-  return [floats, flex, text, vertical].join('\n')
+  return [floats, sizes, flex, text, vertical].join('\n')
 }
 
 
@@ -40034,6 +40045,47 @@ function Alignment() {
           null,
           '.float-none'
         )
+      )
+    ),
+    _react2.default.createElement(
+      'h3',
+      { id: 'alignment-sizing' },
+      'Sizing'
+    ),
+    _react2.default.createElement(
+      'ul',
+      null,
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.full-height'
+        ),
+        ' - applies ',
+        _react2.default.createElement(
+          'code',
+          null,
+          'height: 100%'
+        ),
+        ' to the element'
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'code',
+          null,
+          '.full-width'
+        ),
+        ' - applies ',
+        _react2.default.createElement(
+          'code',
+          null,
+          'width: 100%'
+        ),
+        ' to the element'
       )
     ),
     _react2.default.createElement(

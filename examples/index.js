@@ -74,6 +74,7 @@ function TOC() {
           <li><a href="#alignment-text">Text</a></li>
           <li><a href="#alignment-vertical">Vertical Alignment</a></li>
           <li><a href="#alignment-floats">Floats</a></li>
+          <li><a href="#alignment-sizing">Sizing</a></li>
           <li><a href="#alignment-flexbox">Flexbox</a></li>
         </ul>
       </li>

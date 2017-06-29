@@ -143,6 +143,10 @@ Will result in:
 .float-right { float: right !important; }
 .float-none { float: none !important; }
 
+/* Sizing */
+.full-height { height: 100% !important; }
+.full-width { width: 100% !important; }
+
 /* Flexbox direction */
 .flex-row { flex-direction: row !important; }
 .flex-column { flex-direction: column !important; }
@@ -454,6 +458,10 @@ Will result in:
 
 
 ## Changelog
+
+### v.1.5.2
+
+- Add `.full-height` and `.full-width` alignment helpers
 
 ### v.1.5.1
 

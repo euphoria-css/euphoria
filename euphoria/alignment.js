@@ -1,10 +1,12 @@
 const autoprefixer = require('autoprefixer')
 
 module.exports = () => {
-  const floats = `
-.float-left { float: left !important; }
+  const floats = `.float-left { float: left !important; }
 .float-right { float: right !important; }
 .float-none { float: none !important; }`
+
+  const sizes = `.full-height { height: 100% !important; }
+.full-width { width: 100% !important; }`
 
   const flex = autoprefixer.process(`.flex-row { flex-direction: row !important; }
 .flex-row-reverse { flex-direction: row-reverse !important; }
@@ -49,5 +51,5 @@ module.exports = () => {
 .align-text-top { vertical-align: text-top !important; }
 .align-text-bottom { vertical-align: text-bottom !important; }`)
 
-  return [floats, flex, text, vertical].join('\n')
+  return [floats, sizes, flex, text, vertical].join('\n')
 }

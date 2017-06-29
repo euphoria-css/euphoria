@@ -53,6 +53,18 @@ css.insert(euphoria.alignment())
         <li><code>.float-none</code></li>
       </ul>
 
+      <h3 id="alignment-sizing">Sizing</h3>
+      <ul>
+        <li>
+          <code>.full-height</code> - applies <code>height: 100%</code> to the
+          element
+        </li>
+        <li>
+          <code>.full-width</code> - applies <code>width: 100%</code> to the
+          element
+        </li>
+      </ul>
+
       <h3 id="alignment-flexbox">Flexbox</h3>
       <p>
         See <a href="#display-flex">Display</a> section for
