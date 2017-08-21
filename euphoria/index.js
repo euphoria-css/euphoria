@@ -18,7 +18,7 @@ function all(mapping = {}) {
   const css = R.mapObjIndexed((func, name) => {
     return func(mapping[name])
   }, allStyles)
-  return R.join('\n', R.values(css))
+  return R.flatten(R.values(css))
 }
 
 module.exports = Object.assign({}, allStyles, { all })
