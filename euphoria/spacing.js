@@ -46,32 +46,29 @@ function makeSpacingClass(type, direction, sizeName, size) {
 }
 
 module.exports = (spacing = defaultSpacing) =>
-  R.join(
-    '\n',
-    R.flatten(
-      R.concat(
-        R.map(
-          t =>
-            R.map(
-              d =>
-                R.map(
-                  s => makeSpacingClass(t, d, s[0], s[1]),
-                  R.toPairs(R.merge(spacing, { none: 0 }))
-                ),
-              directions
-            ),
-          types
-        ),
-        // Append auto margin classes.
-        [
-          '.m-auto { margin: auto !important; }',
-          '.ml-auto { margin-left: auto !important; }',
-          '.mr-auto { margin-right: auto !important; }',
-          '.mb-auto { margin-bottom: auto !important; }',
-          '.mt-auto { margin-top: auto !important; }',
-          '.mx-auto { margin-left: auto !important; margin-right: auto !important; }',
-          '.my-auto { margin-top: auto !important; margin-bottom: auto !important; }',
-        ]
-      )
+  R.flatten(
+    R.concat(
+      R.map(
+        t =>
+          R.map(
+            d =>
+              R.map(
+                s => makeSpacingClass(t, d, s[0], s[1]),
+                R.toPairs(R.merge(spacing, { none: 0 }))
+              ),
+            directions
+          ),
+        types
+      ),
+      // Append auto margin classes.
+      [
+        '.m-auto { margin: auto !important; }',
+        '.ml-auto { margin-left: auto !important; }',
+        '.mr-auto { margin-right: auto !important; }',
+        '.mb-auto { margin-bottom: auto !important; }',
+        '.mt-auto { margin-top: auto !important; }',
+        '.mx-auto { margin-left: auto !important; margin-right: auto !important; }',
+        '.my-auto { margin-top: auto !important; margin-bottom: auto !important; }',
+      ]
     )
   )

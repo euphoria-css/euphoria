@@ -61,7 +61,6 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
-    "autoprefixer": "7.1.1",
     "ramda": "0.24.0"
   }
 }

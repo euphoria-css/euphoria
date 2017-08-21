@@ -17,8 +17,5 @@ function makeColorClass(color) {
 }
 
 module.exports = (colors = defaultColors) => {
-  return R.join(
-    '\n',
-    R.flatten(R.map(c => makeColorClass(c), R.toPairs(colors)))
-  )
+  return R.flatten(R.map(c => makeColorClass(c), R.toPairs(colors)))
 }

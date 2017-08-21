@@ -29,7 +29,7 @@ This library contains a collection of building blocks for assembling web UIs tha
   - *Style*: `.text-bold`, `.text-italic`, `.text-normal`
   - *Decoration*: `.text-underline`, `.text-line-through`
 
-Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. All Euphoria functions return a collection of CSS classes as a `String` that can be injected into a webpage, for example using [glamor](https://github.com/threepointone/glamor) (which all the following examples refer to). You can use Euphoria however you like of course.
+Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. All Euphoria functions return a collection of CSS classes as an `Array` of `String`s that can be injected into a webpage, for example using [glamor](https://github.com/threepointone/glamor) (which all the following examples refer to). You can use Euphoria however you like of course.
 
 Most of the code that makes up Euphoria is quite simple, have a look at the `euphoria` directory to learn more about how this all works.
 
@@ -52,11 +52,11 @@ import euphoria from 'euphoria'
 import { css } from 'glamor'
 
 // Include everything:
-css.insert(euphoria.all())
+euphoria.all().map(rule => css.insert(rule))
 
 // or just a certain utils:
-css.insert(euphoria.alignment())
-css.insert(euphoria.display())
+euphoria.alignment().map(rule => css.insert(rule))
+euphoria.display().map(rule => css.insert(rule))
 // etc...
 ```
 
@@ -66,7 +66,7 @@ You can of course also just import the utils you want like:
 import { colors } from 'euphoria'
 import { css } from 'glamor'
 
-css.insert(colors())
+colors().map(rule => css.insert(rule))
 ```
 
 
@@ -82,7 +82,7 @@ If you call `euphoria.all()` it will return all the below utilities together wit
 import { css } from 'glamor'
 import { all } from 'euphoria'
 
-css.insert(all())
+all().map(rule => css.insert(rule))
 ```
 
 You can pass in **custom mappings** also:
@@ -91,22 +91,21 @@ You can pass in **custom mappings** also:
 import { css } from 'glamor'
 import { all } from 'euphoria'
 
-css.insert(
-  all({
-    colors: {
-      angry: 'red',
-      happy: 'green',
-    },
-    spacing: {
-      tiny: '0.2rem',
-      huge: '4rem',
-    },
-    text: {
-      tiny: '0.6rem',
-      huge: '3rem',
-    },
-  })
-)
+
+all({
+  colors: {
+    angry: 'red',
+    happy: 'green',
+  },
+  spacing: {
+    tiny: '0.2rem',
+    huge: '4rem',
+  },
+  text: {
+    tiny: '0.6rem',
+    huge: '3rem',
+  },
+}).map(rule => css.insert(rule))
 
 ```
 
@@ -120,7 +119,7 @@ These mapping will get passed directly to the helpers below based on the key (eg
 import { css } from 'glamor'
 import { alignment } from 'euphoria'
 
-css.insert(alignment())
+alignment().map(rule => css.insert(rule))
 ```
 
 Will result in:
@@ -207,7 +206,7 @@ Will result in:
 import { css } from 'glamor'
 import { colors } from 'euphoria'
 
-css.insert(colors())
+colors().map(rule => css.insert(rule))
 ```
 
 Will result in:
@@ -234,10 +233,10 @@ Will result in:
 You can pass in your own color mappings like:
 
 ```js
-euphoria.colors({
+colors({
   angry: 'red',
   happy: 'green',
-})
+}).map(rule => css.insert(rule))
 ```
 
 Which will return: 
@@ -261,7 +260,7 @@ Which will return:
 import { css } from 'glamor'
 import { display } from 'euphoria'
 
-css.insert(display())
+display().map(rule => css.insert(rule))
 ```
 
 Results in:
@@ -289,13 +288,11 @@ Results in:
 import { css } from 'glamor'
 import { spacing } from 'euphoria'
 
-css.insert(
-  spacing({
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '2rem',
-  })
-)
+spacing({
+  sm: '0.5rem',
+  md: '1rem',
+  lg: '2rem',
+}).map(rule => css.insert(rule))
 ```
 
 Now you will have the following classes available to you:
@@ -406,7 +403,7 @@ We automatically inject `none` classes for padding and spacing (eg `.p-none { pa
 import { css } from 'glamor'
 import { text } from 'euphoria'
 
-css.insert(text())
+text().map(rule => css.insert(rule))
 ```
 
 Will result in:
@@ -443,7 +440,10 @@ To override default font styles, pass in a configuration object:
 import { css } from 'glamor'
 import { text } from 'euphoria'
 
-css.insert(text({ tiny: '0.3rem', huge: '3rem' }))
+text({
+  tiny: '0.3rem',
+  huge: '3rem',
+}).map(rule => css.insert(rule))
 ```
 
 Will result in:
@@ -466,73 +466,76 @@ Will result in:
 
 ## Changelog
 
-### v.1.5.3
+### v1.6.0
+
+- Change API to return an array of strings instead of just a string so we can support more CSS-in-JS libraries and fix integration with Glamor. 
+- Remove autoprefixer dependency; consuming codebase should use autoprefixer as desired.
+
+### v1.5.3
 
 - Add `.position-absolute`, `.position-relative` and `.position-fixed` alignment helpers
 
-### v.1.5.2
+### v1.5.2
 
 - Add `.full-height` and `.full-width` alignment helpers
 
-### v.1.5.1
+### v1.5.1
 
 - Add `.flex-row-reverse` direction
 
-### v.1.5.0
+### v1.5.0 - Use autoprefixer to add vendor prefixes as necessary.
 
-- Use autoprefixer to add vendor prefixes as necessary.
-
-### v.1.4.4
+### v1.4.4
 
 - Finish adding examples to example site
 - Fix `.text-bold`
 
-### v.1.4.3
+### v1.4.3
 
 - Further improve example site.
 
-### v.1.4.2
+### v1.4.2
 
 - Add examples site
 
-### v.1.4.1
+### v1.4.1
 
 - Add `muted` color to defaults
 
-### v.1.4.0
+### v1.4.0
 
 - Add text decoration and font styles
 
-### v.1.3.0
+### v1.3.0
 
 - **BREAKING**: Rename `type` to `text`
 - Cleanup readme
 
-### v.1.2.0
+### v1.2.0
 
 - Make `font-size` helpers
 
-### v.1.1.1
+### v1.1.1
 
 - Make type helpers use `!important` flag.
 
-### v.1.1.0
+### v1.1.0
 
 - Add "text-transform" helpers.
 
-### v.1.0.3
+### v1.0.3
 
 - Set `!important` flag for color styles.
 
-### v.1.0.2
+### v1.0.2
 
 - Update readme.
 
-### v.1.0.1
+### v1.0.1
 
 - Update readme.
 
-### v.1.0.0
+### v1.0.0
 
 - Bump to v1 because npm wasn't allowing minor versions...?
 

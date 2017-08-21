@@ -6,25 +6,35 @@ import { fontSizes } from './config'
 export default function Text() {
   return (
     <div>
-
       <h2 id="text">Text</h2>
 
       <h4 id="text-usage">Usage</h4>
       <Highlight lang="js">{`import euphoria from 'euphoria'
 import { css } from 'glamor'
 
-css.insert(euphoria.text(${stringify(fontSizes)}))
-`}</Highlight>
+euphoria.text(${stringify(
+        fontSizes
+      )}).map(rule => css.insert(rule))`}</Highlight>
 
       <h4 id="text-sizes">Sizes</h4>
       <p className="my-sm text-xxs">
         Text with the class <code>.text-xxs</code>
       </p>
-      <p className="my-sm text-xs">Text with the class <code>.text-xs</code></p>
-      <p className="my-sm text-sm">Text with the class <code>.text-sm</code></p>
-      <p className="my-sm text-md">Text with the class <code>.text-md</code></p>
-      <p className="my-sm text-lg">Text with the class <code>.text-lg</code></p>
-      <p className="my-sm text-xl">Text with the class <code>.text-xl</code></p>
+      <p className="my-sm text-xs">
+        Text with the class <code>.text-xs</code>
+      </p>
+      <p className="my-sm text-sm">
+        Text with the class <code>.text-sm</code>
+      </p>
+      <p className="my-sm text-md">
+        Text with the class <code>.text-md</code>
+      </p>
+      <p className="my-sm text-lg">
+        Text with the class <code>.text-lg</code>
+      </p>
+      <p className="my-sm text-xl">
+        Text with the class <code>.text-xl</code>
+      </p>
       <p className="my-sm text-xxl">
         Text with the class <code>.text-xxl</code>
       </p>
