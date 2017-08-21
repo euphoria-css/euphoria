@@ -3,7 +3,7 @@ import js from 'react-syntax-highlighter/dist/languages/javascript'
 import SyntaxHighlighter, {
   registerLanguage,
 } from 'react-syntax-highlighter/dist/light'
-import React from 'React'
+import React from 'react'
 
 registerLanguage('javascript', js)
 
