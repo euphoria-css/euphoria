@@ -7,16 +7,16 @@ module.exports = () => {
     '.float-none { float: none !important; }',
   ]
 
-  const sizes = [
-    '.full-height { height: 100% !important; }',
-    '.full-width { width: 100% !important; }',
-  ]
+  const sizes = [].concat(
+    [10, 20, 25, 30, 33.3, 40, 50, 60, 66.6, 70, 75, 80, 90, 100].map(s => [
+      `.height-${parseInt(s)}p { height: ${s}% !important; }`,
+      `.width-${parseInt(s)}p { width: ${s}% !important; }`,
+    ])
+  )
 
-  const positions = [
-    '.position-relative { position: relative !important; }',
-    '.position-absolute { position: absolute !important; }',
-    '.position-fixed { position: fixed !important; }',
-  ]
+  const positions = ['relative', 'absolute', 'fixed'].map(
+    p => `.position-${p} { position: ${p} !important; }`
+  )
 
   const flex = [
     '.flex-row { flex-direction: row !important; }',

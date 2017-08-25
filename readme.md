@@ -144,14 +144,40 @@ Will result in:
 .float-right { float: right !important; }
 .float-none { float: none !important; }
 
-/* Sizing */
+/* Position */
 .position-relative { position: relative !important; }
 .position-absolute { position: absolute !important; }
 .position-fixed { position: fixed !important; }
 
 /* Sizing */
-.full-height { height: 100% !important; }
-.full-width { width: 100% !important; }
+.height-10p { height: 10% !important; }
+.width-10p { width: 10% !important; }
+.height-20p { height: 20% !important; }
+.width-20p { width: 20% !important; }
+.height-25p { height: 25% !important; }
+.width-25p { width: 25% !important; }
+.height-30p { height: 30% !important; }
+.width-30p { width: 30% !important; }
+.height-33p { height: 33.3% !important; }
+.width-33p { width: 33.3% !important; }
+.height-40p { height: 40% !important; }
+.width-40p { width: 40% !important; }
+.height-50p { height: 50% !important; }
+.width-50p { width: 50% !important; }
+.height-60p { height: 60% !important; }
+.width-60p { width: 60% !important; }
+.height-66p { height: 66.6% !important; }
+.width-66p { width: 66.6% !important; }
+.height-70p { height: 70% !important; }
+.width-70p { width: 70% !important; }
+.height-75p { height: 75% !important; }
+.width-75p { width: 75% !important; }
+.height-80p { height: 80% !important; }
+.width-80p { width: 80% !important; }
+.height-90p { height: 90% !important; }
+.width-90p { width: 90% !important; }
+.height-100p { height: 100% !important; }
+.width-100p { width: 100% !important; }
 
 /* Flexbox direction */
 .flex-row { flex-direction: row !important; }
@@ -465,6 +491,11 @@ Will result in:
 
 
 ## Changelog
+
+### v1.7.0
+
+- [**DEPRECATED**] Remove `.full-height` and `.full-width` and replaced with `.width-100p`, `.height-100p`, etc...
+- Add width/height styling for all commonly divisible percentage widths
 
 ### v1.6.0
 

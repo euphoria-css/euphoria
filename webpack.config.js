@@ -60,6 +60,7 @@ const webpackConfig = {
   stats: 'minimal',
   devServer: {
     hot: true,
+    overlay: true,
   },
 }
 

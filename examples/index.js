@@ -2,6 +2,7 @@ import Alignment from './alignment'
 import Colors from './colors'
 import Display from './display'
 import euphoria from '../euphoria'
+import Highlight from './highlight'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Spacing from './spacing'
@@ -10,12 +11,11 @@ import { css } from 'glamor'
 import { colors, spacing } from './config'
 
 // Include everything:
-euphoria
-  .all({
-    colors,
-    spacing,
-  })
-  .map(rule => css.insert(rule))
+const rules = euphoria.all({
+  colors,
+  spacing,
+})
+rules.map(rule => css.insert(rule))
 
 // Example specific styles
 const styles = [
@@ -176,6 +176,11 @@ function TOC() {
           </li>
         </ul>
       </li>
+      <li>
+        <a href="#all">
+          <strong>All Rules</strong>
+        </a>
+      </li>
     </ul>
   )
 }
@@ -203,6 +208,11 @@ function Examples() {
       <Display />
       <Spacing />
       <Text />
+      <h2 id="all">All Rules</h2>
+      <pre />
+      <Highlight lang="css">
+        {rules.join('\n')}
+      </Highlight>
     </div>
   )
 }

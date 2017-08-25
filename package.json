@@ -4,8 +4,8 @@
   "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "euphoria/index.js",
   "scripts": {
-    "build-examples": "webpack",
-    "watch-examples": "webpack-dev-server"
+    "build": "webpack",
+    "watch": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
