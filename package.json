@@ -61,6 +61,7 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
+    "prettier": "1.7.0",
     "ramda": "0.24.0"
   }
 }

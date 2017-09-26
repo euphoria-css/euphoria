@@ -492,6 +492,11 @@ Will result in:
 
 ## Changelog
 
+### v1.7.1
+
+- Set Prettier version
+- Add `.prettierrc` config file
+
 ### v1.7.0
 
 - [**DEPRECATED**] Remove `.full-height` and `.full-width` and replaced with `.width-100p`, `.height-100p`, etc...
