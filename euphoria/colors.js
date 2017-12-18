@@ -1,18 +1,13 @@
+const rule = require('./utils/create-rule')
 const R = require('ramda')
-
-const defaultColors = {
-  primary: 'lightseagreen',
-  success: 'forestgreen',
-  muted: 'lightgray',
-  info: 'teal',
-  warning: 'orange',
-  danger: 'crimson',
-}
+const { colors: defaultColors } = require('./defaults')
 
 function makeColorClass(color) {
   return [
-    `.bg-${color[0]} { background: ${color[1]} !important; }`,
-    `.text-${color[0]} { color: ${color[1]} !important; }`,
+    rule(`bg-${color[0]}`, ['background', color[1]]),
+    rule(`text-${color[0]}`, ['color', color[1]]),
+    rule(`hover-bg-${color[0]}:hover`, ['background', color[1]]),
+    rule(`hover-text-${color[0]}:hover`, ['color', color[1]]),
   ]
 }
 

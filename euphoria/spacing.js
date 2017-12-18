@@ -1,3 +1,4 @@
+const rule = require('./utils/create-rule')
 const R = require('ramda')
 
 const types = ['padding', 'margin']
@@ -62,13 +63,13 @@ module.exports = (spacing = defaultSpacing) =>
       ),
       // Append auto margin classes.
       [
-        '.m-auto { margin: auto !important; }',
-        '.ml-auto { margin-left: auto !important; }',
-        '.mr-auto { margin-right: auto !important; }',
-        '.mb-auto { margin-bottom: auto !important; }',
-        '.mt-auto { margin-top: auto !important; }',
-        '.mx-auto { margin-left: auto !important; margin-right: auto !important; }',
-        '.my-auto { margin-top: auto !important; margin-bottom: auto !important; }',
+        rule('m-auto', ['margin', 'auto']),
+        rule('ml-auto', ['margin-left', 'auto']),
+        rule('mr-auto', ['margin-right', 'auto']),
+        rule('mb-auto', ['margin-bottom', 'auto']),
+        rule('mt-auto', ['margin-top', 'auto']),
+        rule('mx-auto', ['margin-left', 'auto']),
+        rule('my-auto', ['margin-top', 'auto']),
       ]
     )
   )

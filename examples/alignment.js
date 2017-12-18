@@ -4,8 +4,6 @@ import React from 'react'
 export default function Alignment() {
   return (
     <div>
-      <h2 id="alignment">Alignment</h2>
-
       <h4 id="alignment-usage">Usage</h4>
       <Highlight lang="js">{`import euphoria from 'euphoria'
 import { css } from 'glamor'

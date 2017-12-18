@@ -1,71 +1,56 @@
+const rule = require('./utils/create-rule')
 const R = require('ramda')
 
 module.exports = () => {
-  const floats = [
-    '.float-left { float: left !important; }',
-    '.float-right { float: right !important; }',
-    '.float-none { float: none !important; }',
-  ]
-
-  const sizes = [].concat(
-    [10, 20, 25, 30, 33.3, 40, 50, 60, 66.6, 70, 75, 80, 90, 100].map(s => [
-      `.height-${parseInt(s)}p { height: ${s}% !important; }`,
-      `.width-${parseInt(s)}p { width: ${s}% !important; }`,
-    ])
-  )
-
-  const positions = ['relative', 'absolute', 'fixed'].map(
-    p => `.position-${p} { position: ${p} !important; }`
+  const positions = ['relative', 'absolute', 'fixed'].map(p =>
+    rule(`position-${p}`, ['position', p])
   )
 
   const flex = [
-    '.flex-row { flex-direction: row !important; }',
-    '.flex-row-reverse { flex-direction: row-reverse !important; }',
-    '.flex-column { flex-direction: column !important; }',
-    '.flex-column-reverse { flex-direction: column-reverse !important; }',
-    '.justify-content-start { justify-content: flex-start !important; }',
-    '.justify-content-end { justify-content: flex-end !important; }',
-    '.justify-content-center { justify-content: center !important; }',
-    '.justify-content-between { justify-content: space-between !important; }',
-    '.justify-content-around { justify-content: space-around !important; }',
-    '.align-items-start { align-items: flex-start !important; }',
-    '.align-items-end { align-items: flex-end !important; }',
-    '.align-items-center { align-items: center !important; }',
-    '.align-items-baseline { align-items: baseline !important; }',
-    '.align-items-stretch { align-items: stretch !important; }',
-    '.align-self-start { align-self: flex-start !important; }',
-    '.align-self-end { align-self: flex-end !important; }',
-    '.align-self-center { align-self: center !important; }',
-    '.align-self-baseline { align-self: baseline !important; }',
-    '.align-self-stretch { align-self: stretch !important; }',
-    '.align-content-start { align-content: flex-start !important; }',
-    '.align-content-end { align-content: flex-end !important; }',
-    '.align-content-center { align-content: center !important; }',
-    '.align-content-stretch { align-content: stretch !important; }',
-    '.align-content-between { align-content: space-between !important; }',
-    '.align-content-around { align-content: space-around !important; }',
-    '.flex-wrap { flex-wrap: wrap !important; }',
-    '.flex-wrap-reverse { flex-wrap: wrap-reverse !important; }',
-    '.flex-nowrap { flex-wrap: nowrap !important; }',
-    '.flex-first { order: -1 !important; }',
-    '.flex-last { order: 1 !important; }',
+    rule('flex-row', ['flex-direction', 'row']),
+    rule('flex-row-reverse', ['flex-direction', 'row-reverse']),
+    rule('flex-column', ['flex-direction', 'column']),
+    rule('flex-column-reverse', ['flex-direction', 'column-reverse']),
+    rule('justify-content-start', ['justify-content', 'flex-start']),
+    rule('justify-content-end', ['justify-content', 'flex-end']),
+    rule('justify-content-center', ['justify-content', 'center']),
+    rule('justify-content-between', ['justify-content', 'space-between']),
+    rule('justify-content-around', ['justify-content', 'space-around']),
+    rule('align-items-start', ['align-items', 'flex-start']),
+    rule('align-items-end', ['align-items', 'flex-end']),
+    rule('align-items-center', ['align-items', 'center']),
+    rule('align-items-baseline', ['align-items', 'baseline']),
+    rule('align-items-stretch', ['align-items', 'stretch']),
+    rule('align-self-start', ['align-self', 'flex-start']),
+    rule('align-self-end', ['align-self', 'flex-end']),
+    rule('align-self-center', ['align-self', 'center']),
+    rule('align-self-baseline', ['align-self', 'baseline']),
+    rule('align-self-stretch', ['align-self', 'stretch']),
+    rule('align-content-start', ['align-content', 'flex-start']),
+    rule('align-content-end', ['align-content', 'flex-end']),
+    rule('align-content-center', ['align-content', 'center']),
+    rule('align-content-stretch', ['align-content', 'stretch']),
+    rule('align-content-between', ['align-content', 'space-between']),
+    rule('align-content-around', ['align-content', 'space-around']),
+    rule('flex-wrap', ['flex-wrap', 'wrap']),
+    rule('flex-wrap-reverse', ['flex-wrap', 'wrap-reverse']),
+    rule('flex-nowrap', ['flex-wrap', 'nowrap']),
+    rule('flex-first', ['order', '-1']),
+    rule('flex-last', ['order', '1']),
   ]
 
-  const text = [
-    '.text-left { text-align: left !important; }',
-    '.text-right { text-align: right !important; }',
-    '.text-center { text-align: center !important; }',
-    '.text-justify { text-align: justify !important; }',
-  ]
+  const text = ['left', 'right', 'center', 'justify'].map(dir =>
+    rule(`text-${dir}`, ['text-align', dir])
+  )
 
   const vertical = [
-    '.align-baseline { vertical-align: baseline !important; }',
-    '.align-top { vertical-align: top !important; }',
-    '.align-middle { vertical-align: middle !important; }',
-    '.align-bottom { vertical-align: bottom !important; }',
-    '.align-text-top { vertical-align: text-top !important; }',
-    '.align-text-bottom { vertical-align: text-bottom !important; }',
+    rule('align-baseline', ['vertical-align', 'baseline']),
+    rule('align-top', ['vertical-align', 'top']),
+    rule('align-middle', ['vertical-align', 'middle']),
+    rule('align-bottom', ['vertical-align', 'bottom']),
+    rule('align-text-top', ['vertical-align', 'text-top']),
+    rule('align-text-bottom', ['vertical-align', 'text-bottom']),
   ]
 
-  return [].concat(floats, sizes, positions, text, flex, vertical)
+  return [].concat(positions, text, flex, vertical)
 }

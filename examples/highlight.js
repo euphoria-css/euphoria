@@ -11,7 +11,11 @@ registerLanguage('css', css)
 
 export default function Highlight(props) {
   return (
-    <SyntaxHighlighter language={props.lang} style={docco}>
+    <SyntaxHighlighter
+      className="p-md border-lg border-primary bl bw-md bc-info"
+      language={props.lang}
+      style={docco}
+    >
       {props.children}
     </SyntaxHighlighter>
   )

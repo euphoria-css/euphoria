@@ -1,40 +1,36 @@
+const rule = require('./utils/create-rule')
 const R = require('ramda')
+const { fontSizes } = require('./defaults')
 
-const defaultSizes = {
-  xxs: '0.7rem',
-  xs: '0.8rem',
-  sm: '0.9rem',
-  md: '1rem',
-  lg: '1.25rem',
-  xl: '1.5rem',
-  xxl: '2rem',
-  xxxl: '3rem',
-}
-
-module.exports = (sizes = defaultSizes) => {
+module.exports = (sizes = fontSizes) => {
   const transform = [
-    '.text-uppercase { text-transform: uppercase !important; }',
-    '.text-lowercase { text-transform: lowercase !important; }',
-    '.text-capitalize { text-transform: capitalize !important; }',
+    rule('uppercase', ['text-transform', 'uppercase']),
+    rule('lowercase', ['text-transform', 'lowercase']),
+    rule('capitalize', ['text-transform', 'capitalize']),
   ]
 
   const style = [
-    '.text-normal { font-style: normal !important; }',
-    '.text-bold { font-weight: bold !important; }',
-    '.text-italic { font-style: italic !important; }',
+    rule('normal', ['font-style', 'normal'], ['font-weight', 'normal']),
+    rule('bold', ['font-weight', 'bold']),
+    rule('italic', ['font-style', 'italic']),
   ]
 
   const decoration = [
-    '.text-line-through { text-decoration: line-through !important; }',
-    '.text-underline { text-decoration: underline !important; }',
+    rule('line-through', ['text-decoration', 'line-through']),
+    rule('underline', ['text-decoration', 'underline']),
   ]
 
   const fontSizes = R.flatten(
-    R.map(
-      s => `.text-${s[0]} { font-size: ${s[1]} !important; }`,
-      R.toPairs(sizes)
-    )
+    R.map(s => rule(`text-${s[0]}`, ['font-size', s[1]]), R.toPairs(sizes))
   )
 
-  return [].concat(decoration, fontSizes, style, transform)
+  const spacing = [
+    rule('ls-sm', ['letter-spacing', '-0.5em']),
+    rule('ls-md', ['letter-spacing', '0']),
+    rule('ls-lg', ['letter-spacing', '0.2em']),
+    rule('ls-xl', ['letter-spacing', '0.5em']),
+    rule('ls-xxl', ['letter-spacing', '0.8em']),
+  ]
+
+  return [].concat(fontSizes, decoration, style, transform, spacing)
 }
