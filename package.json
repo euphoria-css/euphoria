@@ -1,11 +1,13 @@
 {
   "name": "euphoria",
   "version": "1.7.1",
-  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "description":
+    "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "euphoria/index.js",
   "scripts": {
     "build": "webpack",
-    "bundle": "node bundle.js",
+    "bundle":
+      "node bundle.js && gzip -9 -c euphoria.min.css > euphoria.min.css.gz",
     "watch": "webpack-dev-server"
   },
   "repository": {
@@ -56,6 +58,7 @@
     "html-webpack-harddisk-plugin": "0.1.0",
     "html-webpack-plugin": "2.28.0",
     "lodash": "4.17.4",
+    "prop-types": "15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-syntax-highlighter": "5.6.2",
