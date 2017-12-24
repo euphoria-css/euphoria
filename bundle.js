@@ -1,34 +1,25 @@
 const CleanCSS = require('clean-css')
-const fs = require('fs')
 const chalk = require('chalk')
+const fs = require('fs')
 const Euphoria = require('./euphoria')
 
 const PATH = 'euphoria.min.css'
 
-const rules = new Euphoria()
-
-// console.log('\n')
-// console.log(chalk.red.bold.underline('RULES:'))
-// console.log(chalk.gray(rules))
-
-// rules.rules.map(rule => {
-//   console.log(chalk.red.bold.underline('\nRULESET:'))
-//   console.log(chalk.gray(rule))
-// })
+const euphoria = new Euphoria()
 
 // Add a custom rule.
-rules.addRule('.button', { 'box-shadow': '1px 1px 1px rgba(0, 0, 0, 0.1)' }, [
-  '.px-lg',
-  '.py-md',
-  '.bg-primary',
-  '.hover-bg-info',
-  '.uppercase',
-  '.ls-md',
-])
+// euphoria.addRule({
+//   short: 'btn',
+//   verbose: 'button',
+//   properties: { 'box-shadow': '1px 1px 1px rgba(0, 0, 0, 0.1)' },
+//   inherits: ['px-lg', 'py-md', 'bg-primary', 'hov-bg-info', 'br-pill'],
+// })
 
-const clean = new CleanCSS({}).minify(rules.toString())
+const clean = new CleanCSS({}).minify(euphoria.toString())
 fs.writeFileSync(PATH, clean.styles)
 
-console.log(chalk.gray(rules))
-// console.log(chalk.gray(clean.styles))
-console.log(chalk.green.bold(`\nMinified CSS to ${PATH}!\n`))
+console.log(chalk.gray(euphoria))
+console.log(
+  chalk.green.bold('Minified CSS to'),
+  chalk.blue.bold.underline(PATH)
+)

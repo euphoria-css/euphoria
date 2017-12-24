@@ -1027,18 +1027,32 @@ class Euphoria {
    * @param {Object} custom Custom styles to apply to the rule.
    * @param {Array} custom An (optional) list of Euphoria selectors to combine into this new rule.
    */
-  addRule(selector, custom = {}, inherited = []) {
-    if (inherited.length) {
+  addRule({
+    short,
+    verbose,
+    properties = {},
+    inherits = [],
+    hover = false,
+    responsive = false,
+    important = false,
+    after = false,
+  }) {
+    if (inherits.length) {
       this.rules.map(set => {
         set.rules.map(rule => {
-          if (inherited.indexOf(rule.selector) != -1) {
-            Object.assign(custom, rule.properties)
+          if (
+            inherits.indexOf(rule.classNameShort) != -1 ||
+            inherits.indexOf(rule.classNameVerbose) != -1
+          ) {
+            Object.assign(properties, rule.properties)
           }
         })
       })
     }
 
-    this.rules.push(new Rule(selector, custom))
+    this.rules.push(
+      new Rule({ short, verbose, properties, hover, responsive, after })
+    )
   }
 
   css(separator = '\n') {
