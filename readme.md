@@ -29,7 +29,7 @@ Euphoria provides common styling classes for creating user interfaces in CSS-in-
 Use the CDN version:
 
 ```html
-<link href="unpkg.com/danawoodman/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
+<link href="unpkg.com/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
 
 With yarn:
@@ -56,7 +56,7 @@ Just include the version of Euphoria you want in the `<head>` of your page:
 <html>
   <head>
     <title>My Site</title>
-    <link href="unpkg.com/danawoodman/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
+    <link href="unpkg.com/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
   ...content here...
