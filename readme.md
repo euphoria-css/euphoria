@@ -115,8 +115,18 @@ You can add your own custom rules to Euphoria by using the `addRule` method. Thi
 
 Usage:
 
-```js
-euphoria.addRule(selector, customCSS, inheritedStyles)
+```ts
+
+euphoria.addRule({
+  short: string,
+  verbose: string,
+  properties: Object,
+  inherits: Array<string>,
+  hover: boolean,
+  after: boolean,
+  important: boolean,
+  responsive: boolean,
+})
 ```
 
 * **`short`**: a required `String` representing a short-form CSS selector to add as a new rule to Euphoria (eg `.btn`, `.hdr`, etc.)
