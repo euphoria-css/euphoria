@@ -15,10 +15,20 @@ const euphoria = new Euphoria()
 //   inherits: ['px-lg', 'py-md', 'bg-primary', 'hov-bg-info', 'br-pill'],
 // })
 
-const clean = new CleanCSS({}).minify(euphoria.toString())
-fs.writeFileSync(PATH, clean.styles)
+const copyright = `/**
+ * Euphoria
+ * 
+ * Copyright: Dana Woodman 2018
+ * Licence: MIT
+ * 
+ * Learn more at: <http:github.com/danawoodman/euphoria>
+ */`
 
-console.log(chalk.gray(euphoria))
+const clean = new CleanCSS({}).minify(euphoria.toString())
+const css = [copyright, clean.styles].join('\n')
+fs.writeFileSync(PATH, css)
+
+// console.log(chalk.gray(euphoria))
 console.log(
   chalk.green.bold('Minified CSS to'),
   chalk.blue.bold.underline(PATH)

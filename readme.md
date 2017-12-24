@@ -10,7 +10,6 @@ This library contains a collection of building blocks for assembling web UIs tha
 Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. Euphoria generates CSS that can be injected into a webpage, for example using [glamor][glamor] (which all the following examples refer to) or output to a file to be served by a web server. You can use Euphoria however you like of course.
 
 
-
 ## Features
 
 - Customizable rules
@@ -25,21 +24,47 @@ Euphoria provides common styling classes for creating user interfaces in CSS-in-
 - Programatic styles
 
 
-
 ## Install
 
+Use the CDN version:
+
+```html
+<link href="unpkg.com/danawoodman/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
+```
+
 With yarn:
+
 ```bash
 yarn add euphoria
 ```
 
 With npm:
+
 ```bash
 npm i -S euphoria
 ```
 
 
 ## Usage
+
+### Default version
+
+Just include the version of Euphoria you want in the `<head>` of your page:
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>My Site</title>
+    <link href="unpkg.com/danawoodman/euphoria@2.0.0/euphoria.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+  ...content here...
+  </body>
+</html>
+```
+
+### Glamor
 
 ```js
 import Euphoria from 'euphoria'
@@ -54,7 +79,7 @@ css.insert(euphoria.toString())
 
 This will generate a `String` of CSS that can then be inserted into the web page (via `css.insert()` in glamor) or can be included in part of a build process.
 
-### Options
+## Options
 
 Euphoria is fully configurable and all the settings for sizes, colors and more can be changed by passing in an options `Object`.
 
