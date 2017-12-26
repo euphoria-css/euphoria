@@ -46,7 +46,7 @@ const COLORS = Object.assign(
   createColorVariation('blue', BLUE),
   {
     white: WHITE,
-    'gray-lightest': '#f9f9f9',
+    'gray-lightest': '#f6f6f6',
     'gray-lighter': '#e1e1e1',
     'gray-light': '#ccc',
     gray: '#aaa',
