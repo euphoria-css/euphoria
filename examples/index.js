@@ -225,6 +225,7 @@ function ExampleAdapter({ ruleset }) {
     case 'Font sizes':
     case 'Letter spacing':
     case 'Line height':
+    case 'Opacity':
     case 'Text alignment':
     case 'Text decoration':
     case 'Text styles':

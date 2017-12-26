@@ -171,10 +171,9 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 
 ## TODO
 
-- [ ] Auto generated documentation of customized code
-  - How to handle custom rules?
+Rules: 
+
 - [ ] Box shadow
-- [ ] Opacity (100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5, 2.5, 1)
 - [ ] Animations (default and hover versions)
   - [ ] Fade
   - [ ] Show child
@@ -185,6 +184,11 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 - [ ] Background size
 - [ ] Grid layout helpers
 - [ ] Font weights
+
+Documentation:
+
+- [ ] Auto generated documentation of customized code
+  - How to handle custom rules?
 - Custom style examples:
   - Links
   - Buttons
@@ -193,8 +197,6 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
   - Card
   - Tables
 - Examples
-  - [ ] Add custom styles
-  - [ ] Change defaults
   - [ ] Only use certain styles
 
 

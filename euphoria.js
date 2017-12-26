@@ -188,6 +188,21 @@ class Euphoria {
         xl: 3,
         xxl: 4,
       },
+      opacity: {
+        '100': 1.0,
+        '90': 0.9,
+        '80': 0.8,
+        '70': 0.7,
+        '60': 0.6,
+        '50': 0.5,
+        '40': 0.4,
+        '30': 0.3,
+        '20': 0.2,
+        '10': 0.1,
+        '05': 0.05,
+        '025': 0.025,
+        '0': 0,
+      },
       sizes: [
         'auto',
         5,
@@ -1012,6 +1027,22 @@ class Euphoria {
             properties: { order: '1' },
           },
         ],
+      },
+      {
+        name: 'Opacity',
+        rules: _.map(this.options.opacity, (value, name) => ({
+          short: `o-${name}`,
+          verbose: `opacity-${name}`,
+          properties: { opacity: value },
+        })),
+      },
+      {
+        name: 'Whitespace',
+        rules: ['pre', 'nowrap', 'normal'].map(ws => ({
+          short: `ws-${ws}`,
+          verbose: `white-space-${ws}`,
+          properties: { 'white-space': ws },
+        })),
       },
     ]
   }
