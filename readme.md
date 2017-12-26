@@ -109,7 +109,7 @@ Everything that makes sense to make configurable is configurable.
 
 Please see [the documentation website][docs] for a full list of available options.
 
-### Adding a custom rules
+### Adding a custom rule
 
 You can add your own custom rules to Euphoria by using the `addRule` method. This method allows you to create a new CSS selector with optional custom CSS and a list of styles to inherit from. Think of this as the equivalent of a LESS/SASS mixin.
 
@@ -169,12 +169,10 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 }
 ```
 
-
 ## TODO
 
 - [ ] Auto generated documentation of customized code
   - How to handle custom rules?
-- [ ] Bundle minified version for unpkg.com usage (sane defaults, like Bootstrap)
 - [ ] Box shadow
 - [ ] Opacity (100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5, 2.5, 1)
 - [ ] Animations (default and hover versions)
@@ -185,6 +183,8 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
   - [ ] Shake
   - [ ] Rotate
 - [ ] Background size
+- [ ] Grid layout helpers
+- [ ] Font weights
 - Custom style examples:
   - Links
   - Buttons
@@ -231,7 +231,9 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 
 - Add `.flex-row-reverse` direction
 
-### v1.5.0 - Use autoprefixer to add vendor prefixes as necessary.
+### v1.5.0
+
+- Use autoprefixer to add vendor prefixes as necessary.
 
 ### v1.4.4
 

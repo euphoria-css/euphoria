@@ -16,7 +16,7 @@ function TOCLink({ children, href }) {
   return (
     <a
       href={href}
-      className="dib px-sm py-xs primary hov-white hov-bg-cyan no-decoration db bl bw-sm bc-transparent hov-bc-cyan-dark"
+      className="db fl w-100-xs-only w-50-sm-up w-33-md-up w-20-lg-up px-sm py-xs primary hov-bg-cyan-lightest no-decoration br-pill ba bc-transparent hov-bc-primary"
     >
       {children}
     </a>
@@ -26,15 +26,18 @@ function TOCLink({ children, href }) {
 function TOC() {
   return (
     <nav>
+      <h1 className="txt-xxl center ls-lg mt-none mb-lg uppercase">Euphoria</h1>
       <h2 className="txt-xs mb-sm sans-serif mt-none center uppercase ls-lg gray-lighter">
         Table of contents
       </h2>
-      {RULES.map((ruleset, key) => (
-        <TOCLink href={`#${slugify(ruleset.name.toLowerCase())}`} key={key}>
-          {ruleset.name}
-        </TOCLink>
-      ))}
-      <TOCLink href="#all">All Rules</TOCLink>
+      <div className="cf">
+        {RULES.map((ruleset, key) => (
+          <TOCLink href={`#${slugify(ruleset.name.toLowerCase())}`} key={key}>
+            {ruleset.name}
+          </TOCLink>
+        ))}
+        <TOCLink href="#all">All Rules</TOCLink>
+      </div>
     </nav>
   )
 }
