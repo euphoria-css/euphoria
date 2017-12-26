@@ -1,13 +1,11 @@
 {
   "name": "euphoria",
-  "version": "2.0.2",
-  "description":
-    "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "version": "2.0.3",
+  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "euphoria/index.js",
   "scripts": {
     "build-examples": "webpack",
-    "build-css":
-      "node bundle.js && gzip -9 -c euphoria.min.css > euphoria.min.css.gz",
+    "build-css": "node bundle.js && gzip -9 -c euphoria.min.css > euphoria.min.css.gz",
     "build": "yarn build-examples && yarn build-css",
     "watch": "webpack-dev-server"
   },
