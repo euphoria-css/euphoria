@@ -1,8 +1,7 @@
 {
   "name": "euphoria",
-  "version": "2.0.4",
-  "description":
-    "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "version": "2.0.5",
+  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "src/euphoria.js",
   "scripts": {
     "build-examples": "webpack",
