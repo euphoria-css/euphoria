@@ -136,6 +136,17 @@ function WidthExample({ rules }) {
     </div>
   )
 }
+function BoxShadowExample({ rules }) {
+  return (
+    <div>
+      {rules.map((rule, key) => (
+        <div className={`my-md p-sm bg-white ${rule.classNameShort}`} key={key}>
+          <Code>{rule.classNameShort}</Code>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function BoxExample({ rules }) {
   return (
@@ -220,9 +231,13 @@ function ExampleAdapter({ ruleset }) {
     case 'Border positions':
       return <BorderExample rules={rules} />
       break
+    case 'Box shadows':
+      return <BoxShadowExample rules={rules} />
+      break
     case 'Cursor':
     case 'Font families':
     case 'Font sizes':
+    case 'Font weights':
     case 'Letter spacing':
     case 'Line height':
     case 'Opacity':

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "150f5e95a6706818002a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "36a51cb96e24589fcb83"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22670,9 +22670,28 @@ function WidthExample(_ref6) {
     })
   );
 }
-
-function BoxExample(_ref7) {
+function BoxShadowExample(_ref7) {
   var rules = _ref7.rules;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    rules.map(function (rule, key) {
+      return _react2.default.createElement(
+        'div',
+        { className: 'my-md p-sm bg-white ' + rule.classNameShort, key: key },
+        _react2.default.createElement(
+          Code,
+          null,
+          rule.classNameShort
+        )
+      );
+    })
+  );
+}
+
+function BoxExample(_ref8) {
+  var rules = _ref8.rules;
 
   return _react2.default.createElement(
     'div',
@@ -22697,10 +22716,10 @@ function BoxExample(_ref7) {
   );
 }
 
-function BorderExample(_ref8) {
-  var _ref8$extraClasses = _ref8.extraClasses,
-      extraClasses = _ref8$extraClasses === undefined ? '' : _ref8$extraClasses,
-      rules = _ref8.rules;
+function BorderExample(_ref9) {
+  var _ref9$extraClasses = _ref9.extraClasses,
+      extraClasses = _ref9$extraClasses === undefined ? '' : _ref9$extraClasses,
+      rules = _ref9.rules;
 
   return _react2.default.createElement(
     'div',
@@ -22729,10 +22748,10 @@ function BorderExample(_ref8) {
   );
 }
 
-function TextExample(_ref9) {
-  var _ref9$extraClasses = _ref9.extraClasses,
-      extraClasses = _ref9$extraClasses === undefined ? '' : _ref9$extraClasses,
-      rules = _ref9.rules;
+function TextExample(_ref10) {
+  var _ref10$extraClasses = _ref10.extraClasses,
+      extraClasses = _ref10$extraClasses === undefined ? '' : _ref10$extraClasses,
+      rules = _ref10.rules;
 
   return _react2.default.createElement(
     'div',
@@ -22770,8 +22789,8 @@ function AllRules() {
   );
 }
 
-function ExampleAdapter(_ref10) {
-  var ruleset = _ref10.ruleset;
+function ExampleAdapter(_ref11) {
+  var ruleset = _ref11.ruleset;
   var name = ruleset.name,
       rules = ruleset.rules;
 
@@ -22797,9 +22816,13 @@ function ExampleAdapter(_ref10) {
     case 'Border positions':
       return _react2.default.createElement(BorderExample, { rules: rules });
       break;
+    case 'Box shadows':
+      return _react2.default.createElement(BoxShadowExample, { rules: rules });
+      break;
     case 'Cursor':
     case 'Font families':
     case 'Font sizes':
+    case 'Font weights':
     case 'Letter spacing':
     case 'Line height':
     case 'Opacity':
@@ -51016,6 +51039,13 @@ class Euphoria {
         pill: '100em',
         '100': '100%',
       },
+      boxShadows: {
+        xs: '0 0 4px 2px rgba(0, 0, 0, .2)',
+        sm: '0 0 8px 2px rgba(0, 0, 0, .2)',
+        md: '2px 2px 4px 2px rgba(0, 0, 0, .2)',
+        lg: '2px 2px 8px 0 rgba(0, 0, 0, .2)',
+        xl: '4px 4px 4px 2px rgba(0, 0, 0, .2)',
+      },
       breakpoints: {
         'xs-only': 'max-width: 599px',
         'sm-up': 'min-width: 600px',
@@ -51340,6 +51370,14 @@ class Euphoria {
         })),
       },
       {
+        name: 'Background sizes',
+        rules: _.map(['contain', 'cover'], size => ({
+          short: `${size}`,
+          verbose: `background-size-${size}`,
+          properties: { 'background-size': size },
+        })),
+      },
+      {
         name: 'Clearfix',
         rules: [
           {
@@ -51349,6 +51387,14 @@ class Euphoria {
             after: true,
           },
         ],
+      },
+      {
+        name: 'Box shadows',
+        rules: _.map(this.options.boxShadows, (shadow, name) => ({
+          short: `bs-${name}`,
+          verbose: `box-shadow-${name}`,
+          properties: { 'box-shadow': shadow },
+        })),
       },
       {
         name: 'Text transforms',
@@ -51374,16 +51420,34 @@ class Euphoria {
         name: 'Text styles',
         rules: [
           {
-            short: 'bold',
-            verbose: 'font-weight-bold',
-            properties: { 'font-weight': 'bold' },
-          },
-          {
             short: 'italic',
             verbose: 'font-style-italic',
             properties: { 'font-style': 'italic' },
           },
         ],
+      },
+      {
+        name: 'Font weights',
+        rules: _.map(
+          [
+            { name: 'bold', size: 'bold' },
+            { name: 'normal', size: 'normal' },
+            { name: '1', size: '100' },
+            { name: '2', size: '200' },
+            { name: '3', size: '300' },
+            { name: '4', size: '400' },
+            { name: '5', size: '500' },
+            { name: '6', size: '600' },
+            { name: '7', size: '700' },
+            { name: '8', size: '800' },
+            { name: '9', size: '900' },
+          ],
+          ({ size, name }) => ({
+            short: name === 'bold' ? 'bold' : `fw-${name}`,
+            verbose: `font-weight-${size}`,
+            properties: { 'font-weight': size },
+          })
+        ),
       },
       {
         name: 'Text decoration',

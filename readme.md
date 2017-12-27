@@ -265,7 +265,6 @@ Now, if you change the definitions for any of the inherited styles, the `.btn` c
 
 Rules: 
 
-- [ ] Box shadow
 - [ ] Animations (default and hover versions)
   - [ ] Fade
   - [ ] Show child
@@ -273,12 +272,11 @@ Rules:
   - [ ] Grow
   - [ ] Shake
   - [ ] Rotate
-- [ ] Background size
-- [ ] Grid layout helpers
-- [ ] Font weights
 - [ ] Font families:
   - [ ] Have a set of common "web safe" fonts
   - [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
+- Someday:
+  - [ ] Grid layout helpers
 
 Build:
 

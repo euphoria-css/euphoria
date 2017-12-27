@@ -83,6 +83,13 @@ class Euphoria {
         pill: '100em',
         '100': '100%',
       },
+      boxShadows: {
+        xs: '0 0 4px 2px rgba(0, 0, 0, .2)',
+        sm: '0 0 8px 2px rgba(0, 0, 0, .2)',
+        md: '2px 2px 4px 2px rgba(0, 0, 0, .2)',
+        lg: '2px 2px 8px 0 rgba(0, 0, 0, .2)',
+        xl: '4px 4px 4px 2px rgba(0, 0, 0, .2)',
+      },
       breakpoints: {
         'xs-only': 'max-width: 599px',
         'sm-up': 'min-width: 600px',
@@ -407,6 +414,14 @@ class Euphoria {
         })),
       },
       {
+        name: 'Background sizes',
+        rules: _.map(['contain', 'cover'], size => ({
+          short: `${size}`,
+          verbose: `background-size-${size}`,
+          properties: { 'background-size': size },
+        })),
+      },
+      {
         name: 'Clearfix',
         rules: [
           {
@@ -416,6 +431,14 @@ class Euphoria {
             after: true,
           },
         ],
+      },
+      {
+        name: 'Box shadows',
+        rules: _.map(this.options.boxShadows, (shadow, name) => ({
+          short: `bs-${name}`,
+          verbose: `box-shadow-${name}`,
+          properties: { 'box-shadow': shadow },
+        })),
       },
       {
         name: 'Text transforms',
@@ -441,16 +464,34 @@ class Euphoria {
         name: 'Text styles',
         rules: [
           {
-            short: 'bold',
-            verbose: 'font-weight-bold',
-            properties: { 'font-weight': 'bold' },
-          },
-          {
             short: 'italic',
             verbose: 'font-style-italic',
             properties: { 'font-style': 'italic' },
           },
         ],
+      },
+      {
+        name: 'Font weights',
+        rules: _.map(
+          [
+            { name: 'bold', size: 'bold' },
+            { name: 'normal', size: 'normal' },
+            { name: '1', size: '100' },
+            { name: '2', size: '200' },
+            { name: '3', size: '300' },
+            { name: '4', size: '400' },
+            { name: '5', size: '500' },
+            { name: '6', size: '600' },
+            { name: '7', size: '700' },
+            { name: '8', size: '800' },
+            { name: '9', size: '900' },
+          ],
+          ({ size, name }) => ({
+            short: name === 'bold' ? 'bold' : `fw-${name}`,
+            verbose: `font-weight-${size}`,
+            properties: { 'font-weight': size },
+          })
+        ),
       },
       {
         name: 'Text decoration',
