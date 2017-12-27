@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import Euphoria from '../euphoria'
+import Euphoria from '../src/euphoria'
 import Highlight from './highlight'
 import React from 'react'
 import ReactDOM from 'react-dom'

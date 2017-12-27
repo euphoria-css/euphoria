@@ -1,7 +1,7 @@
 const CleanCSS = require('clean-css')
 const chalk = require('chalk')
 const fs = require('fs')
-const Euphoria = require('./euphoria')
+const Euphoria = require('./src/euphoria')
 
 const PATH = 'euphoria.min.css'
 

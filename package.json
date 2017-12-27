@@ -3,7 +3,7 @@
   "version": "2.0.4",
   "description":
     "Minimalist CSS component and utility framework for CSS-in-JS applications",
-  "main": "euphoria.js",
+  "main": "src/euphoria.js",
   "scripts": {
     "build-examples": "webpack",
     "build-css": "node bundle.js",

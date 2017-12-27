@@ -12,14 +12,13 @@ To try out Euphoria, just add the following to the `<head>` of your page and the
 <link href="//unpkg.com/euphoria/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
 
-
 ## Introduction
 
 At its core, Euphoria is a set of minimal CSS styles that you can use to assemble user interfaces for the web. However, Euphoria is much more than that.
 
 Euphoria leverages the power of JavaScript to generate a powerful set of CSS utility classes that can be used to assemble frontend UIs. This toolset is similar to tools like [Bootstrap][bootstrap] or [Tachyons][tachyons] in that they give you the building blocks you need to create a responsive, feature rich UI without having to write a line of CSS.
 
-Euphoria is built using JavaScript which gives you the power to do nearly anythign you want with the generated styles. By default, we Euphoria outputs a sane default set of styles that work for quickly mocking up UIs. However, since most websites and applications need certain design elements that Euphoria doesn't ship with, we've made it easy to add and extend the set of styles that Euphoria outputs.
+Euphoria is built using JavaScript which gives you the power to do nearly anything you want with the generated styles. By default, Euphoria outputs a sane default set of styles that work for quickly mocking up UIs. However, since most websites and applications need certain design elements that Euphoria doesn't ship with, we've made it easy to add and extend the set of styles that Euphoria outputs.
 
 The most common properties of Euphoria that you will most likely change are our bundled selection of colors, fonts and font sizes. Most other styles (`.float-left`, `.display-block`, etc.) are generic enough that they don't need to be changed. We make it easy to override the defaults for:
 
@@ -135,6 +134,10 @@ Please see [euphoria-cli][cli] for complete documentation on the command line to
 This will look up your `euphoria.config.js` file and use your custom configuration and (optional) `output` path and create a compressed CSS file that you can use in your project. Since this is just JavaScript, you can use this in any way you'd like based on how you setup your build process.
 
 See the [Options][options] section below to see all available options.
+
+### Usage with WebPack
+
+**Coming soon...**
 
 ### JavaScript API
 
