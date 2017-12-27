@@ -38,27 +38,14 @@ You can override any of these settings easily either using our JavaScript API or
 
 In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamor], all the outputted styles are available to you and you can share common settings for font sizes, colors, etc between Euphoria and your CSS-in-JS tool of choice. The recommended approach would be to use [euphoria-cli][cli] in your build process and have your `euphoria.config.js` file import and global CSS for things like colors, fonts, etc that you need.
 
-## Principles
-
-* **Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and 
-* **Simplicity**: Styles are short, simple and isolated. Add or remove styles and things behave as you expect. There is no magic in this library.
-* **Consistency**: We attempt to keep a common format for styles that are predictable and consistent. In certain situations for the "short" styles, we made exceptions to improve the usability of the library.
-* **Short and Verbose Styles**: We provide, out of the box, two sets of styles for different preferences. One style is what we call "short" which provide abbreviated class names so you don't need to write long style names (e.g. `.fl` instead of `.float-left`). For those that like more explicit and verbose styles, we provide a "verbose" version of Euphoria that has all the class names as clear as possible (e.g. `.overflow-visible`, `.text-center`, or `.background-color-primary`). Choose whatever style you want and if you don't want to output one of the styles, just configure Euphoria to omit the one you don't want (see [Options][options] below)
-
-
 ## Features
 
-- Customizable rules
-  - Colors, Fonts, Spacing sizes
-  - Add custom rule definitions
-- Short and verbose names
-  - eg `.fl` or `.float-left`, `.uppercase` or `.text-transform-uppercase`
-  - Default both are available but you can configure to use one or the other
-- All common formatting styles you need to design an application
-- Create custom rules that extend the built-in styles (see `addRule()` method)
-- Immutable, composable styles
-- Programatic styles
-- Doesn't rely on CSS pre/post-processors like LESS, Sass or PostCSS.
+* **Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and 
+* **Customizable rules**: We give you the freedom to customize nearly everything in Euphoria including colors, fonts, spacing sizes and a lot more. You can even add custom rules that extend built-in Euphoria rules.
+* **Short and Verbose Styles**: We provide, out of the box, two sets of styles for different preferences. One style is what we call "short" which provide abbreviated class names so you don't need to write long style names (e.g. `.fl` instead of `.float-left`). For those that like more explicit and verbose styles, we provide a "verbose" version of Euphoria that has all the class names as clear as possible (e.g. `.overflow-visible`, `.text-center`, or `.background-color-primary`). Choose whatever style you want and if you don't want to output one of the styles, just configure Euphoria to omit the one you don't want (see [Options][options] below)
+* **No pre/post-processors needed**: Doesn't rely on CSS pre/post-processors like LESS, Sass or PostCSS which frees you up to use the tools you like and none you don't.
+* **Simplicity**: Styles are short, simple and isolated. Add or remove styles and things behave as you expect. There is no magic in this library.
+* **Consistency**: We attempt to keep a common format for styles that are predictable and consistent. In certain situations for the "short" styles, we made exceptions to improve the usability of the library.
 
 
 ## Install
