@@ -23,6 +23,7 @@ Euphoria is built using JavaScript which gives you the power to do nearly anythi
 The most common properties of Euphoria that you will most likely change are our bundled selection of colors, fonts and font sizes. Most other styles (`.float-left`, `.display-block`, etc.) are generic enough that they don't need to be changed. We make it easy to override the defaults for:
 
 * Border radius
+* Box shadows
 * Breakpoints
 * Colors
 * Cursors

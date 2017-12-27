@@ -35,12 +35,14 @@ const webpackConfig = {
   },
   plugins: [
     new ExtractTextPlugin('[name].css'),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       filename: 'index.html',
       template: 'template.ejs',
       showErrors: ENV === 'development',
+      NODE_ENV: ENV,
     }),
     new HtmlWebpackHarddiskPlugin(),
   ],

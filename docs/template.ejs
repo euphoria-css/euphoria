@@ -3,7 +3,10 @@
 
 <head>
   <title>Euphoria</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,900|Mogra" rel="stylesheet">
+  <% if (htmlWebpackPlugin.options.NODE_ENV !== 'development') { %>
+    <link href="//unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" type="text/css"
+    />
+    <% } %>
 </head>
 
 <body class='p-none m-none'>

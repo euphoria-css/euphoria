@@ -8,7 +8,10 @@ import { css } from 'glamor'
 
 // Generate the Euhpria CSS
 const euphoria = new Euphoria({})
-css.insert(euphoria.toString())
+
+// If development, load euphoria via glamor, otherwise use
+// latest CDN version.
+if (process.env.NODE_ENV === 'development') css.insert(euphoria.toString())
 
 const RULES = _.sortBy(euphoria.rules, 'name')
 
