@@ -1,4 +1,4 @@
-![Euphoria](https://cl.ly/l4hy/Screen%20Shot%202017-06-17%20at%202.03.11%20PM.png)
+![Euphoria Banner](https://cl.ly/oWlv/euphoria-banner.png)
 
 > Euphoric CSS styling utility library for CSS-in-JS projects
 
@@ -80,13 +80,15 @@ Just include the version of Euphoria you want in the `<head>` of your page:
 <html>
   <head>
     <title>My Site</title>
-    <link href="//unpkg.com/euphoria@2.0.4/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
+    <link href="//unpkg.com/euphoria@VERSION/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
   ...content here...
   </body>
 </html>
 ```
+
+Replace `VERSION` with whatever Euphoria you want or remove the `@VERSION` part to use the latest version.
 
 Now you have access to the default set of Euphoria styles. If you want to customize these styles, please read on:
 
@@ -118,7 +120,7 @@ euphoria
 
 Please see [euphoria-cli][cli] for complete documentation on the command line tool.
 
-This will look up your `euphoria.config.js` file and use your custom configuration and (optional) `output` path and create a compressed CSS file that you can use in your project. Since this is just JavaScript, you can use this in any way you'd like based on how you setup your build process.
+This will look up your `euphoria.config.js` file (using [cosmicconfig][cosmicconfig]) and use your custom configuration and (optional) `output` path and create a compressed CSS file that you can use in your project. Since this is just JavaScript, you can use this in any way you'd like based on how you setup your build process.
 
 See the [Options][options] section below to see all available options.
 
@@ -425,9 +427,12 @@ Thank you to all those that have put in a lot of thought and energy around pushi
 
 MIT
 
-[bootstrap]: https://getbootstrap.com/
+
+
+[bootstrap]: https://getbootstrap.com
+[cosmicconfig]: https://github.com/davidtheclark/cosmiconfig
 [cli]: https://github.com/danawoodman.com/euphoria-cli
-[docs]: http://danawoodman.com/euphoria/
+[docs]: https://euphoria-css.github.io/euphoria
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options
 [tachyons]: http://tachyons.io
