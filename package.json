@@ -6,9 +6,9 @@
   "main": "src/euphoria.js",
   "scripts": {
     "build-examples": "webpack",
-    "build-css": "node bundle.js",
+    "build-css": "node scripts/bundle.js",
     "build": "yarn build-examples && yarn build-css",
-    "gzip": "gzip -9 -c euphoria.min.css > euphoria.min.css.gz",
+    "gzip": "gzip -9 -c dist/euphoria.min.css > dist/euphoria.min.css.gz",
     "watch": "webpack-dev-server"
   },
   "repository": {

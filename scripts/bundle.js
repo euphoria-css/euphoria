@@ -1,21 +1,11 @@
 const CleanCSS = require('clean-css')
 const chalk = require('chalk')
 const fs = require('fs')
-const Euphoria = require('./src/euphoria')
+const Euphoria = require('../src/euphoria')
+const path = require('path')
 
-const PATH = 'euphoria.min.css'
-
-const euphoria = new Euphoria()
-
-// Add a custom rule.
-// euphoria.addRule({
-//   short: 'btn',
-//   verbose: 'button',
-//   properties: { 'box-shadow': '1px 1px 1px rgba(0, 0, 0, 0.1)' },
-//   inherits: ['px-lg', 'py-md', 'bg-primary', 'hov-bg-info', 'br-pill'],
-// })
-
-const copyright = `/**
+const PATH = path.join(process.cwd(), 'dist', 'euphoria.min.css')
+const COPYRIGHT = `/**
  * Euphoria
  * 
  * Copyright: Dana Woodman 2018
@@ -24,8 +14,9 @@ const copyright = `/**
  * Learn more at: <http:github.com/danawoodman/euphoria>
  */`
 
+const euphoria = new Euphoria()
 const clean = new CleanCSS({}).minify(euphoria.toString())
-const css = [copyright, clean.styles].join('\n')
+const css = [COPYRIGHT, clean.styles].join('\n')
 fs.writeFileSync(PATH, css)
 
 // console.log(chalk.gray(euphoria))

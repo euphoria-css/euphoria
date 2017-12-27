@@ -6,7 +6,6 @@ const path = require('path')
 const webpack = require('webpack')
 
 // Environment variables
-const APP_NAME = 'Euphoria Examples'
 const ENV = process.env.NODE_ENV || 'development'
 
 console.log(
@@ -15,12 +14,12 @@ console.log(
   chalk.blue.underline(ENV)
 )
 
-const context = path.join(process.cwd(), 'examples')
+const ROOT = path.join(process.cwd(), 'docs')
 
 const webpackConfig = {
   // Context is the location where WebPack looks for application
   // code.
-  context,
+  context: ROOT,
 
   // Define the entry point of the application and any dependencies
   // we need to import before loading the application.
@@ -30,7 +29,7 @@ const webpackConfig = {
 
   // Define the output (compiled) JavaScript code for the application.
   output: {
-    path: process.cwd(),
+    path: ROOT,
     filename: '[name].js',
     //publicPath: '/',
   },
@@ -40,7 +39,6 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       filename: 'index.html',
-      //title: APP_NAME,
       template: 'template.ejs',
       showErrors: ENV === 'development',
     }),
@@ -53,7 +51,7 @@ const webpackConfig = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        include: context,
+        include: ROOT,
       },
     ],
   },

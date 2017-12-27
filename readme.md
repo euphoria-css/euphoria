@@ -9,7 +9,7 @@
 To try out Euphoria, just add the following to the `<head>` of your page and then see the [documentation][docs] for available styles:
 
 ```html
-<link href="//unpkg.com/euphoria/euphoria.min.css" rel="stylesheet" type="text/css" />
+<link href="//unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
 
 ## Introduction
@@ -66,7 +66,7 @@ In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamo
 Use the CDN version:
 
 ```html
-<link href="//unpkg.com/euphoria/euphoria.min.css" rel="stylesheet" type="text/css" />
+<link href="//unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
 
 With yarn:
@@ -93,7 +93,7 @@ Just include the version of Euphoria you want in the `<head>` of your page:
 <html>
   <head>
     <title>My Site</title>
-    <link href="//unpkg.com/euphoria@2.0.4/euphoria.min.css" rel="stylesheet" type="text/css" />
+    <link href="//unpkg.com/euphoria@2.0.4/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
   ...content here...
