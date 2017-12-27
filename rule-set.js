@@ -1,11 +1,16 @@
 const _ = require('lodash')
 const Rule = require('./rule')
+const slugify = require('slugify')
 
 class RuleSet {
   constructor({ breakpoints, name, rules }) {
     this.name = name
     this._rules = rules
     this.breakpoints = breakpoints
+  }
+
+  get key() {
+    return slugify(this.name)
   }
 
   get rules() {

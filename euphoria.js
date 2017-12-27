@@ -515,32 +515,32 @@ class Euphoria {
         name: 'Vertical alignment',
         rules: [
           {
-            short: 'abl',
+            short: 'v-base',
             verbose: 'align-baseline',
             properties: { 'vertical-align': 'baseline' },
           },
           {
-            short: 'at',
+            short: 'v-top',
             verbose: 'align-top',
             properties: { 'vertical-align': 'top' },
           },
           {
-            short: 'am',
+            short: 'v-mid',
             verbose: 'align-middle',
             properties: { 'vertical-align': 'middle' },
           },
           {
-            short: 'ab',
+            short: 'v-bot',
             verbose: 'align-bottom',
             properties: { 'vertical-align': 'bottom' },
           },
           {
-            short: 'att',
+            short: 'v-text-top',
             verbose: 'align-text-top',
             properties: { 'vertical-align': 'text-top' },
           },
           {
-            short: 'atb',
+            short: 'v-text-bot',
             verbose: 'align-text-bottom',
             properties: {
               'vertical-align': 'text-bottom',

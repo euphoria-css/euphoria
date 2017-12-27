@@ -4,10 +4,47 @@
 
 **To view examples of how to use Euphoria, check out the [Examples site][docs]!**
 
+## Quick Start
 
-This library contains a collection of building blocks for assembling web UIs that are common across most applications.
+To try out Euphoria, just add the following to the `<head>` of your page and then see the [documentation][docs] for available styles:
 
-Euphoria provides common styling classes for creating user interfaces in CSS-in-JS projects. Euphoria generates CSS that can be injected into a webpage, for example using [glamor][glamor] (which all the following examples refer to) or output to a file to be served by a web server. You can use Euphoria however you like of course.
+```html
+<link href="//unpkg.com/euphoria/euphoria.min.css" rel="stylesheet" type="text/css" />
+```
+
+
+## Introduction
+
+At its core, Euphoria is a set of minimal CSS styles that you can use to assemble user interfaces for the web. However, Euphoria is much more than that.
+
+Euphoria leverages the power of JavaScript to generate a powerful set of CSS utility classes that can be used to assemble frontend UIs. This toolset is similar to tools like [Bootstrap][bootstrap] or [Tachyons][tachyons] in that they give you the building blocks you need to create a responsive, feature rich UI without having to write a line of CSS.
+
+Euphoria is built using JavaScript which gives you the power to do nearly anythign you want with the generated styles. By default, we Euphoria outputs a sane default set of styles that work for quickly mocking up UIs. However, since most websites and applications need certain design elements that Euphoria doesn't ship with, we've made it easy to add and extend the set of styles that Euphoria outputs.
+
+The most common properties of Euphoria that you will most likely change are our bundled selection of colors, fonts and font sizes. Most other styles (`.float-left`, `.display-block`, etc.) are generic enough that they don't need to be changed. We make it easy to override the defaults for:
+
+* Border radius
+* Breakpoints
+* Colors
+* Cursors
+* Font families
+* Font sizes
+* Letter spacing
+* Line heights
+* Opacity
+* Sizes (widths, heights)
+* Spacing (paddings, margins)
+
+You can override any of these settings easily either using our JavaScript API or command line build tool, [euphoria-cli][cli]. There is no need to write any CSS, use any pre or post-processing tools (LESS, Sass, PostCSS) in order to do this. See the [Usage][usage] section to learn more how to customize Euphoria.
+
+In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamor], all the outputted styles are available to you and you can share common settings for font sizes, colors, etc between Euphoria and your CSS-in-JS tool of choice. The recommended approach would be to use [euphoria-cli][cli] in your build process and have your `euphoria.config.js` file import and global CSS for things like colors, fonts, etc that you need.
+
+## Principles
+
+* **Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and 
+* **Simplicity**: Styles are short, simple and isolated. Add or remove styles and things behave as you expect. There is no magic in this library.
+* **Consistency**: We attempt to keep a common format for styles that are predictable and consistent. In certain situations for the "short" styles, we made exceptions to improve the usability of the library.
+* **Short and Verbose Styles**: We provide, out of the box, two sets of styles for different preferences. One style is what we call "short" which provide abbreviated class names so you don't need to write long style names (e.g. `.fl` instead of `.float-left`). For those that like more explicit and verbose styles, we provide a "verbose" version of Euphoria that has all the class names as clear as possible (e.g. `.overflow-visible`, `.text-center`, or `.background-color-primary`). Choose whatever style you want and if you don't want to output one of the styles, just configure Euphoria to omit the one you don't want (see [Options][options] below)
 
 
 ## Features
@@ -22,6 +59,7 @@ Euphoria provides common styling classes for creating user interfaces in CSS-in-
 - Create custom rules that extend the built-in styles (see `addRule()` method)
 - Immutable, composable styles
 - Programatic styles
+- Doesn't rely on CSS pre/post-processors like LESS, Sass or PostCSS.
 
 
 ## Install
@@ -47,7 +85,7 @@ npm i -S euphoria
 
 ## Usage
 
-### Default version
+### CDN version
 
 Just include the version of Euphoria you want in the `<head>` of your page:
 
@@ -56,7 +94,7 @@ Just include the version of Euphoria you want in the `<head>` of your page:
 <html>
   <head>
     <title>My Site</title>
-    <link href="//unpkg.com/euphoria/euphoria.min.css" rel="stylesheet" type="text/css" />
+    <link href="//unpkg.com/euphoria@2.0.4/euphoria.min.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
   ...content here...
@@ -64,7 +102,47 @@ Just include the version of Euphoria you want in the `<head>` of your page:
 </html>
 ```
 
+Now you have access to the default set of Euphoria styles. If you want to customize these styles, please read on:
+
+### Command line usage
+
+**COMING SOON!**
+
+After installing Euphoria, create a `euphoria.config.js` (or  `.euphoriarc` that contains JSON or YAML) file at the base of your project that exports a configuration `Object`:
+
+```js
+const colors = require('./colors')
+
+module.exports = {
+  output: 'dist/euphoria.css',
+  colors: {
+    red: 'red',
+    green: '#00aa00',
+    blue: 'rgb(0, 0, 220)',
+    orange: colors.orange,
+  },
+}
+```
+
+And now you can run the following to generate your very own customized Euphoria bundle:
+
+```bash
+euphoria
+```
+
+Please see [euphoria-cli][cli] for complete documentation on the command line tool.
+
+This will look up your `euphoria.config.js` file and use your custom configuration and (optional) `output` path and create a compressed CSS file that you can use in your project. Since this is just JavaScript, you can use this in any way you'd like based on how you setup your build process.
+
+See the [Options][options] section below to see all available options.
+
+### JavaScript API
+
+Coming soon, how to import Euphoria into your build process and generate CSS from our JavaScript API.
+
 ### Glamor
+
+**Note: this approach is not ideal as the loading time of a page increases drastically, please import CSS instead**
 
 ```js
 import Euphoria from 'euphoria'
@@ -109,6 +187,27 @@ Everything that makes sense to make configurable is configurable.
 
 Please see [the documentation website][docs] for a full list of available options.
 
+### Disabling rules
+
+**Coming soon...**
+
+Disabling rules is useful if you already have a set of styles that serve your needs for a particular set of styles and you don't want the duplicate rules taking up bandwidth. Another use case is if you don't want the responsive styles that Euphoria provides.
+
+How to disable:
+
+* Responsiveness
+* Each type of ruleset (floats, colors, fonts, etc)
+
+```js
+const euphoria = new Euphoria({
+  disable: ['floats', 'text-colors', 'font-families'],
+})
+
+console.log(euphoria.toString())
+```
+
+This will output the Euphoria styles minus those for floats, colors or font-families.
+
 ### Adding a custom rule
 
 You can add your own custom rules to Euphoria by using the `addRule` method. This method allows you to create a new CSS selector with optional custom CSS and a list of styles to inherit from. Think of this as the equivalent of a LESS/SASS mixin.
@@ -116,7 +215,6 @@ You can add your own custom rules to Euphoria by using the `addRule` method. Thi
 Usage:
 
 ```ts
-
 euphoria.addRule({
   short: string,
   verbose: string,
@@ -169,6 +267,8 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 }
 ```
 
+Now, if you change the definitions for any of the inherited styles, the `.btn` class will automatically use the latest version. This way, you get all the flexibility of mixins but with the flexibility of JavaScript.
+
 ## TODO
 
 Rules: 
@@ -184,6 +284,13 @@ Rules:
 - [ ] Background size
 - [ ] Grid layout helpers
 - [ ] Font weights
+- [ ] Font families:
+  - [ ] Have a set of common "web safe" fonts
+  - [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
+
+Build:
+
+- [ ] Add autoprefixer
 
 Documentation:
 
@@ -313,10 +420,25 @@ PRs welcome!
 
 [Dana Woodman](http://danawoodman.com)
 
+### Inspiration
+
+Euphoria was inspired by a lot of awesome projects, including:
+
+- [Bootstrap][bootstrap]
+- [Tachyons][tachyons]
+- [glamor][glamor]
+
+Thank you to all those that have put in a lot of thought and energy around pushing CSS forward!
+
 
 ## License
 
 MIT
 
+[bootstrap]: https://getbootstrap.com/
+[cli]: https://github.com/danawoodman.com/euphoria-cli
 [docs]: http://danawoodman.com/euphoria/
 [glamor]: https://github.com/threepointone/glamor
+[options]: #options
+[tachyons]: http://tachyons.io
+[usage]: #usage
