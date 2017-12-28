@@ -43,6 +43,9 @@ In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamo
 ## Features
 
 * **Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and 
+* **Isolation**: By building with Euphoria you remove the magic from your HTML. No longer do you have to wade through hundreds or thousands of lines of CSS/LESS/Sass/etc. looking for the various places where you CSS styling comes from and then looking to where those classes are defined so you don't break anything. Instead, every HTML class becomes clear and concise as to what styles are applied to it. Changing that one HTML class is isolated an will effect only the code being modified meaning you don't need to waste hours making sure you didn't break anything.
+* **A "Palette" of Styles**: Euphoria gives you a wide range of common styling utilties to "paint" your UI. You have near infinite flexibility tweaking styles, having one-off but still commonly defined styles and more programatic styling.
+* **Component Friendly**: Euphoria works great with tools like Euphoria, Vue.js or Angular where you create common components to use throughout your application. Your components can make it so you don't need to duplicate classes all over the place, which makes working with Euphoria even easier.
 * **Customizable rules**: We give you the freedom to customize nearly everything in Euphoria including colors, fonts, spacing sizes and a lot more. You can even add custom rules that extend built-in Euphoria rules.
 * **Short and Verbose Styles**: We provide, out of the box, two sets of styles for different preferences. One style is what we call "short" which provide abbreviated class names so you don't need to write long style names (e.g. `.fl` instead of `.float-left`). For those that like more explicit and verbose styles, we provide a "verbose" version of Euphoria that has all the class names as clear as possible (e.g. `.overflow-visible`, `.text-center`, or `.background-color-primary`). Choose whatever style you want and if you don't want to output one of the styles, just configure Euphoria to omit the one you don't want (see [Options][options] below)
 * **No pre/post-processors needed**: Doesn't rely on CSS pre/post-processors like LESS, Sass or PostCSS which frees you up to use the tools you like and none you don't.
@@ -274,6 +277,11 @@ Rules:
   - [ ] Grow
   - [ ] Shake
   - [ ] Rotate
+- Better Pseudo-selector support
+  - [ ] Placeholder `::placeholder` text
+  - [ ] Outline `:outline` styling
+  - [ ] Focus `:focus` styling
+  - [ ] Hover `:hover` styling
 - [ ] Font families:
   - [ ] Have a set of common "web safe" fonts
   - [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
