@@ -1,16 +1,17 @@
 import Hr from './hr'
 import React from 'react'
 import ruleSetAnchor from './ruleset-anchor'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function TOCLink({ children, href }) {
   return (
-    <Link
+    <NavLink
       to={href}
       className="db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
+      activeClassName="white bg-primary bc-cyan-dark"
     >
       {children}
-    </Link>
+    </NavLink>
   )
 }
 

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "00bba65fb44643081e67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f4d11f20f4e0c8dd780b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -24118,10 +24118,11 @@ function TOCLink(_ref) {
       href = _ref.href;
 
   return _react2.default.createElement(
-    _reactRouterDom.Link,
+    _reactRouterDom.NavLink,
     {
       to: href,
-      className: 'db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm'
+      className: 'db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm',
+      activeClassName: 'white bg-primary bc-cyan-dark'
     },
     children
   );
