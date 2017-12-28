@@ -1,8 +1,7 @@
 {
   "name": "euphoria",
   "version": "2.0.5",
-  "description":
-    "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "src/euphoria.js",
   "scripts": {
     "build-examples": "NODE_ENV=production webpack",
@@ -69,6 +68,7 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
+    "react-router-dom": "4.2.2",
     "shader": "0.1.3",
     "slugify": "1.2.8"
   }

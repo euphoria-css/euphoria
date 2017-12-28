@@ -23,9 +23,7 @@ const webpackConfig = {
 
   // Define the entry point of the application and any dependencies
   // we need to import before loading the application.
-  entry: {
-    examples: ['babel-polyfill', './index.js'],
-  },
+  entry: ['babel-polyfill', './index.js'],
 
   // Define the output (compiled) JavaScript code for the application.
   output: {
@@ -62,6 +60,10 @@ const webpackConfig = {
     hot: true,
     overlay: true,
   },
+}
+
+if (ENV === 'production') {
+  // webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin())
 }
 
 module.exports = webpackConfig
