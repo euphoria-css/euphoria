@@ -83,6 +83,14 @@ class Euphoria {
         pill: '100em',
         '100': '100%',
       },
+      borderWidths: {
+        xxs: '0.05rem',
+        sm: '0.15rem',
+        md: '0.3rem',
+        lg: '0.6rem',
+        xl: '1.2rem',
+        xxl: '2.4rem',
+      },
       boxShadows: {
         xs: '0 0 4px 2px rgba(0, 0, 0, .2)',
         sm: '0 0 8px 2px rgba(0, 0, 0, .2)',
@@ -636,45 +644,12 @@ class Euphoria {
         ],
       },
       {
-        name: 'Border width',
-        rules: [
-          {
-            short: 'bw-xxs',
-            verbose: 'border-width-xxs',
-            properties: {
-              'border-width': '0.05em',
-            },
-          },
-          {
-            short: 'bw-xs',
-            verbose: 'border-width-xs',
-            properties: {
-              'border-width': '0.15em',
-            },
-          },
-          {
-            short: 'bw-sm',
-            verbose: 'border-width-sm',
-            properties: { 'border-width': '0.3em' },
-          },
-          {
-            short: 'bw-md',
-            verbose: 'border-width-md',
-            properties: { 'border-width': '0.6em' },
-          },
-          {
-            short: 'bw-lg',
-            verbose: 'border-width-lg',
-            properties: { 'border-width': '1.2em' },
-          },
-          {
-            short: 'bw-xl',
-            verbose: 'border-width-xl',
-            properties: {
-              'border-width': '2.4em',
-            },
-          },
-        ],
+        name: 'Border widths',
+        rules: _.map(this.options.borderWidths, (size, name) => ({
+          short: `bw-${name}`,
+          verbose: `border-width-${name}`,
+          properties: { 'border-width': size },
+        })),
       },
       {
         name: 'Border styles',

@@ -1,13 +1,13 @@
 import Hr from './hr'
 import React from 'react'
-import slugify from 'slugify'
+import ruleSetAnchor from './ruleset-anchor'
 import { Link } from 'react-router-dom'
 
 function TOCLink({ children, href }) {
   return (
     <Link
       to={href}
-      className="db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-sm bc-transparent hov-bc-cyan-dark txt-sm"
+      className="db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
     >
       {children}
     </Link>
@@ -33,7 +33,7 @@ function TOC({ rules }) {
         <Hr />
         <Heading>Rules</Heading>
         {rules.map((ruleset, key) => (
-          <TOCLink href={`/${slugify(ruleset.name.toLowerCase())}`} key={key}>
+          <TOCLink href={`/${ruleSetAnchor(ruleset.name)}`} key={key}>
             {ruleset.name}
           </TOCLink>
         ))}

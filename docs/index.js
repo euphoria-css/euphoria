@@ -7,7 +7,6 @@ import Header from './header'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ruleSetAnchor from './ruleset-anchor'
-import slugify from 'slugify'
 import TOC from './toc'
 import Usage from './usage'
 import { css } from 'glamor'
@@ -31,7 +30,7 @@ function Documentation() {
           <div className="fl w-20-md-up w-100 br bc-gray-lighter pr-none-xs-only">
             <TOC rules={RULES} />
           </div>
-          <div className="fl w-80-md-up w-100 pl-lg-md-up py-md">
+          <div className="fl w-80-md-up w-100 px-lg-md-up py-md p-md-xs-only">
             <Route exact path="/" component={Usage} />
             <Route
               path="/defaults"

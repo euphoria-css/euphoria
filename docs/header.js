@@ -2,7 +2,7 @@ import React from 'react'
 
 function Header() {
   return (
-    <nav className="bg-primary px-md py-sm df ai-center">
+    <nav className="bg-primary px-md py-sm df ai-center bl bw-lg bc-cyan-dark">
       <h1 className="dib txt-lg ls-lg m-none uppercase white fw-1">Euphoria</h1>
       <a
         href="https://github.com/euphoria-css/euphoria"

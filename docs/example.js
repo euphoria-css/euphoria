@@ -109,9 +109,7 @@ function BorderExample({ extraClasses = '', rules }) {
     <div className="cf">
       {rules.map((rule, key) => (
         <div key={key} className="mb-sm w-70">
-          <div
-            className={`${extraClasses} ${rule.classNameShort} p-sm bg-gray-lightest center`}
-          >
+          <div className={`${extraClasses} ${rule.classNameShort} p-sm center`}>
             <small>
               <Code>{`${extraClasses} ${rule.classNameShort}`}</Code>
             </small>
@@ -149,14 +147,14 @@ function ExampleAdapter({ ruleset }) {
     case 'Border radius':
     case 'Border removal':
     case 'Border styles':
-    case 'Border width':
+    case 'Border widths':
       return <BorderExample rules={rules} extraClasses="ba" />
       break
     case 'Border radius position':
       return <BorderExample rules={rules} extraClasses="ba br-md" />
       break
     case 'Border positions':
-      return <BorderExample rules={rules} />
+      return <BorderExample rules={rules} extraClasses="bg-gray-lightest" />
       break
     case 'Box shadows':
       return <BoxShadowExample rules={rules} />

@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const Rule = require('./rule')
-const slugify = require('slugify')
+const slugify = require('url-slug')
 
 class RuleSet {
   constructor({ breakpoints, name, rules }) {
