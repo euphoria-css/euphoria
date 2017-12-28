@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "682e3e9b6cd157fd326a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "34653c3ec19a6f5940e0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -23977,7 +23977,7 @@ function ExampleAdapter(_ref8) {
     default:
       return _react2.default.createElement(
         'p',
-        { className: 'bg-yellow-lighter bl bw-md bc-yellow p-md' },
+        { className: 'bl bw-md bc-orange italic yellow-darkest bg-yellow-lighter p-md' },
         'Examples coming soon...'
       );
       break;
@@ -40111,11 +40111,11 @@ class Euphoria {
         xxl: '2.4rem',
       },
       boxShadows: {
-        xs: '0 0 4px 2px rgba(0, 0, 0, .2)',
-        sm: '0 0 8px 2px rgba(0, 0, 0, .2)',
-        md: '2px 2px 4px 2px rgba(0, 0, 0, .2)',
-        lg: '2px 2px 8px 0 rgba(0, 0, 0, .2)',
-        xl: '4px 4px 4px 2px rgba(0, 0, 0, .2)',
+        '1': '0 0 4px 2px rgba(0, 0, 0, .2)',
+        '2': '0 0 8px 2px rgba(0, 0, 0, .2)',
+        '3': '2px 2px 4px 2px rgba(0, 0, 0, .2)',
+        '4': '2px 2px 8px 0 rgba(0, 0, 0, .2)',
+        '5': '4px 4px 4px 2px rgba(0, 0, 0, .2)',
       },
       breakpoints: {
         'xs-only': 'max-width: 599px',

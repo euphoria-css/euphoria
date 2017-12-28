@@ -195,7 +195,7 @@ function ExampleAdapter({ ruleset }) {
       break
     default:
       return (
-        <p className="bg-yellow-lighter bl bw-md bc-yellow p-md">
+        <p className="bl bw-md bc-orange italic yellow-darkest bg-yellow-lighter p-md">
           Examples coming soon...
         </p>
       )
