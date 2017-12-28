@@ -11,7 +11,7 @@ const GRAY = '#888'
 
 // General colors
 const PURPLE = '#9006db'
-const PINK = '#db1880'
+const PINK = '#e01890'
 const RED = '#db2e18'
 const ORANGE = '#ea780e'
 const YELLOW = '#ffff00'
@@ -73,7 +73,7 @@ function createColorVariation(name, color) {
 class Euphoria {
   constructor(options) {
     this.defaults = {
-      borderRadiuses: {
+      borderRadii: {
         none: 'none',
         xs: '0.15em',
         sm: '0.3em',
@@ -157,7 +157,6 @@ class Euphoria {
         'grab',
         'grabbing',
       ],
-      floats: ['left', 'right', 'none'],
       fontFamilies: {
         system:
           '-apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue" ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
@@ -679,7 +678,7 @@ class Euphoria {
       },
       {
         name: 'Border radius',
-        rules: _.map(this.options.borderRadiuses, (size, label) => ({
+        rules: _.map(this.options.borderRadii, (size, label) => ({
           short: `br-${label}`,
           verbose: `border-radius-${label}`,
           properties: {
@@ -1133,7 +1132,7 @@ class Euphoria {
   }
 
   _createFloatRules() {
-    return _.map(this.options.floats, float => ({
+    return ['left', 'right', 'none'].map(float => ({
       short: `f${float[0]}`,
       verbose: `float-${float}`,
       properties: { float },

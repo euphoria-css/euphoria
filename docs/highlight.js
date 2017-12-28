@@ -1,5 +1,5 @@
 import css from 'react-syntax-highlighter/dist/languages/css'
-import docco from 'react-syntax-highlighter/dist/styles/docco'
+import vs from 'react-syntax-highlighter/dist/styles/vs'
 import js from 'react-syntax-highlighter/dist/languages/javascript'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -17,13 +17,11 @@ Highlight.propTypes = {
 
 function Highlight({ children, lang }) {
   return (
-    <SyntaxHighlighter
-      className="p-md bw-md bl bw-md bc-info"
-      language={lang}
-      style={docco}
-    >
-      {children.toString()}
-    </SyntaxHighlighter>
+    <div className="px-md py-xs bl bw-md bc-purple">
+      <SyntaxHighlighter language={lang} style={vs}>
+        {children.toString()}
+      </SyntaxHighlighter>
+    </div>
   )
 }
 

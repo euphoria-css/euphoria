@@ -108,7 +108,7 @@ function BorderExample({ extraClasses = '', rules }) {
   return (
     <div className="cf">
       {rules.map((rule, key) => (
-        <div key={key} className="mb-sm w-70">
+        <div key={key} className="mb-sm w-70-md-up">
           <div className={`${extraClasses} ${rule.classNameShort} p-sm center`}>
             <small>
               <Code>{`${extraClasses} ${rule.classNameShort}`}</Code>
