@@ -166,6 +166,7 @@ function ExampleAdapter({ ruleset }) {
     case 'Letter spacing':
     case 'Line height':
     case 'Opacity':
+    case 'Opacity (hover)':
     case 'Text alignment':
     case 'Text decoration':
     case 'Text styles':

@@ -301,6 +301,19 @@ Documentation:
 
 ## Changelog
 
+### v2.1.0
+
+- Big doc site refactor
+- Add font weights
+- Add background sizes
+- Box shadow styling
+- Readme updates
+- Code reorganization
+- Update vertical align rule
+- Add whitespace rules
+- Add opacity rules
+- Color tweaks
+
 ### v2.0.0
 
 - [**BREAKING**] Complete code rewrite: Tons of new selectors, more consistent naming, short/verbose names, breakpoints, easier configuration, add custom style extensions and a lot more.

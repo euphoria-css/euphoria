@@ -1053,6 +1053,15 @@ class Euphoria {
         })),
       },
       {
+        name: 'Opacity (hover)',
+        rules: _.map(this.options.opacity, (value, name) => ({
+          short: `hov-o-${name}`,
+          verbose: `hover-opacity-${name}`,
+          properties: { opacity: value },
+          hover: true,
+        })),
+      },
+      {
         name: 'Whitespace',
         rules: ['pre', 'nowrap', 'normal'].map(ws => ({
           short: `ws-${ws}`,
