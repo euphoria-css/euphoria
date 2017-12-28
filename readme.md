@@ -431,7 +431,7 @@ MIT
 
 [bootstrap]: https://getbootstrap.com
 [cosmicconfig]: https://github.com/davidtheclark/cosmiconfig
-[cli]: https://github.com/danawoodman.com/euphoria-cli
+[cli]: https://github.com/euphoria-css/euphoria-cli
 [docs]: https://euphoria-css.github.io/euphoria
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options
