@@ -15,9 +15,9 @@ const PINK = '#e01890'
 const RED = '#db2e18'
 const ORANGE = '#ea780e'
 const YELLOW = '#ffff00'
-const GREEN = '#4eb223'
+const GREEN = '#61cc0a'
 const CYAN = '#0fbc9c'
-const BLUE = '#378ad3'
+const BLUE = '#1990e5'
 
 // Context specific colors
 const PRIMARY = CYAN
@@ -60,7 +60,7 @@ const COLORS = Object.assign(
 
 function createColorVariation(name, color) {
   return {
-    [`${name}-lightest`]: shader(color, 0.95),
+    [`${name}-lightest`]: shader(color, 0.9),
     [`${name}-lighter`]: shader(color, 0.7),
     [`${name}-light`]: shader(color, 0.45),
     [name]: color,

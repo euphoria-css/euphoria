@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "34653c3ec19a6f5940e0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "00bba65fb44643081e67"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2480,7 +2480,7 @@ function Title(_ref) {
 
   return _react2.default.createElement(
     "h2",
-    { className: "txt-xl mb-lg pb-sm bb sans-serif ls-lg uppercase" },
+    { className: "txt-xl mb-lg pb-sm bb bc-gray-lighter sans-serif fw-1 ls-lg uppercase" },
     children
   );
 }
@@ -24039,19 +24039,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Header() {
   return _react2.default.createElement(
     "nav",
-    { className: "bg-primary px-md py-md df ai-center bl bw-lg bc-cyan-dark" },
+    { className: "cf bg-primary px-md py-md ai-center bl bw-lg bc-cyan-dark" },
     _react2.default.createElement(
       "h1",
-      { className: "dib txt-lg ls-lg m-none uppercase white fw-1" },
+      { className: "fl txt-lg ls-lg m-none uppercase white fw-1" },
       "Euphoria"
     ),
     _react2.default.createElement(
-      "a",
-      {
-        href: "https://github.com/euphoria-css/euphoria",
-        className: "cyan-lighter hov-white no-decoration ml-auto"
-      },
-      "Euphoria on Github"
+      "div",
+      { className: "fr db-xs-only fn-xs-only py-xxs" },
+      _react2.default.createElement(
+        "a",
+        {
+          href: "https://github.com/euphoria-css/euphoria",
+          className: "cyan-lighter hov-white no-decoration",
+          target: "_blank"
+        },
+        "Euphoria on Github"
+      )
     )
   );
 }
@@ -40034,9 +40039,9 @@ const PINK = '#e01890'
 const RED = '#db2e18'
 const ORANGE = '#ea780e'
 const YELLOW = '#ffff00'
-const GREEN = '#4eb223'
+const GREEN = '#61cc0a'
 const CYAN = '#0fbc9c'
-const BLUE = '#378ad3'
+const BLUE = '#1990e5'
 
 // Context specific colors
 const PRIMARY = CYAN
@@ -40079,7 +40084,7 @@ const COLORS = Object.assign(
 
 function createColorVariation(name, color) {
   return {
-    [`${name}-lightest`]: shader(color, 0.95),
+    [`${name}-lightest`]: shader(color, 0.9),
     [`${name}-lighter`]: shader(color, 0.7),
     [`${name}-light`]: shader(color, 0.45),
     [name]: color,
