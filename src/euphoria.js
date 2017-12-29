@@ -845,12 +845,7 @@ class Euphoria {
             verbose: 'list-unstyled',
             properties: {
               'list-style': 'none',
-              margin: 0,
-              padding: 0,
-              '& li': {
-                margin: 0,
-                padding: 0,
-              },
+              '& li': {},
             },
           },
         ],

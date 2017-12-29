@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d5cc78b7e21522711dcb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cada8d50e49931369198"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -41213,12 +41213,7 @@ class Euphoria {
             verbose: 'list-unstyled',
             properties: {
               'list-style': 'none',
-              margin: 0,
-              padding: 0,
-              '& li': {
-                margin: 0,
-                padding: 0,
-              },
+              '& li': {},
             },
           },
         ],
