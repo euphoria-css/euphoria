@@ -17,7 +17,7 @@ function TOCLink({ children, href }) {
 
 function Heading({ children }) {
   return (
-    <h3 className="m-none mb-sm px-sm mt-md gray-light uppercase ls-lg txt-sm">
+    <h3 className="m-none mb-sm px-sm mt-sm gray-light uppercase ls-lg txt-sm">
       {children}
     </h3>
   )
