@@ -841,7 +841,7 @@ class Euphoria {
         name: 'Lists',
         rules: [
           {
-            short: 'unstlyed',
+            short: 'unstyled',
             verbose: 'list-unstyled',
             properties: {
               'list-style': 'none',
