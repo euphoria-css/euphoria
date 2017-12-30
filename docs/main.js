@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "56d92e2d1c403e9933d5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "349b3a196515ac11c97d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -40472,7 +40472,7 @@ class Euphoria {
         'sm-up': 'min-width: 600px',
         'md-up': 'min-width: 900px',
         'lg-up': 'min-width: 1200px',
-        'xl-up': 'min-width: 1800px',
+        // 'xl-up': 'min-width: 1800px',
       },
       colors: COLORS,
       cursors: [

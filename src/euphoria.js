@@ -103,7 +103,7 @@ class Euphoria {
         'sm-up': 'min-width: 600px',
         'md-up': 'min-width: 900px',
         'lg-up': 'min-width: 1200px',
-        'xl-up': 'min-width: 1800px',
+        // 'xl-up': 'min-width: 1800px',
       },
       colors: COLORS,
       cursors: [
