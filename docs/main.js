@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cada8d50e49931369198"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "56d92e2d1c403e9933d5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -23317,7 +23317,8 @@ class Rule {
 
   get selectors() {
     if (!this.selectorVerbose) return this.selectorShort
-    return this.selectorShort + ', ' + this.selectorVerbose
+    return this.selectorShort
+    // return this.selectorShort + ', ' + this.selectorVerbose
   }
 
   get selectorShort() {

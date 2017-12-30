@@ -31,7 +31,8 @@ class Rule {
 
   get selectors() {
     if (!this.selectorVerbose) return this.selectorShort
-    return this.selectorShort + ', ' + this.selectorVerbose
+    return this.selectorShort
+    // return this.selectorShort + ', ' + this.selectorVerbose
   }
 
   get selectorShort() {
