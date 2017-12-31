@@ -7,24 +7,24 @@ import Title from './title'
 
 function BackgroundColorExample({ hover = false, rules }) {
   return (
-    <table className="border-collapse">
+    <table className="collapse">
       <tbody>
         {rules.map((rule, key) => (
-          <tr key={key}>
+          <tr key={key} className="hov-bg-yellow-lightest">
             <td
               className={`${
-                rule.classNameShort
+                rule.className
               } gray-light hov-black px-md am br bc-transparent`}
             >
               {hover && <small>Hover!</small>}
             </td>
             <td className="px-sm bb bc-gray-lighter">
-              <Code>{rule.classNameShort}</Code>
+              <Code>{rule.className}</Code>
             </td>
             <td className="px-sm bb bc-gray-lighter">
-              <Highlight lang="javascript" inline>{`<span class="${
-                rule.classNameShort
-              }">ABC</span>`}</Highlight>
+              <Highlight lang="javascript" inline>{`<div class="${
+                rule.className
+              }"></div>`}</Highlight>
             </td>
           </tr>
         ))}
@@ -35,26 +35,25 @@ function BackgroundColorExample({ hover = false, rules }) {
 
 function TextColorExample({ hover = false, rules }) {
   return (
-    <table className="border-collapse">
+    <table className="collapse">
       <tbody>
         {rules.map((rule, key) => (
-          <tr key={key}>
+          <tr key={key} className="hov-bg-yellow-lightest">
             <td
               className={`px-md align-middle br bb bc-gray-lighter ${
-                rule.classNameShort === 'white' ||
-                rule.classNameShort === 'transparent'
+                rule.className === 'white' || rule.className === 'transparent'
                   ? 'bg-black'
                   : ''
               }`}
             >
-              <span className={`${rule.classNameShort} txt-xxl bold`}>ABC</span>
+              <span className={`${rule.className} txt-xl bold`}>ABC</span>
             </td>
-            <td className="p-sm bb bc-gray-lighter">
-              <Code>{rule.classNameShort}</Code>
+            <td className="px-sm bb br bc-gray-lighter">
+              <Code>{rule.className}</Code>
             </td>
-            <td className="p-sm bb bc-gray-lighter">
+            <td className="px-sm bb bc-gray-lighter">
               <Highlight lang="javascript" inline>{`<span class="${
-                rule.classNameShort
+                rule.className
               }">ABC</span>`}</Highlight>
             </td>
           </tr>
@@ -70,10 +69,10 @@ function WidthExample({ rules }) {
       {rules.map((rule, key) => (
         <div className="mb-md" key={key}>
           <div className="mb-xs">
-            <Code>{rule.classNameShort}</Code>
+            <Code>{rule.className}</Code>
           </div>
           <div className="bg-gray-lightest">
-            <div className={`${rule.classNameShort} bg-blue-light p-xs`} />
+            <div className={`${rule.className} bg-blue-light p-xs`} />
           </div>
         </div>
       ))}
@@ -86,10 +85,10 @@ function BoxShadowExample({ rules }) {
     <div>
       {rules.map((rule, key) => (
         <div
-          className={`my-md p-sm bg-white w-50-md-up ${rule.classNameShort}`}
+          className={`my-md p-sm bg-white w-50-md-up ${rule.className}`}
           key={key}
         >
-          <Code>{rule.classNameShort}</Code>
+          <Code>{rule.className}</Code>
         </div>
       ))}
     </div>
@@ -102,11 +101,11 @@ function BoxExample({ extraClasses = '', rules }) {
       {rules.map((rule, key) => (
         <div className="my-sm bg-blue-lightest ba bc-blue-lighter" key={key}>
           <div
-            className={`${rule.classNameShort} ${
-              rule.classNameShort.indexOf('auto') !== -1 ? 'db w-auto' : 'dib'
+            className={`${rule.className} ${
+              rule.className.indexOf('auto') !== -1 ? 'db w-auto' : 'dib'
             } center bg-white ba bc-gray-light ${extraClasses}`}
           >
-            <Code>{rule.classNameShort}</Code>
+            <Code>{rule.className}</Code>
           </div>
         </div>
       ))}
@@ -119,9 +118,9 @@ function BorderExample({ extraClasses = '', rules }) {
     <div className="cf">
       {rules.map((rule, key) => (
         <div key={key} className="mb-md w-50-md-up">
-          <div className={`${extraClasses} ${rule.classNameShort}`}>
+          <div className={`${extraClasses} ${rule.className}`}>
             <small>
-              <Code>{rule.classNameShort}</Code>
+              <Code>{rule.className}</Code>
             </small>
           </div>
         </div>
@@ -134,8 +133,8 @@ function TextExample({ extraClasses = '', rules }) {
   return (
     <div>
       {rules.map((rule, key) => (
-        <p className={`${extraClasses} ${rule.classNameShort}`} key={key}>
-          This text has the class <Code>{rule.classNameShort}</Code>.
+        <p className={`${extraClasses} ${rule.className}`} key={key}>
+          This text has the class <Code>{rule.className}</Code>.
         </p>
       ))}
     </div>
@@ -221,6 +220,21 @@ function ExampleAdapter({ ruleset }) {
     case 'Widths (max)':
     case 'Widths (responsive)':
       return <WidthExample rules={rules} />
+      break
+    case 'Visibility':
+      return (
+        <p>
+          Apply this classes to cause an element to be visible or invisible.
+        </p>
+      )
+      break
+    case 'Z-Index':
+      return (
+        <p>
+          A collection of <Code>z-index</Code> values from 0-1000 in 100
+          increments.
+        </p>
+      )
       break
     default:
       return (

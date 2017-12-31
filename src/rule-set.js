@@ -14,15 +14,14 @@ class RuleSet {
   }
 
   get rules() {
-    if (!this.breakpoints) return this._rules
+    if (!this.breakpoints) return this._rules.map(r => new Rule(r))
 
     // Create responsive styles.
     return _.flatten(
       _.map(this.breakpoints, (value, label) => {
         return _.map(this._rules, rule => {
-          const newRule = rule.toObject()
           rule.breakpoint = label
-          return new Rule(newRule)
+          return new Rule(rule)
         })
       })
     )

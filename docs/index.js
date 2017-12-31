@@ -14,7 +14,9 @@ import { css } from 'glamor'
 import { HashRouter, Route, Switch, Link } from 'react-router-dom'
 
 // Generate the Euhpria CSS
-const euphoria = new Euphoria({})
+const euphoria = new Euphoria({
+  // baseColors: { red: 'red' },
+})
 
 // If development, load euphoria via glamor, otherwise use
 // latest CDN version.

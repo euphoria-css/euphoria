@@ -1,79 +1,13 @@
 const _ = require('lodash')
 const Rule = require('./rule')
 const RuleSet = require('./rule-set')
-const shader = require('shader')
+const lightness = require('lightness')
 const { CssSelectorParser } = require('css-selector-parser')
 
 const parser = new CssSelectorParser()
 
-// Grayscale
-const BLACK = 'black'
-const WHITE = 'white'
-const GRAY = '#888'
-
-// General colors
-const PURPLE = '#9006db'
-const PINK = '#e01890'
-const RED = '#db2e18'
-const ORANGE = '#ea780e'
-const YELLOW = '#ffff00'
-const GREEN = '#61cc0a'
-const CYAN = '#0fbc9c'
-const BLUE = '#1990e5'
-
-// Context specific colors
-const PRIMARY = CYAN
-const SECONDARY = GRAY
-const INFO = BLUE
-const SUCCESS = GREEN
-const WARNING = ORANGE
-const DANGER = RED
-
-const COLORS = Object.assign(
-  {
-    primary: PRIMARY,
-    secondary: SECONDARY,
-    info: INFO,
-    success: SUCCESS,
-    warning: WARNING,
-    danger: DANGER,
-  },
-  createColorVariation('purple', PURPLE),
-  createColorVariation('pink', PINK),
-  createColorVariation('red', RED),
-  createColorVariation('orange', ORANGE),
-  createColorVariation('yellow', YELLOW),
-  createColorVariation('green', GREEN),
-  createColorVariation('cyan', CYAN),
-  createColorVariation('blue', BLUE),
-  {
-    white: WHITE,
-    'gray-lightest': '#f9f9f9',
-    'gray-lighter': '#eaeaea',
-    'gray-light': '#ccc',
-    gray: '#aaa',
-    'gray-dark': '#999',
-    'gray-darker': '#555',
-    'gray-darkest': '#333',
-    black: BLACK,
-    transparent: 'transparent',
-  }
-)
-
-function createColorVariation(name, color) {
-  return {
-    [`${name}-lightest`]: shader(color, 0.9),
-    [`${name}-lighter`]: shader(color, 0.7),
-    [`${name}-light`]: shader(color, 0.45),
-    [name]: color,
-    [`${name}-dark`]: shader(color, -0.35),
-    [`${name}-darker`]: shader(color, -0.5),
-    [`${name}-darkest`]: shader(color, -0.65),
-  }
-}
-
 class Euphoria {
-  constructor(options) {
+  constructor(options = {}) {
     this.defaults = {
       alignContent: {
         start: 'flex-start',
@@ -135,8 +69,7 @@ class Euphoria {
         'lg-up': 'min-width: 1200px',
         // 'xl-up': 'min-width: 1800px',
       },
-      // TODO: easier way to change the base colors without having to reset them all
-      colors: COLORS,
+      colorGradients: true,
       clearfix: true,
       cursors: [
         // General
@@ -347,20 +280,74 @@ class Euphoria {
       },
       visibility: true,
       whitespace: ['pre', 'nowrap', 'normal'],
-      zIndex: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      zIndex: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
     }
 
-    // TODO: shall or deep merge?
+    // Set default colors
+    this.defaults.baseColors = {
+      // Context colors
+      primary: null,
+      secondary: null,
+      info: null,
+      success: null,
+      warning: null,
+      danger: null,
+
+      // Grayscale
+      gray: '#7a7a7a',
+
+      // General colors
+      purple: '#9006db',
+      pink: '#e01890',
+      red: '#db2e18',
+      orange: '#e26104',
+      yellow: '#efef00',
+      green: '#61cc0a',
+      cyan: '#0fbc9c',
+      blue: '#0c7ccc',
+    }
+    this.defaults.baseColors.primary = this.defaults.baseColors.cyan
+    this.defaults.baseColors.secondary = this.defaults.baseColors.gray
+    this.defaults.baseColors.info = this.defaults.baseColors.blue
+    this.defaults.baseColors.success = this.defaults.baseColors.green
+    this.defaults.baseColors.warning = this.defaults.baseColors.orange
+    this.defaults.baseColors.danger = this.defaults.baseColors.red
+
     this.options = Object.assign({}, this.defaults, options)
+    this.options.colors = this.createColors(options.baseColors)
 
     this.rules = this.rawRules.map(
       ({ name, rules = [], responsive }) =>
         new RuleSet({
-          name: name,
-          rules: rules && rules.map(props => new Rule(props)),
+          name,
+          rules,
           breakpoints: responsive && this.options.breakpoints,
         })
     )
+  }
+
+  createColors(overrides = {}) {
+    const colors = {}
+
+    // Generate color gradients version for all colors.
+    this.options.colorGradients &&
+      _.map(this.options.baseColors, (val, key) => {
+        colors[`${key}-lightest`] = lightness(val, 50)
+        colors[`${key}-lighter`] = lightness(val, 45)
+        colors[`${key}-light`] = lightness(val, 30)
+        colors[key] = val
+        colors[`${key}-dark`] = lightness(val, -10)
+        colors[`${key}-darker`] = lightness(val, -16)
+        colors[`${key}-darkest`] = lightness(val, -24)
+      })
+
+    // Some base colors that never change, thus they don't need
+    // to be configurable
+    colors.transparent = 'transparent'
+    colors.black = 'black'
+    colors.white = 'white'
+
+    return colors
   }
 
   get rawRules() {
@@ -932,8 +919,8 @@ class Euphoria {
           set.rules.map(rule => {
             if (inherits.includes(rule.selector)) {
               // if (
-              //   inherits.indexOf(rule.classNameShort) != -1 ||
-              //   inherits.indexOf(rule.classNameVerbose) != -1
+              //   inherits.indexOf(rule.className) != -1 ||
+              //   inherits.indexOf(rule.className) != -1
               // ) {
               Object.assign(properties, rule.properties)
             }

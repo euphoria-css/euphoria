@@ -8,7 +8,7 @@
     "build-css": "node scripts/bundle.js",
     "build": "yarn build-examples && yarn build-css",
     "gzip": "gzip -9 -c dist/euphoria.min.css > dist/euphoria.min.css.gz",
-    "watch": "NODE_ENV=development webpack-dev-server"
+    "start": "NODE_ENV=development webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -69,8 +69,8 @@
   },
   "dependencies": {
     "css-selector-parser": "1.3.0",
+    "lightness": "1.0.0",
     "lodash": "4.17.4",
-    "shader": "0.1.3",
     "url-slug": "2.0.0"
   }
 }

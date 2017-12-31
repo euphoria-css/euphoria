@@ -21,7 +21,7 @@ function Customize({ defaults }) {
 
   // Euphoria config object, passed directly to Euphoria.
   options: {
-    colors: { red: 'red' },  // Override the default colors
+    baseColors: { red: 'red' },  // Override the default colors
     flexbox: false,          // Don't generate "flexbox" styles
   },
 
@@ -46,14 +46,14 @@ function Customize({ defaults }) {
       </p>
       <Highlight lang="js">{`module.exports = {
   options: {
-    colors: {
+    baseColors: {
       red: 'red'
     }
   }
 }`}</Highlight>
       <p>
-        You can override the default <Code>colors</Code> settings but all the
-        other defaults will be retained.
+        You can override the default <Code>baseColors</Code> settings but all
+        the other defaults will be retained.
       </p>
 
       <SubHeading>Removing rulesets</SubHeading>
