@@ -16,12 +16,12 @@ registerLanguage('bash', bash)
 
 Highlight.propTypes = {
   children: PropTypes.string.isRequired,
-  lang: PropTypes.oneOf(['javascript', 'css', 'html']).isRequired,
+  lang: PropTypes.oneOf(['bash', 'javascript', 'css', 'html']).isRequired,
 }
 
-function Highlight({ children, lang }) {
+function Highlight({ children, inline = false, lang }) {
   return (
-    <div className="px-md py-xs bl bw-md bc-purple">
+    <div className={inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple'}>
       <SyntaxHighlighter language={lang} style={vs}>
         {children.toString()}
       </SyntaxHighlighter>

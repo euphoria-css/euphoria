@@ -42,8 +42,7 @@ In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamo
 
 ## Features
 
-
-**Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and 
+**Atomic Styles**: Styles in Euphoria are designed to be assembled together to create the styles you desire. Each class is as simple as possible and
 
 **Isolation**: By building with Euphoria you remove the magic from your HTML. No longer do you have to wade through hundreds or thousands of lines of CSS/LESS/Sass/etc. looking for the various places where you CSS styling comes from and then looking to where those classes are defined so you don't break anything. Instead, every HTML class becomes clear and concise as to what styles are applied to it. Changing that one HTML class is isolated an will effect only the code being modified meaning you don't need to waste hours making sure you didn't break anything.
 
@@ -60,7 +59,6 @@ In addition, for projects that leverage CSS-in-JS frameworks like [glamor][glamo
 **Simplicity**: Styles are short, simple and isolated. Add or remove styles and things behave as you expect. There is no magic in this library.
 
 **Consistency**: We attempt to keep a common format for styles that are predictable and consistent. In certain situations for the "short" styles, we made exceptions to improve the usability of the library.
-
 
 ## Install
 
@@ -81,7 +79,6 @@ With npm:
 ```bash
 npm i -S euphoria
 ```
-
 
 ## Usage
 
@@ -110,7 +107,7 @@ Now you have access to the default set of Euphoria styles. If you want to custom
 
 **COMING SOON!**
 
-After installing Euphoria, create a `euphoria.config.js` (or  `.euphoriarc` that contains JSON or YAML) file at the base of your project that exports a configuration `Object`:
+After installing Euphoria, create a `euphoria.config.js` (or `.euphoriarc` that contains JSON or YAML) file at the base of your project that exports a configuration `Object`:
 
 ```js
 const colors = require('./colors')
@@ -154,7 +151,9 @@ Coming soon, how to import Euphoria into your build process and generate CSS fro
 import Euphoria from 'euphoria'
 import { css } from 'glamor'
 
-const options = { /* options, see below */ }
+const options = {
+  /* options, see below */
+}
 
 const euphoria = new Euphoria(options)
 
@@ -222,23 +221,17 @@ Usage:
 
 ```ts
 euphoria.addRule({
-  short: string,
-  verbose: string,
+  selector: string,
   properties: Object,
   inherits: Array<string>,
-  hover: boolean,
-  after: boolean,
   important: boolean,
   responsive: boolean,
 })
 ```
 
-* **`short`**: a required `String` representing a short-form CSS selector to add as a new rule to Euphoria (eg `.btn`, `.hdr`, etc.)
-* **`verbose`**: an optional `String` representing a long-form CSS selector to add as a new rule to Euphoria (eg `.button`, `.page-header`, etc.). Default is `null`.
+* **`selector`**: a required `String` representing a CSS selector to add as a new rule to Euphoria, can include pseudo-selectors (eg `.btn`, `.input:focus`, etc.)
 * **`properties`**: an optional `Object` with custom CSS rules to add to the new selector. Default is `{}`.
 * **`inherits`**: an optional `Array` of Euphoria selectors that the new selector will inherit from. Default is `[]`.
-* **`hover`**: an optional `Boolean` indicating this style should apply to the `:hover` state of the selector. Default is `false`.
-* **`after`**: an optional `Boolean` indicating this rule should be applied `:after` the selector. Default is `false`.
 * **`important`**: an optional `Boolean` indicating the rule should have the `!important` flag added to it. Default is `false`.
 * **`responsive`**: an optional `Boolean` indicating that the rule should have responsive states added to it via the `breakpoints` setting. Default is `false`.
 
@@ -248,21 +241,18 @@ import Euphoria from 'euphoria'
 const euphoria = new Euphoria()
 
 euphoria.addRule({
-  short: 'btn',
-  verbose: 'button',
+  selector: '.button:hover',
   properties: { 'box-shadow': '1px 1px 1px rgba(0, 0, 0, 0.1)' },
-  inherits: ['px-lg', 'py-md', 'bg-primary', 'hov-bg-info', 'br-pill'],
-  // hover: false,
+  inherits: ['px-lg', 'py-md', 'bg-primary', 'hov-bg-info', 'rad-pill'],
   // important: false,
-  // after: false,
   // responsive: false,
 })
 ```
 
-Now Euphoria will add a `.btn`/`.button` class to its output that has a custom box shadow and inherits the list of Euphoria styles. This would generate CSS similar to the following (depending on your settings):
+Now Euphoria will add a `.button:hover` class to its output that has a custom box shadow and inherits the list of Euphoria styles. This would generate CSS similar to the following (depending on your settings):
 
 ```css
-.btn, .button {
+.button:hover {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   background: #378ad3;
   border-radius: 100em;
@@ -273,170 +263,168 @@ Now Euphoria will add a `.btn`/`.button` class to its output that has a custom b
 }
 ```
 
-Now, if you change the definitions for any of the inherited styles, the `.btn` class will automatically use the latest version. This way, you get all the flexibility of mixins but with the flexibility of JavaScript.
+Now, if you change the definitions for any of the inherited styles, the `.button:hover` class will automatically use the latest version. This way, you get all the flexibility of mixins but with the flexibility of JavaScript.
 
 ## TODO
 
-Rules: 
+Rules:
 
-- [ ] Animations (default and hover versions)
-  - [ ] Fade
-  - [ ] Show child
-  - [ ] Hide child
-  - [ ] Grow
-  - [ ] Shake
-  - [ ] Rotate
-- Better Pseudo-selector support
-  - [ ] Placeholder `::placeholder` text
-  - [ ] Outline `:outline` styling
-  - [ ] Focus `:focus` styling
-  - [ ] Hover `:hover` styling
-- [ ] Font families:
-  - [ ] Have a set of common "web safe" fonts
-  - [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
-- Someday:
-  - [ ] Grid layout helpers
+* [ ] Animations (default and hover versions)
+  * [ ] Fade
+  * [ ] Show child
+  * [ ] Hide child
+  * [ ] Grow
+  * [ ] Shake
+  * [ ] Rotate
+* Better Pseudo-selector support
+  * [ ] Placeholder `::placeholder` text
+  * [ ] Outline `:outline` styling
+  * [ ] Focus `:focus` styling
+  * [ ] Hover `:hover` styling
+* [ ] Font families:
+  * [ ] Have a set of common "web safe" fonts
+  * [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
+* Someday:
+  * [ ] Grid layout helpers
 
 Build:
 
-- [ ] Add autoprefixer
+* [ ] Add autoprefixer
 
 Documentation:
 
-- [ ] Auto generated documentation of customized code
-  - How to handle custom rules?
-- Custom style examples:
-  - Links
-  - Buttons
-  - Form elements
-    - Inputs
-  - Card
-  - Tables
-- Examples
-  - [ ] Only use certain styles
-
+* [ ] Auto generated documentation of customized code
+  * How to handle custom rules?
+* Custom style examples:
+  * Links
+  * Buttons
+  * Form elements
+    * Inputs
+  * Card
+  * Tables
+* Examples
+  * [ ] Only use certain styles
 
 ## Changelog
 
 ### v2.1.0
 
-- Big doc site refactor
-- Add font weights
-- Add background sizes
-- Box shadow styling
-- Readme updates
-- Code reorganization
-- Update vertical align rule
-- Add whitespace rules
-- Add opacity rules
-- Color tweaks
+* Big doc site refactor
+* Add font weights
+* Add background sizes
+* Box shadow styling
+* Readme updates
+* Code reorganization
+* Update vertical align rule
+* Add whitespace rules
+* Add opacity rules
+* Color tweaks
 
 ### v2.0.0
 
-- [**BREAKING**] Complete code rewrite: Tons of new selectors, more consistent naming, short/verbose names, breakpoints, easier configuration, add custom style extensions and a lot more.
+* [**BREAKING**] Complete code rewrite: Tons of new selectors, more consistent naming, short/verbose names, breakpoints, easier configuration, add custom style extensions and a lot more.
 
 ### v1.7.1
 
-- Set Prettier version
-- Add `.prettierrc` config file
+* Set Prettier version
+* Add `.prettierrc` config file
 
 ### v1.7.0
 
-- [**DEPRECATED**] Remove `.full-height` and `.full-width` and replaced with `.width-100p`, `.height-100p`, etc...
-- Add width/height styling for all commonly divisible percentage widths
+* [**DEPRECATED**] Remove `.full-height` and `.full-width` and replaced with `.width-100p`, `.height-100p`, etc...
+* Add width/height styling for all commonly divisible percentage widths
 
 ### v1.6.0
 
-- Change API to return an array of strings instead of just a string so we can support more CSS-in-JS libraries and fix integration with Glamor. 
-- Remove autoprefixer dependency; consuming codebase should use autoprefixer as desired.
+* Change API to return an array of strings instead of just a string so we can support more CSS-in-JS libraries and fix integration with Glamor.
+* Remove autoprefixer dependency; consuming codebase should use autoprefixer as desired.
 
 ### v1.5.3
 
-- Add `.position-absolute`, `.position-relative` and `.position-fixed` alignment helpers
+* Add `.position-absolute`, `.position-relative` and `.position-fixed` alignment helpers
 
 ### v1.5.2
 
-- Add `.full-height` and `.full-width` alignment helpers
+* Add `.full-height` and `.full-width` alignment helpers
 
 ### v1.5.1
 
-- Add `.flex-row-reverse` direction
+* Add `.flex-row-reverse` direction
 
 ### v1.5.0
 
-- Use autoprefixer to add vendor prefixes as necessary.
+* Use autoprefixer to add vendor prefixes as necessary.
 
 ### v1.4.4
 
-- Finish adding examples to example site
-- Fix `.text-bold`
+* Finish adding examples to example site
+* Fix `.text-bold`
 
 ### v1.4.3
 
-- Further improve example site.
+* Further improve example site.
 
 ### v1.4.2
 
-- Add examples site
+* Add examples site
 
 ### v1.4.1
 
-- Add `muted` color to defaults
+* Add `muted` color to defaults
 
 ### v1.4.0
 
-- Add text decoration and font styles
+* Add text decoration and font styles
 
 ### v1.3.0
 
-- **BREAKING**: Rename `type` to `text`
-- Cleanup readme
+* **BREAKING**: Rename `type` to `text`
+* Cleanup readme
 
 ### v1.2.0
 
-- Make `font-size` helpers
+* Make `font-size` helpers
 
 ### v1.1.1
 
-- Make type helpers use `!important` flag.
+* Make type helpers use `!important` flag.
 
 ### v1.1.0
 
-- Add "text-transform" helpers.
+* Add "text-transform" helpers.
 
 ### v1.0.3
 
-- Set `!important` flag for color styles.
+* Set `!important` flag for color styles.
 
 ### v1.0.2
 
-- Update readme.
+* Update readme.
 
 ### v1.0.1
 
-- Update readme.
+* Update readme.
 
 ### v1.0.0
 
-- Bump to v1 because npm wasn't allowing minor versions...?
+* Bump to v1 because npm wasn't allowing minor versions...?
 
 ### v0.2.0
 
-- Move to CSS-in-JS implementation
-- Add alignment, display, colors, spacing helpers
+* Move to CSS-in-JS implementation
+* Add alignment, display, colors, spacing helpers
 
 ### v0.1.0
 
-- Initial prototype
-
+* Initial prototype
 
 ## Contributing
 
 PRs welcome!
 
-- Please run `prettier --no-semi --single-quote --trailing-comma es5` on all code before submitting.
-- Please write tests for your code! (coming soon 😅)
-- If you're updating examples, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
+* Please run `prettier --no-semi --single-quote --trailing-comma es5` on all code before submitting.
+* Please write tests for your code! (coming soon 😅)
+* If you're updating examples, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
 
 ## Credits
 
@@ -446,18 +434,15 @@ PRs welcome!
 
 Euphoria was inspired by a lot of awesome projects, including:
 
-- [Bootstrap][bootstrap]
-- [Tachyons][tachyons]
-- [glamor][glamor]
+* [Bootstrap][bootstrap]
+* [Tachyons][tachyons]
+* [glamor][glamor]
 
 Thank you to all those that have put in a lot of thought and energy around pushing CSS forward!
-
 
 ## License
 
 MIT
-
-
 
 [bootstrap]: https://getbootstrap.com
 [cosmicconfig]: https://github.com/davidtheclark/cosmiconfig

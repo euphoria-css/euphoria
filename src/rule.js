@@ -1,7 +1,11 @@
 const _ = require('lodash')
+const { CssSelectorParser } = require('css-selector-parser')
+
+const parser = new CssSelectorParser()
 
 class Rule {
   constructor({
+    selector,
     short,
     properties,
     after = false,
@@ -11,6 +15,18 @@ class Rule {
     media = null,
     verbose = null,
   }) {
+    this.selector = selector || `.${short}${hover ? ':hover' : ''}`
+
+    if (selector) {
+      const parsed = parser.parse(selector)
+      const className = parsed.rule.classNames[0]
+      short = className
+      const pseudos =
+        parsed.rule.pseudos && parsed.rule.pseudos.map(p => p.name)
+      hover = Boolean(pseudos && pseudos.includes('hover'))
+      after = Boolean(pseudos && pseudos.includes('after'))
+    }
+
     this._classNameShort = short
     this._classNameVerbose = verbose
     this.properties = properties

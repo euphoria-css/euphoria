@@ -1,6 +1,7 @@
 import Code from './code'
 import Highlight from './highlight'
 import React from 'react'
+import SubHeading from './subheading'
 import ruleSetAnchor from './ruleset-anchor'
 import Title from './title'
 
@@ -11,15 +12,19 @@ function BackgroundColorExample({ hover = false, rules }) {
         {rules.map((rule, key) => (
           <tr key={key}>
             <td
-              className={`${rule.classNameShort} gray-light hov-black px-md am br bc-transparent`}
+              className={`${
+                rule.classNameShort
+              } gray-light hov-black px-md am br bc-transparent`}
             >
               {hover && <small>Hover!</small>}
             </td>
-            <td className="p-sm bb bc-gray-lighter">
+            <td className="px-sm bb bc-gray-lighter">
               <Code>{rule.classNameShort}</Code>
             </td>
-            <td className="p-sm bb bc-gray-lighter">
-              <Code>{rule.classNameVerbose}</Code>
+            <td className="px-sm bb bc-gray-lighter">
+              <Highlight lang="javascript" inline>{`<span class="${
+                rule.classNameShort
+              }">ABC</span>`}</Highlight>
             </td>
           </tr>
         ))}
@@ -35,10 +40,12 @@ function TextColorExample({ hover = false, rules }) {
         {rules.map((rule, key) => (
           <tr key={key}>
             <td
-              className={`px-md align-middle br bb bc-gray-lighter ${rule.classNameShort ===
-                'white' || rule.classNameShort === 'transparent'
-                ? 'bg-black'
-                : ''}`}
+              className={`px-md align-middle br bb bc-gray-lighter ${
+                rule.classNameShort === 'white' ||
+                rule.classNameShort === 'transparent'
+                  ? 'bg-black'
+                  : ''
+              }`}
             >
               <span className={`${rule.classNameShort} txt-xxl bold`}>ABC</span>
             </td>
@@ -46,7 +53,9 @@ function TextColorExample({ hover = false, rules }) {
               <Code>{rule.classNameShort}</Code>
             </td>
             <td className="p-sm bb bc-gray-lighter">
-              <Code>{rule.classNameVerbose}</Code>
+              <Highlight lang="javascript" inline>{`<span class="${
+                rule.classNameShort
+              }">ABC</span>`}</Highlight>
             </td>
           </tr>
         ))}
@@ -76,7 +85,10 @@ function BoxShadowExample({ rules }) {
   return (
     <div>
       {rules.map((rule, key) => (
-        <div className={`my-md p-sm bg-white ${rule.classNameShort}`} key={key}>
+        <div
+          className={`my-md p-sm bg-white w-50-md-up ${rule.classNameShort}`}
+          key={key}
+        >
           <Code>{rule.classNameShort}</Code>
         </div>
       ))}
@@ -84,17 +96,15 @@ function BoxShadowExample({ rules }) {
   )
 }
 
-function BoxExample({ rules }) {
+function BoxExample({ extraClasses = '', rules }) {
   return (
     <div>
       {rules.map((rule, key) => (
         <div className="my-sm bg-blue-lightest ba bc-blue-lighter" key={key}>
           <div
-            className={`${rule.classNameShort} ${rule.classNameShort.indexOf(
-              'auto'
-            ) !== -1
-              ? 'db w-auto'
-              : 'dib'} center p-xs bg-white ba bc-gray-light`}
+            className={`${rule.classNameShort} ${
+              rule.classNameShort.indexOf('auto') !== -1 ? 'db w-auto' : 'dib'
+            } center bg-white ba bc-gray-light ${extraClasses}`}
           >
             <Code>{rule.classNameShort}</Code>
           </div>
@@ -108,10 +118,10 @@ function BorderExample({ extraClasses = '', rules }) {
   return (
     <div className="cf">
       {rules.map((rule, key) => (
-        <div key={key} className="mb-sm w-70-md-up">
-          <div className={`${extraClasses} ${rule.classNameShort} p-sm center`}>
+        <div key={key} className="mb-md w-50-md-up">
+          <div className={`${extraClasses} ${rule.classNameShort}`}>
             <small>
-              <Code>{`${extraClasses} ${rule.classNameShort}`}</Code>
+              <Code>{rule.classNameShort}</Code>
             </small>
           </div>
         </div>
@@ -144,17 +154,34 @@ function ExampleAdapter({ ruleset }) {
       break
     case 'Border colors':
     case 'Border colors (hover)':
+      return <BorderExample rules={rules} extraClasses="bt bw-md pt-xs" />
+      break
+    case 'Border positions':
+      return (
+        <BorderExample
+          rules={rules}
+          extraClasses="center p-sm bg-gray-lightest"
+        />
+      )
+      break
+    case 'Border radii position':
+      return (
+        <BorderExample
+          rules={rules}
+          extraClasses="ba rad-md center p-sm bg-gray-lightest"
+        />
+      )
+      break
     case 'Border radius':
     case 'Border removal':
     case 'Border styles':
     case 'Border widths':
-      return <BorderExample rules={rules} extraClasses="ba" />
-      break
-    case 'Border radius position':
-      return <BorderExample rules={rules} extraClasses="ba br-md" />
-      break
-    case 'Border positions':
-      return <BorderExample rules={rules} extraClasses="bg-gray-lightest" />
+      return (
+        <BorderExample
+          rules={rules}
+          extraClasses="ba center p-sm bg-gray-lightest"
+        />
+      )
       break
     case 'Box shadows':
       return <BoxShadowExample rules={rules} />
@@ -175,6 +202,8 @@ function ExampleAdapter({ ruleset }) {
       break
     case 'Margins':
     case 'Margins (responsive)':
+      return <BoxExample rules={rules} extraClasses="p-xs" />
+      break
     case 'Padding':
     case 'Padding (responsive)':
       return <BoxExample rules={rules} />
@@ -210,10 +239,16 @@ function Example({ ruleset }) {
       <div id={ruleSetAnchor(ruleset.name)} className="mb-xl">
         <ExampleAdapter ruleset={ruleset} />
       </div>
-      <div className="">
-        <div className="gray-light mb-sm">Rule CSS:</div>
-        <Highlight lang="css">{ruleset.toString()}</Highlight>
-      </div>
+      <SubHeading>Rule CSS</SubHeading>
+      <Highlight lang="css">{ruleset.toString()}</Highlight>
+
+      <SubHeading>Configuration Options</SubHeading>
+      <p>
+        In order to customize this rule, you can change the default options of:
+      </p>
+      <Highlight lang="javascript">{`new Euphoria({
+  //... other options
+})`}</Highlight>
     </div>
   )
 }

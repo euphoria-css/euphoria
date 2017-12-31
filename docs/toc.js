@@ -7,7 +7,7 @@ function TOCLink({ children, href }) {
   return (
     <NavLink
       to={href}
-      className="db px-sm py-xs no-decoration primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
+      className="db px-sm py-xs td-none primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
       activeClassName="white bg-primary bc-cyan-dark"
     >
       {children}
@@ -29,7 +29,7 @@ function TOC({ rules }) {
       <div className="cf">
         <Heading>Getting Started</Heading>
         <TOCLink href="/">Usage</TOCLink>
-        <TOCLink href="/defaults">Defaults</TOCLink>
+        <TOCLink href="/customize">Customize</TOCLink>
         <TOCLink href="/all">All Rules</TOCLink>
         <Hr />
         <Heading>Rules</Heading>

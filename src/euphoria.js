@@ -1,8 +1,10 @@
 const _ = require('lodash')
 const Rule = require('./rule')
 const RuleSet = require('./rule-set')
-const SizeRule = require('./size-rule')
 const shader = require('shader')
+const { CssSelectorParser } = require('css-selector-parser')
+
+const parser = new CssSelectorParser()
 
 // Grayscale
 const BLACK = 'black'
@@ -46,8 +48,8 @@ const COLORS = Object.assign(
   createColorVariation('blue', BLUE),
   {
     white: WHITE,
-    'gray-lightest': '#f6f6f6',
-    'gray-lighter': '#e1e1e1',
+    'gray-lightest': '#f9f9f9',
+    'gray-lighter': '#eaeaea',
     'gray-light': '#ccc',
     gray: '#aaa',
     'gray-dark': '#999',
@@ -73,6 +75,31 @@ function createColorVariation(name, color) {
 class Euphoria {
   constructor(options) {
     this.defaults = {
+      alignContent: {
+        start: 'flex-start',
+        end: 'flex-end',
+        center: 'center',
+        stretch: 'stretch',
+        around: 'space-around',
+        between: 'space-between',
+      },
+      alignItems: {
+        start: 'flex-start',
+        end: 'flex-end',
+        center: 'center',
+        baseline: 'baseline',
+        stretch: 'stretch',
+      },
+      alignSelf: {
+        start: 'flex-start',
+        end: 'flex-end',
+        center: 'center',
+        baseline: 'baseline',
+        stretch: 'stretch',
+      },
+      backgroundSizes: ['contain', 'cover'],
+      borderCollapse: true,
+      borderPosition: true,
       borderRadii: {
         none: 'none',
         xs: '0.15em',
@@ -83,6 +110,9 @@ class Euphoria {
         pill: '100em',
         '100': '100%',
       },
+      borderRadiiPosition: true,
+      borderRemoval: true,
+      borderStyles: ['solid', 'dotted', 'dashed'],
       borderWidths: {
         xxs: '0.05rem',
         sm: '0.15rem',
@@ -106,6 +136,7 @@ class Euphoria {
         // 'xl-up': 'min-width: 1800px',
       },
       colors: COLORS,
+      clearfix: true,
       cursors: [
         // General
         'auto',
@@ -157,6 +188,34 @@ class Euphoria {
         'grab',
         'grabbing',
       ],
+      display: {
+        db: 'block',
+        di: 'inline',
+        dib: 'inline-block',
+        df: 'flex',
+        dfb: 'flex-block',
+        dt: 'table',
+        dtc: 'table-cell',
+        none: 'none',
+      },
+      flexDirection: {
+        row: 'row',
+        'row-reverse': 'row-reverse',
+        col: 'column',
+        'col-reverse': 'column-reverse',
+        start: 'flex-start',
+        end: 'flex-end',
+      },
+      flexOrder: {
+        first: '-1',
+        last: '1',
+      },
+      flexWrap: {
+        wrap: 'wrap',
+        reverse: 'reverse',
+        none: 'nowrap',
+      },
+      floats: ['left', 'right', 'none'],
       fontFamilies: {
         system:
           '-apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue" ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
@@ -176,13 +235,33 @@ class Euphoria {
         times: 'times, serif',
       },
       fontSizes: {
-        xxxl: '4rem',
-        xxl: '2.6rem',
-        xl: '1.9rem',
-        lg: '1.3rem',
-        md: '1rem',
-        sm: '0.85rem',
-        xs: '0.7rem',
+        xxxl: '4em',
+        xxl: '2.6em',
+        xl: '1.9em',
+        lg: '1.3em',
+        md: '1em',
+        sm: '0.85em',
+        xs: '0.7em',
+      },
+      fontWeights: {
+        bold: 'bold',
+        normal: 'normal',
+        '1': '100',
+        '2': '200',
+        '3': '300',
+        '4': '400',
+        '5': '500',
+        '6': '600',
+        '7': '700',
+        '8': '800',
+        '9': '900',
+      },
+      justifyContent: {
+        start: 'flex-start',
+        end: 'flex-end',
+        center: 'center',
+        between: 'space-between',
+        around: 'space-around',
       },
       letterSpacing: {
         xxs: '-0.2em',
@@ -202,6 +281,8 @@ class Euphoria {
         xl: 3,
         xxl: 4,
       },
+      lists: true,
+      normalize: true,
       opacity: {
         '100': 1.0,
         '90': 0.9,
@@ -217,6 +298,8 @@ class Euphoria {
         '025': 0.025,
         '0': 0,
       },
+      overflow: ['visible', 'hidden', 'scroll', 'auto'],
+      positions: ['relative', 'absolute', 'fixed'],
       sizes: [
         'auto',
         5,
@@ -246,68 +329,85 @@ class Euphoria {
         xl: '8rem',
         xxl: '14rem',
       },
+      textAlignment: ['left', 'right', 'center', 'justify'],
+      textDecoration: {
+        none: 'none',
+        line: 'line-through',
+        underline: 'underline',
+      },
+      textStyle: true,
+      textTransforms: ['uppercase', 'lowercase', 'capitalize'],
+      verticalAlignment: {
+        base: 'baseline',
+        bot: 'bottom',
+        top: 'top',
+        'text-top': 'text-top',
+        'text-bot': 'text-bottom',
+      },
+      visibility: true,
+      whitespace: ['pre', 'nowrap', 'normal'],
+      zIndex: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
     }
 
     // TODO: shall or deep merge?
     this.options = Object.assign({}, this.defaults, options)
 
     this.rules = this.rawRules.map(
-      ruleset =>
+      ({ name, rules = [], responsive }) =>
         new RuleSet({
-          name: ruleset.name,
-          rules: ruleset.rules.map(props => new Rule(props)),
-          breakpoints: ruleset.breakpoints,
+          name: name,
+          rules: rules && rules.map(props => new Rule(props)),
+          breakpoints: responsive && this.options.breakpoints,
         })
     )
   }
 
   get rawRules() {
     return [
+      // ---------------------------------------------------------
+      // Display
+      // ---------------------------------------------------------
+
       {
         name: 'Display',
-        rules: [
-          {
-            short: 'db',
-            verbose: 'display-block',
-            properties: { display: 'block' },
-          },
-          {
-            short: 'di',
-            verbose: 'display-inline',
-            properties: { display: 'inline' },
-          },
-          {
-            short: 'dib',
-            verbose: 'display-inline-block',
-            properties: { display: 'inline-block' },
-          },
-          {
-            short: 'df',
-            verbose: 'display-flex',
-            properties: { display: 'flex' },
-          },
-          {
-            short: 'dfb',
-            verbose: 'display-flex-block',
-            properties: { display: 'flex-block' },
-          },
-          {
-            short: 'dt',
-            verbose: 'display-table',
-            properties: { display: 'table' },
-          },
-          {
-            short: 'dtc',
-            verbose: 'display-table-cell',
-            properties: { display: 'table-cell' },
-          },
-          {
-            short: 'dn',
-            verbose: 'display-none',
-            properties: { display: 'none' },
-          },
-        ],
+        rules: _.map(this.options.display, (val, key) => ({
+          selector: `.${key}`,
+          properties: { display: val },
+        })),
       },
+      {
+        name: 'Overflow',
+        rules: _.map(this.options.overflow, overflow => ({
+          selector: `.of-${overflow}`,
+          properties: { overflow },
+        })),
+      },
+      {
+        name: 'Opacity',
+        rules: _.map(this.options.opacity, (value, name) => ({
+          selector: `.o-${name}`,
+          properties: { opacity: value },
+        })),
+      },
+      {
+        name: 'Opacity (hover)',
+        rules: _.map(this.options.opacity, (val, key) => ({
+          selector: `.hov-o-${key}:hover`,
+          properties: { opacity: val },
+        })),
+      },
+      {
+        name: 'Z-Index',
+        rules: _.map(this.options.zIndex, val => ({
+          selector: `.z-${val}`,
+          properties: { 'z-index': val },
+        })),
+      },
+
+      // ---------------------------------------------------------
+      // Positioning and display
+      // ---------------------------------------------------------
+
       {
         name: 'Floats',
         rules: this._createFloatRules(),
@@ -315,24 +415,66 @@ class Euphoria {
       {
         name: 'Floats (responsive)',
         rules: this._createFloatRules(),
-        breakpoints: this.options.breakpoints,
+        responsive: true,
       },
       {
         name: 'Positioning',
-        rules: ['relative', 'absolute', 'fixed'].map(p => ({
-          short: p,
-          verbose: `position-${p}`,
+        rules: _.map(this.options.positions, p => ({
+          selector: `.${p}`,
           properties: { position: p },
         })),
       },
       {
+        name: 'Positioning (responsive)',
+        rules: _.map(this.options.positions, p => ({
+          selector: `.${p}`,
+          properties: { position: p },
+        })),
+        responsive: true,
+      },
+      {
         name: 'Text alignment',
-        rules: ['left', 'right', 'center', 'justify'].map(d => ({
-          short: d,
-          verbose: `text-align-${d}`,
+        rules: _.map(this.options.textAlignment, d => ({
+          selector: `.${d}`,
           properties: { 'text-align': d },
         })),
       },
+      {
+        name: 'Vertical alignment',
+        rules: _.map(this.options.verticalAlignment, (val, key) => ({
+          selector: `.v-${key}`,
+          properties: { 'vertical-align': val },
+        })),
+      },
+      {
+        name: 'Visibility',
+        rules: this.options.visibility && [
+          {
+            selector: '.visible',
+            properties: { visibility: 'visible' },
+          },
+          {
+            selector: '.invisible',
+            properties: {
+              visibility: 'hidden',
+            },
+          },
+        ],
+      },
+      {
+        name: 'Clearfix',
+        rules: this.options.clearfix && [
+          {
+            selector: '.cf:after',
+            properties: { clear: 'both', display: 'table', content: '""' },
+          },
+        ],
+      },
+
+      // ---------------------------------------------------------
+      // Sizes
+      // ---------------------------------------------------------
+
       {
         name: 'Widths',
         rules: this._createSizeRules('w', 'width'),
@@ -340,216 +482,139 @@ class Euphoria {
       {
         name: 'Widths (responsive)',
         rules: this._createSizeRules('w', 'width'),
-        breakpoints: this.options.breakpoints,
+        responsive: true,
       },
       {
         name: 'Widths (max)',
-        rules: this.options.sizes.map(s => {
-          const label = s === 'auto' ? 'auto' : parseInt(s)
-          const size = s === 'auto' ? 'auto' : `${s}%`
-          return {
-            short: `mw-${label}`,
-            verbose: `max-width-${label}`,
-            properties: { 'max-width': size },
-          }
-        }),
+        rules: this._createSizeRules('mw', 'max-width'),
       },
       {
         name: 'Heights',
-        rules: this.options.sizes.map(s => {
-          const label = s === 'auto' ? 'auto' : parseInt(s)
-          const size = s === 'auto' ? 'auto' : `${s}%`
-          return {
-            short: `h-${label}`,
-            verbose: `height-${label}`,
-            properties: { height: size },
-          }
-        }),
+        rules: this._createSizeRules('h', 'height'),
+      },
+      // {
+      //   name: 'Heights (max)',
+      //   rules: this._createSizeRules('mh', 'max-height'),
+      // },
+      {
+        name: 'Offsets',
+        rules: this._createSizeRules('offset', 'margin-left'),
       },
       {
-        name: 'Heights (max)',
-        rules: this.options.sizes.map(s => {
-          const label = s === 'auto' ? 'auto' : parseInt(s)
-          const size = s === 'auto' ? 'auto' : `${s}%`
-          return {
-            short: `mh-${label}`,
-            verbose: `max-height-${label}`,
-            properties: { 'max-height': size },
-          }
-        }),
+        name: 'Offsets (responsive)',
+        rules: this._createSizeRules('offset', 'margin-left'),
+        responsive: true,
       },
+
+      // ---------------------------------------------------------
+      // Colors
+      // ---------------------------------------------------------
+
       {
         name: 'Text colors',
         rules: _.map(this.options.colors, (color, name) => ({
-          short: `${name}`,
-          verbose: `text-color-${name}`,
+          selector: `.${name}`,
           properties: { color },
         })),
       },
       {
         name: 'Text colors (hover)',
         rules: _.map(this.options.colors, (color, name) => ({
-          short: `hov-${name}`,
-          verbose: `hover-text-color-${name}`,
+          selector: `.hov-${name}:hover`,
           properties: { color },
-          hover: true,
-        })),
-      },
-      {
-        name: 'Overflow',
-        rules: ['visible', 'hidden', 'scroll', 'auto'].map(overflow => ({
-          short: `of-${overflow}`,
-          verbose: `overflow-${overflow}`,
-          properties: { overflow },
         })),
       },
       {
         name: 'Background colors',
         rules: _.map(this.options.colors, (color, name) => ({
-          short: `bg-${name}`,
-          verbose: `background-color-${name}`,
+          selector: `.bg-${name}`,
           properties: { background: color },
         })),
       },
       {
         name: 'Background colors (hover)',
         rules: _.map(this.options.colors, (color, name) => ({
-          short: `hov-bg-${name}`,
-          verbose: `hover-background-color-${name}`,
+          selector: `.hov-bg-${name}:hover`,
           properties: { background: color },
-          hover: true,
         })),
       },
-      {
-        name: 'Background sizes',
-        rules: _.map(['contain', 'cover'], size => ({
-          short: `${size}`,
-          verbose: `background-size-${size}`,
-          properties: { 'background-size': size },
-        })),
-      },
-      {
-        name: 'Clearfix',
-        rules: [
-          {
-            short: 'cf',
-            verbose: 'clearfix',
-            properties: { clear: 'both', display: 'table', content: '""' },
-            after: true,
-          },
-        ],
-      },
+
+      // ---------------------------------------------------------
+      // Box styles
+      // ---------------------------------------------------------
+
       {
         name: 'Box shadows',
         rules: _.map(this.options.boxShadows, (shadow, name) => ({
-          short: `bs-${name}`,
-          verbose: `box-shadow-${name}`,
+          selector: `.bs-${name}`,
           properties: { 'box-shadow': shadow },
+        })),
+      },
+
+      // ---------------------------------------------------------
+      // Typography
+      // ---------------------------------------------------------
+
+      {
+        name: 'Font sizes',
+        rules: _.map(this.options.fontSizes, (val, key) => ({
+          selector: `.txt-${key}`,
+          properties: {
+            'font-size': val,
+          },
         })),
       },
       {
         name: 'Text transforms',
-        rules: [
-          {
-            short: 'uppercase',
-            verbose: 'text-transform-uppercase',
-            properties: { 'text-transform': 'uppercase' },
-          },
-          {
-            short: 'lowercase',
-            verbose: 'text-transform-lowercase',
-            properties: { 'text-transform': 'lowercase' },
-          },
-          {
-            short: 'capitalize',
-            verbose: 'text-transform-capitalize',
-            properties: { 'text-transform': 'capitalize' },
-          },
-        ],
+        rules: _.map(this.options.textTransforms, trans => ({
+          selector: `.${trans}`,
+          properties: { 'text-transform': trans },
+        })),
       },
       {
         name: 'Text styles',
-        rules: [
+        rules: this.options.textStyle && [
           {
-            short: 'italic',
-            verbose: 'font-style-italic',
+            selector: '.italic',
             properties: { 'font-style': 'italic' },
           },
         ],
       },
       {
         name: 'Font weights',
-        rules: _.map(
-          [
-            { name: 'bold', size: 'bold' },
-            { name: 'normal', size: 'normal' },
-            { name: '1', size: '100' },
-            { name: '2', size: '200' },
-            { name: '3', size: '300' },
-            { name: '4', size: '400' },
-            { name: '5', size: '500' },
-            { name: '6', size: '600' },
-            { name: '7', size: '700' },
-            { name: '8', size: '800' },
-            { name: '9', size: '900' },
-          ],
-          ({ size, name }) => ({
-            short: name === 'bold' ? 'bold' : `fw-${name}`,
-            verbose: `font-weight-${size}`,
-            properties: { 'font-weight': size },
-          })
-        ),
+        rules: _.map(this.options.fontWeights, (val, key) => ({
+          selector: key === '.bold' ? 'bold' : `.fw-${key}`,
+          properties: { 'font-weight': val },
+        })),
       },
       {
         name: 'Text decoration',
-        rules: [
-          {
-            short: 'line-through',
-            verbose: 'text-decoration-line-through',
-            properties: {
-              'text-decoration': 'line-through',
-            },
-          },
-          {
-            short: 'underline',
-            verbose: 'text-decoration-underline',
-            properties: {
-              'text-decoration': 'underline',
-            },
-          },
-          {
-            short: 'no-decoration',
-            verbose: 'text-decoration-none',
-            properties: {
-              'text-decoration': 'none',
-            },
-          },
-        ],
+        rules: _.map(this.options.textDecoration, (val, key) => ({
+          selector: `.td-${key}`,
+          properties: { 'text-decoration': val },
+        })),
       },
       {
         name: 'Letter spacing',
-        rules: _.map(this.options.letterSpacing, (size, label) => ({
-          short: `ls-${label}`,
-          verbose: `letter-spacing-${label}`,
+        rules: _.map(this.options.letterSpacing, (val, key) => ({
+          selector: `.ls-${key}`,
           properties: {
-            'letter-spacing': size,
+            'letter-spacing': val,
           },
         })),
       },
       {
         name: 'Line height',
-        rules: _.map(this.options.lineHeights, (size, label) => ({
-          short: `lh-${label}`,
-          verbose: `line-height-${label}`,
-          properties: { 'line-height': size },
+        rules: _.map(this.options.lineHeights, (val, key) => ({
+          selector: `.lh-${key}`,
+          properties: { 'line-height': val },
         })),
       },
       {
         name: 'Normalize font',
-        rules: [
+        rules: this.options.normalize && [
           {
-            short: 'normal',
-            verbose: 'normalize-font',
+            selector: '.normal',
             properties: {
               'font-style': 'normal',
               'font-weight': 'normal',
@@ -560,81 +625,58 @@ class Euphoria {
         ],
       },
       {
-        name: 'Vertical alignment',
-        rules: [
-          {
-            short: 'v-base',
-            verbose: 'align-baseline',
-            properties: { 'vertical-align': 'baseline' },
-          },
-          {
-            short: 'v-top',
-            verbose: 'align-top',
-            properties: { 'vertical-align': 'top' },
-          },
-          {
-            short: 'v-mid',
-            verbose: 'align-middle',
-            properties: { 'vertical-align': 'middle' },
-          },
-          {
-            short: 'v-bot',
-            verbose: 'align-bottom',
-            properties: { 'vertical-align': 'bottom' },
-          },
-          {
-            short: 'v-text-top',
-            verbose: 'align-text-top',
-            properties: { 'vertical-align': 'text-top' },
-          },
-          {
-            short: 'v-text-bot',
-            verbose: 'align-text-bottom',
-            properties: {
-              'vertical-align': 'text-bottom',
-            },
-          },
-        ],
+        name: 'Font families',
+        rules: _.map(this.options.fontFamilies, (val, key) => {
+          return {
+            selector: `.${key}`,
+            properties: { 'font-family': val },
+          }
+        }),
       },
       {
+        name: 'Whitespace',
+        rules: _.map(this.options.whitespace, ws => ({
+          selector: `.ws-${ws}`,
+          properties: { 'white-space': ws },
+        })),
+      },
+
+      // ---------------------------------------------------------
+      // Borders
+      // ---------------------------------------------------------
+
+      {
         name: 'Border positions',
-        rules: [
+        rules: this.options.borderPosition && [
           {
-            short: 'ba',
-            verbose: 'border',
+            selector: '.ba',
             properties: { border: '1px solid' },
           },
           {
-            short: 'bl',
-            verbose: 'border-left',
+            selector: '.bl',
             properties: { 'border-left': '1px solid' },
           },
           {
-            short: 'bt',
-            verbose: 'border-top',
+            selector: '.bt',
             properties: { 'border-top': '1px solid' },
           },
           {
-            short: 'br',
-            verbose: 'border-right',
+            selector: '.br',
             properties: { 'border-right': '1px solid' },
           },
           {
-            short: 'bb',
-            verbose: 'border-bottom',
+            selector: '.bb',
             properties: { 'border-bottom': '1px solid' },
           },
           {
-            short: 'bx',
-            verbose: 'border-x',
+            selector: '.bx',
             properties: {
               'border-left': '1px solid',
               'border-right': '1px solid',
             },
           },
           {
-            short: 'by',
-            verbose: 'border-y',
+            selector: '.by',
             properties: {
               'border-top': '1px solid',
               'border-bottom': '1px solid',
@@ -643,125 +685,37 @@ class Euphoria {
         ],
       },
       {
-        name: 'Border widths',
-        rules: _.map(this.options.borderWidths, (size, name) => ({
-          short: `bw-${name}`,
-          verbose: `border-width-${name}`,
-          properties: { 'border-width': size },
-        })),
-      },
-      {
-        name: 'Border styles',
-        rules: [
-          {
-            short: 'b-solid',
-            verbose: 'border-style-solid',
-            properties: {
-              'border-style': 'solid',
-            },
-          },
-          {
-            short: 'b-dotted',
-            verbose: 'border-style-dotted',
-            properties: {
-              'border-style': 'dotted',
-            },
-          },
-          {
-            short: 'b-dashed',
-            verbose: 'border-style-dashed',
-            properties: {
-              'border-style': 'dashed',
-            },
-          },
-        ],
-      },
-      {
-        name: 'Border radius',
-        rules: _.map(this.options.borderRadii, (size, label) => ({
-          short: `br-${label}`,
-          verbose: `border-radius-${label}`,
-          properties: {
-            'border-radius': size,
-          },
-        })),
-      },
-      {
-        name: 'Border radius position',
-        rules: [
-          {
-            short: 'br-left',
-            verbose: 'border-radius-left',
-            properties: {
-              'border-top-right-radius': '0',
-              'border-bottom-right-radius': '0',
-            },
-          },
-          {
-            short: 'br-top',
-            verbose: 'border-radius-top',
-            properties: {
-              'border-bottom-right-radius': '0',
-              'border-bottom-left-radius': '0',
-            },
-          },
-          {
-            short: 'br-right',
-            verbose: 'border-radius-right',
-            properties: {
-              'border-top-left-radius': '0',
-              'border-bottom-left-radius': '0',
-            },
-          },
-          {
-            short: 'br-bottom',
-            verbose: 'border-radius-bottom',
-            properties: {
-              'border-top-right-radius': '0',
-              'border-top-left-radius': '0',
-            },
-          },
-        ],
-      },
-      {
         name: 'Border removal',
-        rules: [
+        rules: this.options.borderRemoval && [
           {
-            short: 'bn',
-            verbose: 'border-none',
+            selector: '.b-none',
             properties: { border: 'none' },
           },
           {
-            short: 'bn-l',
-            verbose: 'border-none-left',
+            selector: '.bl-none',
             properties: { 'border-left': 'none' },
           },
           {
-            short: 'bn-r',
-            verbose: 'border-none-right',
+            selector: '.br-none',
             properties: { 'border-right': 'none' },
           },
           {
-            short: 'bn-b',
-            verbose: 'border-none-bottom',
+            selector: '.bb-none',
             properties: { 'border-bottom': 'none' },
           },
           {
-            short: 'bn-t',
-            verbose: 'border-none-top',
+            selector: '.bt-none',
             properties: { 'border-top': 'none' },
           },
           {
-            short: 'bn-x',
-            verbose: 'border-none-x',
+            selector: '.bx-none',
             properties: {
               'border-left': 'none',
               'border-right': 'none',
             },
           },
           {
-            short: 'bn-y',
-            verbose: 'border-none-y',
+            selector: '.by-none',
             properties: {
               'border-top': 'none',
               'border-bottom': 'none',
@@ -770,11 +724,66 @@ class Euphoria {
         ],
       },
       {
-        name: 'Border collapse',
-        rules: [
+        name: 'Border styles',
+        rules: _.map(this.options.borderStyles, val => ({
+          selector: `.b-${val}`,
+          properties: { 'border-style': val },
+        })),
+      },
+      {
+        name: 'Border widths',
+        rules: _.map(this.options.borderWidths, (val, key) => ({
+          selector: `.bw-${key}`,
+          properties: { 'border-width': val },
+        })),
+      },
+      {
+        name: 'Border radius',
+        rules: _.map(this.options.borderRadii, (val, key) => ({
+          selector: `.rad-${key}`,
+          properties: {
+            'border-radius': val,
+          },
+        })),
+      },
+      {
+        name: 'Border radii position',
+        rules: this.options.borderRadiiPosition && [
           {
-            short: 'collapse',
-            verbose: 'border-collapse',
+            selector: '.br-left',
+            properties: {
+              'border-top-right-radius': 0,
+              'border-bottom-right-radius': 0,
+            },
+          },
+          {
+            selector: '.br-top',
+            properties: {
+              'border-bottom-right-radius': 0,
+              'border-bottom-left-radius': 0,
+            },
+          },
+          {
+            selector: '.br-right',
+            properties: {
+              'border-top-left-radius': 0,
+              'border-bottom-left-radius': 0,
+            },
+          },
+          {
+            selector: '.br-bottom',
+            properties: {
+              'border-top-right-radius': 0,
+              'border-top-left-radius': 0,
+            },
+          },
+        ],
+      },
+      {
+        name: 'Border collapse',
+        rules: this.options.borderCollapse && [
+          {
+            selector: '.collapse',
             properties: {
               'border-collapse': 'collapse',
             },
@@ -784,41 +793,60 @@ class Euphoria {
       {
         name: 'Border colors',
         rules: _.map(this.options.colors, (val, key) => ({
-          short: `bc-${key}`,
-          verbose: `border-color-${key}`,
+          selector: `.bc-${key}`,
           properties: { 'border-color': val },
         })),
       },
       {
         name: 'Border colors (hover)',
         rules: _.map(this.options.colors, (val, key) => ({
-          short: `hov-bc-${key}`,
-          verbose: `hover-border-color-${key}`,
+          selector: `.hov-bc-${key}:hover`,
           properties: { 'border-color': val },
-          hover: true,
         })),
       },
-      // TODO: Allow customizing font families
+
+      // ---------------------------------------------------------
+      // Flexbox
+      // ---------------------------------------------------------
+
       {
-        name: 'Font families',
-        rules: _.map(this.options.fontFamilies, (stack, name) => {
-          return {
-            short: name,
-            verbose: `font-family-${name}`,
-            properties: { 'font-family': stack },
-          }
-        }),
+        name: 'Flexbox',
+        rules: [].concat(
+          _.map(this.options.flexDirection, (val, key) => ({
+            selector: `.fd-${key}`,
+            properties: { 'flex-direction': val },
+          })),
+          _.map(this.options.justifyContent, (val, key) => ({
+            selector: `.jc-${key}`,
+            properties: { 'justify-content': val },
+          })),
+          _.map(this.options.alignItems, (val, key) => ({
+            selector: `.ai-${key}`,
+            properties: { 'align-items': val },
+          })),
+          _.map(this.options.alignSelf, (val, key) => ({
+            selector: `.as-${key}`,
+            properties: { 'align-self': val },
+          })),
+          _.map(this.options.alignContent, (val, key) => ({
+            selector: `.ac-${key}`,
+            properties: { 'align-content': val },
+          })),
+          _.map(this.options.flexWrap, (val, key) => ({
+            selector: `.fw-${key}`,
+            properties: { 'flex-wrap': val },
+          })),
+          _.map(this.options.flexOrder, (val, key) => ({
+            selector: `.fo-${key}`,
+            properties: { 'flex-order': val },
+          }))
+        ),
       },
-      {
-        name: 'Font sizes',
-        rules: _.map(this.options.fontSizes, (prop, name) => ({
-          short: `txt-${name}`,
-          verbose: `text-size-${name}`,
-          properties: {
-            'font-size': prop,
-          },
-        })),
-      },
+
+      // ---------------------------------------------------------
+      // Spacing
+      // ---------------------------------------------------------
+
       {
         name: 'Margins',
         rules: this._createSpacingRules('margin'),
@@ -826,7 +854,7 @@ class Euphoria {
       {
         name: 'Margins (responsive)',
         rules: this._createSpacingRules('margin'),
-        breakpoints: this.options.breakpoints,
+        responsive: true,
       },
       {
         name: 'Padding',
@@ -835,14 +863,18 @@ class Euphoria {
       {
         name: 'Padding (responsive)',
         rules: this._createSpacingRules('padding'),
-        breakpoints: this.options.breakpoints,
+        responsive: true,
       },
+
+      // ---------------------------------------------------------
+      // Lists
+      // ---------------------------------------------------------
+
       {
         name: 'Lists',
-        rules: [
+        rules: this.options.lists && [
           {
-            short: 'unstyled',
-            verbose: 'list-unstyled',
+            selector: '.unstyled',
             properties: {
               'list-style': 'none',
               '& li': {},
@@ -850,217 +882,23 @@ class Euphoria {
           },
         ],
       },
+
+      // ---------------------------------------------------------
+      // Other styles
+      // ---------------------------------------------------------
+
       {
-        name: 'Visibility',
-        rules: [
-          {
-            short: 'visible',
-            verbose: 'visibility-visible',
-            properties: { visibility: 'visible' },
-          },
-          {
-            short: 'invisible',
-            verbose: 'visibility-invisible',
-            properties: {
-              visibility: 'hidden',
-            },
-          },
-        ],
+        name: 'Background sizes',
+        rules: _.map(this.options.backgroundSizes, size => ({
+          selector: `.${size}`,
+          properties: { 'background-size': size },
+        })),
       },
       {
         name: 'Cursor',
-        rules: this.options.cursors.map(cursor => ({
-          short: `c-${cursor}`,
-          verbose: `cursor-${cursor}`,
+        rules: _.map(this.options.cursors, cursor => ({
+          selector: `.c-${cursor}`,
           properties: { cursor },
-        })),
-      },
-      {
-        name: 'Flexbox',
-        rules: [
-          {
-            short: 'f-row',
-            verbose: 'flex-direction-row',
-            properties: { 'flex-direction': 'row' },
-          },
-          {
-            short: 'f-row-reverse',
-            verbose: 'flex-direction-row-reverse',
-            properties: { 'flex-direction': 'row-reverse' },
-          },
-          {
-            short: 'f-column',
-            verbose: 'flex-direction-column',
-            properties: { 'flex-direction': 'column' },
-          },
-          {
-            short: 'f-column-reverse',
-            verbose: 'flex-direction-column-reverse',
-            properties: {
-              'flex-direction': 'column-reverse',
-            },
-          },
-          {
-            short: 'jc-start',
-            verbose: 'justify-content-flex-start',
-            properties: { 'justify-content': 'flex-start' },
-          },
-          {
-            short: 'jc-end',
-            verbose: 'justify-content-flex-end',
-            properties: { 'justify-content': 'flex-end' },
-          },
-          {
-            short: 'jc-center',
-            verbose: 'justify-content-center',
-            properties: { 'justify-content': 'center' },
-          },
-          {
-            short: 'jc-between',
-            verbose: 'justify-content-space-between',
-            properties: {
-              'justify-content': 'space-between',
-            },
-          },
-          {
-            short: 'jc-around',
-            verbose: 'justify-content-space-around',
-            properties: {
-              'justify-content': 'space-around',
-            },
-          },
-          {
-            short: 'ai-start',
-            verbose: 'align-items-flex-start',
-            properties: { 'align-items': 'flex-start' },
-          },
-          {
-            short: 'ai-end',
-            verbose: 'align-items-flex-end',
-            properties: { 'align-items': 'flex-end' },
-          },
-          {
-            short: 'ai-center',
-            verbose: 'align-items-center',
-            properties: { 'align-items': 'center' },
-          },
-          {
-            short: 'ai-baseline',
-            verbose: 'align-items-baseline',
-            properties: { 'align-items': 'baseline' },
-          },
-          {
-            short: 'ai-stretch',
-            verbose: 'align-items-stretch',
-            properties: { 'align-items': 'stretch' },
-          },
-          {
-            short: 'as-start',
-            verbose: 'align-self-flex-start',
-            properties: { 'align-self': 'flex-start' },
-          },
-          {
-            short: 'as-end',
-            verbose: 'align-self-flex-end',
-            properties: { 'align-self': 'flex-end' },
-          },
-          {
-            short: 'as-center',
-            verbose: 'align-self-center',
-            properties: { 'align-self': 'center' },
-          },
-          {
-            short: 'as-baseline',
-            verbose: 'align-self-baseline',
-            properties: { 'align-self': 'baseline' },
-          },
-          {
-            short: 'as-stretch',
-            verbose: 'align-self-stretch',
-            properties: { 'align-self': 'stretch' },
-          },
-          {
-            short: 'ac-start',
-            verbose: 'align-content-start',
-            properties: { 'align-content': 'flex-start' },
-          },
-          {
-            short: 'ac-end',
-            verbose: 'align-content-flex-end',
-            properties: { 'align-content': 'flex-end' },
-          },
-          {
-            short: 'ac-center',
-            verbose: 'align-content-center',
-            properties: { 'align-content': 'center' },
-          },
-          {
-            short: 'ac-stretch',
-            verbose: 'align-content-stretch',
-            properties: { 'align-content': 'stretch' },
-          },
-          {
-            short: 'ac-between',
-            verbose: 'align-content-space-between',
-            properties: {
-              'align-content': 'space-between',
-            },
-          },
-          {
-            short: 'ac-around',
-            verbose: 'align-content-space-around',
-            properties: { 'align-content': 'space-around' },
-          },
-          {
-            short: 'fw',
-            verbose: 'flex-wrap',
-            properties: { 'flex-wrap': 'wrap' },
-          },
-          {
-            short: 'fw-reverse',
-            verbose: 'flex-wrap-reverse',
-            properties: { 'flex-wrap': 'wrap-reverse' },
-          },
-          {
-            short: 'fw-none',
-            verbose: 'flex-wrap-none',
-            properties: { 'flex-wrap': 'nowrap' },
-          },
-          {
-            short: 'fo-first',
-            verbose: 'flex-order-first',
-            properties: { order: '-1' },
-          },
-          {
-            short: 'fo-last',
-            verbose: 'flex-order-last',
-            properties: { order: '1' },
-          },
-        ],
-      },
-      {
-        name: 'Opacity',
-        rules: _.map(this.options.opacity, (value, name) => ({
-          short: `o-${name}`,
-          verbose: `opacity-${name}`,
-          properties: { opacity: value },
-        })),
-      },
-      {
-        name: 'Opacity (hover)',
-        rules: _.map(this.options.opacity, (value, name) => ({
-          short: `hov-o-${name}`,
-          verbose: `hover-opacity-${name}`,
-          properties: { opacity: value },
-          hover: true,
-        })),
-      },
-      {
-        name: 'Whitespace',
-        rules: ['pre', 'nowrap', 'normal'].map(ws => ({
-          short: `ws-${ws}`,
-          verbose: `white-space-${ws}`,
-          properties: { 'white-space': ws },
         })),
       },
     ]
@@ -1069,39 +907,46 @@ class Euphoria {
   /**
    * Create a new rule to add to the list of defined rules.
    * Take the name of the new selector, any custom CSS to
-   * apply to it and then a list of any of the existing 
+   * apply to it and then a list of any of the existing
    * Euphoria selectors to merge into the rule. Think
    * of this like a mixin in LESS/SASS.
-   * 
+   *
    * @param {String} selector The name of the selector, eg ".my-selector".
    * @param {Object} custom Custom styles to apply to the rule.
    * @param {Array} custom An (optional) list of Euphoria selectors to combine into this new rule.
    */
   addRule({
-    short,
-    verbose,
+    selector,
     properties = {},
     inherits = [],
-    hover = false,
     responsive = false,
     important = false,
-    after = false,
   }) {
+    // TODO: remove as this is temporary:
+    selector = selector || `.${short}${hover ? ':hover' : ''}`
+
     if (inherits.length) {
       this.rules.map(set => {
-        set.rules.map(rule => {
-          if (
-            inherits.indexOf(rule.classNameShort) != -1 ||
-            inherits.indexOf(rule.classNameVerbose) != -1
-          ) {
-            Object.assign(properties, rule.properties)
-          }
-        })
+        if (set.rules && set.rules.length) {
+          set.rules.map(rule => {
+            if (inherits.includes(rule.selector)) {
+              // if (
+              //   inherits.indexOf(rule.classNameShort) != -1 ||
+              //   inherits.indexOf(rule.classNameVerbose) != -1
+              // ) {
+              Object.assign(properties, rule.properties)
+            }
+          })
+        }
       })
     }
 
     this.rules.push(
-      new Rule({ short, verbose, properties, hover, responsive, after })
+      new Rule({
+        selector,
+        properties,
+        responsive, // TODO: get this to work!
+      })
     )
   }
 
@@ -1120,22 +965,31 @@ class Euphoria {
   // Private methodsj
   //----------------------------------------------------------------
 
-  _createSizeRules(prefixShort, prefixVerbose) {
-    return _.map(this.options.sizes, size =>
-      new SizeRule({ prefixShort, prefixVerbose, size }).toObject()
-    )
+  _createSizeRules(prefix, rule) {
+    return _.map(this.options.sizes, s => {
+      const label = s === 'auto' ? 'auto' : parseInt(s)
+      const size = s === 'auto' ? 'auto' : `${s}%`
+      return {
+        selector: `.${prefix}-${label}`,
+        properties: { [rule]: size },
+      }
+    })
   }
 
   _createFloatRules() {
-    return ['left', 'right', 'none'].map(float => ({
-      short: `f${float[0]}`,
-      verbose: `float-${float}`,
+    return _.map(this.options.floats, float => ({
+      selector: `.f${float[0]}`,
+      // short: `f${float[0]}`,
+      // verbose: `float-${float}`,
       properties: { float },
     }))
   }
 
   _createSpacingRules(type) {
     const spacing = this.options.spacing
+
+    if (!spacing) return []
+
     const rules = []
     const directions = ['', 'left', 'top', 'right', 'bottom', 'x', 'y']
 
@@ -1167,7 +1021,12 @@ class Euphoria {
             break
         }
 
-        rules.push({ short, verbose, properties })
+        rules.push({
+          selector: `.${short}`,
+          // short,
+          // verbose,
+          properties,
+        })
       })
     })
 

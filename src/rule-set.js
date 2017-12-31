@@ -5,7 +5,7 @@ const slugify = require('url-slug')
 class RuleSet {
   constructor({ breakpoints, name, rules }) {
     this.name = name
-    this._rules = rules
+    this._rules = rules || []
     this.breakpoints = breakpoints
   }
 
@@ -16,6 +16,7 @@ class RuleSet {
   get rules() {
     if (!this.breakpoints) return this._rules
 
+    // Create responsive styles.
     return _.flatten(
       _.map(this.breakpoints, (value, label) => {
         return _.map(this._rules, rule => {
