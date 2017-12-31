@@ -135,6 +135,7 @@ class Euphoria {
         'lg-up': 'min-width: 1200px',
         // 'xl-up': 'min-width: 1800px',
       },
+      // TODO: easier way to change the base colors without having to reset them all
       colors: COLORS,
       clearfix: true,
       cursors: [
