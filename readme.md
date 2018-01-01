@@ -10,11 +10,11 @@ To try out Euphoria, just add the following to the `<head>` of your page:
 <link href="//unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
 
-Now check the [documentation][docs] for usage information and docs.
+Now check the [documentation site][docs] for usage information.
 
 ## Documentation
 
-Please see the [documentation website][docs] for information on installation and usage!
+Please see [euphoria-css.com][docs] for information on installation and usage!
 
 ## Contributing
 
