@@ -1,15 +1,13 @@
 {
   "name": "euphoria",
-  "version": "2.3.0",
-  "description":
-    "Minimalist CSS component and utility framework for CSS-in-JS applications",
+  "version": "2.4.0",
+  "description": "Minimalist CSS component and utility framework for CSS-in-JS applications",
   "main": "src/euphoria.js",
   "scripts": {
     "build-examples": "NODE_ENV=production webpack",
     "build-css": "node scripts/bundle.js",
     "build": "npm run build-examples && npm run build-css",
-    "format":
-      "prettier --write --ignore-path docs/main.js {src,scripts,docs}/**/*.js",
+    "format": "prettier --write --ignore-path docs/main.js {src,scripts,docs}/**/*.js",
     "gzip": "gzip -9 -c dist/euphoria.min.css > dist/euphoria.min.css.gz",
     "start": "NODE_ENV=development webpack-dev-server",
     "test": "ava src/**/*.test.js",
