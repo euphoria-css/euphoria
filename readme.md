@@ -93,6 +93,19 @@ If you're updating code, make sure to run `npm run build-examples` and commit co
 
 ## Changelog
 
+### v2.5.0
+
+* Major design work to docs site
+* Support non-class rule creation
+* Usage and overview docs pages
+* Improve colors to be more consistent + more colors
+* Remove `xl` breakpoint (for now)
+* Remove usage of yarn
+* Opacity hover styles
+* Move readme content to docs site
+* Add some basic tests
+* Lots of other cleanup and optimizations
+
 ### v2.1.0
 
 * Big doc site refactor
