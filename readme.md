@@ -1,16 +1,16 @@
 ![Euphoria Banner](https://cl.ly/oWlv/euphoria-banner.png)
 
-> Euphoric CSS styling utility library for CSS-in-JS projects
-
-**To view examples of how to use Euphoria, check out the [Examples site][docs]!**
+> A euphoric CSS micro-framework.
 
 ## Quick Start
 
-To try out Euphoria, just add the following to the `<head>` of your page and then see the [documentation][docs] for available styles:
+To try out Euphoria, just add the following to the `<head>` of your page:
 
 ```html
 <link href="//unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" type="text/css" />
 ```
+
+Now check the [documentation][docs] for usage information and docs.
 
 ## Documentation
 
