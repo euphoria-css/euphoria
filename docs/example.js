@@ -18,13 +18,18 @@ function BackgroundColorExample({ hover = false, rules }) {
             >
               {hover && <small>Hover!</small>}
             </td>
-            <td className="px-sm bb bc-gray-lighter">
+            <td className="p-xs bb bc-gray-lighter">
               <Code>{rule.className}</Code>
             </td>
-            <td className="px-sm bb bc-gray-lighter">
+            <td className="p-xs bb bc-gray-lighter">
               <Highlight lang="javascript" inline>{`<div class="${
                 rule.className
               }"></div>`}</Highlight>
+            </td>
+            <td className="p-xs bb bc-gray-lighter">
+              <Highlight lang="css" inline>
+                {rule.css}
+              </Highlight>
             </td>
           </tr>
         ))}

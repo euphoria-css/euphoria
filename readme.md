@@ -422,13 +422,21 @@ Documentation:
 
 PRs welcome!
 
-* Please run `prettier --no-semi --single-quote --trailing-comma es5` on all code before submitting.
-* Please write tests for your code! (coming soon 😅)
-* If you're updating examples, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
+### Formatting
+
+Please run prettier (using `npm run format`) on all code before submitting.
+
+### Test
+
+Please write tests for your code! Test files are next to the source files and we're using [ava][ava] test library.
+
+### Build
+
+If you're updating examples, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
 
 ## Credits
 
-[Dana Woodman](http://danawoodman.com)
+Created by [Dana Woodman][dana]
 
 ### Inspiration
 
@@ -444,9 +452,11 @@ Thank you to all those that have put in a lot of thought and energy around pushi
 
 MIT
 
+[ava]: https://github.com/avajs/ava
 [bootstrap]: https://getbootstrap.com
 [cosmicconfig]: https://github.com/davidtheclark/cosmiconfig
 [cli]: https://github.com/euphoria-css/euphoria-cli
+[dana]: http://danawoodman.com
 [docs]: https://euphoria-css.github.io/euphoria
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options

@@ -14,7 +14,7 @@ function Customize({ defaults }) {
         containing JSON or YAML) which exports a configuration object.
         Everything in the configuration file is optional.
       </p>
-      <Highlight lang="js">{`module.exports = {
+      <Highlight lang="javascript">{`module.exports = {
 
   // Location to put compiled CSS. Below is default setting:
   outputPath: 'dist/euphoria.css',
@@ -44,7 +44,7 @@ function Customize({ defaults }) {
         You can override any of these settings by passing in a configuration
         object to Euphoria which will be merged with the defaults, for example:
       </p>
-      <Highlight lang="js">{`module.exports = {
+      <Highlight lang="javascript">{`module.exports = {
   options: {
     baseColors: {
       red: 'red'
@@ -62,7 +62,7 @@ function Customize({ defaults }) {
         <Code>false</Code> and Euphoria will not generate any rules that depend
         on that setting.
       </p>
-      <Highlight lang="js">{`module.exports = {
+      <Highlight lang="javascript">{`module.exports = {
   options: {
     cursors: false
   }
@@ -75,7 +75,7 @@ function Customize({ defaults }) {
         inheriting from existing Euphoria styles. You can think of these as
         "mixins" from other tools like Sass/LESS.
       </p>
-      <Highlight lang="js">{`module.exports = {
+      <Highlight lang="javascript">{`module.exports = {
   customRules: [
     {
       selector: '.input',

@@ -32,7 +32,7 @@ function TOC({ rules }) {
         <TOCLink href="/customize">Customize</TOCLink>
         <TOCLink href="/all">All Rules</TOCLink>
         <Hr />
-        <Heading>Rules</Heading>
+        <Heading>Styles</Heading>
         {rules.map((ruleset, key) => (
           <TOCLink href={`/${ruleSetAnchor(ruleset.name)}`} key={key}>
             {ruleset.name}

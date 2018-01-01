@@ -18,15 +18,13 @@ function Usage() {
         on Github for installation and setup documentation.
       </p>
       <p>
-        See{' '}
+        Learn{' '}
         <Link to="/customize" className="primary">
-          all available defaults
-        </Link>.
-      </p>
-      <p>
-        You can view{' '}
+          how to customize Euphoria
+        </Link>{' '}
+        or see{' '}
         <Link to="/all" className="primary">
-          all CSS rules here
+          all Euphoria CSS styles
         </Link>.
       </p>
 
@@ -65,7 +63,7 @@ npm i -S euphoria euphoria-cli`}</Highlight>
       <p>
         See{' '}
         <Link className="primary" to="/customize">
-          Defaults
+          Customize
         </Link>{' '}
         for more information on how to customize Euphoria.
       </p>

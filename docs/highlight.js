@@ -9,6 +9,9 @@ import SyntaxHighlighter, {
 import vs from 'react-syntax-highlighter/dist/styles/vs'
 import xml from 'react-syntax-highlighter/dist/languages/xml'
 
+// Override stupid container styles
+const styles = Object.assign({}, vs, { hljs: {} })
+
 registerLanguage('javascript', js)
 registerLanguage('css', css)
 registerLanguage('html', xml)
@@ -21,8 +24,12 @@ Highlight.propTypes = {
 
 function Highlight({ children, inline = false, lang }) {
   return (
-    <div className={inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple'}>
-      <SyntaxHighlighter language={lang} style={vs}>
+    <div
+      className={
+        inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple bg-purple-lightest'
+      }
+    >
+      <SyntaxHighlighter language={lang} style={styles}>
         {children.toString()}
       </SyntaxHighlighter>
     </div>

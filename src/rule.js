@@ -11,45 +11,33 @@ class Rule {
     important = false,
     media = null,
   }) {
-    this._selector = selector
+    this._rawSelector = selector
     this.properties = properties
     this.important = important
     this.breakpoint = breakpoint
     this.media = media
-
-    // TODO: handle non-class rules
-    const parsed = parser.parse(this._selector)
-    this._className = parsed.rule.classNames[0]
-
-    // Parse pseudo selectors
-    const pseudos = parsed.rule.pseudos && parsed.rule.pseudos.map(p => p.name)
-    this.hover = Boolean(pseudos && pseudos.includes('hover'))
-    this.after = Boolean(pseudos && pseudos.includes('after'))
-    // TODO: Handle any arbitrary selectors
-  }
-
-  get selector() {
-    let selector = '.' + this.className
-    if (this.hover) selector += ':hover'
-    if (this.after) selector += ':after'
-    return selector
   }
 
   get className() {
-    let name = this._className
-    if (this.breakpoint) name += `-${this.breakpoint}`
-    return name
+    return parser.parse(this.selector).rule.classNames[0]
   }
 
-  get propertiesCSS() {
-    return _.map(
-      this.properties,
-      (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
-    ).join(' ')
+  get selector() {
+    const parsed = parser.parse(this._rawSelector).rule
+    let selector = parsed.classNames[0]
+
+    // Add breakpoint suffix.
+    if (this.breakpoint) selector += `-${this.breakpoint}`
+
+    // Add pseudo selectors, if present.
+    const pseudos = parsed.pseudos && parsed.pseudos.map(p => p.name).join(':')
+    if (pseudos) selector += `:${pseudos}`
+
+    return '.' + selector
   }
 
   get css() {
-    let rule = `${this.selector} { ${this.propertiesCSS} }`
+    let rule = `${this.selector} { ${this._propertyCSS} }`
     if (this.media) rule = `@media only screen and (${this.media}) { ${rule} }`
     return rule
   }
@@ -58,17 +46,15 @@ class Rule {
     return this.css
   }
 
-  toObject() {
-    return {
-      selector: this.selector,
-      properties: this.properties,
-      important: this.important,
-      breakpoint: this.breakpoint,
-      media: this.media,
-      // verbose: this._classNameVerbose,
-      // hover: this.hover,
-      // after: this.after,
-    }
+  //----------------------------------------------
+  // Private instance methods
+  //----------------------------------------------
+
+  get _propertyCSS() {
+    return _.map(
+      this.properties,
+      (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
+    ).join(' ')
   }
 }
 

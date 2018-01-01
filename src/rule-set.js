@@ -3,31 +3,18 @@ const Rule = require('./rule')
 const slugify = require('url-slug')
 
 class RuleSet {
-  constructor({ breakpoints, name, rules }) {
+  constructor({ breakpoints = null, name, rules }) {
     this.name = name
-    this._rules = rules || []
+    this.rules = rules //rules.map(r => new Rule(r))
     this.breakpoints = breakpoints
   }
 
   get key() {
-    return slugify(this.name)
+    return slugify(this.name.trim())
   }
 
-  get rules() {
-    if (!this.breakpoints) return this._rules.map(r => new Rule(r))
-
-    // Create responsive styles.
-    return _.flatten(
-      _.map(this.breakpoints, (value, label) => {
-        return _.map(this._rules, rule => {
-          rule.breakpoint = label
-          return new Rule(rule)
-        })
-      })
-    )
-  }
-
-  css(separator = '\n') {
+  get css() {
+    const separator = '\n'
     if (!this.breakpoints) return this.rules.join(separator)
 
     return _.map(this.breakpoints, (value, label) => {
@@ -35,7 +22,9 @@ class RuleSet {
         `@media only screen and (${value}) {`,
         this.rules
           .map(rule => {
-            // Add the responsive suffix to the class name
+            // Set the breakpoint for the rule so that
+            // it will add the proper responsive suffix
+            // to the class name.
             rule.breakpoint = label
             return '  ' + rule
           })
@@ -46,7 +35,7 @@ class RuleSet {
   }
 
   toString() {
-    return this.css()
+    return this.css
   }
 }
 

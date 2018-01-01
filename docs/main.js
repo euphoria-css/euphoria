@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d219d1fcab05d11d3b22"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4bee535207e7e0075db6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2609,6 +2609,9 @@ var _xml2 = _interopRequireDefault(_xml);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Override stupid container styles
+var styles = Object.assign({}, _vs2.default, { hljs: {} });
+
 (0, _light.registerLanguage)('javascript', _javascript2.default);
 (0, _light.registerLanguage)('css', _css2.default);
 (0, _light.registerLanguage)('html', _xml2.default);
@@ -2627,10 +2630,12 @@ function Highlight(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple' },
+    {
+      className: inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple bg-purple-lightest'
+    },
     _react2.default.createElement(
       _light2.default,
-      { language: lang, style: _vs2.default },
+      { language: lang, style: styles },
       children.toString()
     )
   );
@@ -24332,45 +24337,33 @@ class Rule {
     important = false,
     media = null,
   }) {
-    this._selector = selector
+    this._rawSelector = selector
     this.properties = properties
     this.important = important
     this.breakpoint = breakpoint
     this.media = media
-
-    // TODO: handle non-class rules
-    const parsed = parser.parse(this._selector)
-    this._className = parsed.rule.classNames[0]
-
-    // Parse pseudo selectors
-    const pseudos = parsed.rule.pseudos && parsed.rule.pseudos.map(p => p.name)
-    this.hover = Boolean(pseudos && pseudos.includes('hover'))
-    this.after = Boolean(pseudos && pseudos.includes('after'))
-    // TODO: Handle any arbitrary selectors
-  }
-
-  get selector() {
-    let selector = '.' + this.className
-    if (this.hover) selector += ':hover'
-    if (this.after) selector += ':after'
-    return selector
   }
 
   get className() {
-    let name = this._className
-    if (this.breakpoint) name += `-${this.breakpoint}`
-    return name
+    return parser.parse(this.selector).rule.classNames[0]
   }
 
-  get propertiesCSS() {
-    return _.map(
-      this.properties,
-      (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
-    ).join(' ')
+  get selector() {
+    const parsed = parser.parse(this._rawSelector).rule
+    let selector = parsed.classNames[0]
+
+    // Add breakpoint suffix.
+    if (this.breakpoint) selector += `-${this.breakpoint}`
+
+    // Add pseudo selectors, if present.
+    const pseudos = parsed.pseudos && parsed.pseudos.map(p => p.name).join(':')
+    if (pseudos) selector += `:${pseudos}`
+
+    return '.' + selector
   }
 
   get css() {
-    let rule = `${this.selector} { ${this.propertiesCSS} }`
+    let rule = `${this.selector} { ${this._propertyCSS} }`
     if (this.media) rule = `@media only screen and (${this.media}) { ${rule} }`
     return rule
   }
@@ -24379,17 +24372,15 @@ class Rule {
     return this.css
   }
 
-  toObject() {
-    return {
-      selector: this.selector,
-      properties: this.properties,
-      important: this.important,
-      breakpoint: this.breakpoint,
-      media: this.media,
-      // verbose: this._classNameVerbose,
-      // hover: this.hover,
-      // after: this.after,
-    }
+  //----------------------------------------------
+  // Private instance methods
+  //----------------------------------------------
+
+  get _propertyCSS() {
+    return _.map(
+      this.properties,
+      (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
+    ).join(' ')
   }
 }
 
@@ -24685,7 +24676,7 @@ function Customize(_ref) {
     ),
     _react2.default.createElement(
       _highlight2.default,
-      { lang: 'js' },
+      { lang: 'javascript' },
       'module.exports = {\n\n  // Location to put compiled CSS. Below is default setting:\n  outputPath: \'dist/euphoria.css\',\n\n  // Euphoria config object, passed directly to Euphoria.\n  options: {\n    baseColors: { red: \'red\' },  // Override the default colors\n    flexbox: false,          // Don\'t generate "flexbox" styles\n  },\n\n  // Custom CSS rules to add to outputted CSS. Rules can\n  // inherit from existing Euphoria styles and can have \n  // their own custom CSS properties.\n  customRules: [\n    {\n      selector: \'.button\',\n      properties: {\n        outline: \'5px solid red\',\n      },\n      inherits: [\'.px-md\', \'.py-sm\', \'.bg-primary\', \'.white\', \'.td-none\'],\n    },\n  ],\n}'
     ),
     _react2.default.createElement(
@@ -24700,7 +24691,7 @@ function Customize(_ref) {
     ),
     _react2.default.createElement(
       _highlight2.default,
-      { lang: 'js' },
+      { lang: 'javascript' },
       'module.exports = {\n  options: {\n    baseColors: {\n      red: \'red\'\n    }\n  }\n}'
     ),
     _react2.default.createElement(
@@ -24733,7 +24724,7 @@ function Customize(_ref) {
     ),
     _react2.default.createElement(
       _highlight2.default,
-      { lang: 'js' },
+      { lang: 'javascript' },
       'module.exports = {\n  options: {\n    cursors: false\n  }\n}'
     ),
     _react2.default.createElement(
@@ -24748,7 +24739,7 @@ function Customize(_ref) {
     ),
     _react2.default.createElement(
       _highlight2.default,
-      { lang: 'js' },
+      { lang: 'javascript' },
       'module.exports = {\n  customRules: [\n    {\n      selector: \'.input\',\n      inherits: [\'.p-sm\', \'.bg-white\', \'.ba\', \'.br-sm\', \'.bc-gray\'],\n    },\n    {\n      selector: \'.some-custom-style:hover\',\n      properties: {\n        border: \'0 none\',\n        \'text-decoration\': \'none\',\n        // Any CSS rules you\'d like in kebab-case...\n      },\n    },\n    // Create as many rules as you\'d like with any combination of\n    // Euphoria styles or custom styles.\n  ],\n}'
     ),
     _react2.default.createElement(
@@ -24836,7 +24827,7 @@ function BackgroundColorExample(_ref) {
           ),
           _react2.default.createElement(
             'td',
-            { className: 'px-sm bb bc-gray-lighter' },
+            { className: 'p-xs bb bc-gray-lighter' },
             _react2.default.createElement(
               _code2.default,
               null,
@@ -24845,11 +24836,20 @@ function BackgroundColorExample(_ref) {
           ),
           _react2.default.createElement(
             'td',
-            { className: 'px-sm bb bc-gray-lighter' },
+            { className: 'p-xs bb bc-gray-lighter' },
             _react2.default.createElement(
               _highlight2.default,
               { lang: 'javascript', inline: true },
               '<div class="' + rule.className + '"></div>'
+            )
+          ),
+          _react2.default.createElement(
+            'td',
+            { className: 'p-xs bb bc-gray-lighter' },
+            _react2.default.createElement(
+              _highlight2.default,
+              { lang: 'css', inline: true },
+              rule.css
             )
           )
         );
@@ -25447,7 +25447,7 @@ function TOC(_ref3) {
       _react2.default.createElement(
         Heading,
         null,
-        'Rules'
+        'Styles'
       ),
       rules.map(function (ruleset, key) {
         return _react2.default.createElement(
@@ -25527,24 +25527,20 @@ function Usage() {
     _react2.default.createElement(
       'p',
       null,
-      'See',
+      'Learn',
       ' ',
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/customize', className: 'primary' },
-        'all available defaults'
+        'how to customize Euphoria'
       ),
-      '.'
-    ),
-    _react2.default.createElement(
-      'p',
-      null,
-      'You can view',
+      ' ',
+      'or see',
       ' ',
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/all', className: 'primary' },
-        'all CSS rules here'
+        'all Euphoria CSS styles'
       ),
       '.'
     ),
@@ -25649,7 +25645,7 @@ function Usage() {
       _react2.default.createElement(
         _reactRouterDom.Link,
         { className: 'primary', to: '/customize' },
-        'Defaults'
+        'Customize'
       ),
       ' ',
       'for more information on how to customize Euphoria.'
@@ -44032,6 +44028,7 @@ class Euphoria {
         stretch: 'stretch',
       },
       backgroundSizes: ['contain', 'cover'],
+      baseColors: null,
       borderCollapse: true,
       borderPosition: true,
       borderRadii: {
@@ -44297,14 +44294,14 @@ class Euphoria {
       gray: '#7a7a7a',
 
       // General colors
-      purple: '#9006db',
-      pink: '#e01890',
-      red: '#db2e18',
+      blue: '#3187c4',
+      cyan: '#24b79c',
+      green: '#7db735',
       orange: '#e26104',
+      purple: '#963ebc',
+      pink: '#bc328c',
+      red: '#d8401e',
       yellow: '#efef00',
-      green: '#61cc0a',
-      cyan: '#0fbc9c',
-      blue: '#0c7ccc',
     }
     this.defaults.baseColors.primary = this.defaults.baseColors.cyan
     this.defaults.baseColors.secondary = this.defaults.baseColors.gray
@@ -44320,7 +44317,7 @@ class Euphoria {
       ({ name, rules = [], responsive }) =>
         new RuleSet({
           name,
-          rules,
+          rules: rules.map(r => new Rule(r)),
           breakpoints: responsive && this.options.breakpoints,
         })
     )
@@ -44365,16 +44362,16 @@ class Euphoria {
       },
       {
         name: 'Overflow',
-        rules: _.map(this.options.overflow, overflow => ({
-          selector: `.of-${overflow}`,
-          properties: { overflow },
+        rules: _.map(this.options.overflow, val => ({
+          selector: `.of-${val}`,
+          properties: { overflow: val },
         })),
       },
       {
         name: 'Opacity',
-        rules: _.map(this.options.opacity, (value, name) => ({
+        rules: _.map(this.options.opacity, (val, name) => ({
           selector: `.o-${name}`,
-          properties: { opacity: value },
+          properties: { opacity: val },
         })),
       },
       {
@@ -44407,24 +44404,24 @@ class Euphoria {
       },
       {
         name: 'Positioning',
-        rules: _.map(this.options.positions, p => ({
-          selector: `.${p}`,
-          properties: { position: p },
+        rules: _.map(this.options.positions, val => ({
+          selector: `.${val}`,
+          properties: { position: val },
         })),
       },
       {
         name: 'Positioning (responsive)',
-        rules: _.map(this.options.positions, p => ({
-          selector: `.${p}`,
-          properties: { position: p },
+        rules: _.map(this.options.positions, val => ({
+          selector: `.${val}`,
+          properties: { position: val },
         })),
         responsive: true,
       },
       {
         name: 'Text alignment',
-        rules: _.map(this.options.textAlignment, d => ({
-          selector: `.${d}`,
-          properties: { 'text-align': d },
+        rules: _.map(this.options.textAlignment, val => ({
+          selector: `.${val}`,
+          properties: { 'text-align': val },
         })),
       },
       {
@@ -44500,30 +44497,30 @@ class Euphoria {
 
       {
         name: 'Text colors',
-        rules: _.map(this.options.colors, (color, name) => ({
-          selector: `.${name}`,
-          properties: { color },
+        rules: _.map(this.options.colors, (val, key) => ({
+          selector: `.${key}`,
+          properties: { color: val },
         })),
       },
       {
         name: 'Text colors (hover)',
-        rules: _.map(this.options.colors, (color, name) => ({
-          selector: `.hov-${name}:hover`,
-          properties: { color },
+        rules: _.map(this.options.colors, (val, key) => ({
+          selector: `.hov-${key}:hover`,
+          properties: { color: val },
         })),
       },
       {
         name: 'Background colors',
-        rules: _.map(this.options.colors, (color, name) => ({
-          selector: `.bg-${name}`,
-          properties: { background: color },
+        rules: _.map(this.options.colors, (val, key) => ({
+          selector: `.bg-${key}`,
+          properties: { background: val },
         })),
       },
       {
         name: 'Background colors (hover)',
-        rules: _.map(this.options.colors, (color, name) => ({
-          selector: `.hov-bg-${name}:hover`,
-          properties: { background: color },
+        rules: _.map(this.options.colors, (val, key) => ({
+          selector: `.hov-bg-${key}:hover`,
+          properties: { background: val },
         })),
       },
 
@@ -44533,9 +44530,9 @@ class Euphoria {
 
       {
         name: 'Box shadows',
-        rules: _.map(this.options.boxShadows, (shadow, name) => ({
-          selector: `.bs-${name}`,
-          properties: { 'box-shadow': shadow },
+        rules: _.map(this.options.boxShadows, (val, key) => ({
+          selector: `.bs-${key}`,
+          properties: { 'box-shadow': val },
         })),
       },
 
@@ -44554,9 +44551,9 @@ class Euphoria {
       },
       {
         name: 'Text transforms',
-        rules: _.map(this.options.textTransforms, trans => ({
-          selector: `.${trans}`,
-          properties: { 'text-transform': trans },
+        rules: _.map(this.options.textTransforms, val => ({
+          selector: `.${val}`,
+          properties: { 'text-transform': val },
         })),
       },
       {
@@ -44623,9 +44620,9 @@ class Euphoria {
       },
       {
         name: 'Whitespace',
-        rules: _.map(this.options.whitespace, ws => ({
-          selector: `.ws-${ws}`,
-          properties: { 'white-space': ws },
+        rules: _.map(this.options.whitespace, val => ({
+          selector: `.ws-${val}`,
+          properties: { 'white-space': val },
         })),
       },
 
@@ -44877,16 +44874,16 @@ class Euphoria {
 
       {
         name: 'Background sizes',
-        rules: _.map(this.options.backgroundSizes, size => ({
-          selector: `.${size}`,
-          properties: { 'background-size': size },
+        rules: _.map(this.options.backgroundSizes, val => ({
+          selector: `.${val}`,
+          properties: { 'background-size': val },
         })),
       },
       {
         name: 'Cursor',
-        rules: _.map(this.options.cursors, cursor => ({
-          selector: `.c-${cursor}`,
-          properties: { cursor },
+        rules: _.map(this.options.cursors, val => ({
+          selector: `.c-${val}`,
+          properties: { cursor: val },
         })),
       },
     ]
@@ -44938,7 +44935,8 @@ class Euphoria {
     )
   }
 
-  css(separator = '\n') {
+  get css() {
+    const separator = '\n'
     return ['* { box-sizing: border-box }']
       .concat(this.rules)
       .map(rule => rule)
@@ -44946,11 +44944,11 @@ class Euphoria {
   }
 
   toString() {
-    return this.css()
+    return this.css
   }
 
   //----------------------------------------------------------------
-  // Private methodsj
+  // Private methods
   //----------------------------------------------------------------
 
   _createSizeRules(prefix, rule) {
@@ -45034,31 +45032,18 @@ const Rule = __webpack_require__(175)
 const slugify = __webpack_require__(173)
 
 class RuleSet {
-  constructor({ breakpoints, name, rules }) {
+  constructor({ breakpoints = null, name, rules }) {
     this.name = name
-    this._rules = rules || []
+    this.rules = rules //rules.map(r => new Rule(r))
     this.breakpoints = breakpoints
   }
 
   get key() {
-    return slugify(this.name)
+    return slugify(this.name.trim())
   }
 
-  get rules() {
-    if (!this.breakpoints) return this._rules.map(r => new Rule(r))
-
-    // Create responsive styles.
-    return _.flatten(
-      _.map(this.breakpoints, (value, label) => {
-        return _.map(this._rules, rule => {
-          rule.breakpoint = label
-          return new Rule(rule)
-        })
-      })
-    )
-  }
-
-  css(separator = '\n') {
+  get css() {
+    const separator = '\n'
     if (!this.breakpoints) return this.rules.join(separator)
 
     return _.map(this.breakpoints, (value, label) => {
@@ -45066,7 +45051,9 @@ class RuleSet {
         `@media only screen and (${value}) {`,
         this.rules
           .map(rule => {
-            // Add the responsive suffix to the class name
+            // Set the breakpoint for the rule so that
+            // it will add the proper responsive suffix
+            // to the class name.
             rule.breakpoint = label
             return '  ' + rule
           })
@@ -45077,7 +45064,7 @@ class RuleSet {
   }
 
   toString() {
-    return this.css()
+    return this.css
   }
 }
 
