@@ -240,7 +240,7 @@ MIT
 [cosmicconfig]: https://github.com/davidtheclark/cosmiconfig
 [cli]: https://github.com/euphoria-css/euphoria-cli
 [dana]: http://danawoodman.com
-[docs]: https://euphoria-css.github.io/euphoria
+[docs]: http://euphoria-css.com
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options
 [tachyons]: http://tachyons.io
