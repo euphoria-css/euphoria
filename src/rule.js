@@ -18,13 +18,26 @@ class Rule {
     this.media = media
   }
 
+  get type() {
+    return 'Rule'
+  }
+
   get className() {
     return parser.parse(this.selector).rule.classNames[0]
   }
 
+  get name() {
+    return this.selector
+  }
+
   get selector() {
     const parsed = parser.parse(this._rawSelector).rule
-    let selector = parsed.classNames[0]
+
+    // Reconstruct the selector base name
+    let selector = null
+    if (parsed.classNames) selector = '.' + parsed.classNames[0]
+    if (parsed.tagName) selector = parsed.tagName
+    if (parsed.id) selector = '#' + parsed.id
 
     // Add breakpoint suffix.
     if (this.breakpoint) selector += `-${this.breakpoint}`
@@ -33,7 +46,7 @@ class Rule {
     const pseudos = parsed.pseudos && parsed.pseudos.map(p => p.name).join(':')
     if (pseudos) selector += `:${pseudos}`
 
-    return '.' + selector
+    return selector
   }
 
   get css() {

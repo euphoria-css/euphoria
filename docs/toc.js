@@ -23,12 +23,13 @@ function Heading({ children }) {
   )
 }
 
-function TOC({ rules }) {
+function TOC({ rules = [] }) {
   return (
     <nav>
       <div className="cf">
         <Heading>Getting Started</Heading>
-        <TOCLink href="/">Usage</TOCLink>
+        <TOCLink href="/">Overview</TOCLink>
+        <TOCLink href="/usage">Usage</TOCLink>
         <TOCLink href="/customize">Customize</TOCLink>
         <TOCLink href="/all">All Rules</TOCLink>
         <Hr />

@@ -15,6 +15,8 @@ const r1 = new Rule(r1Args)
 
 test('should expose properties', t =>
   t.deepEqual(r1.properties, r1Args.properties))
+test('should expose type property', t => t.is(r1.type, 'Rule'))
+test('name property should match selector', t => t.is(r1.name, r1Args.selector))
 test('should expose selector', t => t.is(r1.selector, r1.selector))
 test('should expose className', t => t.is(r1.className, 'my-class'))
 test('should return CSS with toString method', t =>
@@ -44,5 +46,26 @@ test('should expose breakpoint', t => t.is(r2.breakpoint, r2Args.breakpoint))
 test('should expose media', t => t.is(r2.media, r2Args.media))
 test('should expose important', t => t.true(r2.important))
 
-test.todo('should handle non-class selectors')
+//----------------------------------------------
+// Non-class selectors
+//----------------------------------------------
+
+const r3Args = {
+  selector: 'p',
+  inherits: ['.lh-md'],
+}
+const r3 = new Rule(r3Args)
+
+test('should handle non-class selectors', t =>
+  t.is(r3.selector, r3Args.selector))
+
+const r4Args = {
+  selector: '#header',
+  properties: { color: 'orange' },
+}
+const r4 = new Rule(r4Args)
+
+test('should handle non-class selectors', t =>
+  t.is(r4.selector, r4Args.selector))
+
 test.todo('should handle multiple pseudo selectors')

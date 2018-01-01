@@ -1,6 +1,6 @@
 import slugify from 'url-slug'
 
-function ruleSetAnchor(name) {
+function ruleSetAnchor(name = '') {
   return slugify(name.toLowerCase())
 }
 

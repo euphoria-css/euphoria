@@ -13,6 +13,7 @@ const rs1 = new RuleSet({
   rules: [r1],
 })
 
+test('should expose type', t => t.is(rs1.type, 'RuleSet'))
 test('should generate a unique key for the ruleset', t =>
   t.is(rs1.key, 'my-custom-rule-set'))
 test('should export CSS', t => t.is(rs1.css, '.foo { color: pink; }'))

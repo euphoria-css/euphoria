@@ -17,7 +17,7 @@ function Customize({ defaults }) {
       <Highlight lang="javascript">{`module.exports = {
 
   // Location to put compiled CSS. Below is default setting:
-  outputPath: 'dist/euphoria.css',
+  outputPath: 'euphoria.min.css',
 
   // Euphoria config object, passed directly to Euphoria.
   options: {

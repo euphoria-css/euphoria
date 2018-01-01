@@ -237,6 +237,7 @@ class Euphoria {
       positions: ['relative', 'absolute', 'fixed'],
       sizes: [
         'auto',
+        0,
         5,
         10,
         15,
@@ -299,9 +300,9 @@ class Euphoria {
 
       // General colors
       blue: '#3187c4',
-      cyan: '#24b79c',
+      cyan: '#31c4a9',
       green: '#7db735',
-      orange: '#e26104',
+      orange: '#dd6618',
       purple: '#963ebc',
       pink: '#bc328c',
       red: '#d8401e',
@@ -911,18 +912,11 @@ class Euphoria {
     responsive = false,
     important = false,
   }) {
-    // TODO: remove as this is temporary:
-    selector = selector || `.${short}${hover ? ':hover' : ''}`
-
     if (inherits.length) {
       this.rules.map(set => {
         if (set.rules && set.rules.length) {
           set.rules.map(rule => {
             if (inherits.includes(rule.selector)) {
-              // if (
-              //   inherits.indexOf(rule.className) != -1 ||
-              //   inherits.indexOf(rule.className) != -1
-              // ) {
               Object.assign(properties, rule.properties)
             }
           })

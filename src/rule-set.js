@@ -13,6 +13,10 @@ class RuleSet {
     return slugify(this.name.trim())
   }
 
+  get type() {
+    return 'RuleSet'
+  }
+
   get css() {
     const separator = '\n'
     if (!this.breakpoints) return this.rules.join(separator)
