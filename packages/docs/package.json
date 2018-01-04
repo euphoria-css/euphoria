@@ -32,8 +32,6 @@
     "webpack-dev-server": "2.9.7"
   },
   "dependencies": {
-    "euphoria": "^2.6.0",
-    "euphoria-cli": "^2.6.0",
     "glamor": "2.20.40",
     "prop-types": "15.6.0",
     "react": "16.2.0",

@@ -17,8 +17,7 @@
   "dependencies": {
     "chalk": "2.3.0",
     "clean-css": "4.1.9",
-    "cosmiconfig": "3.1.0",
-    "euphoria": "^2.6.0"
+    "cosmiconfig": "3.1.0"
   },
   "peerDependencies": {
     "euphoria": "^2.6.0"
