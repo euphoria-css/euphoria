@@ -1,9 +1,7 @@
 {
   "version": "2.5.0",
   "scripts": {
-    "build": "npm-run-all -s build-packages build-css",
-    "build-css": "node ./scripts/bundle",
-    "build-packages": "lerna exec -- npm run build",
+    "build": "lerna exec -- npm run build",
     "format":
       "prettier --write --ignore-path **/*/main.js {packages,scripts,docs}/**/*.js",
     "start": "npm-run-all -p start-core start-cli start-docs",

@@ -1,0 +1,12 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "euphoria"
+  },
+  "devDependencies": {
+    "euphoria": "^2.6.3",
+    "euphoria-cli": "^2.6.3"
+  }
+}
