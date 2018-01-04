@@ -1,7 +1,7 @@
 {
   "name": "euphoria-cli",
   "description": "Euphoria CSS command line tool",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
@@ -11,7 +11,10 @@
   },
   "main": "lib/euphoria-cli.cjs.js",
   "module": "lib/euphoria-cli.esm.js",
-  "files": ["bin", "lib"],
+  "files": [
+    "bin",
+    "lib"
+  ],
   "dependencies": {
     "chalk": "2.3.0",
     "clean-css": "4.1.9",
