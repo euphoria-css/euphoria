@@ -6,8 +6,9 @@
   },
   "private": true,
   "devDependencies": {
-    "euphoria": "^2.5.0",
-    "euphoria-cli": "^1.0.0",
+    "euphoria": "^2.6.0",
+    "euphoria-cli": "^2.6.0",
     "nodemon": "1.14.7"
-  }
+  },
+  "version": "2.6.0"
 }
