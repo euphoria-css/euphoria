@@ -1,6 +1,6 @@
 {
   "name": "euphoria",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "A euphoria CSS micro-framework.",
   "main": "lib/euphoria.cjs.js",
   "module": "lib/euphoria.esm.js",
@@ -30,7 +30,7 @@
     "babel-preset-stage-1": "6.24.1",
     "chalk": "2.3.0",
     "clean-css": "4.1.9",
-    "euphoria-cli": "^2.6.3",
+    "euphoria-cli": "^2.6.4",
     "extract-text-webpack-plugin": "2.1.2",
     "glamor": "2.20.25",
     "html-webpack-harddisk-plugin": "0.1.0",
