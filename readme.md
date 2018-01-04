@@ -1,5 +1,11 @@
 ![Euphoria Banner](https://cl.ly/oWlv/euphoria-banner.png)
 
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Travis CI build status](https://img.shields.io/travis/euphoria-css/euphoria.svg)](https://travis-ci.org/euphoria-css/euphoria)
+[![Dependency Status](https://img.shields.io/david/euphoria-css/euphoria.svg)](https://david-dm.org/euphoria-css/euphoria)
+[![View on npm](https://img.shields.io/npm/dm/euphoria.svg)](https://www.npmjs.com/package/euphoria)
+[![View on npm](https://img.shields.io/npm/v/euphoria.svg)](https://www.npmjs.com/package/euphoria)
+
 > A euphoric CSS micro-framework.
 
 ## Quick Start
