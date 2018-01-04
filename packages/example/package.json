@@ -1,0 +1,13 @@
+{
+  "name": "example",
+  "scripts": {
+    "build": "euphoria",
+    "start": "nodemon --exec 'npm run build' ./euphoria.config.js"
+  },
+  "private": true,
+  "devDependencies": {
+    "euphoria": "^2.5.0",
+    "euphoria-cli": "^1.0.0",
+    "nodemon": "1.14.7"
+  }
+}

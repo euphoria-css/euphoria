@@ -1,8 +1,10 @@
 const CleanCSS = require('clean-css')
 const chalk = require('chalk')
 const fs = require('fs')
-const Euphoria = require('../src/euphoria')
+const Euphoria = require('../packages/euphoria/lib/euphoria.cjs')
 const path = require('path')
+
+// TODO: Use the CLI to generate this instead...
 
 const PATH = path.join(process.cwd(), 'dist', 'euphoria.min.css')
 const COPYRIGHT = `/**
@@ -17,6 +19,8 @@ const COPYRIGHT = `/**
 const euphoria = new Euphoria()
 const clean = new CleanCSS({}).minify(euphoria.toString())
 const css = [COPYRIGHT, clean.styles].join('\n')
+// Compressor.compress(euphoria.css)
+
 fs.writeFileSync(PATH, css)
 
 // console.log(chalk.gray(euphoria))

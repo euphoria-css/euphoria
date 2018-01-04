@@ -16,6 +16,8 @@ Now check the [documentation site][docs] for usage information.
 
 Please see [euphoria-css.com][docs] for information on installation and usage!
 
+Also, have a look at the [examples folder][examples] for a real-world example of using Euphoria.
+
 ## Contributing
 
 **PRs welcome!**
@@ -80,16 +82,6 @@ If you're updating code, make sure to run `npm run build-examples` and commit co
 ### Build:
 
 * [ ] Add autoprefixer
-
-### Documentation:
-
-* Custom style examples:
-  * Links
-  * Buttons
-  * Form elements
-    * Inputs
-  * Card
-  * Tables
 
 ## Changelog
 
@@ -241,6 +233,7 @@ MIT
 [cli]: https://github.com/euphoria-css/euphoria-cli
 [dana]: http://danawoodman.com
 [docs]: http://euphoria-css.com
+[examples]: /packages/example
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options
 [tachyons]: http://tachyons.io
