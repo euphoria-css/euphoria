@@ -8,7 +8,7 @@
     "start-core": "cd packages/euphoria && npm start",
     "start-cli": "cd packages/euphoria-cli && npm start",
     "start-docs": "cd packages/docs && npm start",
-    "test": "lerna exec -- npm test"
+    "test": "lerna exec --scope=euphoria -- npm test"
   },
   "devDependencies": {
     "chalk": "2.3.0",
