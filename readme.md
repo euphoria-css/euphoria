@@ -85,6 +85,10 @@ If you're updating code, make sure to run `npm run build-examples` and commit co
 
 ## Changelog
 
+### v2.6.3
+
+* Various post-release cleanup
+
 ### v2.6.2
 
 * Migrate all code to using Lerna for package management
