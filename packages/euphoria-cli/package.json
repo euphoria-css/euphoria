@@ -11,9 +11,7 @@
   },
   "main": "lib/euphoria-cli.cjs.js",
   "module": "lib/euphoria-cli.esm.js",
-  "files": [
-    "lib"
-  ],
+  "files": ["bin", "lib"],
   "dependencies": {
     "chalk": "2.3.0",
     "clean-css": "4.1.9",

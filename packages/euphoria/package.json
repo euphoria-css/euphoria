@@ -4,9 +4,7 @@
   "description": "A euphoria CSS micro-framework.",
   "main": "lib/euphoria.cjs.js",
   "module": "lib/euphoria.esm.js",
-  "files": [
-    "lib"
-  ],
+  "files": ["dist", "lib"],
   "ava": {
     "require": "babel-register"
   },
