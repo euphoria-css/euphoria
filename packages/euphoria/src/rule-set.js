@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { map } from 'lodash'
 import Rule from './rule'
 import slugify from 'url-slug'
 
@@ -22,7 +22,7 @@ class RuleSet {
     const separator = '\n'
     if (!this.breakpoints) return this.rules.join(separator)
 
-    return _.map(this.breakpoints, (value, label) => {
+    return map(this.breakpoints, (value, label) => {
       return [
         `@media only screen and (${value}) {`,
         this.rules

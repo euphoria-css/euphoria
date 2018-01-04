@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { each, map } from 'lodash'
 import slugify from 'url-slug'
 import { CssSelectorParser } from 'css-selector-parser'
 
@@ -14,7 +14,7 @@ class Rule {
   }) {
     this._rawSelector = selector
     this.properties = {}
-    _.each(properties, (val, key) => {
+    each(properties, (val, key) => {
       this.properties[slugify(key)] = val
     })
     this.important = important
@@ -68,7 +68,7 @@ class Rule {
   //----------------------------------------------
 
   get _propertyCSS() {
-    return _.map(
+    return map(
       this.properties,
       (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
     ).join(' ')

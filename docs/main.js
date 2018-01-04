@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1e3392d65a7fa2080058"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4061b45e0ffce3962ee6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -29559,8 +29559,6 @@ module.exports = function (regExp, replace) {
 
 var _lodash = __webpack_require__(153);
 
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _allRules = __webpack_require__(380);
 
 var _allRules2 = _interopRequireDefault(_allRules);
@@ -29631,7 +29629,7 @@ if (false) _glamor.css.insert(euphoria.toString());
 // Only rules within RuleSets are considered as "built-in" rules. Rules added
 // via `addRule` are not contained in a RuleSet so they will be omitted in the
 // docs.
-var RULES = _lodash2.default.sortBy(_lodash2.default.filter(euphoria.rules, ['type', 'RuleSet']), 'name');
+var RULES = (0, _lodash.sortBy)((0, _lodash.filter)(euphoria.rules, ['type', 'RuleSet']), 'name');
 
 function Container(_ref) {
   var children = _ref.children,
@@ -29727,8 +29725,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _lodash = __webpack_require__(153);
 
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _title = __webpack_require__(53);
 
 var _title2 = _interopRequireDefault(_title);
@@ -29762,7 +29758,7 @@ function AllRules(_ref) {
     _react2.default.createElement(
       _highlight2.default,
       { lang: 'css' },
-      _lodash2.default.map(rules, function (rule) {
+      (0, _lodash.map)(rules, function (rule) {
         return rule.css;
       }).join('\n')
     )
@@ -33107,7 +33103,7 @@ exports.default = Customize;
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var _ = _interopDefault(__webpack_require__(430));
+var lodash = __webpack_require__(430);
 var slugify = _interopDefault(__webpack_require__(431));
 var cssSelectorParser = __webpack_require__(613);
 var lightness = _interopDefault(__webpack_require__(615));
@@ -33173,7 +33169,7 @@ var Rule = function () {
 
     this._rawSelector = selector;
     this.properties = {};
-    _.each(properties, function (val, key) {
+    lodash.each(properties, function (val, key) {
       _this.properties[slugify(key)] = val;
     });
     this.important = important;
@@ -33240,7 +33236,7 @@ var Rule = function () {
     get: function get$$1() {
       var _this2 = this;
 
-      return _.map(this.properties, function (val, key) {
+      return lodash.map(this.properties, function (val, key) {
         return key + ': ' + val + (_this2.important ? ' !important' : '') + ';';
       }).join(' ');
     }
@@ -33285,7 +33281,7 @@ var RuleSet = function () {
       var separator = '\n';
       if (!this.breakpoints) return this.rules.join(separator);
 
-      return _.map(this.breakpoints, function (value, label) {
+      return lodash.map(this.breakpoints, function (value, label) {
         return ['@media only screen and (' + value + ') {', _this.rules.map(function (rule) {
           // Set the breakpoint for the rule so that
           // it will add the proper responsive suffix
@@ -33588,7 +33584,7 @@ var Euphoria = function () {
       var colors = {};
 
       // Generate color gradients version for all colors.
-      this.options.colorGradients && _.map(this.options.baseColors, function (val, key) {
+      this.options.colorGradients && lodash.map(this.options.baseColors, function (val, key) {
         colors[key + '-lightest'] = lightness(val, 50);
         colors[key + '-lighter'] = lightness(val, 45);
         colors[key + '-light'] = lightness(val, 30);
@@ -33662,7 +33658,7 @@ var Euphoria = function () {
   }, {
     key: '_createSizeRules',
     value: function _createSizeRules(prefix, rule) {
-      return _.map(this.options.sizes, function (s) {
+      return lodash.map(this.options.sizes, function (s) {
         var label = s === 'auto' ? 'auto' : parseInt(s);
         var size = s === 'auto' ? 'auto' : s + '%';
         return {
@@ -33674,7 +33670,7 @@ var Euphoria = function () {
   }, {
     key: '_createFloatRules',
     value: function _createFloatRules() {
-      return _.map(this.options.floats, function (float) {
+      return lodash.map(this.options.floats, function (float) {
         return {
           selector: '.f' + float[0],
           // short: `f${float[0]}`,
@@ -33697,7 +33693,7 @@ var Euphoria = function () {
       if (type === 'margin') spacing['auto'] = 'auto';
 
       directions.map(function (dir) {
-        _.map(spacing, function (size, name) {
+        lodash.map(spacing, function (size, name) {
           // Create selector
           var short = '' + type[0] + (dir[0] || '') + '-' + name;
           var properties = {};
@@ -33739,7 +33735,7 @@ var Euphoria = function () {
 
       {
         name: 'Display',
-        rules: _.map(this.options.display, function (val, key) {
+        rules: lodash.map(this.options.display, function (val, key) {
           return {
             selector: '.' + key,
             properties: { display: val }
@@ -33747,7 +33743,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Overflow',
-        rules: _.map(this.options.overflow, function (val) {
+        rules: lodash.map(this.options.overflow, function (val) {
           return {
             selector: '.of-' + val,
             properties: { overflow: val }
@@ -33755,7 +33751,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Opacity',
-        rules: _.map(this.options.opacity, function (val, name) {
+        rules: lodash.map(this.options.opacity, function (val, name) {
           return {
             selector: '.o-' + name,
             properties: { opacity: val }
@@ -33763,7 +33759,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Opacity (hover)',
-        rules: _.map(this.options.opacity, function (val, key) {
+        rules: lodash.map(this.options.opacity, function (val, key) {
           return {
             selector: '.hov-o-' + key + ':hover',
             properties: { opacity: val }
@@ -33771,7 +33767,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Z-Index',
-        rules: _.map(this.options.zIndex, function (val) {
+        rules: lodash.map(this.options.zIndex, function (val) {
           return {
             selector: '.z-' + val,
             properties: { 'z-index': val }
@@ -33792,7 +33788,7 @@ var Euphoria = function () {
         responsive: true
       }, {
         name: 'Positioning',
-        rules: _.map(this.options.positions, function (val) {
+        rules: lodash.map(this.options.positions, function (val) {
           return {
             selector: '.' + val,
             properties: { position: val }
@@ -33800,7 +33796,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Positioning (responsive)',
-        rules: _.map(this.options.positions, function (val) {
+        rules: lodash.map(this.options.positions, function (val) {
           return {
             selector: '.' + val,
             properties: { position: val }
@@ -33809,7 +33805,7 @@ var Euphoria = function () {
         responsive: true
       }, {
         name: 'Text alignment',
-        rules: _.map(this.options.textAlignment, function (val) {
+        rules: lodash.map(this.options.textAlignment, function (val) {
           return {
             selector: '.' + val,
             properties: { 'text-align': val }
@@ -33817,7 +33813,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Vertical alignment',
-        rules: _.map(this.options.verticalAlignment, function (val, key) {
+        rules: lodash.map(this.options.verticalAlignment, function (val, key) {
           return {
             selector: '.v-' + key,
             properties: { 'vertical-align': val }
@@ -33879,7 +33875,7 @@ var Euphoria = function () {
 
       {
         name: 'Text colors',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.' + key,
             properties: { color: val }
@@ -33887,7 +33883,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Text colors (hover)',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.hov-' + key + ':hover',
             properties: { color: val }
@@ -33895,7 +33891,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Background colors',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.bg-' + key,
             properties: { background: val }
@@ -33903,7 +33899,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Background colors (hover)',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.hov-bg-' + key + ':hover',
             properties: { background: val }
@@ -33917,7 +33913,7 @@ var Euphoria = function () {
 
       {
         name: 'Box shadows',
-        rules: _.map(this.options.boxShadows, function (val, key) {
+        rules: lodash.map(this.options.boxShadows, function (val, key) {
           return {
             selector: '.bs-' + key,
             properties: { 'box-shadow': val }
@@ -33931,7 +33927,7 @@ var Euphoria = function () {
 
       {
         name: 'Font sizes',
-        rules: _.map(this.options.fontSizes, function (val, key) {
+        rules: lodash.map(this.options.fontSizes, function (val, key) {
           return {
             selector: '.txt-' + key,
             properties: {
@@ -33941,7 +33937,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Text transforms',
-        rules: _.map(this.options.textTransforms, function (val) {
+        rules: lodash.map(this.options.textTransforms, function (val) {
           return {
             selector: '.' + val,
             properties: { 'text-transform': val }
@@ -33955,7 +33951,7 @@ var Euphoria = function () {
         }]
       }, {
         name: 'Font weights',
-        rules: _.map(this.options.fontWeights, function (val, key) {
+        rules: lodash.map(this.options.fontWeights, function (val, key) {
           return {
             selector: key === '.bold' ? 'bold' : '.fw-' + key,
             properties: { 'font-weight': val }
@@ -33963,7 +33959,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Text decoration',
-        rules: _.map(this.options.textDecoration, function (val, key) {
+        rules: lodash.map(this.options.textDecoration, function (val, key) {
           return {
             selector: '.td-' + key,
             properties: { 'text-decoration': val }
@@ -33971,7 +33967,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Letter spacing',
-        rules: _.map(this.options.letterSpacing, function (val, key) {
+        rules: lodash.map(this.options.letterSpacing, function (val, key) {
           return {
             selector: '.ls-' + key,
             properties: {
@@ -33981,7 +33977,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Line height',
-        rules: _.map(this.options.lineHeights, function (val, key) {
+        rules: lodash.map(this.options.lineHeights, function (val, key) {
           return {
             selector: '.lh-' + key,
             properties: { 'line-height': val }
@@ -34000,7 +33996,7 @@ var Euphoria = function () {
         }]
       }, {
         name: 'Font families',
-        rules: _.map(this.options.fontFamilies, function (val, key) {
+        rules: lodash.map(this.options.fontFamilies, function (val, key) {
           return {
             selector: '.' + key,
             properties: { 'font-family': val }
@@ -34008,7 +34004,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Whitespace',
-        rules: _.map(this.options.whitespace, function (val) {
+        rules: lodash.map(this.options.whitespace, function (val) {
           return {
             selector: '.ws-' + val,
             properties: { 'white-space': val }
@@ -34082,7 +34078,7 @@ var Euphoria = function () {
         }]
       }, {
         name: 'Border styles',
-        rules: _.map(this.options.borderStyles, function (val) {
+        rules: lodash.map(this.options.borderStyles, function (val) {
           return {
             selector: '.b-' + val,
             properties: { 'border-style': val }
@@ -34090,7 +34086,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Border widths',
-        rules: _.map(this.options.borderWidths, function (val, key) {
+        rules: lodash.map(this.options.borderWidths, function (val, key) {
           return {
             selector: '.bw-' + key,
             properties: { 'border-width': val }
@@ -34098,7 +34094,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Border radius',
-        rules: _.map(this.options.borderRadii, function (val, key) {
+        rules: lodash.map(this.options.borderRadii, function (val, key) {
           return {
             selector: '.rad-' + key,
             properties: {
@@ -34143,7 +34139,7 @@ var Euphoria = function () {
         }]
       }, {
         name: 'Border colors',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.bc-' + key,
             properties: { 'border-color': val }
@@ -34151,7 +34147,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Border colors (hover)',
-        rules: _.map(this.options.colors, function (val, key) {
+        rules: lodash.map(this.options.colors, function (val, key) {
           return {
             selector: '.hov-bc-' + key + ':hover',
             properties: { 'border-color': val }
@@ -34165,37 +34161,37 @@ var Euphoria = function () {
 
       {
         name: 'Flexbox',
-        rules: [].concat(_.map(this.options.flexDirection, function (val, key) {
+        rules: [].concat(lodash.map(this.options.flexDirection, function (val, key) {
           return {
             selector: '.fd-' + key,
             properties: { 'flex-direction': val }
           };
-        }), _.map(this.options.justifyContent, function (val, key) {
+        }), lodash.map(this.options.justifyContent, function (val, key) {
           return {
             selector: '.jc-' + key,
             properties: { 'justify-content': val }
           };
-        }), _.map(this.options.alignItems, function (val, key) {
+        }), lodash.map(this.options.alignItems, function (val, key) {
           return {
             selector: '.ai-' + key,
             properties: { 'align-items': val }
           };
-        }), _.map(this.options.alignSelf, function (val, key) {
+        }), lodash.map(this.options.alignSelf, function (val, key) {
           return {
             selector: '.as-' + key,
             properties: { 'align-self': val }
           };
-        }), _.map(this.options.alignContent, function (val, key) {
+        }), lodash.map(this.options.alignContent, function (val, key) {
           return {
             selector: '.ac-' + key,
             properties: { 'align-content': val }
           };
-        }), _.map(this.options.flexWrap, function (val, key) {
+        }), lodash.map(this.options.flexWrap, function (val, key) {
           return {
             selector: '.fw-' + key,
             properties: { 'flex-wrap': val }
           };
-        }), _.map(this.options.flexOrder, function (val, key) {
+        }), lodash.map(this.options.flexOrder, function (val, key) {
           return {
             selector: '.fo-' + key,
             properties: { 'flex-order': val }
@@ -34244,7 +34240,7 @@ var Euphoria = function () {
 
       {
         name: 'Background sizes',
-        rules: _.map(this.options.backgroundSizes, function (val) {
+        rules: lodash.map(this.options.backgroundSizes, function (val) {
           return {
             selector: '.' + val,
             properties: { 'background-size': val }
@@ -34252,7 +34248,7 @@ var Euphoria = function () {
         })
       }, {
         name: 'Cursor',
-        rules: _.map(this.options.cursors, function (val) {
+        rules: lodash.map(this.options.cursors, function (val) {
           return {
             selector: '.c-' + val,
             properties: { cursor: val }

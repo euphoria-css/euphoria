@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { filter, sortBy } from 'lodash'
 import AllRules from './all-rules'
 import Customize from './customize'
 import Euphoria from '../../euphoria/lib/euphoria.cjs'
@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'development') css.insert(euphoria.toString())
 // Only rules within RuleSets are considered as "built-in" rules. Rules added
 // via `addRule` are not contained in a RuleSet so they will be omitted in the
 // docs.
-const RULES = _.sortBy(_.filter(euphoria.rules, ['type', 'RuleSet']), 'name')
+const RULES = sortBy(filter(euphoria.rules, ['type', 'RuleSet']), 'name')
 
 function Container({ children, className = '' }) {
   return (

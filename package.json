@@ -4,6 +4,7 @@
     "build": "lerna exec -- npm run build",
     "format":
       "prettier --write --ignore-path **/*/main.js {packages,scripts,docs}/**/*.js",
+    "prepublish": "npm run build",
     "start": "npm-run-all -p start-core start-cli start-docs",
     "start-core": "cd packages/euphoria && npm start",
     "start-cli": "cd packages/euphoria-cli && npm start",

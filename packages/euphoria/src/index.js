@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { map } from 'lodash'
 import Rule from './rule'
 import RuleSet from './rule-set'
 import lightness from 'lightness'
@@ -333,7 +333,7 @@ class Euphoria {
 
     // Generate color gradients version for all colors.
     this.options.colorGradients &&
-      _.map(this.options.baseColors, (val, key) => {
+      map(this.options.baseColors, (val, key) => {
         colors[`${key}-lightest`] = lightness(val, 50)
         colors[`${key}-lighter`] = lightness(val, 45)
         colors[`${key}-light`] = lightness(val, 30)
@@ -360,35 +360,35 @@ class Euphoria {
 
       {
         name: 'Display',
-        rules: _.map(this.options.display, (val, key) => ({
+        rules: map(this.options.display, (val, key) => ({
           selector: `.${key}`,
           properties: { display: val },
         })),
       },
       {
         name: 'Overflow',
-        rules: _.map(this.options.overflow, val => ({
+        rules: map(this.options.overflow, val => ({
           selector: `.of-${val}`,
           properties: { overflow: val },
         })),
       },
       {
         name: 'Opacity',
-        rules: _.map(this.options.opacity, (val, name) => ({
+        rules: map(this.options.opacity, (val, name) => ({
           selector: `.o-${name}`,
           properties: { opacity: val },
         })),
       },
       {
         name: 'Opacity (hover)',
-        rules: _.map(this.options.opacity, (val, key) => ({
+        rules: map(this.options.opacity, (val, key) => ({
           selector: `.hov-o-${key}:hover`,
           properties: { opacity: val },
         })),
       },
       {
         name: 'Z-Index',
-        rules: _.map(this.options.zIndex, val => ({
+        rules: map(this.options.zIndex, val => ({
           selector: `.z-${val}`,
           properties: { 'z-index': val },
         })),
@@ -409,14 +409,14 @@ class Euphoria {
       },
       {
         name: 'Positioning',
-        rules: _.map(this.options.positions, val => ({
+        rules: map(this.options.positions, val => ({
           selector: `.${val}`,
           properties: { position: val },
         })),
       },
       {
         name: 'Positioning (responsive)',
-        rules: _.map(this.options.positions, val => ({
+        rules: map(this.options.positions, val => ({
           selector: `.${val}`,
           properties: { position: val },
         })),
@@ -424,14 +424,14 @@ class Euphoria {
       },
       {
         name: 'Text alignment',
-        rules: _.map(this.options.textAlignment, val => ({
+        rules: map(this.options.textAlignment, val => ({
           selector: `.${val}`,
           properties: { 'text-align': val },
         })),
       },
       {
         name: 'Vertical alignment',
-        rules: _.map(this.options.verticalAlignment, (val, key) => ({
+        rules: map(this.options.verticalAlignment, (val, key) => ({
           selector: `.v-${key}`,
           properties: { 'vertical-align': val },
         })),
@@ -502,28 +502,28 @@ class Euphoria {
 
       {
         name: 'Text colors',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.${key}`,
           properties: { color: val },
         })),
       },
       {
         name: 'Text colors (hover)',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.hov-${key}:hover`,
           properties: { color: val },
         })),
       },
       {
         name: 'Background colors',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.bg-${key}`,
           properties: { background: val },
         })),
       },
       {
         name: 'Background colors (hover)',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.hov-bg-${key}:hover`,
           properties: { background: val },
         })),
@@ -535,7 +535,7 @@ class Euphoria {
 
       {
         name: 'Box shadows',
-        rules: _.map(this.options.boxShadows, (val, key) => ({
+        rules: map(this.options.boxShadows, (val, key) => ({
           selector: `.bs-${key}`,
           properties: { 'box-shadow': val },
         })),
@@ -547,7 +547,7 @@ class Euphoria {
 
       {
         name: 'Font sizes',
-        rules: _.map(this.options.fontSizes, (val, key) => ({
+        rules: map(this.options.fontSizes, (val, key) => ({
           selector: `.txt-${key}`,
           properties: {
             'font-size': val,
@@ -556,7 +556,7 @@ class Euphoria {
       },
       {
         name: 'Text transforms',
-        rules: _.map(this.options.textTransforms, val => ({
+        rules: map(this.options.textTransforms, val => ({
           selector: `.${val}`,
           properties: { 'text-transform': val },
         })),
@@ -572,21 +572,21 @@ class Euphoria {
       },
       {
         name: 'Font weights',
-        rules: _.map(this.options.fontWeights, (val, key) => ({
+        rules: map(this.options.fontWeights, (val, key) => ({
           selector: key === '.bold' ? 'bold' : `.fw-${key}`,
           properties: { 'font-weight': val },
         })),
       },
       {
         name: 'Text decoration',
-        rules: _.map(this.options.textDecoration, (val, key) => ({
+        rules: map(this.options.textDecoration, (val, key) => ({
           selector: `.td-${key}`,
           properties: { 'text-decoration': val },
         })),
       },
       {
         name: 'Letter spacing',
-        rules: _.map(this.options.letterSpacing, (val, key) => ({
+        rules: map(this.options.letterSpacing, (val, key) => ({
           selector: `.ls-${key}`,
           properties: {
             'letter-spacing': val,
@@ -595,7 +595,7 @@ class Euphoria {
       },
       {
         name: 'Line height',
-        rules: _.map(this.options.lineHeights, (val, key) => ({
+        rules: map(this.options.lineHeights, (val, key) => ({
           selector: `.lh-${key}`,
           properties: { 'line-height': val },
         })),
@@ -616,7 +616,7 @@ class Euphoria {
       },
       {
         name: 'Font families',
-        rules: _.map(this.options.fontFamilies, (val, key) => {
+        rules: map(this.options.fontFamilies, (val, key) => {
           return {
             selector: `.${key}`,
             properties: { 'font-family': val },
@@ -625,7 +625,7 @@ class Euphoria {
       },
       {
         name: 'Whitespace',
-        rules: _.map(this.options.whitespace, val => ({
+        rules: map(this.options.whitespace, val => ({
           selector: `.ws-${val}`,
           properties: { 'white-space': val },
         })),
@@ -715,21 +715,21 @@ class Euphoria {
       },
       {
         name: 'Border styles',
-        rules: _.map(this.options.borderStyles, val => ({
+        rules: map(this.options.borderStyles, val => ({
           selector: `.b-${val}`,
           properties: { 'border-style': val },
         })),
       },
       {
         name: 'Border widths',
-        rules: _.map(this.options.borderWidths, (val, key) => ({
+        rules: map(this.options.borderWidths, (val, key) => ({
           selector: `.bw-${key}`,
           properties: { 'border-width': val },
         })),
       },
       {
         name: 'Border radius',
-        rules: _.map(this.options.borderRadii, (val, key) => ({
+        rules: map(this.options.borderRadii, (val, key) => ({
           selector: `.rad-${key}`,
           properties: {
             'border-radius': val,
@@ -782,14 +782,14 @@ class Euphoria {
       },
       {
         name: 'Border colors',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.bc-${key}`,
           properties: { 'border-color': val },
         })),
       },
       {
         name: 'Border colors (hover)',
-        rules: _.map(this.options.colors, (val, key) => ({
+        rules: map(this.options.colors, (val, key) => ({
           selector: `.hov-bc-${key}:hover`,
           properties: { 'border-color': val },
         })),
@@ -802,31 +802,31 @@ class Euphoria {
       {
         name: 'Flexbox',
         rules: [].concat(
-          _.map(this.options.flexDirection, (val, key) => ({
+          map(this.options.flexDirection, (val, key) => ({
             selector: `.fd-${key}`,
             properties: { 'flex-direction': val },
           })),
-          _.map(this.options.justifyContent, (val, key) => ({
+          map(this.options.justifyContent, (val, key) => ({
             selector: `.jc-${key}`,
             properties: { 'justify-content': val },
           })),
-          _.map(this.options.alignItems, (val, key) => ({
+          map(this.options.alignItems, (val, key) => ({
             selector: `.ai-${key}`,
             properties: { 'align-items': val },
           })),
-          _.map(this.options.alignSelf, (val, key) => ({
+          map(this.options.alignSelf, (val, key) => ({
             selector: `.as-${key}`,
             properties: { 'align-self': val },
           })),
-          _.map(this.options.alignContent, (val, key) => ({
+          map(this.options.alignContent, (val, key) => ({
             selector: `.ac-${key}`,
             properties: { 'align-content': val },
           })),
-          _.map(this.options.flexWrap, (val, key) => ({
+          map(this.options.flexWrap, (val, key) => ({
             selector: `.fw-${key}`,
             properties: { 'flex-wrap': val },
           })),
-          _.map(this.options.flexOrder, (val, key) => ({
+          map(this.options.flexOrder, (val, key) => ({
             selector: `.fo-${key}`,
             properties: { 'flex-order': val },
           }))
@@ -879,14 +879,14 @@ class Euphoria {
 
       {
         name: 'Background sizes',
-        rules: _.map(this.options.backgroundSizes, val => ({
+        rules: map(this.options.backgroundSizes, val => ({
           selector: `.${val}`,
           properties: { 'background-size': val },
         })),
       },
       {
         name: 'Cursor',
-        rules: _.map(this.options.cursors, val => ({
+        rules: map(this.options.cursors, val => ({
           selector: `.c-${val}`,
           properties: { cursor: val },
         })),
@@ -950,7 +950,7 @@ class Euphoria {
   //----------------------------------------------------------------
 
   _createSizeRules(prefix, rule) {
-    return _.map(this.options.sizes, s => {
+    return map(this.options.sizes, s => {
       const label = s === 'auto' ? 'auto' : parseInt(s)
       const size = s === 'auto' ? 'auto' : `${s}%`
       return {
@@ -961,7 +961,7 @@ class Euphoria {
   }
 
   _createFloatRules() {
-    return _.map(this.options.floats, float => ({
+    return map(this.options.floats, float => ({
       selector: `.f${float[0]}`,
       // short: `f${float[0]}`,
       // verbose: `float-${float}`,
@@ -981,7 +981,7 @@ class Euphoria {
     if (type === 'margin') spacing['auto'] = 'auto'
 
     directions.map(dir => {
-      _.map(spacing, (size, name) => {
+      map(spacing, (size, name) => {
         // Create selector
         const short = `${type[0]}${dir[0] || ''}-${name}`
         const verbose = `${type}${dir ? `-${dir}` : ''}-${name}`
