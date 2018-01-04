@@ -1,6 +1,7 @@
 module.exports = {
-  // Location to put compiled CSS
-  outputPath: 'euphoria.css',
+  // Customize where to put compiled CSS, relative to
+  // the current directory
+  // outputPath: 'euphoria.min.css',
 
   // Euphoria options object, passed directly to Euphoria.
   options: {
