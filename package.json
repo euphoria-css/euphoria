@@ -8,7 +8,7 @@
     "start": "npm-run-all -p start-core start-cli start-docs",
     "start-core": "cd packages/euphoria && npm start",
     "start-cli": "cd packages/euphoria-cli && npm start",
-    "start-docs": "cd docs && npm start",
+    "start-docs": "cd packages/docs && npm start",
     "test": "lerna exec -- npm test"
   },
   "devDependencies": {
