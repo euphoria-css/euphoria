@@ -1,6 +1,6 @@
 # Euphoria Examples
 
-This is an example of how you could use Euphoria in one of your projects. All that you need is to install Euphoria and the CLI:
+This is an example of how you could use Euphoria in one of your projects.
 
 ## Usage
 
@@ -10,7 +10,19 @@ Install dependencies:
 npm install
 ```
 
-Now run `npm run build` to generate Euphoria CSS or run `npm start` to rebuild Euphoria CSS every time the configuration file changes.
+Now run
+
+```bash
+npm run build
+```
+
+...to generate Euphoria CSS or run
+
+```bash
+npm start
+```
+
+...to rebuild Euphoria CSS every time the configuration file changes.
 
 Now open up the `index.html` file in your browser to see the example site.
 
