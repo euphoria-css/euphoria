@@ -1,6 +1,6 @@
 {
   "name": "euphoria",
-  "version": "2.6.8",
+  "version": "2.6.9",
   "description": "A euphoria CSS micro-framework.",
   "main": "lib/euphoria.cjs.js",
   "module": "lib/euphoria.esm.js",
