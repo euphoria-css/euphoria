@@ -1,6 +1,7 @@
 {
   "version": "2.5.0",
   "scripts": {
+    "bootstrap": "lerna exec -- npm install",
     "build": "lerna exec -- npm run build",
     "format":
       "prettier --write --ignore-path **/*/main.js {packages,scripts,docs}/**/*.js",

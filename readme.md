@@ -26,17 +26,17 @@ Also, have a look at the [examples folder][examples] for a real-world example of
 
 ## Contributing
 
-**PRs welcome!**
+**Pull Requests welcome!**
 
 Checkout the project and run:
 
 ```bash
-# Using NVM, install proper node version.
+# Using nvm, install proper node version.
 nvm install
 nvm use
 
 # Install dependencies.
-npm i
+npm install
 
 # Make sure things work.
 npm test
@@ -45,11 +45,7 @@ npm test
 npm start
 ```
 
-Once you're happy with your changes, build (and commit) the compiled code:
-
-```bash
-npm run build
-```
+Once you're happy with your changes, submit a Pull Request on Github.
 
 ### Formatting
 
@@ -58,10 +54,6 @@ Please run Prettier (use `npm run format` if your editor isn't setup to use Pret
 ### Test
 
 Please write tests for your code! Test files are next to the source files (with a `.test.js` extension) and we're using the [ava][ava] test library. Run tests with `npm test` or `npm run watch-test`
-
-### Build
-
-If you're updating code, make sure to run `npm run build-examples` and commit compiled changes before submitting a PR.
 
 ## TODO
 
@@ -226,7 +218,7 @@ If you're updating code, make sure to run `npm run build-examples` and commit co
 
 ## Credits
 
-Created by [Dana Woodman][dana]
+Copyright &copy; 2018 by [Dana Woodman][dana].
 
 ### Inspiration
 
