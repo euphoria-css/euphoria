@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4061b45e0ffce3962ee6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fda012062d1a4fc87c3d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -29614,17 +29614,11 @@ var _reactRouterDom = __webpack_require__(76);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Generate the Euhpria CSS
-var euphoria = new _euphoria2.default();
-
-// Add some custom rules only for the documentation site.
-// euphoria.addRule({
-//   selector: 'p',
-//   inherits: ['.lh-md', '.gray-darker', '.my-md'],
-// })
+// const euphoria = new Euphoria()
 
 // If development, load euphoria via glamor, otherwise use
 // latest CDN version.
-if (false) _glamor.css.insert(euphoria.toString());
+// if (process.env.NODE_ENV === 'development') css.insert(euphoria.toString())
 
 // Only rules within RuleSets are considered as "built-in" rules. Rules added
 // via `addRule` are not contained in a RuleSet so they will be omitted in the

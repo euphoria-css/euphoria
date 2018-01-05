@@ -4,16 +4,11 @@
   "description": "A euphoria CSS micro-framework.",
   "main": "lib/euphoria.cjs.js",
   "module": "lib/euphoria.esm.js",
-  "files": [
-    "dist",
-    "lib"
-  ],
   "ava": {
     "require": "babel-register"
   },
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "npm run build",
     "start": "npm-run-all -p start-src start-test",
     "start-src": "rollup -c -w",
     "start-test": "npm run test -- --watch",
