@@ -15,17 +15,11 @@ import { css } from 'glamor'
 import { HashRouter, Route, Switch, Link } from 'react-router-dom'
 
 // Generate the Euhpria CSS
-const euphoria = new Euphoria()
-
-// Add some custom rules only for the documentation site.
-// euphoria.addRule({
-//   selector: 'p',
-//   inherits: ['.lh-md', '.gray-darker', '.my-md'],
-// })
+// const euphoria = new Euphoria()
 
 // If development, load euphoria via glamor, otherwise use
 // latest CDN version.
-if (process.env.NODE_ENV === 'development') css.insert(euphoria.toString())
+// if (process.env.NODE_ENV === 'development') css.insert(euphoria.toString())
 
 // Only rules within RuleSets are considered as "built-in" rules. Rules added
 // via `addRule` are not contained in a RuleSet so they will be omitted in the
