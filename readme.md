@@ -20,7 +20,7 @@ Now check the [documentation site][docs] for usage information.
 
 ## Documentation
 
-Please see [euphoria-css.com][docs] for information on installation and usage!
+**Please see [euphoria-css.com][docs] for information on installation and usage!**
 
 Also, have a look at the [examples folder][examples] for a real-world example of using Euphoria.
 
