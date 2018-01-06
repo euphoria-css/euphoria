@@ -3,8 +3,7 @@
   "scripts": {
     "bootstrap": "lerna exec -- npm install",
     "build": "lerna exec -- npm run build",
-    "format":
-      "prettier --write --ignore-path **/*/main.js {packages,scripts,docs}/**/*.js",
+    "format": "prettier --write --ignore-path **/*/main.js {packages,scripts,docs}/**/*.js",
     "prepublishOnly": "npm run build",
     "start": "npm-run-all -p start-core start-cli start-docs",
     "start-core": "cd packages/euphoria && npm start",
@@ -17,5 +16,6 @@
     "clean-css": "4.1.9",
     "lerna": "^2.5.1",
     "npm-run-all": "4.1.2"
-  }
+  },
+  "dependencies": {}
 }

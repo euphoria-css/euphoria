@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fda012062d1a4fc87c3d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "243772a01377fd406b93"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -29614,7 +29614,7 @@ var _reactRouterDom = __webpack_require__(76);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Generate the Euhpria CSS
-// const euphoria = new Euphoria()
+var euphoria = new _euphoria2.default();
 
 // If development, load euphoria via glamor, otherwise use
 // latest CDN version.

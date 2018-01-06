@@ -7,9 +7,12 @@
     "build": "npm-run-all build-euphoria build-docs",
     "build-euphoria": "euphoria",
     "build-docs": "NODE_ENV=production webpack",
+    "prestart": "npm run build-euphoria",
     "start": "npm-run-all start-docs start-euphoria",
-    "start-euphoria": "nodemon --exec 'npm run build-euphoria' euphoria.config.js",
-    "start-docs": "NODE_ENV=development webpack-dev-server"
+    "start-euphoria":
+      "nodemon --exec 'npm run build-euphoria' euphoria.config.js",
+    "start-docs":
+      "NODE_ENV=development webpack-dev-server --content-base ../../docs"
   },
   "author": "Dana Woodman <dana@danawoodman.com> (http://danawoodman.com/)",
   "license": "ISC",
