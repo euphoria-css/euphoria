@@ -1,77 +1,45 @@
-import { each, map } from 'lodash'
-import slugify from 'url-slug'
 import { CssSelectorParser } from 'css-selector-parser'
+import { map } from 'lodash'
 
 const parser = new CssSelectorParser()
 
 class Rule {
-  constructor({
-    selector,
-    properties,
-    breakpoint = null,
-    important = false,
-    media = null,
-  }) {
-    this._rawSelector = selector
-    this.properties = {}
-    each(properties, (val, key) => {
-      this.properties[slugify(key)] = val
-    })
-    this.important = important
+  constructor({ selector, properties, breakpoint = null }) {
+    this.selector = selector
+    this.properties = properties
     this.breakpoint = breakpoint
-    this.media = media
-  }
-
-  get type() {
-    return 'Rule'
   }
 
   get className() {
-    return parser.parse(this.selector).rule.classNames[0]
-  }
-
-  get name() {
-    return this.selector
-  }
-
-  get selector() {
-    const parsed = parser.parse(this._rawSelector).rule
-
-    // Reconstruct the selector base name
-    let selector = null
-    if (parsed.classNames) selector = '.' + parsed.classNames[0]
-    if (parsed.tagName) selector = parsed.tagName
-    if (parsed.id) selector = '#' + parsed.id
-
-    // Add breakpoint suffix.
-    if (this.breakpoint) selector += `-${this.breakpoint}`
-
-    // Add pseudo selectors, if present.
-    const pseudos = parsed.pseudos && parsed.pseudos.map(p => p.name).join(':')
-    if (pseudos) selector += `:${pseudos}`
-
-    return selector
+    try {
+      return parser.parse(this.selector).rule.classNames[0]
+    } catch (error) {
+      return null
+    }
   }
 
   get css() {
-    let rule = `${this.selector} { ${this._propertyCSS} }`
-    if (this.media) rule = `@media only screen and (${this.media}) { ${rule} }`
-    return rule
+    return `${this.selector} { ${map(
+      this.properties,
+      (v, k) => `${k}: ${v};`
+    ).join(' ')} }`
   }
 
   toString() {
     return this.css
   }
 
-  //----------------------------------------------
-  // Private instance methods
-  //----------------------------------------------
+  toJSON() {
+    const obj = {
+      selector: this.selector,
+      properties: this.properties,
+      css: this.css,
+    }
 
-  get _propertyCSS() {
-    return map(
-      this.properties,
-      (val, key) => `${key}: ${val}${this.important ? ' !important' : ''};`
-    ).join(' ')
+    if (this.breakpoint) obj.breakpoint = this.breakpoint
+    if (this.className) obj.className = this.className
+
+    return obj
   }
 }
 

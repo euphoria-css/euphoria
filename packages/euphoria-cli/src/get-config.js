@@ -3,10 +3,8 @@ const explorer = cosmiconfig('euphoria')
 
 const CWD = process.cwd()
 
-class Config {
-  static get() {
-    return explorer.load(CWD)
-  }
+function getConfig() {
+  return explorer.load(CWD)
 }
 
-export default Config
+export default getConfig

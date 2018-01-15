@@ -26,7 +26,9 @@ function Highlight({ children, inline = false, lang }) {
   return (
     <div
       className={
-        inline ? 'dib' : 'px-md py-xs bl bw-md bc-purple bg-purple-lightest'
+        inline
+          ? 'dib txt-sm'
+          : 'p-md bl bw-md bc-purple bg-purple-lightest txt-sm'
       }
     >
       <SyntaxHighlighter language={lang} style={styles}>

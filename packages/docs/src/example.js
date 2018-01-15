@@ -37,7 +37,6 @@ function BackgroundColorExample({ hover = false, rules }) {
     </table>
   )
 }
-
 function TextColorExample({ hover = false, rules }) {
   return (
     <table className="collapse">
@@ -99,6 +98,53 @@ function BoxShadowExample({ rules }) {
     </div>
   )
 }
+function MarginExample({ rules }) {
+  return (
+    <div>
+      <p>
+        Margin utilites include a variety of scaled spacing, auto margins,
+        removal of margins and percentage based widths for offsetting
+        columns/etc.
+      </p>
+      {rules.map((rule, key) => {
+        const auto = rule.className.includes('auto')
+        return (
+          <div className="my-sm" key={key}>
+            <div className={`bg-blue-light ${auto ? 'db' : 'dib'}`}>
+              <div
+                className={`center ${rule.className} ${
+                  auto ? 'db w-20' : 'dib'
+                }`}
+              >
+                <div className="bg-blue p-xs">
+                  <code className="dib white">{rule.className}</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+function PaddingExample({ rules }) {
+  return (
+    <div>
+      {rules.map((rule, key) => (
+        <div className="my-sm" key={key}>
+          <div className="dib bg-blue-light">
+            <div className={`dib center ${rule.className}`}>
+              <div className="bg-blue p-xs">
+                <code className="dib white">{rule.className}</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function BoxExample({ extraClasses = '', rules }) {
   return (
@@ -107,7 +153,7 @@ function BoxExample({ extraClasses = '', rules }) {
         <div className="my-sm bg-blue-lightest ba bc-blue-lighter" key={key}>
           <div
             className={`${rule.className} ${
-              rule.className.indexOf('auto') !== -1 ? 'db w-auto' : 'dib'
+              rule.className.includes('auto') ? 'db w-20' : 'dib'
             } center bg-white ba bc-gray-light ${extraClasses}`}
           >
             <Code>{rule.className}</Code>
@@ -176,7 +222,7 @@ function ExampleAdapter({ ruleset }) {
         />
       )
       break
-    case 'Border radius':
+    case 'Border radii':
     case 'Border removal':
     case 'Border styles':
     case 'Border widths':
@@ -195,7 +241,7 @@ function ExampleAdapter({ ruleset }) {
     case 'Font sizes':
     case 'Font weights':
     case 'Letter spacing':
-    case 'Line height':
+    case 'Line heights':
     case 'Opacity':
     case 'Opacity (hover)':
     case 'Text alignment':
@@ -204,13 +250,13 @@ function ExampleAdapter({ ruleset }) {
     case 'Text transforms':
       return <TextExample rules={rules} />
       break
-    case 'Margins':
-    case 'Margins (responsive)':
-      return <BoxExample rules={rules} extraClasses="p-xs" />
+    case 'Margin':
+    case 'Margin (responsive)':
+      return <MarginExample rules={rules} extraClasses="p-xs" />
       break
     case 'Padding':
     case 'Padding (responsive)':
-      return <BoxExample rules={rules} />
+      return <PaddingExample rules={rules} />
       break
     case 'Normalize font':
       return <TextExample rules={rules} extraClasses="bold italic underline" />
@@ -263,11 +309,20 @@ function Example({ ruleset }) {
 
       <SubHeading>Configuration Options</SubHeading>
       <p>
-        In order to customize this rule, you can change the default options of:
+        In order to customize this rule, you can change the default options in
+        your <Code>euphoria.config.js</Code> file:
       </p>
-      <Highlight lang="javascript">{`new Euphoria({
-  //... other options
-})`}</Highlight>
+      <Highlight lang="javascript">{`module.exports = {
+  options: {
+
+    // Disable this rule:
+    disabledRules: [ '${ruleset.key}' ],
+
+    // Make responsive
+    responsive: [ '${ruleset.key}' ],
+
+  },
+}`}</Highlight>
     </div>
   )
 }

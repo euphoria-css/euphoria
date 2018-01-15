@@ -1,7 +1,75 @@
-import { each, map } from 'lodash';
-import slugify from 'url-slug';
+import { each, flatten, isEmpty, map, pickBy, reduce } from 'lodash';
 import { CssSelectorParser } from 'css-selector-parser';
 import lightness from 'lightness';
+
+function createAST(rulesets) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  var ast = {};
+
+  // Setup responsive rule grouping.
+  var responsiveRules = {};
+  if (breakpoints) {
+    each(breakpoints, function (val, key) {
+      responsiveRules[key] = {
+        query: '@media only screen and (' + val + ')',
+        rules: {}
+      };
+    });
+  }
+
+  each(rulesets, function (ruleset) {
+    each(ruleset.rules, function (_ref) {
+      var breakpoint = _ref.breakpoint,
+          properties = _ref.properties,
+          selector = _ref.selector;
+
+      // Add responsive styles to specific breakpoint section
+      if (breakpoint) {
+        responsiveRules[breakpoint].rules[selector] = properties;
+      } else {
+        ast[selector] = properties;
+      }
+    });
+  });
+
+  // Add responsive rules to AST
+  each(responsiveRules, function (group, bp) {
+    ast[group.query] = group.rules;
+  });
+
+  return pickBy(ast, function (v) {
+    return !isEmpty(v);
+  });
+}
+
+function makeProps(properties) {
+  return map(properties, function (v, k) {
+    return k + ': ' + v + ';';
+  }).join(' ');
+}
+
+function makeRule(selector, properties) {
+  return selector + ' { ' + makeProps(properties) + ' }';
+}
+
+function createCSS(ast) {
+  return map(ast, function (properties, selector) {
+    // If a responsive group, go ahead and loop through
+    // the list of responsive styles and wrap them in a
+    // media query.
+    if (selector.startsWith('@media')) {
+      var rules = map(properties, function (v, k) {
+        return '  ' + makeRule(k, v);
+      });
+      rules.unshift(selector + ' {');
+      rules.push('}');
+      return rules.join('\n');
+    }
+
+    return makeRule(selector, properties);
+  }).join('\n');
+}
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -46,30 +114,33 @@ var defineProperty = function (obj, key, value) {
   return obj;
 };
 
-var parser$1 = new CssSelectorParser();
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var parser = new CssSelectorParser();
 
 var Rule = function () {
   function Rule(_ref) {
-    var _this = this;
-
     var selector = _ref.selector,
         properties = _ref.properties,
         _ref$breakpoint = _ref.breakpoint,
-        breakpoint = _ref$breakpoint === undefined ? null : _ref$breakpoint,
-        _ref$important = _ref.important,
-        important = _ref$important === undefined ? false : _ref$important,
-        _ref$media = _ref.media,
-        media = _ref$media === undefined ? null : _ref$media;
+        breakpoint = _ref$breakpoint === undefined ? null : _ref$breakpoint;
     classCallCheck(this, Rule);
 
-    this._rawSelector = selector;
-    this.properties = {};
-    each(properties, function (val, key) {
-      _this.properties[slugify(key)] = val;
-    });
-    this.important = important;
+    this.selector = selector;
+    this.properties = properties;
     this.breakpoint = breakpoint;
-    this.media = media;
   }
 
   createClass(Rule, [{
@@ -77,63 +148,35 @@ var Rule = function () {
     value: function toString() {
       return this.css;
     }
-
-    //----------------------------------------------
-    // Private instance methods
-    //----------------------------------------------
-
   }, {
-    key: 'type',
-    get: function get$$1() {
-      return 'Rule';
+    key: 'toJSON',
+    value: function toJSON() {
+      var obj = {
+        selector: this.selector,
+        properties: this.properties,
+        css: this.css
+      };
+
+      if (this.breakpoint) obj.breakpoint = this.breakpoint;
+      if (this.className) obj.className = this.className;
+
+      return obj;
     }
   }, {
     key: 'className',
     get: function get$$1() {
-      return parser$1.parse(this.selector).rule.classNames[0];
-    }
-  }, {
-    key: 'name',
-    get: function get$$1() {
-      return this.selector;
-    }
-  }, {
-    key: 'selector',
-    get: function get$$1() {
-      var parsed = parser$1.parse(this._rawSelector).rule;
-
-      // Reconstruct the selector base name
-      var selector = null;
-      if (parsed.classNames) selector = '.' + parsed.classNames[0];
-      if (parsed.tagName) selector = parsed.tagName;
-      if (parsed.id) selector = '#' + parsed.id;
-
-      // Add breakpoint suffix.
-      if (this.breakpoint) selector += '-' + this.breakpoint;
-
-      // Add pseudo selectors, if present.
-      var pseudos = parsed.pseudos && parsed.pseudos.map(function (p) {
-        return p.name;
-      }).join(':');
-      if (pseudos) selector += ':' + pseudos;
-
-      return selector;
+      try {
+        return parser.parse(this.selector).rule.classNames[0];
+      } catch (error) {
+        return null;
+      }
     }
   }, {
     key: 'css',
     get: function get$$1() {
-      var rule = this.selector + ' { ' + this._propertyCSS + ' }';
-      if (this.media) rule = '@media only screen and (' + this.media + ') { ' + rule + ' }';
-      return rule;
-    }
-  }, {
-    key: '_propertyCSS',
-    get: function get$$1() {
-      var _this2 = this;
-
-      return map(this.properties, function (val, key) {
-        return key + ': ' + val + (_this2.important ? ' !important' : '') + ';';
-      }).join(' ');
+      return this.selector + ' { ' + map(this.properties, function (v, k) {
+        return k + ': ' + v + ';';
+      }).join(' ') + ' }';
     }
   }]);
   return Rule;
@@ -141,15 +184,17 @@ var Rule = function () {
 
 var RuleSet = function () {
   function RuleSet(_ref) {
-    var _ref$breakpoints = _ref.breakpoints,
-        breakpoints = _ref$breakpoints === undefined ? null : _ref$breakpoints,
+    var key = _ref.key,
         name = _ref.name,
-        rules = _ref.rules;
+        rules = _ref.rules,
+        _ref$responsive = _ref.responsive,
+        responsive = _ref$responsive === undefined ? false : _ref$responsive;
     classCallCheck(this, RuleSet);
 
     this.name = name;
     this.rules = rules;
-    this.breakpoints = breakpoints;
+    this.responsive = responsive;
+    this.key = key;
   }
 
   createClass(RuleSet, [{
@@ -158,1009 +203,1200 @@ var RuleSet = function () {
       return this.css;
     }
   }, {
-    key: 'key',
-    get: function get$$1() {
-      return slugify(this.name.trim());
-    }
-  }, {
-    key: 'type',
-    get: function get$$1() {
-      return 'RuleSet';
+    key: 'toJSON',
+    value: function toJSON() {
+      var obj = {
+        name: this.name,
+        rules: map(this.rules, function (r) {
+          return r.toJSON();
+        })
+      };
+
+      if (this.responsive) obj.responsive = true;
+
+      return obj;
     }
   }, {
     key: 'css',
     get: function get$$1() {
-      var _this = this;
-
-      if (!this.rules || !this.rules.length) return '';
-      var separator = '\n';
-      if (!this.breakpoints) return this.rules.join(separator);
-
-      return map(this.breakpoints, function (value, label) {
-        return ['@media only screen and (' + value + ') {', _this.rules.map(function (rule) {
-          // Set the breakpoint for the rule so that
-          // it will add the proper responsive suffix
-          // to the class name.
-          rule.breakpoint = label;
-          return '  ' + rule;
-        }).join(separator), '}'].join(separator);
-      }).join(separator);
+      return map(this.rules, function (r) {
+        return r.css;
+      }).join('\n');
     }
   }]);
   return RuleSet;
 }();
 
-var parser = new CssSelectorParser();
+// import { CssSelectorParser } from 'css-selector-parser'
 
-var Euphoria = function () {
-  function Euphoria() {
-    var _this = this;
+// export function create(selector, properties) {
+//   return { [selector]: properties }
+// }
 
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    classCallCheck(this, Euphoria);
+// export function addProperty(rule, newProperty) {
+//   const key = Object.keys(rule)[0]
+//   const properties = { ...rule[key], ...newProperty }
+//   return { [key]: properties }
+// }
 
-    this.defaults = {
-      alignContent: {
-        start: 'flex-start',
-        end: 'flex-end',
-        center: 'center',
-        stretch: 'stretch',
-        around: 'space-around',
-        between: 'space-between'
-      },
-      alignItems: {
-        start: 'flex-start',
-        end: 'flex-end',
-        center: 'center',
-        baseline: 'baseline',
-        stretch: 'stretch'
-      },
-      alignSelf: {
-        start: 'flex-start',
-        end: 'flex-end',
-        center: 'center',
-        baseline: 'baseline',
-        stretch: 'stretch'
-      },
-      backgroundSizes: ['contain', 'cover'],
-      baseColors: null,
-      borderCollapse: true,
-      borderPosition: true,
-      borderRadii: {
-        none: 'none',
-        xs: '0.15em',
-        sm: '0.3em',
-        md: '0.6em',
-        lg: '1em',
-        xl: '1.8em',
-        pill: '100em',
-        '100': '100%'
-      },
-      borderRadiiPosition: true,
-      borderRemoval: true,
-      borderStyles: ['solid', 'dotted', 'dashed'],
-      borderWidths: {
-        xxs: '0.05rem',
-        sm: '0.15rem',
-        md: '0.3rem',
-        lg: '0.6rem',
-        xl: '1.2rem',
-        xxl: '2.4rem'
-      },
-      boxShadows: {
-        '1': '0 0 4px 2px rgba(0, 0, 0, .2)',
-        '2': '0 0 8px 2px rgba(0, 0, 0, .2)',
-        '3': '2px 2px 4px 2px rgba(0, 0, 0, .2)',
-        '4': '2px 2px 8px 0 rgba(0, 0, 0, .2)',
-        '5': '4px 4px 4px 2px rgba(0, 0, 0, .2)'
-      },
-      breakpoints: {
-        'xs-only': 'max-width: 599px',
-        'sm-up': 'min-width: 600px',
-        'md-up': 'min-width: 900px',
-        'lg-up': 'min-width: 1200px'
-        // 'xl-up': 'min-width: 1800px',
-      },
-      colorGradients: true,
-      clearfix: true,
-      cursors: [
-      // General
-      'auto', 'default', 'none',
+function addSuffix(selector, suffix) {
+  // Add the suffix to the selector but before
+  // any pseudo selectors.
+  var parts = selector.split(':');
+  parts[0] += '-' + suffix;
+  return parts.join(':');
+}
 
-      // Links & status
-      'context-menu', 'help', 'pointer', 'progress', 'wait',
+function inheritProps(inherits$$1, all) {
+  if (isEmpty(inherits$$1)) return {};
+  return reduce(all, function (props, rs) {
+    each(rs.rules, function (r) {
+      if (inherits$$1.includes(r.selector)) {
+        props = _extends({}, props, r.properties);
+      }
+    });
+    return props;
+  }, {});
+}
 
-      // Selection
-      'cell', 'crosshair', 'text', 'vertical-text',
+function createRuleSets(templates, options) {
+  // Support passing in custom ruleset creators.
+  templates = _extends({}, templates, options.customRules);
 
-      // Drag & drop
-      'alias', 'copy', 'move', 'no-drop', 'not-allowed',
+  var rulesets = reduce(templates, function (all, template, key) {
+    var name = template.name,
+        rules = template.rules;
+    var breakpoints = options.breakpoints;
 
-      // Resize
-      'all-scroll', 'col-resize', 'row-resize', 'n-resize', 'e-resize', 's-resize', 'w-resize', 'ne-resize', 'nw-resize', 'se-resize', 'sw-resize', 'ew-resize', 'ns-resize', 'nesw-resize', 'nwse-resize',
+    var responsive = (options.responsive || []).includes(key);
 
-      // Zoom
-      'zoom-in', 'zoom-out',
+    // Exit early if this rule is in the list of rules to disable.
+    if (options.disabledRules && options.disabledRules.length && options.disabledRules.includes(key)) {
+      return all;
+    }
 
-      // Drag/drop
-      'grab', 'grabbing'],
-      display: {
-        db: 'block',
-        di: 'inline',
-        dib: 'inline-block',
-        df: 'flex',
-        dfb: 'flex-block',
-        dt: 'table',
-        dtc: 'table-cell',
-        none: 'none'
-      },
-      flexDirection: {
-        row: 'row',
-        'row-reverse': 'row-reverse',
-        col: 'column',
-        'col-reverse': 'column-reverse',
-        start: 'flex-start',
-        end: 'flex-end'
-      },
-      flexOrder: {
-        first: '-1',
-        last: '1'
-      },
-      flexWrap: {
-        wrap: 'wrap',
-        reverse: 'reverse',
-        none: 'nowrap'
-      },
-      floats: ['left', 'right', 'none'],
-      fontFamilies: {
-        system: '-apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue" ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
-        'sans-serif': 'helvetica, ariel, sans-serif',
-        serif: 'georgia, times, serif',
-        code: 'Consolas, monaco, monospace',
-
-        athelas: 'athelas, georgia, serif',
-        avenir: '"avenir next", avenir, sans-serif',
-        baskerville: 'baskerville, serif',
-        bodoni: '"Bodoni MT", serif',
-        calisto: '"Calisto MT", serif',
-        courier: '"Courier Next", courier, monospace',
-        garamond: 'garamond, serif',
-        georgia: 'georgia, serif',
-        helvetica: '"helvetica neue", helvetica, sans-serif',
-        times: 'times, serif'
-      },
-      fontSizes: {
-        xxxl: '4em',
-        xxl: '2.6em',
-        xl: '1.9em',
-        lg: '1.3em',
-        md: '1em',
-        sm: '0.85em',
-        xs: '0.7em'
-      },
-      fontWeights: {
-        bold: 'bold',
-        normal: 'normal',
-        '1': '100',
-        '2': '200',
-        '3': '300',
-        '4': '400',
-        '5': '500',
-        '6': '600',
-        '7': '700',
-        '8': '800',
-        '9': '900'
-      },
-      justifyContent: {
-        start: 'flex-start',
-        end: 'flex-end',
-        center: 'center',
-        between: 'space-between',
-        around: 'space-around'
-      },
-      letterSpacing: {
-        xxs: '-0.2em',
-        xs: '-0.1em',
-        sm: '-0.05em',
-        md: 0,
-        lg: '0.3em',
-        xl: '0.6em',
-        xxl: '1.2em'
-      },
-      lineHeights: {
-        xxs: 0.5,
-        xs: 0.75,
-        sm: 1,
-        md: 1.5,
-        lg: 2,
-        xl: 3,
-        xxl: 4
-      },
-      lists: true,
-      normalize: true,
-      opacity: {
-        '100': 1.0,
-        '90': 0.9,
-        '80': 0.8,
-        '70': 0.7,
-        '60': 0.6,
-        '50': 0.5,
-        '40': 0.4,
-        '30': 0.3,
-        '20': 0.2,
-        '10': 0.1,
-        '05': 0.05,
-        '025': 0.025,
-        '0': 0
-      },
-      overflow: ['visible', 'hidden', 'scroll', 'auto'],
-      positions: ['relative', 'absolute', 'fixed'],
-      sizes: ['auto', 0, 5, 10, 15, 20, 25, 30, 33.3, 40, 50, 60, 66.6, 70, 75, 80, 90, 100],
-      spacing: {
-        none: 0,
-        xxs: '0.25rem',
-        xs: '0.5rem',
-        sm: '1rem',
-        md: '2rem',
-        lg: '4rem',
-        xl: '8rem',
-        xxl: '14rem'
-      },
-      textAlignment: ['left', 'right', 'center', 'justify'],
-      textDecoration: {
-        none: 'none',
-        line: 'line-through',
-        underline: 'underline'
-      },
-      textStyle: true,
-      textTransforms: ['uppercase', 'lowercase', 'capitalize'],
-      verticalAlignment: {
-        base: 'baseline',
-        bot: 'bottom',
-        top: 'top',
-        'text-top': 'text-top',
-        'text-bot': 'text-bottom'
-      },
-      visibility: true,
-      whitespace: ['pre', 'nowrap', 'normal'],
-      zIndex: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-
-      // Set default colors
-    };this.defaults.baseColors = {
-      // Context colors
-      primary: null,
-      secondary: null,
-      info: null,
-      success: null,
-      warning: null,
-      danger: null,
-
-      // Grayscale
-      gray: '#7a7a7a',
-
-      // General colors
-      blue: '#3187c4',
-      cyan: '#31c4a9',
-      green: '#7db735',
-      orange: '#dd6618',
-      purple: '#963ebc',
-      pink: '#bc328c',
-      red: '#d8401e',
-      yellow: '#efef00'
-    };
-    this.defaults.baseColors.primary = this.defaults.baseColors.cyan;
-    this.defaults.baseColors.secondary = this.defaults.baseColors.gray;
-    this.defaults.baseColors.info = this.defaults.baseColors.blue;
-    this.defaults.baseColors.success = this.defaults.baseColors.green;
-    this.defaults.baseColors.warning = this.defaults.baseColors.orange;
-    this.defaults.baseColors.danger = this.defaults.baseColors.red;
-
-    this.options = Object.assign({}, this.defaults, options);
-    this.options.colors = this.createColors(options.baseColors);
-
-    this.rules = this.rawRules.map(function (_ref) {
-      var name = _ref.name,
-          _ref$rules = _ref.rules,
-          rules = _ref$rules === undefined ? [] : _ref$rules,
-          responsive = _ref.responsive;
-      return new RuleSet({
-        name: name,
-        rules: rules ? rules.map(function (r) {
-          return new Rule(r);
-        }) : [],
-        breakpoints: responsive && _this.options.breakpoints
+    // Generate a list of rules for the ruleset
+    var rls = map(rules(options), function (_ref) {
+      var inherits$$1 = _ref.inherits,
+          selector = _ref.selector,
+          properties = _ref.properties;
+      return new Rule({
+        selector: selector,
+        properties: _extends({}, properties, inheritProps(inherits$$1, all))
       });
     });
-  }
 
-  createClass(Euphoria, [{
-    key: 'createColors',
-    value: function createColors() {
-      var colors = {};
+    all[key] = new RuleSet({ key: key, name: name, rules: rls });
 
-      // Generate color gradients version for all colors.
-      this.options.colorGradients && map(this.options.baseColors, function (val, key) {
-        colors[key + '-lightest'] = lightness(val, 50);
-        colors[key + '-lighter'] = lightness(val, 45);
-        colors[key + '-light'] = lightness(val, 30);
-        colors[key] = val;
-        colors[key + '-dark'] = lightness(val, -10);
-        colors[key + '-darker'] = lightness(val, -16);
-        colors[key + '-darkest'] = lightness(val, -24);
-      });
-
-      // Some base colors that never change, thus they don't need
-      // to be configurable
-      colors.transparent = 'transparent';
-      colors.black = 'black';
-      colors.white = 'white';
-
-      return colors;
-    }
-  }, {
-    key: 'addRule',
-
-
-    /**
-     * Create a new rule to add to the list of defined rules.
-     * Take the name of the new selector, any custom CSS to
-     * apply to it and then a list of any of the existing
-     * Euphoria selectors to merge into the rule. Think
-     * of this like a mixin in LESS/SASS.
-     *
-     * @param {String} selector The name of the selector, eg ".my-selector".
-     * @param {Object} custom Custom styles to apply to the rule.
-     * @param {Array} custom An (optional) list of Euphoria selectors to combine into this new rule.
-     */
-    value: function addRule(_ref2) {
-      var selector = _ref2.selector,
-          _ref2$properties = _ref2.properties,
-          properties = _ref2$properties === undefined ? {} : _ref2$properties,
-          _ref2$inherits = _ref2.inherits,
-          inherits$$1 = _ref2$inherits === undefined ? [] : _ref2$inherits,
-          _ref2$responsive = _ref2.responsive,
-          responsive = _ref2$responsive === undefined ? false : _ref2$responsive,
-          _ref2$important = _ref2.important;
-
-      if (inherits$$1.length) {
-        this.rules.map(function (set$$1) {
-          if (set$$1.rules && set$$1.rules.length) {
-            set$$1.rules.map(function (rule) {
-              if (inherits$$1.includes(rule.selector)) {
-                Object.assign(properties, rule.properties);
-              }
+    // Add responsive styles, if set.
+    if (responsive) {
+      key = key + '-responsive';
+      name = name + ' (responsive)';
+      all[key] = new RuleSet({
+        key: key,
+        name: name,
+        rules: flatten(map(breakpoints, function (_, bp) {
+          return map(rls, function (rule) {
+            return new Rule({
+              selector: addSuffix(rule.selector, bp),
+              properties: rule.properties,
+              breakpoint: bp
             });
-          }
-        });
-      }
-
-      this.rules.push(new Rule({
-        selector: selector,
-        properties: properties,
-        responsive: responsive // TODO: get this to work!
-      }));
-    }
-  }, {
-    key: 'toString',
-    value: function toString() {
-      return this.css;
-    }
-
-    //----------------------------------------------------------------
-    // Private methods
-    //----------------------------------------------------------------
-
-  }, {
-    key: '_createSizeRules',
-    value: function _createSizeRules(prefix, rule) {
-      return map(this.options.sizes, function (s) {
-        var label = s === 'auto' ? 'auto' : parseInt(s);
-        var size = s === 'auto' ? 'auto' : s + '%';
-        return {
-          selector: '.' + prefix + '-' + label,
-          properties: defineProperty({}, rule, size)
-        };
-      });
-    }
-  }, {
-    key: '_createFloatRules',
-    value: function _createFloatRules() {
-      return map(this.options.floats, function (float) {
-        return {
-          selector: '.f' + float[0],
-          // short: `f${float[0]}`,
-          // verbose: `float-${float}`,
-          properties: { float: float }
-        };
-      });
-    }
-  }, {
-    key: '_createSpacingRules',
-    value: function _createSpacingRules(type) {
-      var spacing = this.options.spacing;
-
-      if (!spacing) return [];
-
-      var rules = [];
-      var directions = ['', 'left', 'top', 'right', 'bottom', 'x', 'y'];
-
-      // Add an extra margin auto rule.
-      if (type === 'margin') spacing['auto'] = 'auto';
-
-      directions.map(function (dir) {
-        map(spacing, function (size, name) {
-          // Create selector
-          var short = '' + type[0] + (dir[0] || '') + '-' + name;
-          var properties = {};
-          switch (dir) {
-            case '':
-              properties[type] = size;
-              break;
-            case 'x':
-              properties[type + '-left'] = size;
-              properties[type + '-right'] = size;
-              break;
-            case 'y':
-              properties[type + '-top'] = size;
-              properties[type + '-bottom'] = size;
-              break;
-            default:
-              properties[type + ('-' + dir)] = size;
-              break;
-          }
-
-          rules.push({
-            selector: '.' + short,
-            // short,
-            // verbose,
-            properties: properties
           });
-        });
+        })),
+        responsive: true
       });
-
-      return rules;
     }
-  }, {
-    key: 'rawRules',
-    get: function get$$1() {
-      return [
-      // ---------------------------------------------------------
-      // Display
-      // ---------------------------------------------------------
 
-      {
-        name: 'Display',
-        rules: map(this.options.display, function (val, key) {
-          return {
-            selector: '.' + key,
-            properties: { display: val }
-          };
-        })
-      }, {
-        name: 'Overflow',
-        rules: map(this.options.overflow, function (val) {
-          return {
-            selector: '.of-' + val,
-            properties: { overflow: val }
-          };
-        })
-      }, {
-        name: 'Opacity',
-        rules: map(this.options.opacity, function (val, name) {
-          return {
-            selector: '.o-' + name,
-            properties: { opacity: val }
-          };
-        })
-      }, {
-        name: 'Opacity (hover)',
-        rules: map(this.options.opacity, function (val, key) {
-          return {
-            selector: '.hov-o-' + key + ':hover',
-            properties: { opacity: val }
-          };
-        })
-      }, {
-        name: 'Z-Index',
-        rules: map(this.options.zIndex, function (val) {
-          return {
-            selector: '.z-' + val,
-            properties: { 'z-index': val }
-          };
-        })
-      },
+    return all;
+  }, {});
 
-      // ---------------------------------------------------------
-      // Positioning and display
-      // ---------------------------------------------------------
+  return rulesets;
+}
 
-      {
-        name: 'Floats',
-        rules: this._createFloatRules()
-      }, {
-        name: 'Floats (responsive)',
-        rules: this._createFloatRules(),
-        responsive: true
-      }, {
-        name: 'Positioning',
-        rules: map(this.options.positions, function (val) {
-          return {
-            selector: '.' + val,
-            properties: { position: val }
-          };
-        })
-      }, {
-        name: 'Positioning (responsive)',
-        rules: map(this.options.positions, function (val) {
-          return {
-            selector: '.' + val,
-            properties: { position: val }
-          };
-        }),
-        responsive: true
-      }, {
-        name: 'Text alignment',
-        rules: map(this.options.textAlignment, function (val) {
-          return {
-            selector: '.' + val,
-            properties: { 'text-align': val }
-          };
-        })
-      }, {
-        name: 'Vertical alignment',
-        rules: map(this.options.verticalAlignment, function (val, key) {
-          return {
-            selector: '.v-' + key,
-            properties: { 'vertical-align': val }
-          };
-        })
-      }, {
-        name: 'Visibility',
-        rules: this.options.visibility && [{
-          selector: '.visible',
-          properties: { visibility: 'visible' }
-        }, {
-          selector: '.invisible',
-          properties: {
-            visibility: 'hidden'
-          }
-        }]
-      }, {
-        name: 'Clearfix',
-        rules: this.options.clearfix && [{
-          selector: '.cf:after',
-          properties: { clear: 'both', display: 'table', content: '""' }
-        }]
-      },
+var defaults$1 = {
+  alignContent: {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    stretch: 'stretch',
+    around: 'space-around',
+    between: 'space-between'
+  },
+  alignItems: {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    baseline: 'baseline',
+    stretch: 'stretch'
+  },
+  alignSelf: {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    baseline: 'baseline',
+    stretch: 'stretch'
+  },
+  backgroundSizes: ['contain', 'cover'],
+  baseColors: null,
+  // borderCollapse: true,
+  // borderPositions: true,
+  borderRadii: {
+    none: 'none',
+    xs: '0.15em',
+    sm: '0.3em',
+    md: '0.6em',
+    lg: '1em',
+    xl: '1.8em',
+    pill: '100em',
+    '100': '100%'
+  },
+  borderRadiiPositions: ['left', 'top', 'right', 'bottom'],
+  // borderRemoval: true,
+  borderStyles: ['solid', 'dotted', 'dashed'],
+  borderWidths: {
+    xxs: '0.05rem',
+    sm: '0.15rem',
+    md: '0.3rem',
+    lg: '0.6rem',
+    xl: '1.2rem',
+    xxl: '2.4rem'
+  },
+  boxShadows: {
+    '1': '0 0 4px 2px rgba(0, 0, 0, .2)',
+    '2': '0 0 8px 2px rgba(0, 0, 0, .2)',
+    '3': '2px 2px 4px 2px rgba(0, 0, 0, .2)',
+    '4': '2px 2px 8px 0 rgba(0, 0, 0, .2)',
+    '5': '4px 4px 4px 2px rgba(0, 0, 0, .2)'
+  },
+  breakpoints: {
+    'xs-only': 'max-width: 599px',
+    'sm-up': 'min-width: 600px',
+    'md-up': 'min-width: 900px',
+    'lg-up': 'min-width: 1200px'
+    // 'xl-up': 'min-width: 1800px',
+  },
+  // clearfix: true,
+  colors: {},
+  colorGradients: true,
+  cursors: [
+  // General
+  'auto', 'default', 'none',
 
-      // ---------------------------------------------------------
-      // Sizes
-      // ---------------------------------------------------------
+  // Links & status
+  'context-menu', 'help', 'pointer', 'progress', 'wait',
 
-      {
-        name: 'Widths',
-        rules: this._createSizeRules('w', 'width')
-      }, {
-        name: 'Widths (responsive)',
-        rules: this._createSizeRules('w', 'width'),
-        responsive: true
-      }, {
-        name: 'Widths (max)',
-        rules: this._createSizeRules('mw', 'max-width')
-      }, {
-        name: 'Heights',
-        rules: this._createSizeRules('h', 'height')
-      },
-      // {
-      //   name: 'Heights (max)',
-      //   rules: this._createSizeRules('mh', 'max-height'),
-      // },
-      {
-        name: 'Offsets',
-        rules: this._createSizeRules('offset', 'margin-left')
-      }, {
-        name: 'Offsets (responsive)',
-        rules: this._createSizeRules('offset', 'margin-left'),
-        responsive: true
-      },
+  // Selection
+  'cell', 'crosshair', 'text', 'vertical-text',
 
-      // ---------------------------------------------------------
-      // Colors
-      // ---------------------------------------------------------
+  // Drag & drop
+  'alias', 'copy', 'move', 'no-drop', 'not-allowed',
 
-      {
-        name: 'Text colors',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.' + key,
-            properties: { color: val }
-          };
-        })
-      }, {
-        name: 'Text colors (hover)',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.hov-' + key + ':hover',
-            properties: { color: val }
-          };
-        })
-      }, {
-        name: 'Background colors',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.bg-' + key,
-            properties: { background: val }
-          };
-        })
-      }, {
-        name: 'Background colors (hover)',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.hov-bg-' + key + ':hover',
-            properties: { background: val }
-          };
-        })
-      },
+  // Resize
+  'all-scroll', 'col-resize', 'row-resize', 'n-resize', 'e-resize', 's-resize', 'w-resize', 'ne-resize', 'nw-resize', 'se-resize', 'sw-resize', 'ew-resize', 'ns-resize', 'nesw-resize', 'nwse-resize',
 
-      // ---------------------------------------------------------
-      // Box styles
-      // ---------------------------------------------------------
+  // Zoom
+  'zoom-in', 'zoom-out',
 
-      {
-        name: 'Box shadows',
-        rules: map(this.options.boxShadows, function (val, key) {
-          return {
-            selector: '.bs-' + key,
-            properties: { 'box-shadow': val }
-          };
-        })
-      },
+  // Drag/drop
+  'grab', 'grabbing'],
+  customRules: {},
+  disabledRules: [],
+  display: {
+    db: 'block',
+    di: 'inline',
+    dib: 'inline-block',
+    df: 'flex',
+    dfb: 'flex-block',
+    dt: 'table',
+    dtc: 'table-cell',
+    dn: 'none'
+  },
+  flexDirection: {
+    row: 'row',
+    'row-reverse': 'row-reverse',
+    col: 'column',
+    'col-reverse': 'column-reverse',
+    start: 'flex-start',
+    end: 'flex-end'
+  },
+  flexOrder: {
+    first: '-1',
+    last: '1'
+  },
+  flexWrap: {
+    wrap: 'wrap',
+    reverse: 'reverse',
+    none: 'nowrap'
+  },
+  floats: ['left', 'right', 'none'],
+  fontFamilies: {
+    system: '-apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue" ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
+    'sans-serif': 'helvetica, ariel, sans-serif',
+    serif: 'georgia, times, serif',
+    code: 'Consolas, monaco, monospace',
 
-      // ---------------------------------------------------------
-      // Typography
-      // ---------------------------------------------------------
+    athelas: 'athelas, georgia, serif',
+    avenir: '"avenir next", avenir, sans-serif',
+    baskerville: 'baskerville, serif',
+    bodoni: '"Bodoni MT", serif',
+    calisto: '"Calisto MT", serif',
+    courier: '"Courier Next", courier, monospace',
+    garamond: 'garamond, serif',
+    georgia: 'georgia, serif',
+    helvetica: '"helvetica neue", helvetica, sans-serif',
+    times: 'times, serif'
+  },
+  fontSizes: {
+    xxxl: '4em',
+    xxl: '2.6em',
+    xl: '1.9em',
+    lg: '1.3em',
+    md: '1em',
+    sm: '0.85em',
+    xs: '0.7em'
+  },
+  fontStyles: ['italic'],
+  fontWeights: {
+    bold: 'bold',
+    normal: 'normal',
+    '1': '100',
+    '2': '200',
+    '3': '300',
+    '4': '400',
+    '5': '500',
+    '6': '600',
+    '7': '700',
+    '8': '800',
+    '9': '900'
+  },
+  justifyContent: {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    between: 'space-between',
+    around: 'space-around'
+  },
+  letterSpacing: {
+    xxs: '-0.2em',
+    xs: '-0.1em',
+    sm: '-0.05em',
+    md: 0,
+    lg: '0.3em',
+    xl: '0.6em',
+    xxl: '1.2em'
+  },
+  lineHeights: {
+    xxs: 0.5,
+    xs: 0.75,
+    sm: 1,
+    md: 1.5,
+    lg: 2,
+    xl: 3,
+    xxl: 4
+  },
+  margins: {
+    none: 0,
+    auto: 'auto',
+    xxs: '0.25rem',
+    xs: '0.5rem',
+    sm: '1rem',
+    md: '2rem',
+    lg: '4rem',
+    xl: '8rem',
+    xxl: '14rem'
+  },
+  opacity: {
+    '100': 1.0,
+    '90': 0.9,
+    '80': 0.8,
+    '70': 0.7,
+    '60': 0.6,
+    '50': 0.5,
+    '40': 0.4,
+    '30': 0.3,
+    '20': 0.2,
+    '10': 0.1,
+    '05': 0.05,
+    '025': 0.025,
+    '0': 0
+  },
+  overflow: ['visible', 'hidden', 'scroll', 'auto'],
+  paddings: {
+    none: 0,
+    xxs: '0.25rem',
+    xs: '0.5rem',
+    sm: '1rem',
+    md: '2rem',
+    lg: '4rem',
+    xl: '8rem',
+    xxl: '14rem'
+  },
+  percentageSizes: {
+    auto: 'auto',
+    '0': '0%',
+    '5': '5%',
+    '10': '10%',
+    '15': '15%',
+    '20': '20%',
+    '25': '25%',
+    '30': '30%',
+    '33': '33.3%',
+    '40': '40%',
+    '50': '50%',
+    '60': '60%',
+    '66': '66.6%',
+    '70': '70%',
+    '75': '75%',
+    '80': '80%',
+    '90': '90%',
+    '100': '100%'
+  },
+  positions: ['relative', 'absolute', 'fixed'],
+  positionValues: ['a', 'l', 't', 'r', 'b', 'x', 'y'],
+  responsive: ['floats', 'margin', 'margin-percentages', 'padding', 'positions', 'widths', 'widths-max'],
+  spacing: {
+    none: 0,
+    auto: 'auto',
+    xxs: '0.25rem',
+    xs: '0.5rem',
+    sm: '1rem',
+    md: '2rem',
+    lg: '4rem',
+    xl: '8rem',
+    xxl: '14rem'
+  },
+  spacingDirections: ['', 'l', 't', 'r', 'b', 'x', 'y'],
+  textAlignment: ['left', 'right', 'center', 'justify'],
+  textDecorations: {
+    none: 'none',
+    line: 'line-through',
+    underline: 'underline'
+  },
+  textTransforms: {
+    upper: 'uppercase',
+    lower: 'lowercase',
+    capital: 'capitalize'
+  },
+  verticalAlignment: {
+    base: 'baseline',
+    bot: 'bottom',
+    top: 'top',
+    'text-top': 'text-top',
+    'text-bot': 'text-bottom'
+  },
+  visibility: { visible: 'visible', invisible: 'hidden' },
+  whitespace: ['pre', 'nowrap', 'normal'],
+  zIndex: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+};
 
-      {
-        name: 'Font sizes',
-        rules: map(this.options.fontSizes, function (val, key) {
-          return {
-            selector: '.txt-' + key,
-            properties: {
-              'font-size': val
-            }
-          };
-        })
-      }, {
-        name: 'Text transforms',
-        rules: map(this.options.textTransforms, function (val) {
-          return {
-            selector: '.' + val,
-            properties: { 'text-transform': val }
-          };
-        })
-      }, {
-        name: 'Text styles',
-        rules: this.options.textStyle && [{
-          selector: '.italic',
-          properties: { 'font-style': 'italic' }
-        }]
-      }, {
-        name: 'Font weights',
-        rules: map(this.options.fontWeights, function (val, key) {
-          return {
-            selector: key === '.bold' ? 'bold' : '.fw-' + key,
-            properties: { 'font-weight': val }
-          };
-        })
-      }, {
-        name: 'Text decoration',
-        rules: map(this.options.textDecoration, function (val, key) {
-          return {
-            selector: '.td-' + key,
-            properties: { 'text-decoration': val }
-          };
-        })
-      }, {
-        name: 'Letter spacing',
-        rules: map(this.options.letterSpacing, function (val, key) {
-          return {
-            selector: '.ls-' + key,
-            properties: {
-              'letter-spacing': val
-            }
-          };
-        })
-      }, {
-        name: 'Line height',
-        rules: map(this.options.lineHeights, function (val, key) {
-          return {
-            selector: '.lh-' + key,
-            properties: { 'line-height': val }
-          };
-        })
-      }, {
-        name: 'Normalize font',
-        rules: this.options.normalize && [{
-          selector: '.normal',
-          properties: {
-            'font-style': 'normal',
-            'font-weight': 'normal',
-            'text-decoration': 'none',
-            'text-transform': 'none'
-          }
-        }]
-      }, {
-        name: 'Font families',
-        rules: map(this.options.fontFamilies, function (val, key) {
-          return {
-            selector: '.' + key,
-            properties: { 'font-family': val }
-          };
-        })
-      }, {
-        name: 'Whitespace',
-        rules: map(this.options.whitespace, function (val) {
-          return {
-            selector: '.ws-' + val,
-            properties: { 'white-space': val }
-          };
-        })
-      },
+defaults$1.baseColors = {
+  // Context colors
+  primary: null,
+  secondary: null,
+  info: null,
+  success: null,
+  warning: null,
+  danger: null,
 
-      // ---------------------------------------------------------
-      // Borders
-      // ---------------------------------------------------------
+  // Grayscale
+  gray: '#7a7a7a',
 
-      {
-        name: 'Border positions',
-        rules: this.options.borderPosition && [{
-          selector: '.ba',
-          properties: { border: '1px solid' }
-        }, {
-          selector: '.bl',
-          properties: { 'border-left': '1px solid' }
-        }, {
-          selector: '.bt',
-          properties: { 'border-top': '1px solid' }
-        }, {
-          selector: '.br',
-          properties: { 'border-right': '1px solid' }
-        }, {
-          selector: '.bb',
-          properties: { 'border-bottom': '1px solid' }
-        }, {
-          selector: '.bx',
-          properties: {
-            'border-left': '1px solid',
-            'border-right': '1px solid'
-          }
-        }, {
-          selector: '.by',
-          properties: {
-            'border-top': '1px solid',
-            'border-bottom': '1px solid'
-          }
-        }]
-      }, {
-        name: 'Border removal',
-        rules: this.options.borderRemoval && [{
-          selector: '.b-none',
-          properties: { border: 'none' }
-        }, {
-          selector: '.bl-none',
-          properties: { 'border-left': 'none' }
-        }, {
-          selector: '.br-none',
-          properties: { 'border-right': 'none' }
-        }, {
-          selector: '.bb-none',
-          properties: { 'border-bottom': 'none' }
-        }, {
-          selector: '.bt-none',
-          properties: { 'border-top': 'none' }
-        }, {
-          selector: '.bx-none',
-          properties: {
-            'border-left': 'none',
-            'border-right': 'none'
-          }
-        }, {
-          selector: '.by-none',
-          properties: {
-            'border-top': 'none',
-            'border-bottom': 'none'
-          }
-        }]
-      }, {
-        name: 'Border styles',
-        rules: map(this.options.borderStyles, function (val) {
-          return {
-            selector: '.b-' + val,
-            properties: { 'border-style': val }
-          };
-        })
-      }, {
-        name: 'Border widths',
-        rules: map(this.options.borderWidths, function (val, key) {
-          return {
-            selector: '.bw-' + key,
-            properties: { 'border-width': val }
-          };
-        })
-      }, {
-        name: 'Border radius',
-        rules: map(this.options.borderRadii, function (val, key) {
-          return {
-            selector: '.rad-' + key,
-            properties: {
-              'border-radius': val
-            }
-          };
-        })
-      }, {
-        name: 'Border radii position',
-        rules: this.options.borderRadiiPosition && [{
-          selector: '.br-left',
-          properties: {
-            'border-top-right-radius': 0,
-            'border-bottom-right-radius': 0
-          }
-        }, {
-          selector: '.br-top',
-          properties: {
-            'border-bottom-right-radius': 0,
-            'border-bottom-left-radius': 0
-          }
-        }, {
-          selector: '.br-right',
-          properties: {
-            'border-top-left-radius': 0,
-            'border-bottom-left-radius': 0
-          }
-        }, {
-          selector: '.br-bottom',
-          properties: {
-            'border-top-right-radius': 0,
-            'border-top-left-radius': 0
-          }
-        }]
-      }, {
-        name: 'Border collapse',
-        rules: this.options.borderCollapse && [{
-          selector: '.collapse',
-          properties: {
-            'border-collapse': 'collapse'
-          }
-        }]
-      }, {
-        name: 'Border colors',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.bc-' + key,
-            properties: { 'border-color': val }
-          };
-        })
-      }, {
-        name: 'Border colors (hover)',
-        rules: map(this.options.colors, function (val, key) {
-          return {
-            selector: '.hov-bc-' + key + ':hover',
-            properties: { 'border-color': val }
-          };
-        })
-      },
+  // General colors
+  blue: '#3187c4',
+  cyan: '#31c4a9',
+  green: '#7db735',
+  orange: '#dd6618',
+  purple: '#963ebc',
+  pink: '#bc328c',
+  red: '#d8401e',
+  yellow: '#efef00'
+};
 
-      // ---------------------------------------------------------
-      // Flexbox
-      // ---------------------------------------------------------
+defaults$1.baseColors.primary = defaults$1.baseColors.cyan;
+defaults$1.baseColors.secondary = defaults$1.baseColors.gray;
+defaults$1.baseColors.info = defaults$1.baseColors.blue;
+defaults$1.baseColors.success = defaults$1.baseColors.green;
+defaults$1.baseColors.warning = defaults$1.baseColors.orange;
+defaults$1.baseColors.danger = defaults$1.baseColors.red;
 
-      {
-        name: 'Flexbox',
-        rules: [].concat(map(this.options.flexDirection, function (val, key) {
-          return {
-            selector: '.fd-' + key,
-            properties: { 'flex-direction': val }
-          };
-        }), map(this.options.justifyContent, function (val, key) {
-          return {
-            selector: '.jc-' + key,
-            properties: { 'justify-content': val }
-          };
-        }), map(this.options.alignItems, function (val, key) {
-          return {
-            selector: '.ai-' + key,
-            properties: { 'align-items': val }
-          };
-        }), map(this.options.alignSelf, function (val, key) {
-          return {
-            selector: '.as-' + key,
-            properties: { 'align-self': val }
-          };
-        }), map(this.options.alignContent, function (val, key) {
-          return {
-            selector: '.ac-' + key,
-            properties: { 'align-content': val }
-          };
-        }), map(this.options.flexWrap, function (val, key) {
-          return {
-            selector: '.fw-' + key,
-            properties: { 'flex-wrap': val }
-          };
-        }), map(this.options.flexOrder, function (val, key) {
-          return {
-            selector: '.fo-' + key,
-            properties: { 'flex-order': val }
-          };
-        }))
-      },
+function createColors() {
+  var baseColors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var gradients = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-      // ---------------------------------------------------------
-      // Spacing
-      // ---------------------------------------------------------
+  var colors = {};
 
-      {
-        name: 'Margins',
-        rules: this._createSpacingRules('margin')
-      }, {
-        name: 'Margins (responsive)',
-        rules: this._createSpacingRules('margin'),
-        responsive: true
-      }, {
-        name: 'Padding',
-        rules: this._createSpacingRules('padding')
-      }, {
-        name: 'Padding (responsive)',
-        rules: this._createSpacingRules('padding'),
-        responsive: true
-      },
+  // Generate color gradients version for all colors.
+  map(baseColors, function (val, key) {
+    if (gradients) colors[key + '-lightest'] = lightness(val, 50);
+    if (gradients) colors[key + '-lighter'] = lightness(val, 45);
+    if (gradients) colors[key + '-light'] = lightness(val, 30);
+    colors[key] = val;
+    if (gradients) colors[key + '-dark'] = lightness(val, -10);
+    if (gradients) colors[key + '-darker'] = lightness(val, -16);
+    if (gradients) colors[key + '-darkest'] = lightness(val, -24);
+  });
 
-      // ---------------------------------------------------------
-      // Lists
-      // ---------------------------------------------------------
+  // Some base colors that never change, thus they don't need
+  // to be configurable
+  colors.transparent = 'transparent';
+  colors.black = 'black';
+  colors.white = 'white';
 
-      {
-        name: 'Lists',
-        rules: this.options.lists && [{
-          selector: '.unstyled',
-          properties: {
-            'list-style': 'none',
-            '& li': {}
-          }
-        }]
-      },
+  return colors;
+}
 
-      // ---------------------------------------------------------
-      // Other styles
-      // ---------------------------------------------------------
+function options() {
+  var overrides = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      {
-        name: 'Background sizes',
-        rules: map(this.options.backgroundSizes, function (val) {
-          return {
-            selector: '.' + val,
-            properties: { 'background-size': val }
-          };
-        })
-      }, {
-        name: 'Cursor',
-        rules: map(this.options.cursors, function (val) {
-          return {
-            selector: '.c-' + val,
-            properties: { cursor: val }
-          };
-        })
+  var opts = Object.assign({}, defaults$1, overrides);
+  opts.colors = createColors(opts.baseColors, opts.colorGradients);
+  return opts;
+}
+
+function positionValue(prefix, dir, val) {
+  var _ref6, _ref7;
+
+  switch (dir) {
+    case 'a':
+      return defineProperty({}, prefix, val);
+      break;
+    case 'l':
+      return defineProperty({}, prefix + '-left', val);
+      break;
+    case 't':
+      return defineProperty({}, prefix + '-top', val);
+      break;
+    case 'r':
+      return defineProperty({}, prefix + '-right', val);
+      break;
+    case 'b':
+      return defineProperty({}, prefix + '-bottom', val);
+      break;
+    case 'x':
+      return _ref6 = {}, defineProperty(_ref6, prefix + '-left', val), defineProperty(_ref6, prefix + '-right', val), _ref6;
+      break;
+    case 'y':
+      return _ref7 = {}, defineProperty(_ref7, prefix + '-top', val), defineProperty(_ref7, prefix + '-bottom', val), _ref7;
+      break;
+    default:
+      console.error(prefix, dir, val);
+      throw new Error('invalid "' + prefix + '" value: ' + val + ', direction: ' + dir);
+      break;
+  }
+}
+
+function spacingValue(prefix, dir, val) {
+  var _ref13, _ref14;
+
+  switch (dir) {
+    case '':
+      return defineProperty({}, prefix, val);
+      break;
+    case 'l':
+      return defineProperty({}, prefix + '-left', val);
+      break;
+    case 't':
+      return defineProperty({}, prefix + '-top', val);
+      break;
+    case 'r':
+      return defineProperty({}, prefix + '-right', val);
+      break;
+    case 'b':
+      return defineProperty({}, prefix + '-bottom', val);
+      break;
+    case 'x':
+      return _ref13 = {}, defineProperty(_ref13, prefix + '-left', val), defineProperty(_ref13, prefix + '-right', val), _ref13;
+      break;
+    case 'y':
+      return _ref14 = {}, defineProperty(_ref14, prefix + '-top', val), defineProperty(_ref14, prefix + '-bottom', val), _ref14;
+      break;
+    default:
+      throw new Error('invalid position "' + dir + '"');
+      break;
+  }
+}
+
+var templates = {
+  // ---------------------------------------------------------
+  // Display
+  // ---------------------------------------------------------
+
+  display: {
+    name: 'Display',
+    rules: function rules(opts) {
+      return map(opts.display, function (val, key) {
+        return {
+          selector: '.' + key,
+          properties: { display: val }
+        };
+      });
+    }
+  },
+  overflow: {
+    name: 'Overflow',
+    rules: function rules(opts) {
+      return map(opts.overflow, function (val, key) {
+        return {
+          selector: '.of-' + val,
+          properties: { overflow: val }
+        };
+      });
+    }
+  },
+  opacity: {
+    name: 'Opacity',
+    rules: function rules(opts) {
+      return map(opts.opacity, function (val, key) {
+        return {
+          selector: '.o-' + key,
+          properties: { opacity: val }
+        };
+      });
+    }
+  },
+  'opacity-hover': {
+    name: 'Opacity (hover)',
+    rules: function rules(opts) {
+      return map(opts.opacity, function (val, key) {
+        return {
+          selector: '.hov-o-' + key + ':hover',
+          properties: { opacity: val }
+        };
+      });
+    }
+  },
+  'z-index': {
+    name: 'Z-Index',
+    rules: function rules(opts) {
+      return map(opts.zIndex, function (val, key) {
+        return {
+          selector: '.z-' + val,
+          properties: { 'z-index': val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Positioning and display
+  // ---------------------------------------------------------
+
+  floats: {
+    name: 'Floats',
+    rules: function rules(opts) {
+      return map(opts.floats, function (val, key) {
+        return {
+          selector: '.f' + val[0],
+          properties: { float: val }
+        };
+      });
+    }
+  },
+  positions: {
+    name: 'Positioning',
+    rules: function rules(opts) {
+      return map(opts.positions, function (val, key) {
+        return {
+          selector: '.' + val,
+          properties: { position: val }
+        };
+      });
+    }
+  },
+  'text-alignment': {
+    name: 'Text alignment',
+    rules: function rules(opts) {
+      return map(opts.textAlignment, function (val, key) {
+        return {
+          selector: '.' + val,
+          properties: { 'text-align': val }
+        };
+      });
+    }
+  },
+  'vertical-alignment': {
+    name: 'Vertical alignment',
+    rules: function rules(opts) {
+      return map(opts.verticalAlignment, function (val, key) {
+        return {
+          selector: '.v-' + key,
+          properties: { 'vertical-align': val }
+        };
+      });
+    }
+  },
+  visibility: {
+    name: 'Visibility',
+    rules: function rules(opts) {
+      return map(opts.visibility, function (val, key) {
+        return {
+          selector: '.' + key,
+          properties: { visibility: val }
+        };
+      });
+    }
+  },
+  clearfix: {
+    name: 'Clearfix',
+    rules: function rules(opts) {
+      return [{
+        selector: '.cf:after',
+        properties: { clear: 'both', display: 'table', content: '""' }
       }];
     }
-  }, {
-    key: 'css',
-    get: function get$$1() {
-      var separator = '\n';
-      return ['* { box-sizing: border-box }'].concat(this.rules).map(function (rule) {
-        return rule;
-      }).join(separator);
-    }
-  }]);
-  return Euphoria;
-}();
+  },
 
-export default Euphoria;
+  // ---------------------------------------------------------
+  // Sizes
+  // ---------------------------------------------------------
+
+  widths: {
+    name: 'Widths',
+    rules: function rules(opts) {
+      return map(opts.percentageSizes, function (val, key) {
+        return {
+          selector: '.w-' + key,
+          properties: { width: val }
+        };
+      });
+    }
+  },
+  'widths-max': {
+    name: 'Widths (max)',
+    rules: function rules(opts) {
+      return map(opts.percentageSizes, function (val, key) {
+        return {
+          selector: '.mw-' + key,
+          properties: { 'max-width': val }
+        };
+      });
+    }
+  },
+  heights: {
+    name: 'Heights',
+    rules: function rules(opts) {
+      return map(opts.percentageSizes, function (val, key) {
+        return {
+          selector: '.h-' + key,
+          properties: { height: val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Colors
+  // ---------------------------------------------------------
+
+  'text-colors': {
+    name: 'Text colors',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.' + key,
+          properties: { color: val }
+        };
+      });
+    }
+  },
+  'text-colors-hover': {
+    name: 'Text colors (hover)',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.hov-' + key + ':hover',
+          properties: { color: val }
+        };
+      });
+    }
+  },
+  'background-colors': {
+    name: 'Background colors',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.bg-' + key,
+          properties: { background: val }
+        };
+      });
+    }
+  },
+  'background-colors-hover': {
+    name: 'Background colors (hover)',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.hov-bg-' + key + ':hover',
+          properties: { background: val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Box styles
+  // ---------------------------------------------------------
+
+  'box-shadows': {
+    name: 'Box shadows',
+    rules: function rules(opts) {
+      return map(opts.boxShadows, function (val, key) {
+        return {
+          selector: '.bs-' + key,
+          properties: { 'box-shadow': val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Typography
+  // ---------------------------------------------------------
+
+  'font-sizes': {
+    name: 'Font sizes',
+    rules: function rules(opts) {
+      return map(opts.fontSizes, function (val, key) {
+        return {
+          selector: '.txt-' + key,
+          properties: { 'font-size': val }
+        };
+      });
+    }
+  },
+  'text-transforms': {
+    name: 'Text transforms',
+    rules: function rules(opts) {
+      return map(opts.textTransforms, function (val, key) {
+        return {
+          selector: '.' + key,
+          properties: { 'text-transform': val }
+        };
+      });
+    }
+  },
+  'font-styles': {
+    name: 'Font styles',
+    rules: function rules(opts) {
+      return map(opts.fontStyles, function (val, key) {
+        return {
+          selector: '.' + val,
+          properties: { 'font-style': val }
+        };
+      });
+    }
+  },
+  'font-weights': {
+    name: 'Font weights',
+    rules: function rules(opts) {
+      return map(opts.fontWeights, function (val, key) {
+        return {
+          selector: '.fw-' + key,
+          properties: { 'font-weight': val }
+        };
+      });
+    }
+  },
+  'text-decorations': {
+    name: 'Text decorations',
+    rules: function rules(opts) {
+      return map(opts.textDecorations, function (val, key) {
+        return {
+          selector: '.td-' + key,
+          properties: { 'text-decoration': val }
+        };
+      });
+    }
+  },
+  'text-decorations-hover': {
+    name: 'Text decorations (hover)',
+    rules: function rules(opts) {
+      return map(opts.textDecorations, function (val, key) {
+        return {
+          selector: '.hov-td-' + key + ':hover',
+          properties: { 'text-decoration': val }
+        };
+      });
+    }
+  },
+  'letter-spacing': {
+    name: 'Letter spacing',
+    rules: function rules(opts) {
+      return map(opts.letterSpacing, function (val, key) {
+        return {
+          selector: '.ls-' + key,
+          properties: { 'letter-spacing': val }
+        };
+      });
+    }
+  },
+  'line-heights': {
+    name: 'Line heights',
+    rules: function rules(opts) {
+      return map(opts.lineHeights, function (val, key) {
+        return {
+          selector: '.lh-' + key,
+          properties: { 'line-height': val }
+        };
+      });
+    }
+  },
+  'normalize-font': {
+    name: 'Normalize font',
+    rules: function rules(opts) {
+      return [{
+        selector: '.normal',
+        properties: {
+          'font-style': 'normal',
+          'font-weight': 'normal',
+          'text-decoration': 'none',
+          'text-transform': 'none'
+        }
+      }];
+    }
+  },
+  'font-families': {
+    name: 'Font families',
+    rules: function rules(opts) {
+      return map(opts.fontFamilies, function (val, key) {
+        return {
+          selector: '.' + key,
+          properties: { 'font-family': val }
+        };
+      });
+    }
+  },
+  whitespace: {
+    name: 'Whitespace',
+    rules: function rules(opts) {
+      return map(opts.whitespace, function (val, key) {
+        return {
+          selector: '.ws-' + val,
+          properties: { 'white-space': val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Borders
+  // ---------------------------------------------------------
+
+  'border-positions': {
+    name: 'Border positions',
+    rules: function rules(opts) {
+      return map(opts.positionValues, function (val, key) {
+        return {
+          selector: '.b' + val,
+          properties: positionValue('border', val, '1px solid')
+        };
+      });
+    }
+  },
+  'border-removal': {
+    name: 'Border removal',
+    rules: function rules(opts) {
+      return map(opts.positionValues, function (val, key) {
+        return {
+          selector: '.b' + val + '-none',
+          properties: positionValue('border', val, 'none')
+        };
+      });
+    }
+  },
+  'border-styles': {
+    name: 'Border styles',
+    rules: function rules(opts) {
+      return map(opts.borderStyles, function (val, key) {
+        return {
+          selector: '.b-' + val,
+          properties: { 'border-style': val }
+        };
+      });
+    }
+  },
+  'border-widths': {
+    name: 'Border widths',
+    rules: function rules(opts) {
+      return map(opts.borderWidths, function (val, key) {
+        return {
+          selector: '.bw-' + key,
+          properties: { 'border-width': val }
+        };
+      });
+    }
+  },
+  'border-radii': {
+    name: 'Border radii',
+    rules: function rules(opts) {
+      return map(opts.borderRadii, function (val, key) {
+        return {
+          selector: '.rad-' + key,
+          properties: { 'border-radius': val }
+        };
+      });
+    }
+  },
+  'border-radii-positions': {
+    name: 'Border radii positions',
+    rules: function rules(opts) {
+      return map(opts.borderRadiiPositions, function (val, key) {
+        var properties = void 0;
+        switch (val) {
+          case 'left':
+            properties = {
+              'border-top-right-radius': 0,
+              'border-bottom-right-radius': 0
+            };
+            break;
+          case 'top':
+            properties = {
+              'border-bottom-right-radius': 0,
+              'border-bottom-left-radius': 0
+            };
+            break;
+          case 'right':
+            properties = {
+              'border-top-left-radius': 0,
+              'border-bottom-left-radius': 0
+            };
+            break;
+          case 'bottom':
+            properties = {
+              'border-top-right-radius': 0,
+              'border-top-left-radius': 0
+            };
+            break;
+          default:
+            throw new Error('invalid border radii position');
+            break;
+        }
+        return {
+          selector: '.rad-' + val,
+          properties: properties
+        };
+      });
+    }
+  },
+  'border-collapse': {
+    name: 'Border collapse',
+    rules: function rules(opts) {
+      return [{
+        selector: '.collapse',
+        properties: { 'border-collapse': 'collapse' }
+      }];
+    }
+  },
+  'border-colors': {
+    name: 'Border colors',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.bc-' + key,
+          properties: { 'border-color': val }
+        };
+      });
+    }
+  },
+  'border-colors-hover': {
+    name: 'Border colors (hover)',
+    rules: function rules(opts) {
+      return map(opts.colors, function (val, key) {
+        return {
+          selector: '.hov-bc-' + key + ':hover',
+          properties: { 'border-color': val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Flexbox
+  // ---------------------------------------------------------
+
+  'flex-direction': {
+    name: 'Flex direction',
+    rules: function rules(opts) {
+      return map(opts.flexDirection, function (val, key) {
+        return {
+          selector: '.fd-' + key,
+          properties: { 'flex-direction': val }
+        };
+      });
+    }
+  },
+  'justify-content': {
+    name: 'Justify content',
+    rules: function rules(opts) {
+      return map(opts.justifyContent, function (val, key) {
+        return {
+          selector: '.jc-' + key,
+          properties: { 'justify-content': val }
+        };
+      });
+    }
+  },
+  'align-items': {
+    name: 'Align items',
+    rules: function rules(opts) {
+      return map(opts.alignItems, function (val, key) {
+        return {
+          selector: '.ai-' + key,
+          properties: { 'align-items': val }
+        };
+      });
+    }
+  },
+  'align-self': {
+    name: 'Align self',
+    rules: function rules(opts) {
+      return map(opts.alignSelf, function (val, key) {
+        return {
+          selector: '.as-' + key,
+          properties: { 'align-self': val }
+        };
+      });
+    }
+  },
+  'align-content': {
+    name: 'Align content',
+    rules: function rules(opts) {
+      return map(opts.alignContent, function (val, key) {
+        return {
+          selector: '.ac-' + key,
+          properties: { 'align-content': val }
+        };
+      });
+    }
+  },
+  'flex-wrap': {
+    name: 'Flex wrap',
+    rules: function rules(opts) {
+      return map(opts.flexWrap, function (val, key) {
+        return {
+          selector: '.fw-' + key,
+          properties: { 'flex-wrap': val }
+        };
+      });
+    }
+  },
+  'flex-order': {
+    name: 'Flex order',
+    rules: function rules(opts) {
+      return map(opts.flexOrder, function (val, key) {
+        return {
+          selector: '.fo-' + key,
+          properties: { 'flex-order': val }
+        };
+      });
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Spacing
+  // ---------------------------------------------------------
+
+  margin: {
+    name: 'Margin',
+    rules: function rules(opts) {
+      return flatten(map(opts.margins, function (val, key) {
+        return map(opts.spacingDirections, function (dir) {
+          return {
+            selector: '.m' + dir + '-' + key,
+            properties: spacingValue('margin', dir, val)
+          };
+        });
+      }));
+    }
+  },
+  'margin-percentages': {
+    name: 'Margin (percentages)',
+    rules: function rules(opts) {
+      return flatten(map(opts.percentageSizes, function (val, key) {
+        return map(opts.spacingDirections, function (dir) {
+          return {
+            selector: '.m' + dir + '-' + key,
+            properties: spacingValue('margin', dir, val)
+          };
+        });
+      }));
+    }
+  },
+  padding: {
+    name: 'Padding',
+    rules: function rules(opts) {
+      return flatten(map(opts.paddings, function (val, key) {
+        return map(opts.spacingDirections, function (dir) {
+          return {
+            selector: '.p' + dir + '-' + key,
+            properties: spacingValue('padding', dir, val)
+          };
+        });
+      }));
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Lists
+  // ---------------------------------------------------------
+
+  lists: {
+    name: 'Lists',
+    rules: function rules(opts) {
+      return [{
+        selector: '.unstyled',
+        properties: {
+          'list-style': 'none'
+        }
+      }];
+    }
+  },
+
+  // ---------------------------------------------------------
+  // Other styles
+  // ---------------------------------------------------------
+
+  'background-sizes': {
+    name: 'Background sizes',
+    rules: function rules(opts) {
+      return map(opts.backgroundSizes, function (val, key) {
+        return {
+          selector: '.' + val,
+          properties: { 'background-size': val }
+        };
+      });
+    }
+  },
+  cursors: {
+    name: 'Cursors',
+    rules: function rules(opts) {
+      return map(opts.cursors, function (val, key) {
+        return {
+          selector: '.c-' + val,
+          properties: { cursor: val }
+        };
+      });
+    }
+  }
+};
+
+function euphoria() {
+  var customOpts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var options$$1 = options(customOpts);
+
+  var rulesets = function rulesets() {
+    return createRuleSets(templates, options$$1);
+  };
+  var ast = function ast() {
+    return createAST(rulesets(), options$$1.breakpoints);
+  };
+  var css = function css() {
+    return createCSS(ast());
+  };
+
+  return { ast: ast, css: css, defaults: defaults$1, options: options$$1, rulesets: rulesets };
+}
+
+export default euphoria;

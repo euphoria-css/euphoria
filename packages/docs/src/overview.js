@@ -11,7 +11,7 @@ function P({ children }) {
 
 function A({ children, ...props }) {
   return (
-    <a {...props} className="primary hov-primary-dark" target="_blank">
+    <a {...props} target="_blank">
       {children}
     </a>
   )

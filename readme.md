@@ -57,6 +57,11 @@ Please write tests for your code! Test files are next to the source files (with 
 
 ## TODO
 
+### General
+
+* [ ] Full docs on every possible option and what it affects
+* [ ] Full docs on all the possible override values
+
 ### Rules:
 
 * [ ] Animations (default and hover versions)

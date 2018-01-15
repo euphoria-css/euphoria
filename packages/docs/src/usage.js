@@ -12,20 +12,12 @@ function Usage() {
       <p>Use the sidebar to browse all available Euphoria styles.</p>
       <p>
         Please see{' '}
-        <a href="https://github.com/euphoria-css/euphoria" className="primary">
-          Euphoria
-        </a>{' '}
-        on Github for installation and setup documentation.
+        <a href="https://github.com/euphoria-css/euphoria">Euphoria</a> on
+        Github for installation and setup documentation.
       </p>
       <p>
-        Learn{' '}
-        <Link to="/customize" className="primary">
-          how to customize Euphoria
-        </Link>{' '}
-        or see{' '}
-        <Link to="/all" className="primary">
-          all Euphoria CSS styles
-        </Link>.
+        Learn <Link to="/customize">how to customize Euphoria</Link> or see{' '}
+        <Link to="/all">all Euphoria CSS styles</Link>.
       </p>
 
       <SectionHeading>Install</SectionHeading>
@@ -61,11 +53,8 @@ npm i -S euphoria euphoria-cli`}</Highlight>
         <Code>euphoria.config.js</Code> file and export a configuration object.
       </p>
       <p>
-        See{' '}
-        <Link className="primary" to="/customize">
-          Customize
-        </Link>{' '}
-        for more information on how to customize Euphoria.
+        See <Link to="/customize">Customize</Link> for more information on how
+        to customize Euphoria.
       </p>
 
       <SectionHeading>Starter HTML</SectionHeading>
@@ -81,6 +70,11 @@ npm i -S euphoria euphoria-cli`}</Highlight>
 
     <!-- Optional: Apply a global CSS reset before using Euphoria -->
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" />>
+
+    <!-- Optional but recommended: fix box-sizing -->
+    <style>
+      * { box-sizing: border-box; }
+    </style>
 
     <!-- Use the CDN version of Euphoria: -->
     <link href="https://unpkg.com/euphoria/dist/euphoria.min.css" rel="stylesheet" />

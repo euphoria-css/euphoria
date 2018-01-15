@@ -9,11 +9,9 @@ const COPYRIGHT = `/**
  * Learn more at: <http://euphoria-css.com>
  */`
 
-class Compressor {
-  static compress(css) {
-    const cleaned = new CleanCSS({}).minify(css).styles
-    return [COPYRIGHT, cleaned].join('\n')
-  }
+function compressCSS(css) {
+  const cleaned = new CleanCSS({}).minify(css).styles
+  return [COPYRIGHT, cleaned].join('\n')
 }
 
-export default Compressor
+export default compressCSS

@@ -5,12 +5,12 @@ const babelConfig = {
   babelrc: false,
   ignore: 'node_modules/**',
   presets: [['env', { modules: false }]],
-  plugins: ['external-helpers'],
+  plugins: ['external-helpers', 'transform-object-rest-spread'],
 }
 
 export default [
   {
-    input: 'src/index.js',
+    input: 'src/euphoria.js',
     external: ['css-selector-parser', 'lightness', 'lodash', 'url-slug'],
     plugins: [babel(babelConfig)],
     output: [

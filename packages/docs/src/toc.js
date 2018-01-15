@@ -7,7 +7,7 @@ function TOCLink({ children, href }) {
   return (
     <NavLink
       to={href}
-      className="db px-sm py-xs td-none primary hov-white hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
+      className="db px-sm py-xs td-none primary hov-white hov-td-none hov-bg-primary bl bw-lg bc-transparent hov-bc-cyan-dark txt-sm"
       activeClassName="white bg-primary bc-cyan-dark"
     >
       {children}
@@ -17,7 +17,7 @@ function TOCLink({ children, href }) {
 
 function Heading({ children }) {
   return (
-    <h3 className="m-none mb-sm px-sm mt-sm gray-light uppercase ls-lg txt-sm">
+    <h3 className="m-none mb-sm px-sm mt-sm gray-light upper ls-lg txt-sm">
       {children}
     </h3>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 function Header() {
   return (
     <nav className="cf bg-primary p-md ai-center bl bw-lg bc-cyan-dark">
-      <h1 className="fl-md-up txt-lg ls-lg m-none uppercase white fw-1">
+      <h1 className="fl-md-up txt-lg ls-lg m-none upper white fw-1">
         Euphoria
       </h1>
       <div className="fr-md-up db-xs-only py-xxs mt-sm mt-none-md-up">
