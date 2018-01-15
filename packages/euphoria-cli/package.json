@@ -1,7 +1,7 @@
 {
   "name": "euphoria-cli",
   "description": "Euphoria CSS command line tool",
-  "version": "2.6.5",
+  "version": "2.7.0",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
