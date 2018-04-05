@@ -18,11 +18,45 @@ To try out Euphoria, just add the following to the `<head>` of your page:
 
 Now check the [documentation site][docs] for usage information.
 
-## Documentation
+## Installation
 
-**Please see [euphoria-css.com][docs] for information on installation and usage!**
+### CDN
 
-Also, have a look at the [examples folder][examples] for a real-world example of using Euphoria.
+The easiest way to use Euphoria in a new project is to just include the unpkg file above.
+
+### Using npm/yarn
+
+Install Euphoria:
+
+```bash
+# Using npm
+npm install --save euphoria
+
+# Using yarn
+yarn add euphoria
+```
+
+Now you can either include the minified files in your CSS:
+
+```css
+@import './node_modules/euphoria/dist/euphoria.min.css';
+```
+
+Or, if you are using PostCSS, you can import the source files which will give you access to the CSS variables that Euphoria provides:
+
+```css
+@import './node_modules/euphoria/src/euphoria.css';
+```
+
+If you are using a tool like WebPack, you can use a shorter import syntax:
+
+```css
+@import '~euphoria';
+```
+
+### Customizing Euphoria
+
+To customize Euphoria, import the CSS and then change the values of the CSS variables. Please see the [available variables][variables] that Euphoria creates.
 
 ## Contributing
 
@@ -38,9 +72,6 @@ nvm use
 # Install dependencies.
 npm install
 
-# Make sure things work.
-npm test
-
 # Run dev server:
 npm start
 ```
@@ -50,41 +81,6 @@ Once you're happy with your changes, submit a Pull Request on Github.
 ### Formatting
 
 Please run Prettier (use `npm run format` if your editor isn't setup to use Prettier) on all code before submitting.
-
-### Test
-
-Please write tests for your code! Test files are next to the source files (with a `.test.js` extension) and we're using the [ava][ava] test library. Run tests with `npm test` or `npm run watch-test`
-
-## TODO
-
-### General
-
-* [ ] Full docs on every possible option and what it affects
-* [ ] Full docs on all the possible override values
-
-### Rules:
-
-* [ ] Animations (default and hover versions)
-  * [ ] Fade
-  * [ ] Show child
-  * [ ] Hide child
-  * [ ] Grow
-  * [ ] Shake
-  * [ ] Rotate
-* Better Pseudo-selector support
-  * [ ] Placeholder `::placeholder` text
-  * [ ] Outline `:outline` styling
-  * [ ] Focus `:focus` styling
-  * [ ] Hover `:hover` styling
-* [ ] Font families:
-  * [ ] Have a set of common "web safe" fonts
-  * [ ] Have a font stack for common Google Web Fonts (Open Sans, Roboto, etc)
-* Someday:
-  * [ ] Grid layout helpers
-
-### Build:
-
-* [ ] Add autoprefixer
 
 ## Changelog
 
@@ -119,4 +115,5 @@ MIT
 [glamor]: https://github.com/threepointone/glamor
 [options]: #options
 [tachyons]: http://tachyons.io
+[variables]: http://euphoria-css.com#variables
 [usage]: #usage

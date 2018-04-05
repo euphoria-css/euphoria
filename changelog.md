@@ -1,3 +1,9 @@
+### v3.0.1
+
+Complete re-write using PostCSS to simplify rules and make extensible in CSS projects.
+
+Moving over to using CSS variables to make the library more future proof.
+
 ### v2.7.0
 
 * Rewrote rule engine to be simpler and more flexible. Now you can just provide a "Rule Template" which creates a ruleset containing a list of rules. Each RuleSet gets the full configuration object and can do whatever it wants as long as it returns an array of rules.

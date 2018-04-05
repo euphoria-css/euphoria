@@ -1,4 +1,14 @@
-node_modules
+# OS Specific
 .DS_Store
+
+# Node specific
+node_modules
+
+# Artificats
+.cache
 *.log
-# packages/euphoria/dist/euphoria.min.css
+
+# Project specific
+dist/*
+!dist/euphoria.min.css
+!dist/euphoria.min.css.map

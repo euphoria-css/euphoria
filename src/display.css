@@ -1,0 +1,200 @@
+/*---------------------------------------------
+- Display
+---------------------------------------------*/
+
+.db {
+  display: block;
+}
+.di {
+  display: inline;
+}
+.dib {
+  display: inline-block;
+}
+.df {
+  display: flex;
+}
+.dfb {
+  display: flex-block;
+}
+.dt {
+  display: table;
+}
+.dtc {
+  display: table-cell;
+}
+.dn {
+  display: none;
+}
+
+/*---------------------------------------------
+- Floats
+---------------------------------------------*/
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.fn {
+  float: none;
+}
+
+/*---------------------------------------------
+- Opacity
+---------------------------------------------*/
+
+.o-0 {
+  opacity: 0;
+}
+.o-025 {
+  opacity: 0.025;
+}
+.o-05 {
+  opacity: 0.05;
+}
+.o-10 {
+  opacity: 0.1;
+}
+.o-20 {
+  opacity: 0.2;
+}
+.o-30 {
+  opacity: 0.3;
+}
+.o-40 {
+  opacity: 0.4;
+}
+.o-50 {
+  opacity: 0.5;
+}
+.o-60 {
+  opacity: 0.6;
+}
+.o-70 {
+  opacity: 0.7;
+}
+.o-80 {
+  opacity: 0.8;
+}
+.o-90 {
+  opacity: 0.9;
+}
+.o-100 {
+  opacity: 1;
+}
+
+/*---------------------------------------------
+- Overflow
+---------------------------------------------*/
+
+.of-visible {
+  overflow: visible;
+}
+.of-hidden {
+  overflow: hidden;
+}
+.of-scroll {
+  overflow: scroll;
+}
+.of-auto {
+  overflow: auto;
+}
+
+/*---------------------------------------------
+- Positioning
+---------------------------------------------*/
+
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+
+/*---------------------------------------------
+- Vertical alignment
+---------------------------------------------*/
+
+.v-base {
+  vertical-align: baseline;
+}
+.v-bot {
+  vertical-align: bottom;
+}
+.v-top {
+  vertical-align: top;
+}
+.v-text-top {
+  vertical-align: text-top;
+}
+.v-text-bot {
+  vertical-align: text-bottom;
+}
+
+/*---------------------------------------------
+- Visibility
+---------------------------------------------*/
+
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
+}
+
+/*---------------------------------------------
+- Whitespace
+---------------------------------------------*/
+
+.ws-pre {
+  white-space: pre;
+}
+.ws-nowrap {
+  white-space: nowrap;
+}
+.ws-normal {
+  white-space: normal;
+}
+
+/*---------------------------------------------
+- Z-Index
+---------------------------------------------*/
+
+.z-0 {
+  z-index: 0;
+}
+.z-100 {
+  z-index: 100;
+}
+.z-200 {
+  z-index: 200;
+}
+.z-300 {
+  z-index: 300;
+}
+.z-400 {
+  z-index: 400;
+}
+.z-500 {
+  z-index: 500;
+}
+.z-600 {
+  z-index: 600;
+}
+.z-700 {
+  z-index: 700;
+}
+.z-800 {
+  z-index: 800;
+}
+.z-900 {
+  z-index: 900;
+}
+.z-1000 {
+  z-index: 1000;
+}

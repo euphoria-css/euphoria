@@ -1,0 +1,6 @@
+.clearfix:after,
+.cf:after {
+  clear: both;
+  display: table;
+  content: '';
+}

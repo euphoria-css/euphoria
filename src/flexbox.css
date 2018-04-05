@@ -1,0 +1,153 @@
+/*---------------------------------------------
+- Align content
+---------------------------------------------*/
+
+.ac-start {
+  align-content: flex-start;
+}
+.ac-end {
+  align-content: flex-end;
+}
+.ac-center {
+  align-content: center;
+}
+.ac-stretch {
+  align-content: stretch;
+}
+.ac-around {
+  align-content: space-around;
+}
+.ac-between {
+  align-content: space-between;
+}
+
+/*---------------------------------------------
+- Align items
+---------------------------------------------*/
+
+.ai-start {
+  align-items: flex-start;
+}
+.ai-end {
+  align-items: flex-end;
+}
+.ai-center {
+  align-items: center;
+}
+.ai-baseline {
+  align-items: baseline;
+}
+.ai-stretch {
+  align-items: stretch;
+}
+
+/*---------------------------------------------
+- Align self
+---------------------------------------------*/
+
+.as-start {
+  align-self: flex-start;
+}
+.as-end {
+  align-self: flex-end;
+}
+.as-center {
+  align-self: center;
+}
+.as-baseline {
+  align-self: baseline;
+}
+.as-stretch {
+  align-self: stretch;
+}
+
+/*---------------------------------------------
+- Flex direction
+---------------------------------------------*/
+
+.fd-row {
+  flex-direction: row;
+}
+.fd-row-reverse {
+  flex-direction: row-reverse;
+}
+.fd-col {
+  flex-direction: column;
+}
+.fd-col-reverse {
+  flex-direction: column-reverse;
+}
+.fd-start {
+  flex-direction: flex-start;
+}
+.fd-end {
+  flex-direction: flex-end;
+}
+
+/*---------------------------------------------
+- Flex order
+---------------------------------------------*/
+
+.fo-first {
+  flex-order: -1;
+}
+.fo-last {
+  flex-order: 1;
+}
+
+/*---------------------------------------------
+- Flex grow
+---------------------------------------------*/
+
+.fg-1 {
+  flex-grow: 1;
+}
+.fg-2 {
+  flex-grow: 2;
+}
+.fg-3 {
+  flex-grow: 3;
+}
+.fg-4 {
+  flex-grow: 4;
+}
+.fg-5 {
+  flex-grow: 5;
+}
+.fg-6 {
+  flex-grow: 6;
+}
+
+/*---------------------------------------------
+- Flex wrap
+---------------------------------------------*/
+
+.fw-wrap {
+  flex-wrap: wrap;
+}
+.fw-reverse {
+  flex-wrap: reverse;
+}
+.fw-none {
+  flex-wrap: nowrap;
+}
+
+/*---------------------------------------------
+- Justify content
+---------------------------------------------*/
+
+.jc-start {
+  justify-content: flex-start;
+}
+.jc-end {
+  justify-content: flex-end;
+}
+.jc-center {
+  justify-content: center;
+}
+.jc-between {
+  justify-content: space-between;
+}
+.jc-around {
+  justify-content: space-around;
+}

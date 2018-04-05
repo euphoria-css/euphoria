@@ -1,0 +1,422 @@
+/*---------------------------------------------
+- Font families
+---------------------------------------------*/
+
+.serif,
+.ff-serif {
+  font-family: var(--font-family-serif);
+}
+.sans-serif,
+.ff-sans-serif {
+  font-family: var(--font-family-sans-serif);
+}
+.code,
+.ff-code {
+  font-family: var(--font-family-mono);
+}
+
+/*---------------------------------------------
+- Font sizes
+---------------------------------------------*/
+
+.txt-xxxl {
+  font-size: var(--font-size-xxxl);
+}
+.txt-xxl {
+  font-size: var(--font-size-xxl);
+}
+.txt-xl {
+  font-size: var(--font-size-xl);
+}
+.txt-lg {
+  font-size: var(--font-size-lg);
+}
+.txt-md {
+  font-size: var(--font-size-md);
+}
+.txt-sm {
+  font-size: var(--font-size-sm);
+}
+.txt-xs {
+  font-size: var(--font-size-xs);
+}
+
+/*---------------------------------------------
+- Text alignment
+---------------------------------------------*/
+
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.justify {
+  text-align: justify;
+}
+
+/*---------------------------------------------
+- Font styles
+---------------------------------------------*/
+
+.italic,
+.fs-italic {
+  font-style: italic;
+}
+
+/*---------------------------------------------
+- Font weights
+---------------------------------------------*/
+
+.fw-1 {
+  font-weight: 100;
+}
+.fw-2 {
+  font-weight: 200;
+}
+.fw-3 {
+  font-weight: 300;
+}
+.fw-4 {
+  font-weight: 400;
+}
+.fw-5 {
+  font-weight: 500;
+}
+.fw-6 {
+  font-weight: 600;
+}
+.fw-7 {
+  font-weight: 700;
+}
+.fw-8 {
+  font-weight: 800;
+}
+.fw-9 {
+  font-weight: 900;
+}
+.bold,
+.fw-bold {
+  font-weight: bold;
+}
+.fw-normal {
+  font-weight: normal;
+}
+.lighter,
+.fw-lighter {
+  font-weight: lighter;
+}
+
+/*---------------------------------------------
+- Letter spacing
+---------------------------------------------*/
+
+.ls-xxs {
+  letter-spacing: var(--letter-spacing-xxs);
+}
+.ls-xs {
+  letter-spacing: var(--letter-spacing-xs);
+}
+.ls-sm {
+  letter-spacing: var(--letter-spacing-sm);
+}
+.ls-md {
+  letter-spacing: var(--letter-spacing-md);
+}
+.ls-lg {
+  letter-spacing: var(--letter-spacing-lg);
+}
+.ls-xl {
+  letter-spacing: var(--letter-spacing-xl);
+}
+.ls-xxl {
+  letter-spacing: var(--letter-spacing-xxl);
+}
+
+/*---------------------------------------------
+- Line heights
+---------------------------------------------*/
+
+.lh-xxs {
+  line-height: var(--line-heigh-xxs);
+}
+.lh-xs {
+  line-height: var(--line-heigh-xs);
+}
+.lh-sm {
+  line-height: var(--line-heigh-sm);
+}
+.lh-md {
+  line-height: var(--line-heigh-md);
+}
+.lh-lg {
+  line-height: var(--line-heigh-lg);
+}
+.lh-xl {
+  line-height: var(--line-heigh-xl);
+}
+.lh-xxl {
+  line-height: var(--line-heigh-xxl);
+}
+
+/*---------------------------------------------
+- Lists
+---------------------------------------------*/
+
+.unstyled {
+  list-style: none;
+}
+
+/*---------------------------------------------
+- Text colors
+---------------------------------------------*/
+
+.primary-lightest,
+.hov-primary-lightest:hover {
+  color: var(--color-primary-lightest);
+}
+.primary-lighter,
+.hov-primary-lighter:hover {
+  color: var(--color-primary-lighter);
+}
+.primary-light,
+.hov-primary-light:hover {
+  color: var(--color-primary-light);
+}
+.primary,
+.hov-primary:hover {
+  color: var(--color-primary);
+}
+.primary-dark,
+.hov-primary-dark:hover {
+  color: var(--color-primary-dark);
+}
+.primary-darker,
+.hov-primary-darker:hover {
+  color: var(--color-primary-darker);
+}
+.primary-darkest,
+.hov-primary-darkest:hover {
+  color: var(--color-primary-darkest);
+}
+
+.secondary-lightest,
+.hov-secondary-lightest:hover {
+  color: var(--color-secondary-lightest);
+}
+.secondary-lighter,
+.hov-secondary-lighter:hover {
+  color: var(--color-secondary-lighter);
+}
+.secondary-light,
+.hov-secondary-light:hover {
+  color: var(--color-secondary-light);
+}
+.secondary,
+.hov-secondary:hover {
+  color: var(--color-secondary);
+}
+.secondary-dark,
+.hov-secondary-dark:hover {
+  color: var(--color-secondary-dark);
+}
+.secondary-darker,
+.hov-secondary-darker:hover {
+  color: var(--color-secondary-darker);
+}
+.secondary-darkest,
+.hov-secondary-darkest:hover {
+  color: var(--color-secondary-darkest);
+}
+
+.info-lightest,
+.hov-info-lightest:hover {
+  color: var(--color-info-lightest);
+}
+.info-lighter,
+.hov-info-lighter:hover {
+  color: var(--color-info-lighter);
+}
+.info-light,
+.hov-info-light:hover {
+  color: var(--color-info-light);
+}
+.info,
+.hov-info:hover {
+  color: var(--color-info);
+}
+.info-dark,
+.hov-info-dark:hover {
+  color: var(--color-info-dark);
+}
+.info-darker,
+.hov-info-darker:hover {
+  color: var(--color-info-darker);
+}
+.info-darkest,
+.hov-info-darkest:hover {
+  color: var(--color-info-darkest);
+}
+
+.success-lightest,
+.hov-success-lightest:hover {
+  color: var(--color-success-lightest);
+}
+.success-lighter,
+.hov-success-lighter:hover {
+  color: var(--color-success-lighter);
+}
+.success-light,
+.hov-success-light:hover {
+  color: var(--color-success-light);
+}
+.success,
+.hov-success:hover {
+  color: var(--color-success);
+}
+.success-dark,
+.hov-success-dark:hover {
+  color: var(--color-success-dark);
+}
+.success-darker,
+.hov-success-darker:hover {
+  color: var(--color-success-darker);
+}
+.success-darkest,
+.hov-success-darkest:hover {
+  color: var(--color-success-darkest);
+}
+
+.warning-lightest,
+.hov-warning-lightest:hover {
+  color: var(--color-warning-lightest);
+}
+.warning-lighter,
+.hov-warning-lighter:hover {
+  color: var(--color-warning-lighter);
+}
+.warning-light,
+.hov-warning-light:hover {
+  color: var(--color-warning-light);
+}
+.warning,
+.hov-warning:hover {
+  color: var(--color-warning);
+}
+.warning-dark,
+.hov-warning-dark:hover {
+  color: var(--color-warning-dark);
+}
+.warning-darker,
+.hov-warning-darker:hover {
+  color: var(--color-warning-darker);
+}
+.warning-darkest,
+.hov-warning-darkest:hover {
+  color: var(--color-warning-darkest);
+}
+
+.danger-lightest,
+.hov-danger-lightest:hover {
+  color: var(--color-danger-lightest);
+}
+.danger-lighter,
+.hov-danger-lighter:hover {
+  color: var(--color-danger-lighter);
+}
+.danger-light,
+.hov-danger-light:hover {
+  color: var(--color-danger-light);
+}
+.danger,
+.hov-danger:hover {
+  color: var(--color-danger);
+}
+.danger-dark,
+.hov-danger-dark:hover {
+  color: var(--color-danger-dark);
+}
+.danger-darker,
+.hov-danger-darker:hover {
+  color: var(--color-danger-darker);
+}
+.danger-darkest,
+.hov-danger-darkest:hover {
+  color: var(--color-danger-darkest);
+}
+
+.gray-lightest,
+.hov-gray-lightest:hover {
+  color: var(--color-gray-lightest);
+}
+.gray-lighter,
+.hov-gray-lighter:hover {
+  color: var(--color-gray-lighter);
+}
+.gray-light,
+.hov-gray-light:hover {
+  color: var(--color-gray-light);
+}
+.gray,
+.hov-gray:hover {
+  color: var(--color-gray);
+}
+.gray-dark,
+.hov-gray-dark:hover {
+  color: var(--color-gray-dark);
+}
+.gray-darker,
+.hov-gray-darker:hover {
+  color: var(--color-gray-darker);
+}
+.gray-darkest,
+.hov-gray-darkest:hover {
+  color: var(--color-gray-darkest);
+}
+
+.transparent,
+.hov-transparent:hover {
+  color: transparent;
+}
+.black,
+.hov-black:hover {
+  color: var(--color-black);
+}
+.white,
+.hov-white:hover {
+  color: var(--color-white);
+}
+
+/*---------------------------------------------
+- Text decoration
+---------------------------------------------*/
+
+.td-none,
+.hov-td-none:hover {
+  text-decoration: none;
+}
+.td-line,
+.hov-td-line:hover {
+  text-decoration: line-through;
+}
+.td-underline,
+.hov-td-underline:hover {
+  text-decoration: underline;
+}
+
+/*---------------------------------------------
+- Text transform
+---------------------------------------------*/
+
+.upper {
+  text-transform: uppercase;
+}
+.lower {
+  text-transform: lowercase;
+}
+.capital {
+  text-transform: capitalize;
+}

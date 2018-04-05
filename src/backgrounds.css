@@ -1,0 +1,261 @@
+/*---------------------------------------------
+- Background sizes
+---------------------------------------------*/
+
+.contain {
+  background-size: contain;
+}
+.cover {
+  background-size: cover;
+}
+
+/*---------------------------------------------
+- Background color: primary
+---------------------------------------------*/
+
+.bg-primary-lightest,
+.hov-bg-primary-lightest:hover {
+  background-color: var(--color-primary-lightest);
+}
+.bg-primary-lighter,
+.hov-bg-primary-lighter:hover {
+  background-color: var(--color-primary-lighter);
+}
+.bg-primary-light,
+.hov-bg-primary-light:hover {
+  background-color: var(--color-primary-light);
+}
+.bg-primary,
+.hov-bg-primary:hover {
+  background-color: var(--color-primary);
+}
+.bg-primary-dark,
+.hov-bg-primary-dark:hover {
+  background-color: var(--color-primary-dark);
+}
+.bg-primary-darker,
+.hov-bg-primary-darker:hover {
+  background-color: var(--color-primary-darker);
+}
+.bg-primary-darkest,
+.hov-bg-primary-darkest:hover {
+  background-color: var(--color-primary-darkest);
+}
+
+/*---------------------------------------------
+- Background color: secondary
+---------------------------------------------*/
+
+.bg-secondary-lightest,
+.hov-bg-secondary-lightest:hover {
+  background-color: var(--color-secondary-lightest);
+}
+.bg-secondary-lighter,
+.hov-bg-secondary-lighter:hover {
+  background-color: var(--color-secondary-lighter);
+}
+.bg-secondary-light,
+.hov-bg-secondary-light:hover {
+  background-color: var(--color-secondary-light);
+}
+.bg-secondary,
+.hov-bg-secondary:hover {
+  background-color: var(--color-secondary);
+}
+.bg-secondary-dark,
+.hov-bg-secondary-dark:hover {
+  background-color: var(--color-secondary-dark);
+}
+.bg-secondary-darker,
+.hov-bg-secondary-darker:hover {
+  background-color: var(--color-secondary-darker);
+}
+.bg-secondary-darkest,
+.hov-bg-secondary-darkest:hover {
+  background-color: var(--color-secondary-darkest);
+}
+
+/*---------------------------------------------
+- Background color: info
+---------------------------------------------*/
+
+.bg-info-lightest,
+.hov-bg-info-lightest:hover {
+  background-color: var(--color-info-lightest);
+}
+.bg-info-lighter,
+.hov-bg-info-lighter:hover {
+  background-color: var(--color-info-lighter);
+}
+.bg-info-light,
+.hov-bg-info-light:hover {
+  background-color: var(--color-info-light);
+}
+.bg-info,
+.hov-bg-info:hover {
+  background-color: var(--color-info);
+}
+.bg-info-dark,
+.hov-bg-info-dark:hover {
+  background-color: var(--color-info-dark);
+}
+.bg-info-darker,
+.hov-bg-info-darker:hover {
+  background-color: var(--color-info-darker);
+}
+.bg-info-darkest,
+.hov-bg-info-darkest:hover {
+  background-color: var(--color-info-darkest);
+}
+
+/*---------------------------------------------
+- Background color: success
+---------------------------------------------*/
+
+.bg-success-lightest,
+.hov-bg-success-lightest:hover {
+  background-color: var(--color-success-lightest);
+}
+.bg-success-lighter,
+.hov-bg-success-lighter:hover {
+  background-color: var(--color-success-lighter);
+}
+.bg-success-light,
+.hov-bg-success-light:hover {
+  background-color: var(--color-success-light);
+}
+.bg-success,
+.hov-bg-success:hover {
+  background-color: var(--color-success);
+}
+.bg-success-dark,
+.hov-bg-success-dark:hover {
+  background-color: var(--color-success-dark);
+}
+.bg-success-darker,
+.hov-bg-success-darker:hover {
+  background-color: var(--color-success-darker);
+}
+.bg-success-darkest,
+.hov-bg-success-darkest:hover {
+  background-color: var(--color-success-darkest);
+}
+
+/*---------------------------------------------
+- Background color: warning
+---------------------------------------------*/
+
+.bg-warning-lightest,
+.hov-bg-warning-lightest:hover {
+  background-color: var(--color-warning-lightest);
+}
+.bg-warning-lighter,
+.hov-bg-warning-lighter:hover {
+  background-color: var(--color-warning-lighter);
+}
+.bg-warning-light,
+.hov-bg-warning-light:hover {
+  background-color: var(--color-warning-light);
+}
+.bg-warning,
+.hov-bg-warning:hover {
+  background-color: var(--color-warning);
+}
+.bg-warning-dark,
+.hov-bg-warning-dark:hover {
+  background-color: var(--color-warning-dark);
+}
+.bg-warning-darker,
+.hov-bg-warning-darker:hover {
+  background-color: var(--color-warning-darker);
+}
+.bg-warning-darkest,
+.hov-bg-warning-darkest:hover {
+  background-color: var(--color-warning-darkest);
+}
+
+/*---------------------------------------------
+- Background color: danger
+---------------------------------------------*/
+
+.bg-danger-lightest,
+.hov-bg-danger-lightest:hover {
+  background-color: var(--color-danger-lightest);
+}
+.bg-danger-lighter,
+.hov-bg-danger-lighter:hover {
+  background-color: var(--color-danger-lighter);
+}
+.bg-danger-light,
+.hov-bg-danger-light:hover {
+  background-color: var(--color-danger-light);
+}
+.bg-danger,
+.hov-bg-danger:hover {
+  background-color: var(--color-danger);
+}
+.bg-danger-dark,
+.hov-bg-danger-dark:hover {
+  background-color: var(--color-danger-dark);
+}
+.bg-danger-darker,
+.hov-bg-danger-darker:hover {
+  background-color: var(--color-danger-darker);
+}
+.bg-danger-darkest,
+.hov-bg-danger-darkest:hover {
+  background-color: var(--color-danger-darkest);
+}
+
+/*---------------------------------------------
+- Background color: gray
+---------------------------------------------*/
+
+.bg-gray-lightest,
+.hov-bg-gray-lightest:hover {
+  background-color: var(--color-gray-lightest);
+}
+.bg-gray-lighter,
+.hov-bg-gray-lighter:hover {
+  background-color: var(--color-gray-lighter);
+}
+.bg-gray-light,
+.hov-bg-gray-light:hover {
+  background-color: var(--color-gray-light);
+}
+.bg-gray,
+.hov-bg-gray:hover {
+  background-color: var(--color-gray);
+}
+.bg-gray-dark,
+.hov-bg-gray-dark:hover {
+  background-color: var(--color-gray-dark);
+}
+.bg-gray-darker,
+.hov-bg-gray-darker:hover {
+  background-color: var(--color-gray-darker);
+}
+.bg-gray-darkest,
+.hov-bg-gray-darkest:hover {
+  background-color: var(--color-gray-darkest);
+}
+
+/*---------------------------------------------
+- Background color: others
+---------------------------------------------*/
+
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-inherit {
+  background-color: inherit;
+}
+.bg-initial {
+  background-color: initial;
+}
+.bg-black {
+  background-color: black;
+}
+.bg-white {
+  background-color: white;
+}
