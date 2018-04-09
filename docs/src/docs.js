@@ -743,7 +743,7 @@ function Positioning() {
   )
 }
 
-function Spacings({ sizes }) {
+function Spacings({ prefix, sizes }) {
   return (
     <div>
       {sizes.map((m, key) => (
@@ -754,7 +754,8 @@ function Spacings({ sizes }) {
           {DIRECTIONS.map((d, key) => (
             <p key={key}>
               <code>
-                m{d}-{m}
+                {prefix}
+                {d}-{m}
               </code>
             </p>
           ))}
@@ -988,11 +989,11 @@ const sections = [
     title: 'Positioning',
   },
   {
-    Component: () => <Spacings sizes={MARGINS} />,
+    Component: () => <Spacings prefix="m" sizes={MARGINS} />,
     title: 'Margins',
   },
   {
-    Component: () => <Spacings sizes={PADDINGS} />,
+    Component: () => <Spacings prefix="p" sizes={PADDINGS} />,
     title: 'Paddings',
   },
   {
