@@ -148,11 +148,11 @@
   - line heights
   ---------------------------------------------*/
 
-  --line-height-xxs: 0.5em;
-  --line-height-xs: 0.75em;
-  --line-height-sm: 1em;
-  --line-height-md: 1.5em;
-  --line-height-lg: 2em;
-  --line-height-xl: 3em;
-  --line-height-xxl: 4em;
+  --line-height-xxs: 0.5;
+  --line-height-xs: 0.75;
+  --line-height-sm: 1;
+  --line-height-md: 1.5;
+  --line-height-lg: 2;
+  --line-height-xl: 3;
+  --line-height-xxl: 4;
 }

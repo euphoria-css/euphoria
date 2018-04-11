@@ -1,277 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import kebabCase from 'lodash/kebabCase'
+import {
+  COLORS,
+  CURSORS,
+  DIRECTIONS,
+  MARGINS,
+  PADDINGS,
+  WIDTHS,
+  VARIABLES,
+} from './constants'
 
-const COLORS = [
-  'primary-lightest',
-  'primary-lighter',
-  'primary-light',
-  'primary',
-  'primary-dark',
-  'primary-darker',
-  'primary-darkest',
-  'secondary-lightest',
-  'secondary-lighter',
-  'secondary-light',
-  'secondary',
-  'secondary-dark',
-  'secondary-darker',
-  'secondary-darkest',
-  'info-lightest',
-  'info-lighter',
-  'info-light',
-  'info',
-  'info-dark',
-  'info-darker',
-  'info-darkest',
-  'success-lightest',
-  'success-lighter',
-  'success-light',
-  'success',
-  'success-dark',
-  'success-darker',
-  'success-darkest',
-  'warning-lightest',
-  'warning-lighter',
-  'warning-light',
-  'warning',
-  'warning-dark',
-  'warning-darker',
-  'warning-darkest',
-  'danger-lightest',
-  'danger-lighter',
-  'danger-light',
-  'danger',
-  'danger-dark',
-  'danger-darker',
-  'danger-darkest',
-  'gray-lightest',
-  'gray-lighter',
-  'gray-light',
-  'gray',
-  'gray-dark',
-  'gray-darker',
-  'gray-darkest',
-]
-const CURSORS = [
-  'auto',
-  'default',
-  'none',
-  'context-menu',
-  'help',
-  'pointer',
-  'progress',
-  'wait',
-  'cell',
-  'crosshair',
-  'text',
-  'vertical-text',
-  'alias',
-  'copy',
-  'move',
-  'no-drop',
-  'not-allowed',
-  'all-scroll',
-  'col-resize',
-  'row-resize',
-  'n-resize',
-  'e-resize',
-  's-resize',
-  'w-resize',
-  'ne-resize',
-  'nw-resize',
-  'se-resize',
-  'sw-resize',
-  'ew-resize',
-  'ns-resize',
-  'nesw-resize',
-  'nwse-resize',
-  'zoom-in',
-  'zoom-out',
-  'grab',
-  'grabbing',
-]
-const WIDTHS = [
-  0,
-  5,
-  10,
-  15,
-  20,
-  25,
-  30,
-  33,
-  40,
-  50,
-  60,
-  66,
-  70,
-  75,
-  80,
-  90,
-  100,
-  'auto',
-]
-const DIRECTIONS = ['', 'l', 't', 'r', 'b', 'x', 'y']
-const SPACINGS = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const MARGINS = [...SPACINGS, 'auto']
-const PADDINGS = SPACINGS
-const VARIABLES = `
-/*---------------------------------------------
-- Colors
----------------------------------------------*/
-
-/* Base colors */
-
---color-primary: #31c4a9;
---color-secondary: #7a7a7a;
---color-info: #3187c4;
---color-success: #7db735;
---color-warning: #dd6618;
---color-danger: #d8401e;
---color-gray: #7a7a7a;
---color-white: white;
---color-black: black;
-
-/* Color shades/tints */
-
---color-primary-lightest: #f7fdfc;
---color-primary-lighter: #e2f8f4;
---color-primary-light: #a5e9dc;
---color-primary-dark: #279b86;
---color-primary-darker: #218371;
---color-primary-darkest: #186254;
-
---color-secondary-lightest: #fafafa;
---color-secondary-lighter: #ededed;
---color-secondary-light: #c7c7c7;
---color-secondary-dark: #616161;
---color-secondary-darker: #525252;
---color-secondary-darkest: #3d3d3d;
-
---color-info-lightest: #f7fafd;
---color-info-lighter: #e2eff8;
---color-info-light: #a5cde9;
---color-info-dark: #276b9b;
---color-info-darker: #215a83;
---color-info-darkest: #184362;
-
---color-success-lightest: #f5faef;
---color-success-lighter: #e9f5db;
---color-success-light: #c5e3a0;
---color-success-dark: #618e29;
---color-success-darker: #517722;
---color-success-darkest: #3b5719;
-
---color-warning-lightest: #fef9f6;
---color-warning-lighter: #fbeadf;
---color-warning-light: #f4be9a;
---color-warning-dark: #ae5113;
---color-warning-darker: #934510;
---color-warning-darkest: #6e330c;
-
---color-danger-lightest: #fef7f6;
---color-danger-lighter: #fbe5e0;
---color-danger-light: #f2ac9c;
---color-danger-dark: #ab3217;
---color-danger-darker: #902a14;
---color-danger-darkest: #6c200f;
-
---color-gray-lightest: #fafafa;
---color-gray-lighter: #ededed;
---color-gray-light: #c7c7c7;
---color-gray-dark: #616161;
---color-gray-darker: #525252;
---color-gray-darkest: #3d3d3d;
-
-/*---------------------------------------------
-- Spacing
----------------------------------------------*/
-
---spacing-xxs: 0.25rem;
---spacing-xs: 0.5rem;
---spacing-sm: 1rem;
---spacing-md: 2rem;
---spacing-lg: 4rem;
---spacing-xl: 8rem;
---spacing-xxl: 14rem;
-
-/*---------------------------------------------
-- Font families
----------------------------------------------*/
-
---font-family-serif: Georgia, Times, serif;
---font-family-sans-serif: Helvetica, Arial, sans-serif;
---font-family-mono: Consolas, Monaco, mono;
-
-/*---------------------------------------------
-- Font sizes
----------------------------------------------*/
-
---font-size-xxxl: 4rem;
---font-size-xxl: 2.6rem;
---font-size-xl: 1.9rem;
---font-size-lg: 1.3rem;
---font-size-md: 1rem;
---font-size-sm: 0.85rem;
---font-size-xs: 0.7rem;
-
-/*---------------------------------------------
-- Border sizes
----------------------------------------------*/
-
---border-radius-xs: 0.15em;
---border-radius-sm: 0.3em;
---border-radius-md: 0.6em;
---border-radius-lg: 1em;
---border-radius-xl: 1.8em;
---border-radius-pill: 100em;
-
-/*---------------------------------------------
-- Border widths
----------------------------------------------*/
-
---border-width-xxs: 1px;
---border-width-xs: 0.25rem;
---border-width-sm: 0.5rem;
---border-width-md: 1rem;
---border-width-lg: 1.5rem;
---border-width-xl: 2rem;
---border-width-xxl: 3rem;
-
-/*---------------------------------------------
-- Box shadows
----------------------------------------------*/
-
---box-shadow-1: 0 0 4px 2px rgba(0, 0, 0, 0.2);
---box-shadow-2: 0 0 8px 2px rgba(0, 0, 0, 0.2);
---box-shadow-3: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
---box-shadow-4: 2px 2px 8px 0 rgba(0, 0, 0, 0.2);
---box-shadow-5: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
-
-/*---------------------------------------------
-- Letter spacing
----------------------------------------------*/
-
---letter-spacing-xxs: -0.2em;
---letter-spacing-xs: -0.1em;
---letter-spacing-sm: 0.05em;
---letter-spacing-md: 0em;
---letter-spacing-lg: 0.3em;
---letter-spacing-xl: 0.6em;
---letter-spacing-xxl: 1.2em;
-
-/*---------------------------------------------
-- line heights
----------------------------------------------*/
-
---line-height-xxs: 0.5em;
---line-height-xs: 0.75em;
---line-height-sm: 1em;
---line-height-md: 1.5em;
---line-height-lg: 2em;
---line-height-xl: 3em;
---line-height-xxl: 4em;
-`
+function Code({ children, className, ...props }) {
+  return (
+    <code
+      className={`bg-gray-lightest danger px-xs py-xxs ${className}`}
+      {...props}
+    >
+      {children}
+    </code>
+  )
+}
 
 function SectionHeading({ children, ...props }) {
   return (
@@ -317,7 +66,7 @@ function BackgroundSizes() {
         }}
       />
       <SubSectionHeading>
-        With <code>cover</code> class applied:
+        With <Code>cover</Code> class applied:
       </SubSectionHeading>
       <div
         className="cover"
@@ -328,7 +77,7 @@ function BackgroundSizes() {
         }}
       />
       <SubSectionHeading>
-        With <code>contain</code> class applied:
+        With <Code>contain</Code> class applied:
       </SubSectionHeading>
       <div
         className="contain"
@@ -348,24 +97,24 @@ function BackgroundColors() {
       {COLORS.map((c, key) => (
         <div key={key}>
           <p className={'bg-' + c}>
-            This text has class <code>{c}</code>.
+            This text has class <Code>bg-{c}</Code>.
           </p>
         </div>
       ))}
       <p className="bg-white">
-        This text has class <code>bg-white</code>.
+        This text has class <Code>bg-white</Code>.
       </p>
       <p className="bg-transparent">
-        This text has class <code>bg-transparent</code>.
+        This text has class <Code>bg-transparent</Code>.
       </p>
       <p className="white bg-black">
-        This text has class <code>bg-black</code>.
+        This text has class <Code>bg-black</Code>.
       </p>
       <p className="bg-inherit">
-        This text has class <code>bg-inherit</code>.
+        This text has class <Code>bg-inherit</Code>.
       </p>
       <p className="bg-initial">
-        This text has class <code>bg-initial</code>.
+        This text has class <Code>bg-initial</Code>.
       </p>
     </div>
   )
@@ -374,7 +123,7 @@ function BackgroundColors() {
 function BorderCollapse() {
   return (
     <div>
-      Add the class <code>collapse</code> to a table to remove the spacing
+      Add the class <Code>collapse</Code> to a table to remove the spacing
       between cell borders.
     </div>
   )
@@ -385,18 +134,18 @@ function BorderColors() {
     <div>
       <SubSectionHeading>Usage</SubSectionHeading>
       <p>
-        Add a border positions (eg <code>ba</code>), then define the border
+        Add a border positions (eg <Code>ba</Code>), then define the border
         color.
       </p>
       <SubSectionHeading>Hover styles</SubSectionHeading>
       <p>
-        Prefix the border colors with <code>hov-</code> to change color on hover
-        (eg <code>hov-bc-primary</code>).
+        Prefix the border colors with <Code>hov-</Code> to change color on hover
+        (eg <Code>hov-bc-primary</Code>).
       </p>
       <SubSectionHeading>Examples</SubSectionHeading>
       {COLORS.map((c, key) => (
         <p className={`bt bc-${c} bw-xs pt-xxs mb-sm`} key={key}>
-          <code>bc-{c}</code>
+          <Code>bc-{c}</Code>
         </p>
       ))}
     </div>
@@ -407,25 +156,25 @@ function BorderPositions() {
   return (
     <div>
       <p className="p-sm bg-gray-lightest ba">
-        This element has the class <code>ba</code>
+        This element has the class <Code>ba</Code>
       </p>
       <p className="p-sm bg-gray-lightest bl">
-        This element has the class <code>bl</code>
+        This element has the class <Code>bl</Code>
       </p>
       <p className="p-sm bg-gray-lightest bt">
-        This element has the class <code>bt</code>
+        This element has the class <Code>bt</Code>
       </p>
       <p className="p-sm bg-gray-lightest br">
-        This element has the class <code>br</code>
+        This element has the class <Code>br</Code>
       </p>
       <p className="p-sm bg-gray-lightest bb">
-        This element has the class <code>bb</code>
+        This element has the class <Code>bb</Code>
       </p>
       <p className="p-sm bg-gray-lightest bx">
-        This element has the class <code>bx</code>
+        This element has the class <Code>bx</Code>
       </p>
       <p className="p-sm bg-gray-lightest by">
-        This element has the class <code>by</code>
+        This element has the class <Code>by</Code>
       </p>
     </div>
   )
@@ -435,28 +184,28 @@ function BorderRadii() {
   return (
     <div>
       <p className="p-sm bg-gray-lightest ba rad-none">
-        This element has the class <code>rad-none</code>
+        This element has the class <Code>rad-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-xs">
-        This element has the class <code>rad-xs</code>
+        This element has the class <Code>rad-xs</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-sm">
-        This element has the class <code>rad-sm</code>
+        This element has the class <Code>rad-sm</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-md">
-        This element has the class <code>rad-md</code>
+        This element has the class <Code>rad-md</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-lg">
-        This element has the class <code>rad-lg</code>
+        This element has the class <Code>rad-lg</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-xl">
-        This element has the class <code>rad-xl</code>
+        This element has the class <Code>rad-xl</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-pill">
-        This element has the class <code>rad-pill</code>
+        This element has the class <Code>rad-pill</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba rad-100">
-        This element has the class <code>rad-100</code>
+        This element has the class <Code>rad-100</Code>
       </p>
     </div>
   )
@@ -466,25 +215,25 @@ function BorderRemoval() {
   return (
     <div>
       <p className="p-sm bg-gray-lightest ba ba-none">
-        This element has the class <code>ba-none</code>
+        This element has the class <Code>ba-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bl-none">
-        This element has the class <code>bl-none</code>
+        This element has the class <Code>bl-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bt-none">
-        This element has the class <code>bt-none</code>
+        This element has the class <Code>bt-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba br-none">
-        This element has the class <code>br-none</code>
+        This element has the class <Code>br-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bb-none">
-        This element has the class <code>bb-none</code>
+        This element has the class <Code>bb-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bx-none">
-        This element has the class <code>bx-none</code>
+        This element has the class <Code>bx-none</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba by-none">
-        This element has the class <code>by-none</code>
+        This element has the class <Code>by-none</Code>
       </p>
     </div>
   )
@@ -494,13 +243,13 @@ function BorderStyles() {
   return (
     <div>
       <p className="p-sm bg-gray-lightest ba b-solid">
-        This element has the class <code>b-solid</code>
+        This element has the class <Code>b-solid</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba b-dashed">
-        This element has the class <code>b-dashed</code>
+        This element has the class <Code>b-dashed</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba b-dotted">
-        This element has the class <code>b-dotted</code>
+        This element has the class <Code>b-dotted</Code>
       </p>
     </div>
   )
@@ -510,25 +259,25 @@ function BorderWidths() {
   return (
     <div>
       <p className="p-sm bg-gray-lightest ba bw-xxs">
-        This element has the class <code>bw-xxs</code>
+        This element has the class <Code>bw-xxs</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-xs">
-        This element has the class <code>bw-xs</code>
+        This element has the class <Code>bw-xs</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-sm">
-        This element has the class <code>bw-sm</code>
+        This element has the class <Code>bw-sm</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-md">
-        This element has the class <code>bw-md</code>
+        This element has the class <Code>bw-md</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-lg">
-        This element has the class <code>bw-lg</code>
+        This element has the class <Code>bw-lg</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-xl">
-        This element has the class <code>bw-xl</code>
+        This element has the class <Code>bw-xl</Code>
       </p>
       <p className="p-sm bg-gray-lightest ba bw-xxl">
-        This element has the class <code>bw-xxl</code>
+        This element has the class <Code>bw-xxl</Code>
       </p>
     </div>
   )
@@ -539,7 +288,7 @@ function BoxShadows() {
     <div>
       {[1, 2, 3, 4, 5].map(s => (
         <div className={`p-sm my-md bs-${s}`} key={s}>
-          This div has the class <code>bs-{s}</code>.
+          This div has the class <Code>bs-{s}</Code>.
         </div>
       ))}
     </div>
@@ -549,7 +298,7 @@ function BoxShadows() {
 function Clearfix() {
   return (
     <p>
-      Use the class <code>clearfix</code> to clear floats on parent elements.
+      Use the class <Code>clearfix</Code> to clear floats on parent elements.
     </p>
   )
 }
@@ -562,7 +311,7 @@ function Cursors() {
       </p>
       {CURSORS.map(c => (
         <p className={`c-${c}`} key={c}>
-          This text has the class <code>c-{c}</code>.
+          This text has the class <Code>c-{c}</Code>.
         </p>
       ))}
     </div>
@@ -573,36 +322,36 @@ function Display() {
   return (
     <div>
       <p>
-        Add the class <code>db</code> to give an element the display{' '}
-        <code>block</code>
+        Add the class <Code>db</Code> to give an element the display{' '}
+        <Code>block</Code>
       </p>
       <p>
-        Add the class <code>di</code> to give an element the display{' '}
-        <code>inline</code>
+        Add the class <Code>di</Code> to give an element the display{' '}
+        <Code>inline</Code>
       </p>
       <p>
-        Add the class <code>dib</code> to give an element the display{' '}
-        <code>inline-block</code>
+        Add the class <Code>dib</Code> to give an element the display{' '}
+        <Code>inline-block</Code>
       </p>
       <p>
-        Add the class <code>df</code> to give an element the display{' '}
-        <code>flex</code>
+        Add the class <Code>df</Code> to give an element the display{' '}
+        <Code>flex</Code>
       </p>
       <p>
-        Add the class <code>dfb</code> to give an element the display{' '}
-        <code>flex-block</code>
+        Add the class <Code>dfb</Code> to give an element the display{' '}
+        <Code>flex-block</Code>
       </p>
       <p>
-        Add the class <code>dt</code> to give an element the display{' '}
-        <code>table</code>
+        Add the class <Code>dt</Code> to give an element the display{' '}
+        <Code>table</Code>
       </p>
       <p>
-        Add the class <code>dtc</code> to give an element the display{' '}
-        <code>table-cell</code>
+        Add the class <Code>dtc</Code> to give an element the display{' '}
+        <Code>table-cell</Code>
       </p>
       <p>
-        Add the class <code>dn</code> to give an element the display{' '}
-        <code>none</code>
+        Add the class <Code>dn</Code> to give an element the display{' '}
+        <Code>none</Code>
       </p>
     </div>
   )
@@ -612,16 +361,69 @@ function Floats() {
   return (
     <div>
       <p>
-        Add the class <code>fl</code> to give an element the float{' '}
-        <code>left</code>
+        Add the class <Code>fl</Code> to give an element the float{' '}
+        <Code>left</Code>
       </p>
       <p>
-        Add the class <code>fr</code> to give an element the float{' '}
-        <code>right</code>
+        Add the class <Code>fr</Code> to give an element the float{' '}
+        <Code>right</Code>
       </p>
       <p>
-        Add the class <code>fn</code> to give an element the float{' '}
-        <code>none</code>
+        Add the class <Code>fn</Code> to give an element the float{' '}
+        <Code>none</Code>
+      </p>
+    </div>
+  )
+}
+
+function FontStyle() {
+  return (
+    <div>
+      <p className="fs-italic">
+        This text has the class <Code>fs-italic</Code>
+      </p>
+    </div>
+  )
+}
+
+function FontWeight() {
+  return (
+    <div>
+      <p className="fw-bold">
+        This text has the class <Code>fw-bold</Code>
+      </p>
+      <p className="fw-normal">
+        This text has the class <Code>fw-normal</Code>
+      </p>
+      <p className="fw-lighter">
+        This text has the class <Code>fw-lighter</Code>
+      </p>
+      <p className="fw-1">
+        This text has the class <Code>fw-1</Code>
+      </p>
+      <p className="fw-2">
+        This text has the class <Code>fw-2</Code>
+      </p>
+      <p className="fw-3">
+        This text has the class <Code>fw-3</Code>
+      </p>
+      <p className="fw-4">
+        This text has the class <Code>fw-4</Code>
+      </p>
+      <p className="fw-5">
+        This text has the class <Code>fw-5</Code>
+      </p>
+      <p className="fw-6">
+        This text has the class <Code>fw-6</Code>
+      </p>
+      <p className="fw-7">
+        This text has the class <Code>fw-7</Code>
+      </p>
+      <p className="fw-8">
+        This text has the class <Code>fw-8</Code>
+      </p>
+      <p className="fw-9">
+        This text has the class <Code>fw-9</Code>
       </p>
     </div>
   )
@@ -632,11 +434,125 @@ function Heights() {
     <div>
       <p>
         Heights have the same values as widths, just prefix the values with{' '}
-        <code>h</code> instead of <code>w</code> (<code>w-20</code> changes to{' '}
-        <code>h-20</code>).
+        <Code>h</Code> instead of <Code>w</Code> (<Code>w-20</Code> changes to{' '}
+        <Code>h-20</Code>).
       </p>
       <p>
         Please see <a href="#widths">widths</a> for available values.
+      </p>
+    </div>
+  )
+}
+
+function FontFamilies() {
+  return (
+    <div>
+      <p className="ff-sans-serif">
+        This text has the class <Code>ff-sans-serif</Code>.
+      </p>
+      <p className="ff-serif">
+        This text has the class <Code>ff-serif</Code>.
+      </p>
+      <p className="ff-code">
+        This text has the class <Code>ff-code</Code>.
+      </p>
+    </div>
+  )
+}
+
+function LetterSpacing() {
+  return (
+    <div>
+      <p className="ls-xxs">
+        This text has the class <Code>ls-xxs</Code>
+      </p>
+      <p className="ls-xs">
+        This text has the class <Code>ls-xs</Code>
+      </p>
+      <p className="ls-sm">
+        This text has the class <Code>ls-sm</Code>
+      </p>
+      <p className="ls-md">
+        This text has the class <Code>ls-md</Code>
+      </p>
+      <p className="ls-lg">
+        This text has the class <Code>ls-lg</Code>
+      </p>
+      <p className="ls-xl">
+        This text has the class <Code>ls-xl</Code>
+      </p>
+      <p className="ls-xxl">
+        This text has the class <Code>ls-xxl</Code>
+      </p>
+    </div>
+  )
+}
+
+function LineHeights() {
+  return (
+    <div>
+      <p className="lh-xxs">
+        This text has the class <Code>lh-xxs</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-xs">
+        This text has the class <Code>lh-xs</Code>.Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-sm">
+        This text has the class <Code>lh-sm</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-md">
+        This text has the class <Code>lh-md</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-lg">
+        This text has the class <Code>lh-lg</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-xl">
+        This text has the class <Code>lh-xl</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
+      </p>
+      <p className="lh-xxl">
+        This text has the class <Code>lh-xxl</Code>. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Proin mauris dui, lacinia ac eros quis,
+        mattis accumsan ex. Duis quis justo sit amet lectus posuere luctus sed
+        et risus. Morbi suscipit mi vel magna faucibus venenatis. Vivamus vitae
+        nisi iaculis, malesuada tellus non, tempor risus. In nec justo
+        ultricies, vulputate magna sit amet, vehicula nulla. Sed iaculis at erat
+        eget feugiat. Sed sit amet finibus ante.
       </p>
     </div>
   )
@@ -646,55 +562,55 @@ function Opacity() {
   return (
     <div>
       <p>
-        Give an element the class <code>o-0</code> to give it <code>0</code>{' '}
+        Give an element the class <Code>o-0</Code> to give it <Code>0</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-025</code> to give it{' '}
-        <code>0.025</code> opacity.
+        Give an element the class <Code>o-025</Code> to give it{' '}
+        <Code>0.025</Code> opacity.
       </p>
       <p>
-        Give an element the class <code>o-05</code> to give it <code>0.05</code>{' '}
+        Give an element the class <Code>o-05</Code> to give it <Code>0.05</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-10</code> to give it <code>0.1</code>{' '}
+        Give an element the class <Code>o-10</Code> to give it <Code>0.1</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-20</code> to give it <code>0.2</code>{' '}
+        Give an element the class <Code>o-20</Code> to give it <Code>0.2</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-30</code> to give it <code>0.3</code>{' '}
+        Give an element the class <Code>o-30</Code> to give it <Code>0.3</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-40</code> to give it <code>0.4</code>{' '}
+        Give an element the class <Code>o-40</Code> to give it <Code>0.4</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-50</code> to give it <code>0.5</code>{' '}
+        Give an element the class <Code>o-50</Code> to give it <Code>0.5</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-60</code> to give it <code>0.6</code>{' '}
+        Give an element the class <Code>o-60</Code> to give it <Code>0.6</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-70</code> to give it <code>0.7</code>{' '}
+        Give an element the class <Code>o-70</Code> to give it <Code>0.7</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-80</code> to give it <code>0.8</code>{' '}
+        Give an element the class <Code>o-80</Code> to give it <Code>0.8</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-90</code> to give it <code>0.9</code>{' '}
+        Give an element the class <Code>o-90</Code> to give it <Code>0.9</Code>{' '}
         opacity.
       </p>
       <p>
-        Give an element the class <code>o-1</code> to give it <code>1</code>{' '}
+        Give an element the class <Code>o-1</Code> to give it <Code>1</Code>{' '}
         opacity.
       </p>
     </div>
@@ -705,20 +621,20 @@ function Overflow() {
   return (
     <div>
       <p>
-        Give an element the class <code>of-visible</code> to give it an overflow
-        of <code>visible</code>.
+        Give an element the class <Code>of-visible</Code> to give it an overflow
+        of <Code>visible</Code>.
       </p>
       <p>
-        Give an element the class <code>of-hidden</code> to give it an overflow
-        of <code>hidden</code>.
+        Give an element the class <Code>of-hidden</Code> to give it an overflow
+        of <Code>hidden</Code>.
       </p>
       <p>
-        Give an element the class <code>of-scroll</code> to give it an overflow
-        of <code>scroll</code>.
+        Give an element the class <Code>of-scroll</Code> to give it an overflow
+        of <Code>scroll</Code>.
       </p>
       <p>
-        Give an element the class <code>of-auto</code> to give it an overflow of{' '}
-        <code>auto</code>.
+        Give an element the class <Code>of-auto</Code> to give it an overflow of{' '}
+        <Code>auto</Code>.
       </p>
     </div>
   )
@@ -728,16 +644,16 @@ function Positioning() {
   return (
     <div>
       <p>
-        Give an element the class <code>relative</code> to give it a position of{' '}
-        <code>relative</code>.
+        Give an element the class <Code>relative</Code> to give it a position of{' '}
+        <Code>relative</Code>.
       </p>
       <p>
-        Give an element the class <code>absolute</code> to give it a position of{' '}
-        <code>absolute</code>.
+        Give an element the class <Code>absolute</Code> to give it a position of{' '}
+        <Code>absolute</Code>.
       </p>
       <p>
-        Give an element the class <code>fixed</code> to give it a position of{' '}
-        <code>fixed</code>.
+        Give an element the class <Code>fixed</Code> to give it a position of{' '}
+        <Code>fixed</Code>.
       </p>
     </div>
   )
@@ -746,21 +662,88 @@ function Positioning() {
 function Spacings({ prefix, sizes }) {
   return (
     <div>
-      {sizes.map((m, key) => (
-        <div key={key}>
-          <SubSectionHeading>
-            Size: <code>{m}</code>
-          </SubSectionHeading>
+      <table className="collapse">
+        <thead>
+          <tr>
+            <th />
+            {sizes.map((s, key) => (
+              <th>
+                <Code>{s}</Code>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
           {DIRECTIONS.map((d, key) => (
-            <p key={key}>
-              <code>
-                {prefix}
-                {d}-{m}
-              </code>
-            </p>
+            <tr>
+              <th className="bb bc-gray-lighter p-xs">
+                {d ? (
+                  <Code>{d}</Code>
+                ) : (
+                  <em className="txt-xs fw-normal gray">Blank</em>
+                )}
+              </th>
+              {sizes.map((s, key) => (
+                <td className="bb bc-gray-lighter p-xs">
+                  <Code key={key} className="mx-xs">
+                    {prefix}
+                    {d}-{s}
+                  </Code>
+                </td>
+              ))}
+            </tr>
           ))}
-        </div>
-      ))}
+        </tbody>
+      </table>
+      <SubSectionHeading>Directions</SubSectionHeading>
+      <ul>
+        <li>
+          <em className="txt-xs fw-normal gray">Blank</em> - all directions
+        </li>
+        <li>
+          <Code>t</Code> - top
+        </li>
+        <li>
+          <Code>r</Code> - right
+        </li>
+        <li>
+          <Code>b</Code> - bottom
+        </li>
+        <li>
+          <Code>l</Code> - left
+        </li>
+        <li>
+          <Code>x</Code> - left and right
+        </li>
+        <li>
+          <Code>y</Code> - top and bottom
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+function TextAlignment() {
+  return (
+    <div>
+      <p className="left">
+        This text has class <Code>left</Code>.
+      </p>
+      <p className="right">
+        This text has class <Code>right</Code>.
+      </p>
+      <p className="center">
+        This text has class <Code>center</Code>.
+      </p>
+      <p className="justify">
+        This text has class <Code>justify</Code>. This text has class{' '}
+        <Code>justify</Code>. This text has class <Code>justify</Code>. This
+        text has class <Code>justify</Code>. This text has class{' '}
+        <Code>justify</Code>. This text has class <Code>justify</Code>. This
+        text has class <Code>justify</Code>. This text has class{' '}
+        <Code>justify</Code>. This text has class <Code>justify</Code>. This
+        text has class <Code>justify</Code>.
+      </p>
     </div>
   )
 }
@@ -770,14 +753,82 @@ function TextColors() {
     <div>
       {COLORS.map((c, key) => (
         <p className={c} key={key}>
-          This text has class <code>{c}</code>.
+          This text has class <Code>{c}</Code>.
         </p>
       ))}
       <p className="white bg-black">
-        This text has class <code>white</code>.
+        This text has class <Code>white</Code>.
       </p>
       <p className="black">
-        This text has class <code>black</code>.
+        This text has class <Code>black</Code>.
+      </p>
+    </div>
+  )
+}
+
+function TextDecoration() {
+  return (
+    <div>
+      <p className="td-none">
+        This text has the class <Code>td-none</Code>.
+      </p>
+      <p className="td-line">
+        This text has the class <Code>td-line</Code>.
+      </p>
+      <p className="td-underline">
+        This text has the class <Code>td-underline</Code>.
+      </p>
+
+      <SubSectionHeading>Hover state</SubSectionHeading>
+      <p className="hov-td-none">
+        This text has the class <Code>hov-td-none</Code>.
+      </p>
+      <p className="hov-td-line">
+        This text has the class <Code>hov-td-line</Code>.
+      </p>
+      <p className="hov-td-underline">
+        This text has the class <Code>hov-td-underline</Code>.
+      </p>
+    </div>
+  )
+}
+
+function TextSizes() {
+  return (
+    <div>
+      <p className="txt-xs">
+        This text has the class <Code>txt-xs</Code>.
+      </p>
+      <p className="txt-sm">
+        This text has the class <Code>txt-sm</Code>.
+      </p>
+      <p className="txt-md">
+        This text has the class <Code>txt-md</Code>.
+      </p>
+      <p className="txt-lg">
+        This text has the class <Code>txt-lg</Code>.
+      </p>
+      <p className="txt-xl">
+        This text has the class <Code>txt-xl</Code>.
+      </p>
+      <p className="txt-xxl">
+        This text has the class <Code>txt-xxl</Code>.
+      </p>
+    </div>
+  )
+}
+
+function TextTransform() {
+  return (
+    <div>
+      <p className="upper">
+        This text has the class <Code className="lower">upper</Code>.
+      </p>
+      <p className="lower">
+        This text has the class <Code className="lower">lower</Code>.
+      </p>
+      <p className="capital">
+        This text has the class <Code className="lower">capital</Code>.
       </p>
     </div>
   )
@@ -787,24 +838,24 @@ function VerticalAlignment() {
   return (
     <div>
       <p>
-        Give an element the class <code>v-base</code> to give it a
-        vertical-align of <code>baseline</code>.
+        Give an element the class <Code>v-base</Code> to give it a
+        vertical-align of <Code>baseline</Code>.
       </p>
       <p>
-        Give an element the class <code>v-bot</code> to give it a vertical-align
-        of <code>bottom</code>.
+        Give an element the class <Code>v-bot</Code> to give it a vertical-align
+        of <Code>bottom</Code>.
       </p>
       <p>
-        Give an element the class <code>v-top</code> to give it a vertical-align
-        of <code>top</code>.
+        Give an element the class <Code>v-top</Code> to give it a vertical-align
+        of <Code>top</Code>.
       </p>
       <p>
-        Give an element the class <code>v-text-top</code> to give it a
-        vertical-align of <code>text-top</code>.
+        Give an element the class <Code>v-text-top</Code> to give it a
+        vertical-align of <Code>text-top</Code>.
       </p>
       <p>
-        Give an element the class <code>v-text-bot</code> to give it a
-        vertical-align of <code>text-bottom</code>.
+        Give an element the class <Code>v-text-bot</Code> to give it a
+        vertical-align of <Code>text-bottom</Code>.
       </p>
     </div>
   )
@@ -814,12 +865,12 @@ function Visibility() {
   return (
     <div>
       <p>
-        Give an element the class <code>visible</code> to give it a visibility
-        of <code>visible</code>.
+        Give an element the class <Code>visible</Code> to give it a visibility
+        of <Code>visible</Code>.
       </p>
       <p>
-        Give an element the class <code>invisible</code> to give it a visibility
-        of <code>hidden</code>.
+        Give an element the class <Code>invisible</Code> to give it a visibility
+        of <Code>hidden</Code>.
       </p>
     </div>
   )
@@ -829,16 +880,16 @@ function Whitespace() {
   return (
     <div>
       <p>
-        Give an element the class <code>ws-pre</code> to give it a white-space
-        of <code>pre</code>.
+        Give an element the class <Code>ws-pre</Code> to give it a white-space
+        of <Code>pre</Code>.
       </p>
       <p>
-        Give an element the class <code>ws-nowrap</code> to give it a
-        white-space of <code>nowrap</code>.
+        Give an element the class <Code>ws-nowrap</Code> to give it a
+        white-space of <Code>nowrap</Code>.
       </p>
       <p>
-        Give an element the class <code>ws-normal</code> to give it a
-        white-space of <code>ws-normal</code>.
+        Give an element the class <Code>ws-normal</Code> to give it a
+        white-space of <Code>ws-normal</Code>.
       </p>
     </div>
   )
@@ -848,14 +899,14 @@ function Widths() {
   return (
     <div>
       <p>
-        You can prefix any width class with <code>m</code> to change it to a{' '}
-        <code>max-width</code> class (eg <code>mw-50</code> sets{' '}
-        <code>max-width: 50%;</code>)
+        You can prefix any width class with <Code>m</Code> to change it to a{' '}
+        <Code>max-width</Code> class (eg <Code>mw-50</Code> sets{' '}
+        <Code>max-width: 50%;</Code>)
       </p>
       {WIDTHS.map((w, key) => (
         <div className="my-sm" key={key}>
           <p className="mb-xs">
-            <code>w-{w}</code>
+            <Code>w-{w}</Code>
           </p>
           <div className={`bg-primary white w-${w} py-xs`} />
         </div>
@@ -868,48 +919,48 @@ function ZIndex() {
   return (
     <div>
       <p>
-        Give an element the class <code>z-0</code> to give it a z-index of{' '}
-        <code>0</code>.
+        Give an element the class <Code>z-0</Code> to give it a z-index of{' '}
+        <Code>0</Code>.
       </p>
       <p>
-        Give an element the class <code>z-100</code> to give it a z-index of{' '}
-        <code>100</code>.
+        Give an element the class <Code>z-100</Code> to give it a z-index of{' '}
+        <Code>100</Code>.
       </p>
       <p>
-        Give an element the class <code>z-200</code> to give it a z-index of{' '}
-        <code>200</code>.
+        Give an element the class <Code>z-200</Code> to give it a z-index of{' '}
+        <Code>200</Code>.
       </p>
       <p>
-        Give an element the class <code>z-300</code> to give it a z-index of{' '}
-        <code>300</code>.
+        Give an element the class <Code>z-300</Code> to give it a z-index of{' '}
+        <Code>300</Code>.
       </p>
       <p>
-        Give an element the class <code>z-400</code> to give it a z-index of{' '}
-        <code>400</code>.
+        Give an element the class <Code>z-400</Code> to give it a z-index of{' '}
+        <Code>400</Code>.
       </p>
       <p>
-        Give an element the class <code>z-500</code> to give it a z-index of{' '}
-        <code>500</code>.
+        Give an element the class <Code>z-500</Code> to give it a z-index of{' '}
+        <Code>500</Code>.
       </p>
       <p>
-        Give an element the class <code>z-600</code> to give it a z-index of{' '}
-        <code>600</code>.
+        Give an element the class <Code>z-600</Code> to give it a z-index of{' '}
+        <Code>600</Code>.
       </p>
       <p>
-        Give an element the class <code>z-700</code> to give it a z-index of{' '}
-        <code>700</code>.
+        Give an element the class <Code>z-700</Code> to give it a z-index of{' '}
+        <Code>700</Code>.
       </p>
       <p>
-        Give an element the class <code>z-800</code> to give it a z-index of{' '}
-        <code>800</code>.
+        Give an element the class <Code>z-800</Code> to give it a z-index of{' '}
+        <Code>800</Code>.
       </p>
       <p>
-        Give an element the class <code>z-900</code> to give it a z-index of{' '}
-        <code>900</code>.
+        Give an element the class <Code>z-900</Code> to give it a z-index of{' '}
+        <Code>900</Code>.
       </p>
       <p>
-        Give an element the class <code>z-1000</code> to give it a z-index of{' '}
-        <code>1000</code>.
+        Give an element the class <Code>z-1000</Code> to give it a z-index of{' '}
+        <Code>1000</Code>.
       </p>
     </div>
   )
@@ -973,8 +1024,28 @@ const sections = [
     title: 'Floats',
   },
   {
+    Component: FontFamilies,
+    title: 'Font families',
+  },
+  {
+    Component: FontStyle,
+    title: 'Font style',
+  },
+  {
+    Component: FontWeight,
+    title: 'Font weight',
+  },
+  {
     Component: Heights,
     title: 'Heights',
+  },
+  {
+    Component: LetterSpacing,
+    title: 'Letter spacing',
+  },
+  {
+    Component: LineHeights,
+    title: 'Line heights',
   },
   {
     Component: Opacity,
@@ -997,8 +1068,24 @@ const sections = [
     title: 'Paddings',
   },
   {
+    Component: TextAlignment,
+    title: 'Text alignment',
+  },
+  {
     Component: TextColors,
     title: 'Text colors',
+  },
+  {
+    Component: TextDecoration,
+    title: 'Text decoration',
+  },
+  {
+    Component: TextSizes,
+    title: 'Text sizes',
+  },
+  {
+    Component: TextTransform,
+    title: 'Text transform',
   },
   {
     Component: VerticalAlignment,
@@ -1025,7 +1112,7 @@ const sections = [
 function Docs() {
   return (
     <div
-      className="mx-auto my-md sans-serif p-md"
+      className="mx-auto my-md ff-sans-serif p-md"
       style={{ maxWidth: '800px' }}
     >
       <h1 className="txt-xxl mb-lg lighter">Euphoria Reference</h1>

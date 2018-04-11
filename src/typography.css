@@ -2,15 +2,12 @@
 - Font families
 ---------------------------------------------*/
 
-.serif,
 .ff-serif {
   font-family: var(--font-family-serif);
 }
-.sans-serif,
 .ff-sans-serif {
   font-family: var(--font-family-sans-serif);
 }
-.code,
 .ff-code {
   font-family: var(--font-family-mono);
 }
@@ -141,25 +138,25 @@
 ---------------------------------------------*/
 
 .lh-xxs {
-  line-height: var(--line-heigh-xxs);
+  line-height: var(--line-height-xxs);
 }
 .lh-xs {
-  line-height: var(--line-heigh-xs);
+  line-height: var(--line-height-xs);
 }
 .lh-sm {
-  line-height: var(--line-heigh-sm);
+  line-height: var(--line-height-sm);
 }
 .lh-md {
-  line-height: var(--line-heigh-md);
+  line-height: var(--line-height-md);
 }
 .lh-lg {
-  line-height: var(--line-heigh-lg);
+  line-height: var(--line-height-lg);
 }
 .lh-xl {
-  line-height: var(--line-heigh-xl);
+  line-height: var(--line-height-xl);
 }
 .lh-xxl {
-  line-height: var(--line-heigh-xxl);
+  line-height: var(--line-height-xxl);
 }
 
 /*---------------------------------------------
