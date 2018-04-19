@@ -1,3 +1,8 @@
+### v3.1.0
+
+* Add `.outline-none`
+* Add `.v-mid`, `.v-sub` and `.v-sup`
+
 ### v3.0.1
 
 Complete re-write using PostCSS to simplify rules and make extensible in CSS projects.
