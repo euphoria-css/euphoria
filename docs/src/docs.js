@@ -617,6 +617,17 @@ function Opacity() {
   )
 }
 
+function Outline() {
+  return (
+    <div>
+      <p>
+        Give an element the class <Code>outline-none</Code> to remove the
+        outline styling from an element that is focused.
+      </p>
+    </div>
+  )
+}
+
 function Overflow() {
   return (
     <div>
@@ -846,8 +857,20 @@ function VerticalAlignment() {
         of <Code>bottom</Code>.
       </p>
       <p>
+        Give an element the class <Code>v-mid</Code> to give it a vertical-align
+        of <Code>mid</Code>.
+      </p>
+      <p>
         Give an element the class <Code>v-top</Code> to give it a vertical-align
         of <Code>top</Code>.
+      </p>
+      <p>
+        Give an element the class <Code>v-sub</Code> to give it a vertical-align
+        of <Code>sub</Code>.
+      </p>
+      <p>
+        Give an element the class <Code>v-super</Code> to give it a
+        vertical-align of <Code>super</Code>.
       </p>
       <p>
         Give an element the class <Code>v-text-top</Code> to give it a
@@ -1050,6 +1073,10 @@ const sections = [
   {
     Component: Opacity,
     title: 'Opacity',
+  },
+  {
+    Component: Outline,
+    title: 'Outline',
   },
   {
     Component: Overflow,

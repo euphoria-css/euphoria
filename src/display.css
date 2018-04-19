@@ -117,6 +117,14 @@
 }
 
 /*---------------------------------------------
+- Outline
+---------------------------------------------*/
+
+.outline-none:focus {
+  outline: none;
+}
+
+/*---------------------------------------------
 - Vertical alignment
 ---------------------------------------------*/
 
@@ -126,8 +134,17 @@
 .v-bot {
   vertical-align: bottom;
 }
+.v-mid {
+  vertical-align: middle;
+}
 .v-top {
   vertical-align: top;
+}
+.v-sub {
+  vertical-align: sub;
+}
+.v-super {
+  vertical-align: super;
 }
 .v-text-top {
   vertical-align: text-top;
