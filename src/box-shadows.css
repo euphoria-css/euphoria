@@ -1,15 +1,15 @@
 .bs-1 {
-  box-shadow: var(--box-shadow-1);
+  box-shadow: var(--box-shadow-1) !important;
 }
 .bs-2 {
-  box-shadow: var(--box-shadow-2);
+  box-shadow: var(--box-shadow-2) !important;
 }
 .bs-3 {
-  box-shadow: var(--box-shadow-3);
+  box-shadow: var(--box-shadow-3) !important;
 }
 .bs-4 {
-  box-shadow: var(--box-shadow-4);
+  box-shadow: var(--box-shadow-4) !important;
 }
 .bs-5 {
-  box-shadow: var(--box-shadow-5);
+  box-shadow: var(--box-shadow-5) !important;
 }

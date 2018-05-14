@@ -3,22 +3,22 @@
 ---------------------------------------------*/
 
 .ac-start {
-  align-content: flex-start;
+  align-content: flex-start !important;
 }
 .ac-end {
-  align-content: flex-end;
+  align-content: flex-end !important;
 }
 .ac-center {
-  align-content: center;
+  align-content: center !important;
 }
 .ac-stretch {
-  align-content: stretch;
+  align-content: stretch !important;
 }
 .ac-around {
-  align-content: space-around;
+  align-content: space-around !important;
 }
 .ac-between {
-  align-content: space-between;
+  align-content: space-between !important;
 }
 
 /*---------------------------------------------
@@ -26,19 +26,19 @@
 ---------------------------------------------*/
 
 .ai-start {
-  align-items: flex-start;
+  align-items: flex-start !important;
 }
 .ai-end {
-  align-items: flex-end;
+  align-items: flex-end !important;
 }
 .ai-center {
-  align-items: center;
+  align-items: center !important;
 }
 .ai-baseline {
-  align-items: baseline;
+  align-items: baseline !important;
 }
 .ai-stretch {
-  align-items: stretch;
+  align-items: stretch !important;
 }
 
 /*---------------------------------------------
@@ -46,19 +46,19 @@
 ---------------------------------------------*/
 
 .as-start {
-  align-self: flex-start;
+  align-self: flex-start !important;
 }
 .as-end {
-  align-self: flex-end;
+  align-self: flex-end !important;
 }
 .as-center {
-  align-self: center;
+  align-self: center !important;
 }
 .as-baseline {
-  align-self: baseline;
+  align-self: baseline !important;
 }
 .as-stretch {
-  align-self: stretch;
+  align-self: stretch !important;
 }
 
 /*---------------------------------------------
@@ -66,22 +66,22 @@
 ---------------------------------------------*/
 
 .fd-row {
-  flex-direction: row;
+  flex-direction: row !important;
 }
 .fd-row-reverse {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse !important;
 }
 .fd-col {
-  flex-direction: column;
+  flex-direction: column !important;
 }
 .fd-col-reverse {
-  flex-direction: column-reverse;
+  flex-direction: column-reverse !important;
 }
 .fd-start {
-  flex-direction: flex-start;
+  flex-direction: flex-start !important;
 }
 .fd-end {
-  flex-direction: flex-end;
+  flex-direction: flex-end !important;
 }
 
 /*---------------------------------------------
@@ -89,10 +89,10 @@
 ---------------------------------------------*/
 
 .fo-first {
-  flex-order: -1;
+  flex-order: -1 !important;
 }
 .fo-last {
-  flex-order: 1;
+  flex-order: 1 !important;
 }
 
 /*---------------------------------------------
@@ -100,22 +100,22 @@
 ---------------------------------------------*/
 
 .fg-1 {
-  flex-grow: 1;
+  flex-grow: 1 !important;
 }
 .fg-2 {
-  flex-grow: 2;
+  flex-grow: 2 !important;
 }
 .fg-3 {
-  flex-grow: 3;
+  flex-grow: 3 !important;
 }
 .fg-4 {
-  flex-grow: 4;
+  flex-grow: 4 !important;
 }
 .fg-5 {
-  flex-grow: 5;
+  flex-grow: 5 !important;
 }
 .fg-6 {
-  flex-grow: 6;
+  flex-grow: 6 !important;
 }
 
 /*---------------------------------------------
@@ -123,13 +123,13 @@
 ---------------------------------------------*/
 
 .fw-wrap {
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
 }
 .fw-reverse {
-  flex-wrap: reverse;
+  flex-wrap: reverse !important;
 }
 .fw-none {
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
 }
 
 /*---------------------------------------------
@@ -137,17 +137,17 @@
 ---------------------------------------------*/
 
 .jc-start {
-  justify-content: flex-start;
+  justify-content: flex-start !important;
 }
 .jc-end {
-  justify-content: flex-end;
+  justify-content: flex-end !important;
 }
 .jc-center {
-  justify-content: center;
+  justify-content: center !important;
 }
 .jc-between {
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 .jc-around {
-  justify-content: space-around;
+  justify-content: space-around !important;
 }

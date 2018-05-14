@@ -3,28 +3,28 @@
 ---------------------------------------------*/
 
 .db {
-  display: block;
+  display: block !important;
 }
 .di {
-  display: inline;
+  display: inline !important;
 }
 .dib {
-  display: inline-block;
+  display: inline-block !important;
 }
 .df {
-  display: flex;
+  display: flex !important;
 }
 .dfb {
-  display: flex-block;
+  display: flex-block !important;
 }
 .dt {
-  display: table;
+  display: table !important;
 }
 .dtc {
-  display: table-cell;
+  display: table-cell !important;
 }
 .dn {
-  display: none;
+  display: none !important;
 }
 
 /*---------------------------------------------
@@ -32,13 +32,13 @@
 ---------------------------------------------*/
 
 .fl {
-  float: left;
+  float: left !important;
 }
 .fr {
-  float: right;
+  float: right !important;
 }
 .fn {
-  float: none;
+  float: none !important;
 }
 
 /*---------------------------------------------
@@ -46,43 +46,43 @@
 ---------------------------------------------*/
 
 .o-0 {
-  opacity: 0;
+  opacity: 0 !important;
 }
 .o-025 {
-  opacity: 0.025;
+  opacity: 0.025 !important;
 }
 .o-05 {
-  opacity: 0.05;
+  opacity: 0.05 !important;
 }
 .o-10 {
-  opacity: 0.1;
+  opacity: 0.1 !important;
 }
 .o-20 {
-  opacity: 0.2;
+  opacity: 0.2 !important;
 }
 .o-30 {
-  opacity: 0.3;
+  opacity: 0.3 !important;
 }
 .o-40 {
-  opacity: 0.4;
+  opacity: 0.4 !important;
 }
 .o-50 {
-  opacity: 0.5;
+  opacity: 0.5 !important;
 }
 .o-60 {
-  opacity: 0.6;
+  opacity: 0.6 !important;
 }
 .o-70 {
-  opacity: 0.7;
+  opacity: 0.7 !important;
 }
 .o-80 {
-  opacity: 0.8;
+  opacity: 0.8 !important;
 }
 .o-90 {
-  opacity: 0.9;
+  opacity: 0.9 !important;
 }
 .o-100 {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 /*---------------------------------------------
@@ -90,16 +90,16 @@
 ---------------------------------------------*/
 
 .of-visible {
-  overflow: visible;
+  overflow: visible !important;
 }
 .of-hidden {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .of-scroll {
-  overflow: scroll;
+  overflow: scroll !important;
 }
 .of-auto {
-  overflow: auto;
+  overflow: auto !important;
 }
 
 /*---------------------------------------------
@@ -107,13 +107,13 @@
 ---------------------------------------------*/
 
 .relative {
-  position: relative;
+  position: relative !important;
 }
 .absolute {
-  position: absolute;
+  position: absolute !important;
 }
 .fixed {
-  position: fixed;
+  position: fixed !important;
 }
 
 /*---------------------------------------------
@@ -121,7 +121,7 @@
 ---------------------------------------------*/
 
 .outline-none:focus {
-  outline: none;
+  outline: none !important;
 }
 
 /*---------------------------------------------
@@ -129,28 +129,28 @@
 ---------------------------------------------*/
 
 .v-base {
-  vertical-align: baseline;
+  vertical-align: baseline !important;
 }
 .v-bot {
-  vertical-align: bottom;
+  vertical-align: bottom !important;
 }
 .v-mid {
-  vertical-align: middle;
+  vertical-align: middle !important;
 }
 .v-top {
-  vertical-align: top;
+  vertical-align: top !important;
 }
 .v-sub {
-  vertical-align: sub;
+  vertical-align: sub !important;
 }
 .v-super {
-  vertical-align: super;
+  vertical-align: super !important;
 }
 .v-text-top {
-  vertical-align: text-top;
+  vertical-align: text-top !important;
 }
 .v-text-bot {
-  vertical-align: text-bottom;
+  vertical-align: text-bottom !important;
 }
 
 /*---------------------------------------------
@@ -158,10 +158,10 @@
 ---------------------------------------------*/
 
 .visible {
-  visibility: visible;
+  visibility: visible !important;
 }
 .invisible {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 
 /*---------------------------------------------
@@ -169,13 +169,13 @@
 ---------------------------------------------*/
 
 .ws-pre {
-  white-space: pre;
+  white-space: pre !important;
 }
 .ws-nowrap {
-  white-space: nowrap;
+  white-space: nowrap !important;
 }
 .ws-normal {
-  white-space: normal;
+  white-space: normal !important;
 }
 
 /*---------------------------------------------
@@ -183,35 +183,35 @@
 ---------------------------------------------*/
 
 .z-0 {
-  z-index: 0;
+  z-index: 0 !important;
 }
 .z-100 {
-  z-index: 100;
+  z-index: 100 !important;
 }
 .z-200 {
-  z-index: 200;
+  z-index: 200 !important;
 }
 .z-300 {
-  z-index: 300;
+  z-index: 300 !important;
 }
 .z-400 {
-  z-index: 400;
+  z-index: 400 !important;
 }
 .z-500 {
-  z-index: 500;
+  z-index: 500 !important;
 }
 .z-600 {
-  z-index: 600;
+  z-index: 600 !important;
 }
 .z-700 {
-  z-index: 700;
+  z-index: 700 !important;
 }
 .z-800 {
-  z-index: 800;
+  z-index: 800 !important;
 }
 .z-900 {
-  z-index: 900;
+  z-index: 900 !important;
 }
 .z-1000 {
-  z-index: 1000;
+  z-index: 1000 !important;
 }

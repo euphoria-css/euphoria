@@ -1,3 +1,7 @@
+## v3.2.0
+
+* Make all rules `!important`
+
 ### v3.1.0
 
 * Add `.outline-none`

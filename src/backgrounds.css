@@ -3,10 +3,10 @@
 ---------------------------------------------*/
 
 .contain {
-  background-size: contain;
+  background-size: contain !important;
 }
 .cover {
-  background-size: cover;
+  background-size: cover !important;
 }
 
 /*---------------------------------------------
@@ -15,31 +15,31 @@
 
 .bg-primary-lightest,
 .hov-bg-primary-lightest:hover {
-  background-color: var(--color-primary-lightest);
+  background-color: var(--color-primary-lightest) !important;
 }
 .bg-primary-lighter,
 .hov-bg-primary-lighter:hover {
-  background-color: var(--color-primary-lighter);
+  background-color: var(--color-primary-lighter) !important;
 }
 .bg-primary-light,
 .hov-bg-primary-light:hover {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary-light) !important;
 }
 .bg-primary,
 .hov-bg-primary:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary) !important;
 }
 .bg-primary-dark,
 .hov-bg-primary-dark:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-primary-dark) !important;
 }
 .bg-primary-darker,
 .hov-bg-primary-darker:hover {
-  background-color: var(--color-primary-darker);
+  background-color: var(--color-primary-darker) !important;
 }
 .bg-primary-darkest,
 .hov-bg-primary-darkest:hover {
-  background-color: var(--color-primary-darkest);
+  background-color: var(--color-primary-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -48,31 +48,31 @@
 
 .bg-secondary-lightest,
 .hov-bg-secondary-lightest:hover {
-  background-color: var(--color-secondary-lightest);
+  background-color: var(--color-secondary-lightest) !important;
 }
 .bg-secondary-lighter,
 .hov-bg-secondary-lighter:hover {
-  background-color: var(--color-secondary-lighter);
+  background-color: var(--color-secondary-lighter) !important;
 }
 .bg-secondary-light,
 .hov-bg-secondary-light:hover {
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-secondary-light) !important;
 }
 .bg-secondary,
 .hov-bg-secondary:hover {
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary) !important;
 }
 .bg-secondary-dark,
 .hov-bg-secondary-dark:hover {
-  background-color: var(--color-secondary-dark);
+  background-color: var(--color-secondary-dark) !important;
 }
 .bg-secondary-darker,
 .hov-bg-secondary-darker:hover {
-  background-color: var(--color-secondary-darker);
+  background-color: var(--color-secondary-darker) !important;
 }
 .bg-secondary-darkest,
 .hov-bg-secondary-darkest:hover {
-  background-color: var(--color-secondary-darkest);
+  background-color: var(--color-secondary-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -81,31 +81,31 @@
 
 .bg-info-lightest,
 .hov-bg-info-lightest:hover {
-  background-color: var(--color-info-lightest);
+  background-color: var(--color-info-lightest) !important;
 }
 .bg-info-lighter,
 .hov-bg-info-lighter:hover {
-  background-color: var(--color-info-lighter);
+  background-color: var(--color-info-lighter) !important;
 }
 .bg-info-light,
 .hov-bg-info-light:hover {
-  background-color: var(--color-info-light);
+  background-color: var(--color-info-light) !important;
 }
 .bg-info,
 .hov-bg-info:hover {
-  background-color: var(--color-info);
+  background-color: var(--color-info) !important;
 }
 .bg-info-dark,
 .hov-bg-info-dark:hover {
-  background-color: var(--color-info-dark);
+  background-color: var(--color-info-dark) !important;
 }
 .bg-info-darker,
 .hov-bg-info-darker:hover {
-  background-color: var(--color-info-darker);
+  background-color: var(--color-info-darker) !important;
 }
 .bg-info-darkest,
 .hov-bg-info-darkest:hover {
-  background-color: var(--color-info-darkest);
+  background-color: var(--color-info-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -114,31 +114,31 @@
 
 .bg-success-lightest,
 .hov-bg-success-lightest:hover {
-  background-color: var(--color-success-lightest);
+  background-color: var(--color-success-lightest) !important;
 }
 .bg-success-lighter,
 .hov-bg-success-lighter:hover {
-  background-color: var(--color-success-lighter);
+  background-color: var(--color-success-lighter) !important;
 }
 .bg-success-light,
 .hov-bg-success-light:hover {
-  background-color: var(--color-success-light);
+  background-color: var(--color-success-light) !important;
 }
 .bg-success,
 .hov-bg-success:hover {
-  background-color: var(--color-success);
+  background-color: var(--color-success) !important;
 }
 .bg-success-dark,
 .hov-bg-success-dark:hover {
-  background-color: var(--color-success-dark);
+  background-color: var(--color-success-dark) !important;
 }
 .bg-success-darker,
 .hov-bg-success-darker:hover {
-  background-color: var(--color-success-darker);
+  background-color: var(--color-success-darker) !important;
 }
 .bg-success-darkest,
 .hov-bg-success-darkest:hover {
-  background-color: var(--color-success-darkest);
+  background-color: var(--color-success-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -147,31 +147,31 @@
 
 .bg-warning-lightest,
 .hov-bg-warning-lightest:hover {
-  background-color: var(--color-warning-lightest);
+  background-color: var(--color-warning-lightest) !important;
 }
 .bg-warning-lighter,
 .hov-bg-warning-lighter:hover {
-  background-color: var(--color-warning-lighter);
+  background-color: var(--color-warning-lighter) !important;
 }
 .bg-warning-light,
 .hov-bg-warning-light:hover {
-  background-color: var(--color-warning-light);
+  background-color: var(--color-warning-light) !important;
 }
 .bg-warning,
 .hov-bg-warning:hover {
-  background-color: var(--color-warning);
+  background-color: var(--color-warning) !important;
 }
 .bg-warning-dark,
 .hov-bg-warning-dark:hover {
-  background-color: var(--color-warning-dark);
+  background-color: var(--color-warning-dark) !important;
 }
 .bg-warning-darker,
 .hov-bg-warning-darker:hover {
-  background-color: var(--color-warning-darker);
+  background-color: var(--color-warning-darker) !important;
 }
 .bg-warning-darkest,
 .hov-bg-warning-darkest:hover {
-  background-color: var(--color-warning-darkest);
+  background-color: var(--color-warning-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -180,31 +180,31 @@
 
 .bg-danger-lightest,
 .hov-bg-danger-lightest:hover {
-  background-color: var(--color-danger-lightest);
+  background-color: var(--color-danger-lightest) !important;
 }
 .bg-danger-lighter,
 .hov-bg-danger-lighter:hover {
-  background-color: var(--color-danger-lighter);
+  background-color: var(--color-danger-lighter) !important;
 }
 .bg-danger-light,
 .hov-bg-danger-light:hover {
-  background-color: var(--color-danger-light);
+  background-color: var(--color-danger-light) !important;
 }
 .bg-danger,
 .hov-bg-danger:hover {
-  background-color: var(--color-danger);
+  background-color: var(--color-danger) !important;
 }
 .bg-danger-dark,
 .hov-bg-danger-dark:hover {
-  background-color: var(--color-danger-dark);
+  background-color: var(--color-danger-dark) !important;
 }
 .bg-danger-darker,
 .hov-bg-danger-darker:hover {
-  background-color: var(--color-danger-darker);
+  background-color: var(--color-danger-darker) !important;
 }
 .bg-danger-darkest,
 .hov-bg-danger-darkest:hover {
-  background-color: var(--color-danger-darkest);
+  background-color: var(--color-danger-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -213,31 +213,31 @@
 
 .bg-gray-lightest,
 .hov-bg-gray-lightest:hover {
-  background-color: var(--color-gray-lightest);
+  background-color: var(--color-gray-lightest) !important;
 }
 .bg-gray-lighter,
 .hov-bg-gray-lighter:hover {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--color-gray-lighter) !important;
 }
 .bg-gray-light,
 .hov-bg-gray-light:hover {
-  background-color: var(--color-gray-light);
+  background-color: var(--color-gray-light) !important;
 }
 .bg-gray,
 .hov-bg-gray:hover {
-  background-color: var(--color-gray);
+  background-color: var(--color-gray) !important;
 }
 .bg-gray-dark,
 .hov-bg-gray-dark:hover {
-  background-color: var(--color-gray-dark);
+  background-color: var(--color-gray-dark) !important;
 }
 .bg-gray-darker,
 .hov-bg-gray-darker:hover {
-  background-color: var(--color-gray-darker);
+  background-color: var(--color-gray-darker) !important;
 }
 .bg-gray-darkest,
 .hov-bg-gray-darkest:hover {
-  background-color: var(--color-gray-darkest);
+  background-color: var(--color-gray-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -245,17 +245,17 @@
 ---------------------------------------------*/
 
 .bg-transparent {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 .bg-inherit {
-  background-color: inherit;
+  background-color: inherit !important;
 }
 .bg-initial {
-  background-color: initial;
+  background-color: initial !important;
 }
 .bg-black {
-  background-color: black;
+  background-color: black !important;
 }
 .bg-white {
-  background-color: white;
+  background-color: white !important;
 }

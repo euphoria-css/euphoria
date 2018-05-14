@@ -3,27 +3,27 @@
 ---------------------------------------------*/
 
 .ba {
-  border: 1px solid;
+  border: 1px solid !important;
 }
 .bl {
-  border-left: 1px solid;
+  border-left: 1px solid !important;
 }
 .bt {
-  border-top: 1px solid;
+  border-top: 1px solid !important;
 }
 .br {
-  border-right: 1px solid;
+  border-right: 1px solid !important;
 }
 .bb {
-  border-bottom: 1px solid;
+  border-bottom: 1px solid !important;
 }
 .bx {
-  border-left: 1px solid;
-  border-right: 1px solid;
+  border-left: 1px solid !important;
+  border-right: 1px solid !important;
 }
 .by {
-  border-top: 1px solid;
-  border-bottom: 1px solid;
+  border-top: 1px solid !important;
+  border-bottom: 1px solid !important;
 }
 
 /*---------------------------------------------
@@ -31,28 +31,28 @@
 ---------------------------------------------*/
 
 .rad-100 {
-  border-radius: 100%;
+  border-radius: 100% !important;
 }
 .rad-none {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 .rad-xs {
-  border-radius: var(--border-radius-xs);
+  border-radius: var(--border-radius-xs) !important;
 }
 .rad-sm {
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-sm) !important;
 }
 .rad-md {
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md) !important;
 }
 .rad-lg {
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-lg) !important;
 }
 .rad-xl {
-  border-radius: var(--border-radius-xl);
+  border-radius: var(--border-radius-xl) !important;
 }
 .rad-pill {
-  border-radius: var(--border-radius-pill);
+  border-radius: var(--border-radius-pill) !important;
 }
 
 /*---------------------------------------------
@@ -60,20 +60,20 @@
 ---------------------------------------------*/
 
 .rad-left {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 .rad-top {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 .rad-right {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 .rad-bottom {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
 }
 
 /*---------------------------------------------
@@ -81,27 +81,27 @@
 ---------------------------------------------*/
 
 .ba-none {
-  border: none;
+  border: none !important;
 }
 .bl-none {
-  border-left: none;
+  border-left: none !important;
 }
 .bt-none {
-  border-top: none;
+  border-top: none !important;
 }
 .br-none {
-  border-right: none;
+  border-right: none !important;
 }
 .bb-none {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 .bx-none {
-  border-left: none;
-  border-right: none;
+  border-left: none !important;
+  border-right: none !important;
 }
 .by-none {
-  border-top: none;
-  border-bottom: none;
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 /*---------------------------------------------
@@ -109,13 +109,13 @@
 ---------------------------------------------*/
 
 .b-solid {
-  border-style: solid;
+  border-style: solid !important;
 }
 .b-dotted {
-  border-style: dotted;
+  border-style: dotted !important;
 }
 .b-dashed {
-  border-style: dashed;
+  border-style: dashed !important;
 }
 
 /*---------------------------------------------
@@ -123,25 +123,25 @@
 ---------------------------------------------*/
 
 .bw-xxs {
-  border-width: var(--border-width-xxs);
+  border-width: var(--border-width-xxs) !important;
 }
 .bw-xs {
-  border-width: var(--border-width-xs);
+  border-width: var(--border-width-xs) !important;
 }
 .bw-sm {
-  border-width: var(--border-width-sm);
+  border-width: var(--border-width-sm) !important;
 }
 .bw-md {
-  border-width: var(--border-width-md);
+  border-width: var(--border-width-md) !important;
 }
 .bw-lg {
-  border-width: var(--border-width-lg);
+  border-width: var(--border-width-lg) !important;
 }
 .bw-xl {
-  border-width: var(--border-width-xl);
+  border-width: var(--border-width-xl) !important;
 }
 .bw-xxl {
-  border-width: var(--border-width-xxl);
+  border-width: var(--border-width-xxl) !important;
 }
 
 /*---------------------------------------------
@@ -149,7 +149,7 @@
 ---------------------------------------------*/
 
 .collapse {
-  border-collapse: collapse;
+  border-collapse: collapse !important;
 }
 
 /*---------------------------------------------
@@ -158,31 +158,31 @@
 
 .bc-primary-lightest,
 .hov-bc-primary-lightest:hover {
-  border-color: var(--color-primary-lightest);
+  border-color: var(--color-primary-lightest) !important;
 }
 .bc-primary-lighter,
 .hov-bc-primary-lighter:hover {
-  border-color: var(--color-primary-lighter);
+  border-color: var(--color-primary-lighter) !important;
 }
 .bc-primary-light,
 .hov-bc-primary-light:hover {
-  border-color: var(--color-primary-light);
+  border-color: var(--color-primary-light) !important;
 }
 .bc-primary,
 .hov-bc-primary:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-primary) !important;
 }
 .bc-primary-dark,
 .hov-bc-primary-dark:hover {
-  border-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark) !important;
 }
 .bc-primary-darker,
 .hov-bc-primary-darker:hover {
-  border-color: var(--color-primary-darker);
+  border-color: var(--color-primary-darker) !important;
 }
 .bc-primary-darkest,
 .hov-bc-primary-darkest:hover {
-  border-color: var(--color-primary-darkest);
+  border-color: var(--color-primary-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -191,31 +191,31 @@
 
 .bc-secondary-lightest,
 .hov-bc-secondary-lightest:hover {
-  border-color: var(--color-secondary-lightest);
+  border-color: var(--color-secondary-lightest) !important;
 }
 .bc-secondary-lighter,
 .hov-bc-secondary-lighter:hover {
-  border-color: var(--color-secondary-lighter);
+  border-color: var(--color-secondary-lighter) !important;
 }
 .bc-secondary-light,
 .hov-bc-secondary-light:hover {
-  border-color: var(--color-secondary-light);
+  border-color: var(--color-secondary-light) !important;
 }
 .bc-secondary,
 .hov-bc-secondary:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary) !important;
 }
 .bc-secondary-dark,
 .hov-bc-secondary-dark:hover {
-  border-color: var(--color-secondary-dark);
+  border-color: var(--color-secondary-dark) !important;
 }
 .bc-secondary-darker,
 .hov-bc-secondary-darker:hover {
-  border-color: var(--color-secondary-darker);
+  border-color: var(--color-secondary-darker) !important;
 }
 .bc-secondary-darkest,
 .hov-bc-secondary-darkest:hover {
-  border-color: var(--color-secondary-darkest);
+  border-color: var(--color-secondary-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -224,31 +224,31 @@
 
 .bc-info-lightest,
 .hov-bc-info-lightest:hover {
-  border-color: var(--color-info-lightest);
+  border-color: var(--color-info-lightest) !important;
 }
 .bc-info-lighter,
 .hov-bc-info-lighter:hover {
-  border-color: var(--color-info-lighter);
+  border-color: var(--color-info-lighter) !important;
 }
 .bc-info-light,
 .hov-bc-info-light:hover {
-  border-color: var(--color-info-light);
+  border-color: var(--color-info-light) !important;
 }
 .bc-info,
 .hov-bc-info:hover {
-  border-color: var(--color-info);
+  border-color: var(--color-info) !important;
 }
 .bc-info-dark,
 .hov-bc-info-dark:hover {
-  border-color: var(--color-info-dark);
+  border-color: var(--color-info-dark) !important;
 }
 .bc-info-darker,
 .hov-bc-info-darker:hover {
-  border-color: var(--color-info-darker);
+  border-color: var(--color-info-darker) !important;
 }
 .bc-info-darkest,
 .hov-bc-info-darkest:hover {
-  border-color: var(--color-info-darkest);
+  border-color: var(--color-info-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -257,31 +257,31 @@
 
 .bc-success-lightest,
 .hov-bc-success-lightest:hover {
-  border-color: var(--color-success-lightest);
+  border-color: var(--color-success-lightest) !important;
 }
 .bc-success-lighter,
 .hov-bc-success-lighter:hover {
-  border-color: var(--color-success-lighter);
+  border-color: var(--color-success-lighter) !important;
 }
 .bc-success-light,
 .hov-bc-success-light:hover {
-  border-color: var(--color-success-light);
+  border-color: var(--color-success-light) !important;
 }
 .bc-success,
 .hov-bc-success:hover {
-  border-color: var(--color-success);
+  border-color: var(--color-success) !important;
 }
 .bc-success-dark,
 .hov-bc-success-dark:hover {
-  border-color: var(--color-success-dark);
+  border-color: var(--color-success-dark) !important;
 }
 .bc-success-darker,
 .hov-bc-success-darker:hover {
-  border-color: var(--color-success-darker);
+  border-color: var(--color-success-darker) !important;
 }
 .bc-success-darkest,
 .hov-bc-success-darkest:hover {
-  border-color: var(--color-success-darkest);
+  border-color: var(--color-success-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -290,31 +290,31 @@
 
 .bc-warning-lightest,
 .hov-bc-warning-lightest:hover {
-  border-color: var(--color-warning-lightest);
+  border-color: var(--color-warning-lightest) !important;
 }
 .bc-warning-lighter,
 .hov-bc-warning-lighter:hover {
-  border-color: var(--color-warning-lighter);
+  border-color: var(--color-warning-lighter) !important;
 }
 .bc-warning-light,
 .hov-bc-warning-light:hover {
-  border-color: var(--color-warning-light);
+  border-color: var(--color-warning-light) !important;
 }
 .bc-warning,
 .hov-bc-warning:hover {
-  border-color: var(--color-warning);
+  border-color: var(--color-warning) !important;
 }
 .bc-warning-dark,
 .hov-bc-warning-dark:hover {
-  border-color: var(--color-warning-dark);
+  border-color: var(--color-warning-dark) !important;
 }
 .bc-warning-darker,
 .hov-bc-warning-darker:hover {
-  border-color: var(--color-warning-darker);
+  border-color: var(--color-warning-darker) !important;
 }
 .bc-warning-darkest,
 .hov-bc-warning-darkest:hover {
-  border-color: var(--color-warning-darkest);
+  border-color: var(--color-warning-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -323,31 +323,31 @@
 
 .bc-danger-lightest,
 .hov-bc-danger-lightest:hover {
-  border-color: var(--color-danger-lightest);
+  border-color: var(--color-danger-lightest) !important;
 }
 .bc-danger-lighter,
 .hov-bc-danger-lighter:hover {
-  border-color: var(--color-danger-lighter);
+  border-color: var(--color-danger-lighter) !important;
 }
 .bc-danger-light,
 .hov-bc-danger-light:hover {
-  border-color: var(--color-danger-light);
+  border-color: var(--color-danger-light) !important;
 }
 .bc-danger,
 .hov-bc-danger:hover {
-  border-color: var(--color-danger);
+  border-color: var(--color-danger) !important;
 }
 .bc-danger-dark,
 .hov-bc-danger-dark:hover {
-  border-color: var(--color-danger-dark);
+  border-color: var(--color-danger-dark) !important;
 }
 .bc-danger-darker,
 .hov-bc-danger-darker:hover {
-  border-color: var(--color-danger-darker);
+  border-color: var(--color-danger-darker) !important;
 }
 .bc-danger-darkest,
 .hov-bc-danger-darkest:hover {
-  border-color: var(--color-danger-darkest);
+  border-color: var(--color-danger-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -356,31 +356,31 @@
 
 .bc-gray-lightest,
 .hov-bc-gray-lightest:hover {
-  border-color: var(--color-gray-lightest);
+  border-color: var(--color-gray-lightest) !important;
 }
 .bc-gray-lighter,
 .hov-bc-gray-lighter:hover {
-  border-color: var(--color-gray-lighter);
+  border-color: var(--color-gray-lighter) !important;
 }
 .bc-gray-light,
 .hov-bc-gray-light:hover {
-  border-color: var(--color-gray-light);
+  border-color: var(--color-gray-light) !important;
 }
 .bc-gray,
 .hov-bc-gray:hover {
-  border-color: var(--color-gray);
+  border-color: var(--color-gray) !important;
 }
 .bc-gray-dark,
 .hov-bc-gray-dark:hover {
-  border-color: var(--color-gray-dark);
+  border-color: var(--color-gray-dark) !important;
 }
 .bc-gray-darker,
 .hov-bc-gray-darker:hover {
-  border-color: var(--color-gray-darker);
+  border-color: var(--color-gray-darker) !important;
 }
 .bc-gray-darkest,
 .hov-bc-gray-darkest:hover {
-  border-color: var(--color-gray-darkest);
+  border-color: var(--color-gray-darkest) !important;
 }
 
 /*---------------------------------------------
@@ -389,15 +389,15 @@
 
 .bc-white,
 .hov-bc-white:hover {
-  border-color: var(--color-white);
+  border-color: var(--color-white) !important;
 }
 
 .bc-black,
 .hov-bc-black:hover {
-  border-color: var(--color-black);
+  border-color: var(--color-black) !important;
 }
 
 .bc-transparent,
 .hov-bc-transparent:hover {
-  border-color: transparent;
+  border-color: transparent !important;
 }

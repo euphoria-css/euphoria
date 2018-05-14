@@ -1,108 +1,108 @@
 .c-auto {
-  cursor: auto;
+  cursor: auto !important;
 }
 .c-default {
-  cursor: default;
+  cursor: default !important;
 }
 .c-none {
-  cursor: none;
+  cursor: none !important;
 }
 .c-context-menu {
-  cursor: context-menu;
+  cursor: context-menu !important;
 }
 .c-help {
-  cursor: help;
+  cursor: help !important;
 }
 .c-pointer {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .c-progress {
-  cursor: progress;
+  cursor: progress !important;
 }
 .c-wait {
-  cursor: wait;
+  cursor: wait !important;
 }
 .c-cell {
-  cursor: cell;
+  cursor: cell !important;
 }
 .c-crosshair {
-  cursor: crosshair;
+  cursor: crosshair !important;
 }
 .c-text {
-  cursor: text;
+  cursor: text !important;
 }
 .c-vertical-text {
-  cursor: vertical-text;
+  cursor: vertical-text !important;
 }
 .c-alias {
-  cursor: alias;
+  cursor: alias !important;
 }
 .c-copy {
-  cursor: copy;
+  cursor: copy !important;
 }
 .c-move {
-  cursor: move;
+  cursor: move !important;
 }
 .c-no-drop {
-  cursor: no-drop;
+  cursor: no-drop !important;
 }
 .c-not-allowed {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 .c-all-scroll {
-  cursor: all-scroll;
+  cursor: all-scroll !important;
 }
 .c-col-resize {
-  cursor: col-resize;
+  cursor: col-resize !important;
 }
 .c-row-resize {
-  cursor: row-resize;
+  cursor: row-resize !important;
 }
 .c-n-resize {
-  cursor: n-resize;
+  cursor: n-resize !important;
 }
 .c-e-resize {
-  cursor: e-resize;
+  cursor: e-resize !important;
 }
 .c-s-resize {
-  cursor: s-resize;
+  cursor: s-resize !important;
 }
 .c-w-resize {
-  cursor: w-resize;
+  cursor: w-resize !important;
 }
 .c-ne-resize {
-  cursor: ne-resize;
+  cursor: ne-resize !important;
 }
 .c-nw-resize {
-  cursor: nw-resize;
+  cursor: nw-resize !important;
 }
 .c-se-resize {
-  cursor: se-resize;
+  cursor: se-resize !important;
 }
 .c-sw-resize {
-  cursor: sw-resize;
+  cursor: sw-resize !important;
 }
 .c-ew-resize {
-  cursor: ew-resize;
+  cursor: ew-resize !important;
 }
 .c-ns-resize {
-  cursor: ns-resize;
+  cursor: ns-resize !important;
 }
 .c-nesw-resize {
-  cursor: nesw-resize;
+  cursor: nesw-resize !important;
 }
 .c-nwse-resize {
-  cursor: nwse-resize;
+  cursor: nwse-resize !important;
 }
 .c-zoom-in {
-  cursor: zoom-in;
+  cursor: zoom-in !important;
 }
 .c-zoom-out {
-  cursor: zoom-out;
+  cursor: zoom-out !important;
 }
 .c-grab {
-  cursor: grab;
+  cursor: grab !important;
 }
 .c-grabbing {
-  cursor: grabbing;
+  cursor: grabbing !important;
 }

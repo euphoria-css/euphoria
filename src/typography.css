@@ -3,13 +3,13 @@
 ---------------------------------------------*/
 
 .ff-serif {
-  font-family: var(--font-family-serif);
+  font-family: var(--font-family-serif) !important;
 }
 .ff-sans-serif {
-  font-family: var(--font-family-sans-serif);
+  font-family: var(--font-family-sans-serif) !important;
 }
 .ff-code {
-  font-family: var(--font-family-mono);
+  font-family: var(--font-family-mono) !important;
 }
 
 /*---------------------------------------------
@@ -17,25 +17,25 @@
 ---------------------------------------------*/
 
 .txt-xxxl {
-  font-size: var(--font-size-xxxl);
+  font-size: var(--font-size-xxxl) !important;
 }
 .txt-xxl {
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xxl) !important;
 }
 .txt-xl {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xl) !important;
 }
 .txt-lg {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-lg) !important;
 }
 .txt-md {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-md) !important;
 }
 .txt-sm {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-sm) !important;
 }
 .txt-xs {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-xs) !important;
 }
 
 /*---------------------------------------------
@@ -43,16 +43,16 @@
 ---------------------------------------------*/
 
 .left {
-  text-align: left;
+  text-align: left !important;
 }
 .right {
-  text-align: right;
+  text-align: right !important;
 }
 .center {
-  text-align: center;
+  text-align: center !important;
 }
 .justify {
-  text-align: justify;
+  text-align: justify !important;
 }
 
 /*---------------------------------------------
@@ -61,7 +61,7 @@
 
 .italic,
 .fs-italic {
-  font-style: italic;
+  font-style: italic !important;
 }
 
 /*---------------------------------------------
@@ -69,42 +69,42 @@
 ---------------------------------------------*/
 
 .fw-1 {
-  font-weight: 100;
+  font-weight: 100 !important;
 }
 .fw-2 {
-  font-weight: 200;
+  font-weight: 200 !important;
 }
 .fw-3 {
-  font-weight: 300;
+  font-weight: 300 !important;
 }
 .fw-4 {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 .fw-5 {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 .fw-6 {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 .fw-7 {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 .fw-8 {
-  font-weight: 800;
+  font-weight: 800 !important;
 }
 .fw-9 {
-  font-weight: 900;
+  font-weight: 900 !important;
 }
 .bold,
 .fw-bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 .fw-normal {
-  font-weight: normal;
+  font-weight: normal !important;
 }
 .lighter,
 .fw-lighter {
-  font-weight: lighter;
+  font-weight: lighter !important;
 }
 
 /*---------------------------------------------
@@ -112,25 +112,25 @@
 ---------------------------------------------*/
 
 .ls-xxs {
-  letter-spacing: var(--letter-spacing-xxs);
+  letter-spacing: var(--letter-spacing-xxs) !important;
 }
 .ls-xs {
-  letter-spacing: var(--letter-spacing-xs);
+  letter-spacing: var(--letter-spacing-xs) !important;
 }
 .ls-sm {
-  letter-spacing: var(--letter-spacing-sm);
+  letter-spacing: var(--letter-spacing-sm) !important;
 }
 .ls-md {
-  letter-spacing: var(--letter-spacing-md);
+  letter-spacing: var(--letter-spacing-md) !important;
 }
 .ls-lg {
-  letter-spacing: var(--letter-spacing-lg);
+  letter-spacing: var(--letter-spacing-lg) !important;
 }
 .ls-xl {
-  letter-spacing: var(--letter-spacing-xl);
+  letter-spacing: var(--letter-spacing-xl) !important;
 }
 .ls-xxl {
-  letter-spacing: var(--letter-spacing-xxl);
+  letter-spacing: var(--letter-spacing-xxl) !important;
 }
 
 /*---------------------------------------------
@@ -138,25 +138,25 @@
 ---------------------------------------------*/
 
 .lh-xxs {
-  line-height: var(--line-height-xxs);
+  line-height: var(--line-height-xxs) !important;
 }
 .lh-xs {
-  line-height: var(--line-height-xs);
+  line-height: var(--line-height-xs) !important;
 }
 .lh-sm {
-  line-height: var(--line-height-sm);
+  line-height: var(--line-height-sm) !important;
 }
 .lh-md {
-  line-height: var(--line-height-md);
+  line-height: var(--line-height-md) !important;
 }
 .lh-lg {
-  line-height: var(--line-height-lg);
+  line-height: var(--line-height-lg) !important;
 }
 .lh-xl {
-  line-height: var(--line-height-xl);
+  line-height: var(--line-height-xl) !important;
 }
 .lh-xxl {
-  line-height: var(--line-height-xxl);
+  line-height: var(--line-height-xxl) !important;
 }
 
 /*---------------------------------------------
@@ -164,7 +164,7 @@
 ---------------------------------------------*/
 
 .unstyled {
-  list-style: none;
+  list-style: none !important;
 }
 
 /*---------------------------------------------
@@ -173,218 +173,218 @@
 
 .primary-lightest,
 .hov-primary-lightest:hover {
-  color: var(--color-primary-lightest);
+  color: var(--color-primary-lightest) !important;
 }
 .primary-lighter,
 .hov-primary-lighter:hover {
-  color: var(--color-primary-lighter);
+  color: var(--color-primary-lighter) !important;
 }
 .primary-light,
 .hov-primary-light:hover {
-  color: var(--color-primary-light);
+  color: var(--color-primary-light) !important;
 }
 .primary,
 .hov-primary:hover {
-  color: var(--color-primary);
+  color: var(--color-primary) !important;
 }
 .primary-dark,
 .hov-primary-dark:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-primary-dark) !important;
 }
 .primary-darker,
 .hov-primary-darker:hover {
-  color: var(--color-primary-darker);
+  color: var(--color-primary-darker) !important;
 }
 .primary-darkest,
 .hov-primary-darkest:hover {
-  color: var(--color-primary-darkest);
+  color: var(--color-primary-darkest) !important;
 }
 
 .secondary-lightest,
 .hov-secondary-lightest:hover {
-  color: var(--color-secondary-lightest);
+  color: var(--color-secondary-lightest) !important;
 }
 .secondary-lighter,
 .hov-secondary-lighter:hover {
-  color: var(--color-secondary-lighter);
+  color: var(--color-secondary-lighter) !important;
 }
 .secondary-light,
 .hov-secondary-light:hover {
-  color: var(--color-secondary-light);
+  color: var(--color-secondary-light) !important;
 }
 .secondary,
 .hov-secondary:hover {
-  color: var(--color-secondary);
+  color: var(--color-secondary) !important;
 }
 .secondary-dark,
 .hov-secondary-dark:hover {
-  color: var(--color-secondary-dark);
+  color: var(--color-secondary-dark) !important;
 }
 .secondary-darker,
 .hov-secondary-darker:hover {
-  color: var(--color-secondary-darker);
+  color: var(--color-secondary-darker) !important;
 }
 .secondary-darkest,
 .hov-secondary-darkest:hover {
-  color: var(--color-secondary-darkest);
+  color: var(--color-secondary-darkest) !important;
 }
 
 .info-lightest,
 .hov-info-lightest:hover {
-  color: var(--color-info-lightest);
+  color: var(--color-info-lightest) !important;
 }
 .info-lighter,
 .hov-info-lighter:hover {
-  color: var(--color-info-lighter);
+  color: var(--color-info-lighter) !important;
 }
 .info-light,
 .hov-info-light:hover {
-  color: var(--color-info-light);
+  color: var(--color-info-light) !important;
 }
 .info,
 .hov-info:hover {
-  color: var(--color-info);
+  color: var(--color-info) !important;
 }
 .info-dark,
 .hov-info-dark:hover {
-  color: var(--color-info-dark);
+  color: var(--color-info-dark) !important;
 }
 .info-darker,
 .hov-info-darker:hover {
-  color: var(--color-info-darker);
+  color: var(--color-info-darker) !important;
 }
 .info-darkest,
 .hov-info-darkest:hover {
-  color: var(--color-info-darkest);
+  color: var(--color-info-darkest) !important;
 }
 
 .success-lightest,
 .hov-success-lightest:hover {
-  color: var(--color-success-lightest);
+  color: var(--color-success-lightest) !important;
 }
 .success-lighter,
 .hov-success-lighter:hover {
-  color: var(--color-success-lighter);
+  color: var(--color-success-lighter) !important;
 }
 .success-light,
 .hov-success-light:hover {
-  color: var(--color-success-light);
+  color: var(--color-success-light) !important;
 }
 .success,
 .hov-success:hover {
-  color: var(--color-success);
+  color: var(--color-success) !important;
 }
 .success-dark,
 .hov-success-dark:hover {
-  color: var(--color-success-dark);
+  color: var(--color-success-dark) !important;
 }
 .success-darker,
 .hov-success-darker:hover {
-  color: var(--color-success-darker);
+  color: var(--color-success-darker) !important;
 }
 .success-darkest,
 .hov-success-darkest:hover {
-  color: var(--color-success-darkest);
+  color: var(--color-success-darkest) !important;
 }
 
 .warning-lightest,
 .hov-warning-lightest:hover {
-  color: var(--color-warning-lightest);
+  color: var(--color-warning-lightest) !important;
 }
 .warning-lighter,
 .hov-warning-lighter:hover {
-  color: var(--color-warning-lighter);
+  color: var(--color-warning-lighter) !important;
 }
 .warning-light,
 .hov-warning-light:hover {
-  color: var(--color-warning-light);
+  color: var(--color-warning-light) !important;
 }
 .warning,
 .hov-warning:hover {
-  color: var(--color-warning);
+  color: var(--color-warning) !important;
 }
 .warning-dark,
 .hov-warning-dark:hover {
-  color: var(--color-warning-dark);
+  color: var(--color-warning-dark) !important;
 }
 .warning-darker,
 .hov-warning-darker:hover {
-  color: var(--color-warning-darker);
+  color: var(--color-warning-darker) !important;
 }
 .warning-darkest,
 .hov-warning-darkest:hover {
-  color: var(--color-warning-darkest);
+  color: var(--color-warning-darkest) !important;
 }
 
 .danger-lightest,
 .hov-danger-lightest:hover {
-  color: var(--color-danger-lightest);
+  color: var(--color-danger-lightest) !important;
 }
 .danger-lighter,
 .hov-danger-lighter:hover {
-  color: var(--color-danger-lighter);
+  color: var(--color-danger-lighter) !important;
 }
 .danger-light,
 .hov-danger-light:hover {
-  color: var(--color-danger-light);
+  color: var(--color-danger-light) !important;
 }
 .danger,
 .hov-danger:hover {
-  color: var(--color-danger);
+  color: var(--color-danger) !important;
 }
 .danger-dark,
 .hov-danger-dark:hover {
-  color: var(--color-danger-dark);
+  color: var(--color-danger-dark) !important;
 }
 .danger-darker,
 .hov-danger-darker:hover {
-  color: var(--color-danger-darker);
+  color: var(--color-danger-darker) !important;
 }
 .danger-darkest,
 .hov-danger-darkest:hover {
-  color: var(--color-danger-darkest);
+  color: var(--color-danger-darkest) !important;
 }
 
 .gray-lightest,
 .hov-gray-lightest:hover {
-  color: var(--color-gray-lightest);
+  color: var(--color-gray-lightest) !important;
 }
 .gray-lighter,
 .hov-gray-lighter:hover {
-  color: var(--color-gray-lighter);
+  color: var(--color-gray-lighter) !important;
 }
 .gray-light,
 .hov-gray-light:hover {
-  color: var(--color-gray-light);
+  color: var(--color-gray-light) !important;
 }
 .gray,
 .hov-gray:hover {
-  color: var(--color-gray);
+  color: var(--color-gray) !important;
 }
 .gray-dark,
 .hov-gray-dark:hover {
-  color: var(--color-gray-dark);
+  color: var(--color-gray-dark) !important;
 }
 .gray-darker,
 .hov-gray-darker:hover {
-  color: var(--color-gray-darker);
+  color: var(--color-gray-darker) !important;
 }
 .gray-darkest,
 .hov-gray-darkest:hover {
-  color: var(--color-gray-darkest);
+  color: var(--color-gray-darkest) !important;
 }
 
 .transparent,
 .hov-transparent:hover {
-  color: transparent;
+  color: transparent !important;
 }
 .black,
 .hov-black:hover {
-  color: var(--color-black);
+  color: var(--color-black) !important;
 }
 .white,
 .hov-white:hover {
-  color: var(--color-white);
+  color: var(--color-white) !important;
 }
 
 /*---------------------------------------------
@@ -393,15 +393,15 @@
 
 .td-none,
 .hov-td-none:hover {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .td-line,
 .hov-td-line:hover {
-  text-decoration: line-through;
+  text-decoration: line-through !important;
 }
 .td-underline,
 .hov-td-underline:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 /*---------------------------------------------
@@ -409,11 +409,11 @@
 ---------------------------------------------*/
 
 .upper {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 .lower {
-  text-transform: lowercase;
+  text-transform: lowercase !important;
 }
 .capital {
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }
