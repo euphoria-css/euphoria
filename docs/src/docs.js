@@ -94,6 +94,10 @@ function BackgroundSizes() {
 function BackgroundColors() {
   return (
     <div>
+      <p>
+        Add the prefix <code>hov-</code> to any background color to add a{' '}
+        <code>:hover</code> background style to the given element.
+      </p>
       {COLORS.map((c, key) => (
         <div key={key}>
           <p className={'bg-' + c}>
@@ -762,6 +766,10 @@ function TextAlignment() {
 function TextColors() {
   return (
     <div>
+      <p>
+        Add the prefix <code>hov-</code> to any color to add a{' '}
+        <code>:hover</code> background style to the given element.
+      </p>
       {COLORS.map((c, key) => (
         <p className={c} key={key}>
           This text has class <Code>{c}</Code>.
