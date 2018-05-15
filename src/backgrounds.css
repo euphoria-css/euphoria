@@ -244,18 +244,23 @@
 - Background color: others
 ---------------------------------------------*/
 
-.bg-transparent {
+.bg-transparent,
+.hov-bg-transparent:hover {
   background-color: transparent !important;
 }
-.bg-inherit {
+.bg-inherit,
+.hov-bg-inherit:hover {
   background-color: inherit !important;
 }
-.bg-initial {
+.bg-initial,
+.hov-bg-initial:hover {
   background-color: initial !important;
 }
-.bg-black {
+.bg-black,
+.hov-bg-black:hover {
   background-color: black !important;
 }
-.bg-white {
+.bg-white,
+.hov-bg-white:hover {
   background-color: white !important;
 }
