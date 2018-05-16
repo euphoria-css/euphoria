@@ -1,3 +1,7 @@
+## v3.4.0
+
+* Add flex rules (`f-1`, etc)
+
 ## v3.3.0
 
 * Make all rules `!important`
