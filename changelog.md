@@ -1,10 +1,10 @@
 ## v3.5.0
 
-- Add `position: sticky` rule (`p-sticky`, etc)
+- Add `position: sticky` rule (`.sticky`, etc)
 
 ## v3.4.0
 
-- Add flex rules (`f-1`, etc)
+- Add flex rules (`.f-1`, etc)
 
 ## v3.3.0
 
