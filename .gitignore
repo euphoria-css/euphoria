@@ -9,6 +9,4 @@ node_modules
 *.log
 
 # Project specific
-dist/*
-!dist/euphoria.min.css
-!dist/euphoria.min.css.map
+dist

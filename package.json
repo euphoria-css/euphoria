@@ -10,8 +10,10 @@
     "build-styles": "postcss src/euphoria.css -u postcss-import -u postcss-custom-properties -u postcss-color-function -u cssnano -o dist/euphoria.min.css -m",
     "clean": "rm docs/*.js docs/*.css",
     "start": "npm-run-all -p watch-docs watch-styles",
-    "version": "npm run build && git add -A dist/euphoria.min* docs",
-    "postversion": "git push && git push --tags",
+    "preversion": "npm run build",
+    "postversion": "npm publish",
+    "postpublish": "git push origin --all; git push origin --tags",
+    "prepack": "npm run build",
     "watch-docs": "parcel docs/src/index.html",
     "watch-styles": "npm run build-styles -- --watch"
   },
