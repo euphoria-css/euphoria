@@ -4,11 +4,11 @@
   "description": "A euphoric CSS micro-framework.",
   "main": "src/euphoria.css",
   "scripts": {
+    "clean": "rm docs/*.js docs/*.css",
     "prebuild": "npm run clean",
-    "build": "npm-run-all -p build-docs build-styles",
+    "build": "npm-run-all -p build-*",
     "build-docs": "parcel build --public-url '.' docs/src/index.html -d docs",
     "build-styles": "postcss src/euphoria.css -u postcss-import -u postcss-custom-properties -u postcss-color-function -u cssnano -o dist/euphoria.min.css -m",
-    "clean": "rm docs/*.js docs/*.css",
     "start": "npm-run-all -p watch-docs watch-styles",
     "preversion": "npm run build",
     "postversion": "npm publish",
