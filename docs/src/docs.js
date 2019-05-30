@@ -670,6 +670,10 @@ function Positioning() {
         Give an element the class <Code>fixed</Code> to give it a position of{' '}
         <Code>fixed</Code>.
       </p>
+      <p>
+        Give an element the class <Code>sticky</Code> to give it a position of{' '}
+        <Code>sticky</Code>.
+      </p>
     </div>
   )
 }
